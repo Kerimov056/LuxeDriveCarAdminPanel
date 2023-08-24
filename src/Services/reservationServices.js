@@ -16,4 +16,9 @@ export const getReservPedding = () => { //gozlemede olan reservationlar
 
 export const getReservComplatedCount = () => { //tamamlanmis olan reservationlarin sayi
     return httpClient.get("api/CarReservations/ReservComplatedCount")
+};   
+
+
+export const getReservCancledCount = () => { //legv edilmis olan reservationlarin sayi
+    return httpClient.get("api/CarReservations/IsResevCanceledCount")
 };
