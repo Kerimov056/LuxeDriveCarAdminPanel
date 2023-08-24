@@ -5,7 +5,7 @@ export const getCar = () => {
 };
 
 export const getCarCount = () => {
-  return httpClient.get("api/Car")
+  return httpClient.get("api/Car/Count")
 };
 
 

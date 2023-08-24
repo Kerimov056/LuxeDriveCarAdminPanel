@@ -31,7 +31,7 @@ const CardCompanent = () => {
                             <Col xs="7">
                                 <div className="numbers">
                                     <p className="card-category">Number</p>
-                                    <Card.Title as="h4">{cars?.data}</Card.Title>
+                                    <Card.Title as="h4">{cars?.data==null ? "0" : cars?.data}</Card.Title>
                                 </div>
                             </Col>
                         </Row>
