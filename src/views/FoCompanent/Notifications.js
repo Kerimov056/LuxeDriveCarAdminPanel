@@ -18,7 +18,7 @@ const Notifications = () => {
 
     return (
         <>
-            <Col id='CCCC' lg="3" sm="6">
+            <Col style={{cursor:"pointer"}} id='CCCC' lg="3" sm="6">
                 <Card className="card-stats">
                     <Card.Body>
                         <Row>

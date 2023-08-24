@@ -18,19 +18,19 @@ const CardCompanent = () => {
 
     return (
         <>
-            <Col id='CCCC' lg="3" sm="6">
+            <Col style={{cursor:"pointer"}} id='CCCC' lg="3" sm="6">
                 <Card className="card-stats">
                     <Card.Body>
                         <Row>
                             <Col xs="5">
                                 <div className="icon-big text-center icon-warning">
-                                    <AiFillCar  style={{color:"#fff"}}/>
+                                    <AiFillCar style={{ color: "#fff" }} />
                                 </div>
                             </Col>
                             <Col xs="7">
                                 <div className="numbers">
                                     <p className="card-category">All Cars</p>
-                                    <Card.Title as="h4">{cars?.data==null ? 0 : cars?.data}</Card.Title>
+                                    <Card.Title as="h4">{cars?.data == null ? 0 : cars?.data}</Card.Title>
                                 </div>
                             </Col>
                         </Row>
@@ -38,7 +38,7 @@ const CardCompanent = () => {
                     <Card.Footer>
                         <hr></hr>
                         <div className="stats">
-                            <i className="as fa-redo mr-1"></i>
+                            <i className="nc-icon nc-layers-3"></i>
                             Car Show
                         </div>
                     </Card.Footer>

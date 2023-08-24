@@ -34,7 +34,7 @@ function Dashboard() {
 
           <Confirmed />   {/* tesdiqlenmis reservation */}
 
-          <Notifications /> {/* Reserv tesdiqi gozlenilen reservationlar*/}
+          <Notifications  /> {/* Reserv tesdiqi gozlenilen reservationlar*/}
 
           <ComplatedReservation />  {/*Tamamlanmis Reservatonlar */}
 
@@ -115,7 +115,7 @@ function Dashboard() {
               </Card.Footer>
             </Card>
           </Col>
-          <Col md="4">
+              <Col md="4">  {/* carlarin qrafiki */}
             <Card>
               <Card.Header>
                 <Card.Title as="h4">Email Statistics</Card.Title>
@@ -147,7 +147,7 @@ function Dashboard() {
                 </div>
               </Card.Body>
             </Card>
-          </Col>
+              </Col>
         </Row>
         <Row>
           <Col md="6">
