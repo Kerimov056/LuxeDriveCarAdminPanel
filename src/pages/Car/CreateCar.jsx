@@ -8,11 +8,40 @@ import {
     Nav,
     Container,
     Row,
-    Col
+    Col,
+    InputGroup
 } from "react-bootstrap";
 import "./createcar.scss";
 
 const CreateCar = () => {
+
+    const carCategory = [
+        {
+            Category: "Sport"
+        },
+        {
+            Category: "Lux"
+        }
+    ];
+
+
+    const carType = [
+        {
+            type: "Sedan"
+        },
+        {
+            type: "Furqon"
+        }
+    ];
+
+    const carYear = [
+        {
+            year: 2023
+        },
+        {
+            year: 2022
+        }
+    ];
 
     const carData = [
         {
@@ -33,6 +62,41 @@ const CreateCar = () => {
         const brand = event.target.value;
         setSelectedBrand(brand);
         setSelectedModel(""); // Marka değiştiğinde model seçimini sıfırla
+    };
+
+    const [imageFields, setImageFields] = useState([{ id: 1, files: [] }]);
+
+    console.log(imageFields);
+
+    const addImageField = () => {
+        const newId = imageFields[imageFields.length - 1].id + 1;
+        setImageFields([...imageFields, { id: newId, files: [] }]);
+    };
+
+    const handleFileChange = (event, id) => {
+        const updatedFields = imageFields.map((field) => {
+            if (field.id === id) {
+                return { ...field, files: event.target.files };
+            }
+            return field;
+        });
+        setImageFields(updatedFields);
+    };
+
+    const handleUpload = async () => {
+        imageFields.forEach(async (field) => {
+            const formData = new FormData();
+            field.files.forEach((file) => {
+                formData.append('images', file);
+            });
+
+            try {
+                const response = await axios.post('/api/upload', formData);
+                console.log(`Uploaded images for field ${field.id}:`, response.data);
+            } catch (error) {
+                console.error(`Error uploading images for field ${field.id}:`, error);
+            }
+        });
     };
 
     return (
@@ -75,119 +139,82 @@ const CreateCar = () => {
                                                             </Form.Select>
                                                         </div>
                                                     )}
+
+
+                                                    <label>Year:</label>
+                                                    <Form.Select id='FS' size='lg' value={selectedBrand} onChange={handleBrandChange}>
+                                                        <option size="lg" value="">Marka Seçiniz</option>
+                                                        {carYear.map((year, index) => (
+                                                            <option id="asd" key={index} value={year.year}>
+                                                                {year.year}
+                                                            </option>
+                                                        ))}
+                                                    </Form.Select>
+
+                                                    <label>Type:</label>
+                                                    <Form.Select id='FS' size='lg' value={selectedBrand} onChange={handleBrandChange}>
+                                                        <option size="lg" value="">Marka Seçiniz</option>
+                                                        {carType.map((type, index) => (
+                                                            <option id="asd" key={index} value={type.type}>
+                                                                {type.type}
+                                                            </option>
+                                                        ))}
+                                                    </Form.Select>
+
+                                                    <label>Category:</label>
+                                                    <Form.Select id='FS' size='lg' value={selectedBrand} onChange={handleBrandChange}>
+                                                        <option size="lg" value="">Marka Seçiniz</option>
+                                                        {carCategory.map((Category, index) => (
+                                                            <option id="asd" key={index} value={Category.Category}>
+                                                                {Category.Category}
+                                                            </option>
+                                                        ))}
+                                                    </Form.Select>
+
+
+                                                    <Form.Group>
+                                                        <label>Price</label>
+                                                        <InputGroup className="mb-3">
+                                                            <InputGroup.Text>$</InputGroup.Text>
+                                                            <Form.Control aria-label="Amount (to the nearest dollar)" />
+                                                            <InputGroup.Text>.00</InputGroup.Text>
+                                                        </InputGroup>
+                                                    </Form.Group>
+
                                                 </div>
                                             </Form.Group>
                                         </Col>
 
 
-
-
-                                        <Col className="pr-1" md="5">
-                                            <Form.Group>
-                                                <label>Company (disabled)</label>
-                                                <Form.Control
-                                                    defaultValue="Creative Code Inc."
-                                                    disabled
-                                                    placeholder="Company"
-                                                    type="text"
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
                                         <Col className="px-1" md="3">
-                                            <Form.Group>
-                                                <label>Username</label>
-                                                <Form.Control
-                                                    defaultValue="michael23"
-                                                    placeholder="Username"
-                                                    type="text"
-                                                ></Form.Control>
-                                            </Form.Group>
+
                                         </Col>
-                                        <Col className="pl-1" md="4">
-                                            <Form.Group>
-                                                <label htmlFor="exampleInputEmail1">
-                                                    Email address
-                                                </label>
-                                                <Form.Control
-                                                    placeholder="Email"
-                                                    type="email"
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
+
                                     </Row>
                                     <Row>
+
                                         <Col className="pr-1" md="6">
-                                            <Form.Group>
-                                                <label>First Name</label>
-                                                <Form.Control
-                                                    defaultValue="Mike"
-                                                    placeholder="Company"
-                                                    type="text"
-                                                ></Form.Control>
-                                            </Form.Group>
+                                            {/* <Form.Group controlId="formFileMultiple" className="mb-3">
+                                                <Form.Label>Car Images</Form.Label>
+                                                <Form.Control type="file" multiple />
+                                            </Form.Group> */}
+                                            {imageFields.map((field) => (
+                                                <Form.Group controlId={`formFileMultiple_${field.id}`} className="mb-3" key={field.id}>
+                                                    <Form.Label>Car Images</Form.Label>
+                                                    <Form.Control type="file" multiple onChange={(event) => handleFileChange(event, field.id)} />
+                                                </Form.Group>
+                                            ))}
+                                            <Button onClick={addImageField}>+</Button>
                                         </Col>
-                                        <Col className="pl-1" md="6">
-                                            <Form.Group>
-                                                <label>Last Name</label>
-                                                <Form.Control
-                                                    defaultValue="Andrew"
-                                                    placeholder="Last Name"
-                                                    type="text"
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
+
                                     </Row>
                                     <Row>
                                         <Col md="12">
                                             <Form.Group>
-                                                <label>Address</label>
-                                                <Form.Control
-                                                    defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                                                    placeholder="Home Address"
-                                                    type="text"
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col className="pr-1" md="4">
-                                            <Form.Group>
-                                                <label>City</label>
-                                                <Form.Control
-                                                    defaultValue="Mike"
-                                                    placeholder="City"
-                                                    type="text"
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                        <Col className="px-1" md="4">
-                                            <Form.Group>
-                                                <label>Country</label>
-                                                <Form.Control
-                                                    defaultValue="Andrew"
-                                                    placeholder="Country"
-                                                    type="text"
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                        <Col className="pl-1" md="4">
-                                            <Form.Group>
-                                                <label>Postal Code</label>
-                                                <Form.Control
-                                                    placeholder="ZIP Code"
-                                                    type="number"
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col md="12">
-                                            <Form.Group>
-                                                <label>About Me</label>
+                                                <label>Description</label>
                                                 <Form.Control
                                                     cols="80"
-                                                    defaultValue="Lamborghini Mercy, Your chick she so thirsty, I'm in
-                          that two seat Lambo."
+                                                    defaultValue="Lamborghini Mercy, Your chick she so thirsty, I'm inthat two seat Lambo."
                                                     placeholder="Here can be your description"
                                                     rows="4"
                                                     as="textarea"
@@ -198,9 +225,9 @@ const CreateCar = () => {
                                     <Button
                                         className="btn-fill pull-right"
                                         type="submit"
-                                        variant="info"
+                                        variant="success"
                                     >
-                                        Update Profile
+                                        Create Car
                                     </Button>
                                     <div className="clearfix"></div>
                                 </Form>

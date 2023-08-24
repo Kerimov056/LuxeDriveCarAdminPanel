@@ -1,10 +1,11 @@
 .MM {
-    width: 400px;
+    width: 800px;
     margin-top: 12px;
 
     &>label {
+        margin-top: 20px;
         width: 80%;
-        font-size: 18px;
+        font-size: 17px;
         color: rgb(189, 185, 185);
 
     }
@@ -14,7 +15,7 @@
         height: 40px;
 
         #asd {
-            font-size: 20px;
+            font-size: 19px;
         }
         
     }
