@@ -20,6 +20,7 @@ import ReservCar from "./FoCompanent/ReservCar";
 import Notifications from "./FoCompanent/Notifications";
 import Confirmed from "./FoCompanent/Confirmed";
 import ComplatedReservation from "./FoCompanent/ComplatedReservation";
+import CanceledReservation from "./FoCompanent/CanceledReservation";
 
 function Dashboard() {
   return (
@@ -36,6 +37,8 @@ function Dashboard() {
           <Notifications /> {/* Reserv tesdiqi gozlenilen reservationlar*/}
 
           <ComplatedReservation />  {/*Tamamlanmis Reservatonlar */}
+
+          <CanceledReservation />  {/*Legv edilmis Reservationlar */}
 
         </Row>
         <Row>

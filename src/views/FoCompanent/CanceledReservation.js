@@ -23,7 +23,7 @@ const CanceledReservation = () => {
                         <Row>
                             <Col xs="5">
                                 <div className="icon-big text-center icon-warning">
-                                    <i className="nc-icon nc-badge"></i>
+                                    <i className="nc-icon nc-vector"></i>
                                 </div>
                             </Col>
                             <Col xs="7">
@@ -37,8 +37,8 @@ const CanceledReservation = () => {
                     <Card.Footer>
                         <hr></hr>
                         <div className="stats">
-                            <i className="far fa-calendar-alt mr-1"></i>
-                            Reservation Car
+                            <i className="nc-icon nc-simple-remove"></i>
+                            Reservation
                         </div>
                     </Card.Footer>
                 </Card>
