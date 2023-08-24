@@ -23,7 +23,7 @@ const Confirmed = () => {
                         <Row>
                             <Col xs="5">
                                 <div className="icon-big text-center icon-warning">
-                                    <i className="nc-icon nc-badge"></i>
+                                    <i className="far fa-calendar-alt mr-1"></i>
                                 </div>
                             </Col>
                             <Col xs="7">
@@ -38,7 +38,7 @@ const Confirmed = () => {
                         <hr></hr>
                         <div className="stats">
                             <i className="nc-icon nc-check-2"></i>
-                             Confirmed Reservation
+                            Confirmed Reservation
                         </div>
                     </Card.Footer>
                 </Card>

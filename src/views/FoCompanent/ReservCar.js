@@ -23,12 +23,12 @@ const ReservCar = () => {
                         <Row>
                             <Col xs="5">
                                 <div className="icon-big text-center icon-warning">
-                                    <i className="far fa-calendar-alt mr-1"></i>
+                                    <i className="nc-icon nc-badge"></i>
                                 </div>
                             </Col>
                             <Col xs="7">
                                 <div className="numbers">
-                                    <p className="card-category">All Cars</p>
+                                    <p className="card-category">Reserved Cars</p>
                                     <Card.Title as="h4">{reservCars?.data == null ? 0 : reservCars?.data}</Card.Title>
                                 </div>
                             </Col>
