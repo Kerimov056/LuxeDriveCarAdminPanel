@@ -150,7 +150,7 @@ function User() {
                 </Form>
               </Card.Body>
             </Card>
-          </Col>
+                </Col>
           <Col md="4">
             <Card className="card-user">
               <div className="card-image">

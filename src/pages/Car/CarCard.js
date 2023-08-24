@@ -1,7 +1,7 @@
 import React from 'react'
 import './carcard.scss'
 
-const CarCard = () => {
+const CarCard = (props) => {
     return (
         <>
             <div class="cardDD">
@@ -11,10 +11,10 @@ const CarCard = () => {
                     <span class="green"></span>
                 </div>
 
-                <img src='https://cdn4.buysellads.net/uu/1/81016/1609783196-authentic-260x200-variation-3.jpg' />
-                <h4><span>Marka: BMW</span></h4>
-                <h4><span>Model: m4</span></h4>
-                <p>Year:2023</p>
+                <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwgtQcrkpPx1x5-tW7ODd3nEUTpS8F_NpmDw&usqp=CAU' />
+                <h4><span>Marka: {props.marka}</span></h4>
+                <h4><span>Model: {props.model}</span></h4>
+                <p>Year:{props.year}</p>
             </div>
         </>
     )

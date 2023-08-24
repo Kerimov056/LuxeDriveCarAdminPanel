@@ -31,6 +31,7 @@ const queryClinet = new QueryClient();
 
 
 import AdminLayout from "layouts/Admin.js";
+import CreateCar from "pages/Car/CreateCar";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -40,6 +41,7 @@ root.render(
       <Switch>
         <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
         <Route path="/AllCar" component={AllCar} />
+        <Route path="/createCar" component={CreateCar} />
         <Redirect from="/" to="/admin/dashboard" />
       </Switch>
     </QueryClientProvider>
