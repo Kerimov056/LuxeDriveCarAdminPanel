@@ -8,6 +8,11 @@ export const getCarCount = () => {
   return httpClient.get("api/Car/Count")
 };
 
+export const getReservCarCount = () => {
+  return httpClient.get("api/Car/Count")
+};
+
+
 
 export const getByCar = (id) => {
   return httpClient.get(`api/Car/${id}`);

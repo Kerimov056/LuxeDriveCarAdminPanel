@@ -15,7 +15,7 @@ import {
   OverlayTrigger,
   Tooltip,
 } from "react-bootstrap";
-import CardCompanent from "./CardCompanent";
+import CardCompanent from "./FoCompanent/CardCompanent";
 
 function Dashboard() {
   return (
@@ -25,32 +25,7 @@ function Dashboard() {
           
           <CardCompanent />
 
-          <Col lg="3" sm="6">
-            <Card className="card-stats">
-              <Card.Body>
-                <Row>
-                  <Col xs="5">
-                    <div className="icon-big text-center icon-warning">
-                      <i className="nc-icon nc-light-3 text-success"></i>
-                    </div>
-                  </Col>
-                  <Col xs="7">
-                    <div className="numbers">
-                      <p className="card-category">Revenue</p>
-                      <Card.Title as="h4">$ 1,345</Card.Title>
-                    </div>
-                  </Col>
-                </Row>
-              </Card.Body>
-              <Card.Footer>
-                <hr></hr>
-                <div className="stats">
-                  <i className="far fa-calendar-alt mr-1"></i>
-                  Last day
-                </div>
-              </Card.Footer>
-            </Card>
-          </Col>
+          
 
           <Col lg="3" sm="6">
             <Card className="card-stats">

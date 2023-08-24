@@ -4,10 +4,9 @@ import {
     Row,
     Col,
 } from "react-bootstrap";
-import "./cardcompanent.scss";
 import { useQuery } from "react-query";
-import { getCarCount } from "../Services/carServices";
-
+import { getCarCount } from "../../Services/carServices";
+import { AiFillCar } from "react-icons/ai";
 
 const CardCompanent = () => {
 
@@ -25,13 +24,13 @@ const CardCompanent = () => {
                         <Row>
                             <Col xs="5">
                                 <div className="icon-big text-center icon-warning">
-                                    <i className="nc-icon nc-chart text-warning"></i>
+                                    <AiFillCar />
                                 </div>
                             </Col>
                             <Col xs="7">
                                 <div className="numbers">
-                                    <p className="card-category">Number</p>
-                                    <Card.Title as="h4">{cars?.data==null ? "0" : cars?.data}</Card.Title>
+                                    <p className="card-category">All Cars</p>
+                                    <Card.Title as="h4">{cars?.data==null ? 0 : cars?.data}</Card.Title>
                                 </div>
                             </Col>
                         </Row>
@@ -39,8 +38,8 @@ const CardCompanent = () => {
                     <Card.Footer>
                         <hr></hr>
                         <div className="stats">
-                            <i className="fas fa-redo mr-1"></i>
-                            Update Now
+                            <i className="as fa-redo mr-1"></i>
+                            Car Show
                         </div>
                     </Card.Footer>
                 </Card>
