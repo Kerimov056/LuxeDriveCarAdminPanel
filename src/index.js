@@ -25,6 +25,7 @@ import "./assets/css/animate.min.css";
 import "./assets/scss/light-bootstrap-dashboard-react.scss?v=2.0.0";
 import "./assets/css/demo.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import AllCar from "../src/pages/Car/AllCar";
 import { QueryClient, QueryClientProvider } from "react-query";
 const queryClinet = new QueryClient();
 
@@ -38,6 +39,7 @@ root.render(
     <QueryClientProvider client={queryClinet} >
       <Switch>
         <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
+        <Route path="/AllCar" component={AllCar} />
         <Redirect from="/" to="/admin/dashboard" />
       </Switch>
     </QueryClientProvider>

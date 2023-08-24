@@ -7,6 +7,7 @@ import {
 import { useQuery } from "react-query";
 import { getCarCount } from "../../Services/carServices";
 import { AiFillCar } from "react-icons/ai";
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const CardCompanent = () => {
 
@@ -18,7 +19,7 @@ const CardCompanent = () => {
 
     return (
         <>
-            <Col style={{cursor:"pointer"}} id='CCCC' lg="3" sm="6">
+            <Col style={{ cursor: "pointer" }} id='CCCC' lg="3" sm="6">
                 <Card className="card-stats">
                     <Card.Body>
                         <Row>
@@ -39,7 +40,7 @@ const CardCompanent = () => {
                         <hr></hr>
                         <div className="stats">
                             <i className="nc-icon nc-layers-3"></i>
-                            Car Show
+                            <Link to="/AllCar">  Car Show</Link>
                         </div>
                     </Card.Footer>
                 </Card>
