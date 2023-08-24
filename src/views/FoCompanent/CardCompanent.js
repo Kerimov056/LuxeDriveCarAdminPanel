@@ -24,7 +24,7 @@ const CardCompanent = () => {
                         <Row>
                             <Col xs="5">
                                 <div className="icon-big text-center icon-warning">
-                                    <AiFillCar />
+                                    <AiFillCar  style={{color:"#fff"}}/>
                                 </div>
                             </Col>
                             <Col xs="7">

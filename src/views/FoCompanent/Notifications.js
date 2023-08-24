@@ -24,7 +24,7 @@ const Notifications = () => {
                         <Row>
                             <Col xs="5">
                                 <div className="icon-big text-center icon-warning">
-                                    <MdCircleNotifications />
+                                    <MdCircleNotifications style={{color:"lightblue"}} />
                                 </div>
                             </Col>
                             <Col xs="7">

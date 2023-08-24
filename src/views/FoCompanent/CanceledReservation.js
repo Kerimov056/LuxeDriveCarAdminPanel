@@ -23,7 +23,7 @@ const CanceledReservation = () => {
                         <Row>
                             <Col xs="5">
                                 <div className="icon-big text-center icon-warning">
-                                    <i className="nc-icon nc-vector"></i>
+                                    <i className="nc-icon nc-vector text-danger"></i>
                                 </div>
                             </Col>
                             <Col xs="7">

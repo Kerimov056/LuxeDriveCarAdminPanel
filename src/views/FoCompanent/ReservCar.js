@@ -23,7 +23,7 @@ const ReservCar = () => {
                         <Row>
                             <Col xs="5">
                                 <div className="icon-big text-center icon-warning">
-                                    <i className="nc-icon nc-badge"></i>
+                                    <i className="nc-icon nc-badge text-warning"></i>
                                 </div>
                             </Col>
                             <Col xs="7">

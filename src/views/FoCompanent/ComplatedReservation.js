@@ -23,7 +23,7 @@ const ComplatedReservation = () => {
                         <Row>
                             <Col xs="5">
                                 <div className="icon-big text-center icon-warning">
-                                    <i className="nc-icon nc-app"></i>
+                                    <i className="nc-icon nc-app text-success"></i>
                                 </div>
                             </Col>
                             <Col xs="7">

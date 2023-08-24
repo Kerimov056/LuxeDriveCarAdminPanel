@@ -23,7 +23,7 @@ const Confirmed = () => {
                         <Row>
                             <Col xs="5">
                                 <div className="icon-big text-center icon-warning">
-                                    <i className="far fa-calendar-alt mr-1"></i>
+                                    <i className="far fa-calendar-alt mr-1 text-primary"></i>
                                 </div>
                             </Col>
                             <Col xs="7">
