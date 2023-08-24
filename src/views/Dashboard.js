@@ -26,13 +26,13 @@ function Dashboard() {
       <Container fluid>
         <Row>
           
-          <CardCompanent />
+          <CardCompanent />  {/*All Cars */}
 
-          <ReservCar />          
+          <ReservCar />   {/* hal hazirda reservde olan car */}
 
-          <Confirmed />
+          <Confirmed />   {/* tesdiqlenmis reservation */}
 
-          <Notifications/>
+          <Notifications/> {/* Reserv tesdiqi gozlenilen reservationlar*/}
 
           <Col lg="3" sm="6">
             <Card className="card-stats">
