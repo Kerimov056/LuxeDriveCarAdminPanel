@@ -16,6 +16,7 @@ import {
   Tooltip,
 } from "react-bootstrap";
 import CardCompanent from "./FoCompanent/CardCompanent";
+import ReservCar from "./FoCompanent/ReservCar";
 
 function Dashboard() {
   return (
@@ -25,7 +26,7 @@ function Dashboard() {
           
           <CardCompanent />
 
-          
+          <ReservCar />          
 
           <Col lg="3" sm="6">
             <Card className="card-stats">

@@ -5,14 +5,13 @@ import {
     Col,
 } from "react-bootstrap";
 import { useQuery } from "react-query";
-import { getCarCount } from "../../Services/carServices";
-import { AiFillCar } from "react-icons/ai";
+import { getReservCarCount } from "../../Services/carServices";
 
-const CardCompanent = () => {
+const ReservCar = () => {
 
-    const { data: cars } = useQuery({
-        queryKey: ["CarCount"],
-        queryFn: getCarCount,
+    const { data: reservCars } = useQuery({
+        queryKey: ["ReservCarCount"],
+        queryFn: getReservCarCount,
         staleTime: 0,
     });
 
@@ -24,13 +23,13 @@ const CardCompanent = () => {
                         <Row>
                             <Col xs="5">
                                 <div className="icon-big text-center icon-warning">
-                                    <AiFillCar />
+                                    <i className="far fa-calendar-alt mr-1"></i>
                                 </div>
                             </Col>
                             <Col xs="7">
                                 <div className="numbers">
                                     <p className="card-category">All Cars</p>
-                                    <Card.Title as="h4">{cars?.data==null ? 0 : cars?.data}</Card.Title>
+                                    <Card.Title as="h4">{reservCars?.data == null ? 0 : reservCars?.data}</Card.Title>
                                 </div>
                             </Col>
                         </Row>
@@ -38,7 +37,7 @@ const CardCompanent = () => {
                     <Card.Footer>
                         <hr></hr>
                         <div className="stats">
-                        <i className="far fa-calendar-alt mr-1"></i>
+                            <i className="far fa-calendar-alt mr-1"></i>
                             Reservation Car
                         </div>
                     </Card.Footer>
@@ -48,5 +47,5 @@ const CardCompanent = () => {
     )
 }
 
-export default CardCompanent
+export default ReservCar
 
