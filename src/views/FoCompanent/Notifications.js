@@ -10,7 +10,7 @@ import { getReservCarCount } from "../../Services/carServices";
 
 const Notifications = () => {
 
-    const { data: reservCars } = useQuery({
+    const { data: notification } = useQuery({
         queryKey: ["Notifications"],
         queryFn: getReservCarCount,
         staleTime: 0,
@@ -30,7 +30,7 @@ const Notifications = () => {
                             <Col xs="7">
                                 <div className="numbers">
                                     <p className="card-category">All Cars</p>
-                                    <Card.Title as="h4">{reservCars?.data == null ? 0 : reservCars?.data}</Card.Title>
+                                    <Card.Title as="h4">{notification?.data == null ? 0 : notification?.data}</Card.Title>
                                 </div>
                             </Col>
                         </Row>

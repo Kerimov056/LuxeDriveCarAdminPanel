@@ -18,6 +18,7 @@ import {
 import CardCompanent from "./FoCompanent/CardCompanent";
 import ReservCar from "./FoCompanent/ReservCar";
 import Notifications from "./FoCompanent/Notifications";
+import Confirmed from "./FoCompanent/Confirmed";
 
 function Dashboard() {
   return (
@@ -28,6 +29,8 @@ function Dashboard() {
           <CardCompanent />
 
           <ReservCar />          
+
+          <Confirmed />
 
           <Notifications/>
 

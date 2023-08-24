@@ -9,8 +9,8 @@ import { getReservConfirmed } from "../../Services/reservationServices";
 
 const Confirmed = () => {
 
-    const { data: reservCars } = useQuery({
-        queryKey: ["ReservCarCount"],
+    const { data: confirmed } = useQuery({
+        queryKey: ["ReservConfirmedCount"],
         queryFn: getReservConfirmed,
         staleTime: 0,
     });
@@ -23,13 +23,13 @@ const Confirmed = () => {
                         <Row>
                             <Col xs="5">
                                 <div className="icon-big text-center icon-warning">
-                                    <i className="far fa-calendar-alt mr-1"></i>
+                                    <i className="nc-icon nc-badge"></i>
                                 </div>
                             </Col>
                             <Col xs="7">
                                 <div className="numbers">
-                                    <p className="card-category">All Cars</p>
-                                    <Card.Title as="h4">{reservCars?.data == null ? 0 : reservCars?.data}</Card.Title>
+                                    <p className="card-category">Reservation</p>
+                                    <Card.Title as="h4">{confirmed?.data == null ? 0 : confirmed?.data}</Card.Title>
                                 </div>
                             </Col>
                         </Row>
@@ -37,8 +37,8 @@ const Confirmed = () => {
                     <Card.Footer>
                         <hr></hr>
                         <div className="stats">
-                            <i className="far fa-calendar-alt mr-1"></i>
-                            Reservation Car
+                            <i className="nc-icon nc-check-2"></i>
+                             Confirmed Reservation
                         </div>
                     </Card.Footer>
                 </Card>
