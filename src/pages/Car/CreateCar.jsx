@@ -66,11 +66,14 @@ const CreateCar = () => {
 
     const [imageFields, setImageFields] = useState([{ id: 1, files: [] }]);
 
-    console.log(imageFields);
-
     const addImageField = () => {
         const newId = imageFields[imageFields.length - 1].id + 1;
         setImageFields([...imageFields, { id: newId, files: [] }]);
+    };
+
+    const removeImageField = (id) => {
+        const updatedFields = imageFields.filter((field) => field.id !== id);
+        setImageFields(updatedFields);
     };
 
     const handleFileChange = (event, id) => {
@@ -98,6 +101,7 @@ const CreateCar = () => {
             }
         });
     };
+
 
     return (
         <>
@@ -193,16 +197,17 @@ const CreateCar = () => {
                                     </Row>
                                     <Row>
 
-                                        <Col className="pr-1" md="6">
-                                            {/* <Form.Group controlId="formFileMultiple" className="mb-3">
-                                                <Form.Label>Car Images</Form.Label>
-                                                <Form.Control type="file" multiple />
-                                            </Form.Group> */}
+                                        <Col className="pr-" md="6">
                                             {imageFields.map((field) => (
-                                                <Form.Group controlId={`formFileMultiple_${field.id}`} className="mb-3" key={field.id}>
-                                                    <Form.Label>Car Images</Form.Label>
-                                                    <Form.Control type="file" multiple onChange={(event) => handleFileChange(event, field.id)} />
-                                                </Form.Group>
+                                                <div id='ImgUpload' key={field.id}>
+                                                    <Form.Group style={field.id==1 ? {marginLeft:"-70px"} : {}} controlId={`formFileMultiple_${field.id}`} className="mb-3">
+                                                        <Form.Label>Car Images</Form.Label>
+                                                        <Form.Control type="file" multiple onChange={(event) => handleFileChange(event, field.id)} />
+                                                    </Form.Group>
+                                                    {field.id > 1 &&
+                                                        <Button onClick={() => removeImageField(field.id)}>-</Button>
+                                                    }
+                                                </div>
                                             ))}
                                             <Button onClick={addImageField}>+</Button>
                                         </Col>
