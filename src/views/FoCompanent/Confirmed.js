@@ -4,15 +4,14 @@ import {
     Row,
     Col,
 } from "react-bootstrap";
-import { MdCircleNotifications } from "react-icons/md";
 import { useQuery } from "react-query";
-import { getReservCarCount } from "../../Services/carServices";
+import { getReservConfirmed } from "../../Services/reservationServices";
 
-const Notifications = () => {
+const Confirmed = () => {
 
     const { data: reservCars } = useQuery({
-        queryKey: ["Notifications"],
-        queryFn: getReservCarCount,
+        queryKey: ["ReservCarCount"],
+        queryFn: getReservConfirmed,
         staleTime: 0,
     });
 
@@ -24,7 +23,7 @@ const Notifications = () => {
                         <Row>
                             <Col xs="5">
                                 <div className="icon-big text-center icon-warning">
-                                    <MdCircleNotifications />
+                                    <i className="far fa-calendar-alt mr-1"></i>
                                 </div>
                             </Col>
                             <Col xs="7">
@@ -39,7 +38,7 @@ const Notifications = () => {
                         <hr></hr>
                         <div className="stats">
                             <i className="far fa-calendar-alt mr-1"></i>
-                            Notifications
+                            Reservation Car
                         </div>
                     </Card.Footer>
                 </Card>
@@ -48,5 +47,5 @@ const Notifications = () => {
     )
 }
 
-export default Notifications
+export default Confirmed
 
