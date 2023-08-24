@@ -28,7 +28,7 @@ const ComplatedReservation = () => {
                             </Col>
                             <Col xs="7">
                                 <div className="numbers">
-                                    <p className="card-category">Reserved Cars</p>
+                                    <p className="card-category">Complated Reservations</p>
                                     <Card.Title as="h4">{reservComlated?.data == null ? 0 : reservComlated?.data}</Card.Title>
                                 </div>
                             </Col>
@@ -38,7 +38,7 @@ const ComplatedReservation = () => {
                         <hr></hr>
                         <div className="stats">
                             <i className="nc-icon nc-align-left-2"></i>
-                            Reservation Car
+                            Reservation 
                         </div>
                     </Card.Footer>
                 </Card>

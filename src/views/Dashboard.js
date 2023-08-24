@@ -19,22 +19,23 @@ import CardCompanent from "./FoCompanent/CardCompanent";
 import ReservCar from "./FoCompanent/ReservCar";
 import Notifications from "./FoCompanent/Notifications";
 import Confirmed from "./FoCompanent/Confirmed";
+import ComplatedReservation from "./FoCompanent/ComplatedReservation";
 
 function Dashboard() {
   return (
     <>
       <Container fluid>
         <Row>
-          
+
           <CardCompanent />  {/*All Cars */}
 
           <ReservCar />   {/* hal hazirda reservde olan car */}
 
           <Confirmed />   {/* tesdiqlenmis reservation */}
 
-          <Notifications/> {/* Reserv tesdiqi gozlenilen reservationlar*/}
+          <Notifications /> {/* Reserv tesdiqi gozlenilen reservationlar*/}
 
-          
+          <ComplatedReservation />  {/*Tamamlanmis Reservatonlar */}
 
         </Row>
         <Row>
