@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import {
     Badge,
     Button,
@@ -10,58 +10,34 @@ import {
     Row,
     Col
 } from "react-bootstrap";
+import "./createcar.scss";
 
 const CreateCar = () => {
 
     const carData = [
         {
             brand: "BMW",
-            models: ["Model 1", "Model 2", "Model 3"]
+            models: ["M5", "M4", "M3"]
         },
         {
             brand: "Mercedes",
-            models: ["Model A", "Model B", "Model C"]
+            models: ["S500", "S600", "S450"]
         },
         // Diğer markalar ve modeller
     ];
 
     const [selectedBrand, setSelectedBrand] = useState("");
     const [selectedModel, setSelectedModel] = useState("");
-    
+
     const handleBrandChange = (event) => {
-      const brand = event.target.value;
-      setSelectedBrand(brand);
-      setSelectedModel(""); // Marka değiştiğinde model seçimini sıfırla
+        const brand = event.target.value;
+        setSelectedBrand(brand);
+        setSelectedModel(""); // Marka değiştiğinde model seçimini sıfırla
     };
 
     return (
         <>
-            <div>
-                <label>Marka:</label>
-                <select value={selectedBrand} onChange={handleBrandChange}>
-                    <option value="">Marka Seçiniz</option>
-                    {carData.map((car, index) => (
-                        <option key={index} value={car.brand}>
-                            {car.brand}
-                        </option>
-                    ))}
-                </select>
-
-                {selectedBrand && (
-                    <div>
-                        <label>Model:</label>
-                        <select value={selectedModel} onChange={(e) => setSelectedModel(e.target.value)}>
-                            <option value="">Model Seçiniz</option>
-                            {carData.find((car) => car.brand === selectedBrand).models.map((model, index) => (
-                                <option key={index} value={model}>
-                                    {model}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                )}
-            </div>
-             <Container fluid>
+            <Container fluid>
                 <Row>
                     <Col md="8">
                         <Card>
@@ -71,6 +47,41 @@ const CreateCar = () => {
                             <Card.Body>
                                 <Form>
                                     <Row>
+
+
+                                        <Col className="pr-1" md="5">
+                                            <Form.Group>
+                                                <div className='MM'>
+                                                    <label>Marka:</label>
+                                                    <Form.Select id='FS' size='lg' value={selectedBrand} onChange={handleBrandChange}>
+                                                        <option size="lg" value="">Marka Seçiniz</option>
+                                                        {carData.map((car, index) => (
+                                                            <option id="asd" key={index} value={car.brand}>
+                                                                {car.brand}
+                                                            </option>
+                                                        ))}
+                                                    </Form.Select>
+
+                                                    {selectedBrand && (
+                                                        <div className='MM'>
+                                                            <label>Model:</label>
+                                                            <Form.Select id='FS' value={selectedModel} onChange={(e) => setSelectedModel(e.target.value)}>
+                                                                <option value="">Model Seçiniz</option>
+                                                                {carData.find((car) => car.brand === selectedBrand).models.map((model, index) => (
+                                                                    <option id="asd" key={index} value={model}>
+                                                                        {model}
+                                                                    </option>
+                                                                ))}
+                                                            </Form.Select>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </Form.Group>
+                                        </Col>
+
+
+
+
                                         <Col className="pr-1" md="5">
                                             <Form.Group>
                                                 <label>Company (disabled)</label>
@@ -197,7 +208,7 @@ const CreateCar = () => {
                         </Card>
                     </Col>
                 </Row>
-            </Container> 
+            </Container>
         </>
     )
 }
