@@ -6,13 +6,13 @@ import {
 } from "react-bootstrap";
 import { MdCircleNotifications } from "react-icons/md";
 import { useQuery } from "react-query";
-import { getReservCarCount } from "../../Services/carServices";
+import { getReservPeddingCount } from "../../Services/reservationServices";
 
 const Notifications = () => {
 
     const { data: notification } = useQuery({
         queryKey: ["Notifications"],
-        queryFn: getReservCarCount,
+        queryFn: getReservPeddingCount,
         staleTime: 0,
     });
 
@@ -29,7 +29,7 @@ const Notifications = () => {
                             </Col>
                             <Col xs="7">
                                 <div className="numbers">
-                                    <p className="card-category">All Cars</p>
+                                    <p className="card-category">Notifications</p>
                                     <Card.Title as="h4">{notification?.data == null ? 0 : notification?.data}</Card.Title>
                                 </div>
                             </Col>
@@ -39,7 +39,7 @@ const Notifications = () => {
                         <hr></hr>
                         <div className="stats">
                             <i className="far fa-calendar-alt mr-1"></i>
-                            Notifications
+                            Notifications Reservation
                         </div>
                     </Card.Footer>
                 </Card>
