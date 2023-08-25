@@ -45,7 +45,7 @@ root.render(
         <Route path="/AllCar" component={AllCar} />
         <Route path="/createCar" component={CreateCar} />
         <Route path="/NotificationsReservation" component={NotificationsReservation} />
-        <Route path='/ReservDetail/:id' element={<ReservDetail/>} />
+        <Route path='/ReservDetail/:id' component={ReservDetail} />
         <Redirect from="/" to="/admin/dashboard" />
       </Switch>
     </QueryClientProvider>  
