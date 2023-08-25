@@ -22,10 +22,10 @@ import AdminNavbar from "components/Navbars/AdminNavbar";
 import Footer from "components/Footer/Footer";
 import Sidebar from "components/Sidebar/Sidebar";
 import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
+import sidebarImage from "assets/img/sidebar-3.jpg";
 
 import routes from "routes.js";
 
-import sidebarImage from "assets/img/sidebar-3.jpg";
 
 function Admin() {
   const [image, setImage] = React.useState(sidebarImage);

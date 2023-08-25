@@ -26,6 +26,7 @@ import "./assets/scss/light-bootstrap-dashboard-react.scss?v=2.0.0";
 import "./assets/css/demo.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import AllCar from "../src/pages/Car/AllCar";
+import NotificationsReservation from "../src/pages/Res/NotificationsReservation";
 import { QueryClient, QueryClientProvider } from "react-query";
 const queryClinet = new QueryClient();
 
@@ -42,6 +43,7 @@ root.render(
         <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
         <Route path="/AllCar" component={AllCar} />
         <Route path="/createCar" component={CreateCar} />
+        <Route path="/NotificationsReservation" component={NotificationsReservation} />
         <Redirect from="/" to="/admin/dashboard" />
       </Switch>
     </QueryClientProvider>
