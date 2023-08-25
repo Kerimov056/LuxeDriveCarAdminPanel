@@ -22,7 +22,7 @@ const ReservDetail = () => {
         try {
             await putReservConfirmed(reservId);
             queryClient.invalidateQueries(["reservConform", reservId]);
-            navigate("/NotificationsReservation");
+            navigate.push("/NotificationsReservation");
         } catch (error) {
             console.error("Error confirming reservation:", error);
         }
