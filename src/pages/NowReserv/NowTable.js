@@ -12,17 +12,17 @@ import {
     Row,
     Col,
 } from "react-bootstrap";
-import NData from "./NData";
 import { useQuery } from "react-query";
-import { getReservPedding } from "../../Services/reservationServices";
+import { getReservNow } from "../../Services/reservationServices";
 import moment from 'moment';
+import NowData from "./NowData";
 
 
 function NowTable() {
 
-    const { data: reservPedding, isError } = useQuery({
-        queryKey: ["reservAllPedding"],
-        queryFn: getReservPedding,
+    const { data: reservNow, isError } = useQuery({
+        queryKey: ["getReservNow"],
+        queryFn: getReservNow,
         staleTime: 0,
     });
     if (isError) {
@@ -56,12 +56,10 @@ function NowTable() {
                                             <th className="border-0">Pickup Date</th>
                                             <th className="border-0">Return Date</th>
                                             <th className="border-0">Details</th>
-                                            <th className="border-0">Confirm</th>
-                                            <th className="border-0">Cancel</th>
                                         </tr>
                                     </thead>
                                         {reservPedding?.data?.map((pedding, index) => ( 
-                                            <NData Id={pedding?.id}
+                                            <NowData Id={pedding?.id}
                                                 key={index}
                                                 number={index + 1}
                                                 marka={pedding?.reservCar?.marka}

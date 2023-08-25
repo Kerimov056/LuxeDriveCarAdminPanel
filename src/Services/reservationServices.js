@@ -5,7 +5,12 @@ export const getReservAllConfirmeD = () => {      //tesdiqlenmis olan reservatio
 };
 
 
-export const getReservConfirmed = () => {      //tesdiqlenmis olan reservationlarin sayi
+export const getReservNow = () => {     //halahzirda user'de  olan reservationlar
+    return httpClient.get("api/CarReservations/ReservConfirmedCount")
+};
+
+
+export const getReservConfirmed = () => {     //tesdiqlenmis olan reservationlarin sayi
     return httpClient.get("api/CarReservations/ReservConfirmedCount")
 };
 
