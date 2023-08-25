@@ -88,80 +88,47 @@ const CreateCar = () => {
         setSelectedModel(""); // Marka değiştiğinde model seçimini sıfırla
     };
 
-    const [imageFields, setImageFields] = useState([{ id: 1, files: [] }]);
+
+    const [imageFields, setImageFields] = useState([{ files: [] }]);
 
     const addImageField = () => {
-        const newId = imageFields[imageFields.length - 1].id + 1;
-        setImageFields([...imageFields, { id: newId, files: [] }]);
+        setImageFields([...imageFields, { files: [] }]);
     };
 
-    const removeImageField = (id) => {
-        const updatedFields = imageFields.filter((field) => field.id !== id);
+    const removeImageField = (index) => {
+        const updatedFields = imageFields.filter((field, i) => i !== index);
         setImageFields(updatedFields);
     };
 
-    const handleFileChange = (event, id) => {
-        const updatedFields = imageFields.map((field) => {
-            if (field.id === id) {
-                return { ...field, files: event.target.files };
-            }
-            return field;
-        });
+    const handleFileChange = (event, index) => {
+        const updatedFields = [...imageFields];
+        updatedFields[index] = { ...updatedFields[index], files: event.target.files };
         setImageFields(updatedFields);
     };
 
-    const handleUpload = async () => {
-        imageFields.forEach(async (field) => {
-            const formData = new FormData();
-            field.files.forEach((file) => {
-                formData.append('images', file);
-            });
-
-            try {
-                const response = await axios.post('/api/upload', formData);
-                console.log(`Uploaded images for field ${field.id}:`, response.data);
-            } catch (error) {
-                console.error(`Error uploading images for field ${field.id}:`, error);
-            }
-        });
-    };
-
-
-    const [tagFields, setTagFields] = useState([{ id: 1, value: '' }]);
+    const [tagFields, setTagFields] = useState([{ value: '' }]);
 
     const addTagField = () => {
-        const newId = tagFields[tagFields.length - 1].id + 1;
-        setTagFields([...tagFields, { id: newId, value: '' }]);
+        setTagFields([...tagFields, { value: '' }]);
     };
 
-    const removeTagField = (id) => {
-        const updatedFields = tagFields.filter((field) => field.id !== id);
+    const removeTagField = (index) => {
+        const updatedFields = tagFields.filter((_, i) => i !== index);
         setTagFields(updatedFields);
     };
-
-    const handleTagChange = (event, id) => {
-        const updatedFields = tagFields.map((field) => {
-            if (field.id === id) {
-                return { ...field, value: event.target.value };
-            }
-            return field;
-        });
-        setTagFields(updatedFields);
-    };
-
 
 
     const formik = useFormik({
         initialValues: {
             Marka: selectedBrand,
             Model: selectedModel,
-            Price: 0,
-            Year: 0,
+            Price: undefined,
+            Year: undefined,
             Description: "",
             CarType: "",
             CarCategory: "",
-            CarImages: imageFields,
-            tags: tagFields
+            CarImages: imageFields.map((field) => ({ files: field.files })),
+            tags: tagFields.filter((field) => !field.id).map((field) => ({ value: field.value })),
         },
         onSubmit: async (values) => {
             try {
@@ -171,7 +138,6 @@ const CreateCar = () => {
             }
         },
     });
-
 
     return (
         <>
@@ -191,8 +157,11 @@ const CreateCar = () => {
                                             <Form.Group>
                                                 <div className='MM'>
                                                     <label>Marka:</label>
-                                                    <Form.Select id='FS' size='lg' value={selectedBrand} onChange={handleBrandChange}>
-                                                        <option size="lg" value="">Marka Seçiniz</option>
+                                                    <Form.Select id='FS' size='lg' name='Marka' value={selectedBrand} onChange={(event) => {
+                                                        formik.handleChange(event);  // Formik tarafından sağlanan handleChange fonksiyonu
+                                                        handleBrandChange(event);    // Özel işlev
+                                                    }}>
+                                                        <option size="lg" value="">Marka option</option>
                                                         {carData.map((car, index) => (
                                                             <option id="asd" key={index} value={car.brand}>
                                                                 {car.brand}
@@ -203,8 +172,11 @@ const CreateCar = () => {
                                                     {selectedBrand && (
                                                         <div className='MM'>
                                                             <label>Model:</label>
-                                                            <Form.Select id='FS' value={selectedModel} onChange={(e) => setSelectedModel(e.target.value)}>
-                                                                <option value="">Model Seçiniz</option>
+                                                            <Form.Select id='FS' name='Model' value={selectedModel} onChange={(e) => {
+                                                                formik.handleChange(e);  // Formik tarafından sağlanan handleChange fonksiyonu
+                                                                setSelectedModel(e.target.value); // Özel işlev
+                                                            }}>
+                                                                <option value="">Model option</option>
                                                                 {carData.find((car) => car.brand === selectedBrand).models.map((model, index) => (
                                                                     <option id="asd" key={index} value={model}>
                                                                         {model}
@@ -221,7 +193,7 @@ const CreateCar = () => {
                                                         values={formik.values.Year}
                                                         onChange={formik.handleChange}
                                                         id='FS' size='lg' >
-                                                        <option size="lg" value="">Marka Seçiniz</option>
+                                                        <option size="lg" value="">Year option</option>
                                                         {carYear.map((year, index) => (
                                                             <option id="asd" key={index} value={year.year}>
                                                                 {year.year}
@@ -235,7 +207,7 @@ const CreateCar = () => {
                                                         values={formik.values.CarType}
                                                         onChange={formik.handleChange}
                                                         id='FS' size='lg' >
-                                                        <option size="lg" value="">Marka Seçiniz</option>
+                                                        <option size="lg" value="">Type option</option>
                                                         {carType.map((type, index) => (
                                                             <option id="asd" key={index} value={type.type}>
                                                                 {type.type}
@@ -249,7 +221,7 @@ const CreateCar = () => {
                                                         values={formik.values.CarCategory}
                                                         onChange={formik.handleChange}
                                                         id='FS' size='lg'>
-                                                        <option size="lg" value="">Marka Seçiniz</option>
+                                                        <option size="lg" value="">Category option</option>
                                                         {carCategory.map((Category, index) => (
                                                             <option id="asd" key={index} value={Category.Category}>
                                                                 {Category.Category}
@@ -284,14 +256,14 @@ const CreateCar = () => {
                                     <Row>
 
                                         <Col className="pr-" md="6">
-                                            {imageFields.map((field) => (
-                                                <div id='ImgUpload' key={field.id}>
-                                                    <Form.Group style={field.id == 1 ? { marginLeft: "-70px" } : {}} controlId={`formFileMultiple_${field.id}`} className="mb-3">
+                                            {imageFields.map((field, index) => (
+                                                <div id='ImgUpload' key={index}>
+                                                    <Form.Group style={index === 0 ? { marginLeft: "-70px" } : {}} controlId={`formFileMultiple_${index}`} className="mb-3">
                                                         <Form.Label>Car Images</Form.Label>
-                                                        <Form.Control type="file" multiple onChange={(event) => handleFileChange(event, field.id)} />
+                                                        <Form.Control type="file" multiple onChange={(event) => handleFileChange(event, index)} />
                                                     </Form.Group>
-                                                    {field.id > 1 &&
-                                                        <Button onClick={() => removeImageField(field.id)}>-</Button>
+                                                    {index > 0 &&
+                                                        <Button onClick={() => removeImageField(index)}>-</Button>
                                                     }
                                                 </div>
                                             ))}
@@ -299,26 +271,28 @@ const CreateCar = () => {
                                         </Col>
 
                                         <Col className="pr-" md="6">
-                                            {tagFields.map((field) => (
-                                                <div id="ImgUpload" key={field.id}>
-                                                    <Form.Group key={field.id}>
-                                                        <label style={field.id == 1 ? { marginLeft: "-70px" } : {}} controlId={`formFileMultiple_${field.id}`} >Tag</label>
-                                                        <InputGroup style={field.id == 1 ? { marginLeft: "-70px" } : {}} controlId={`formFileMultiple_${field.id}`} className="mb-3">
+                                            {tagFields.map((field, index) => (
+                                                <div id="ImgUpload" key={index}>
+                                                    <Form.Group>
+                                                        <label style={index === 0 ? { marginLeft: "-70px" } : {}} controlId={`formFileMultiple_${index}`}>Tag</label>
+                                                        <InputGroup style={index === 0 ? { marginLeft: "-70px" } : {}} controlId={`formFileMultiple_${index}`} className="mb-3">
                                                             <InputGroup.Text>#</InputGroup.Text>
                                                             <Form.Control
                                                                 aria-label="Tag input"
-                                                                value={field.value}
-                                                                onChange={(event) => handleTagChange(event, field.id)}
+                                                                name={`tags[${index}].value`}  // Formik'e yönlendirilen alan adı
+                                                                value={formik.values.tags[index]?.value || ''}  // Formik'in yönettiği değer
+                                                                onChange={formik.handleChange}  // Formik tarafından yönetilen değeri güncelle
                                                             />
                                                         </InputGroup>
                                                     </Form.Group>
-                                                    {field.id > 1 &&
-                                                        <Button onClick={() => removeTagField(field.id)}>-</Button>
+                                                    {index > 0 &&
+                                                        <Button onClick={() => removeTagField(index)}>-</Button>
                                                     }
                                                 </div>
                                             ))}
                                             <Button onClick={addTagField}>+</Button>
                                         </Col>
+
                                     </Row>
                                     <Row>
                                         <Col md="12">

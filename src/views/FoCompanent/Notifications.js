@@ -7,6 +7,7 @@ import {
 import { MdCircleNotifications } from "react-icons/md";
 import { useQuery } from "react-query";
 import { getReservPeddingCount } from "../../Services/reservationServices";
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Notifications = () => {
 
@@ -39,7 +40,7 @@ const Notifications = () => {
                         <hr></hr>
                         <div className="stats">
                             <i className="far fa-calendar-alt mr-1"></i>
-                            Notifications Reservation
+                           <Link to="/NotificationsReservation">Notifications Reservation</Link> 
                         </div>
                     </Card.Footer>
                 </Card>
