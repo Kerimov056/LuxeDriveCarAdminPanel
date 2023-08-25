@@ -9,15 +9,15 @@ export const getReservConfirmed = () => {      //tesdiqlenmis olan reservationla
     return httpClient.get("api/CarReservations/ReservConfirmedCount")
 };
 
-export const putReservConfirmed = (resrcId) => {
+export const putReservConfirmed = (resrcId) => {  //confirim etemk ucun
     return httpClient.put(`api/CarReservations/Confirmed?Id=${resrcId}`);
 };
 
-export const putReservCancled = (resrcId) => {
+export const putReservCancled = (resrcId) => {  //cancled etmek ucun
     return httpClient.put(`api/CarReservations/Cancled?Id=${resrcId}`);
 };
 
-export const putReservRemove = (resrcId) => {
+export const putReservRemove = (resrcId) => {  //silmek ucun
     return httpClient.delete(`api/CarReservations/${resrcId}`);
 };
 
