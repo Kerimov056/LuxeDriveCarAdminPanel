@@ -146,7 +146,7 @@ const CreateCar = () => {
 
 
                                                     <label>Year:</label>
-                                                    <Form.Select id='FS' size='lg' value={selectedBrand} onChange={handleBrandChange}>
+                                                    <Form.Select id='FS' size='lg' >
                                                         <option size="lg" value="">Marka Seçiniz</option>
                                                         {carYear.map((year, index) => (
                                                             <option id="asd" key={index} value={year.year}>
@@ -156,7 +156,7 @@ const CreateCar = () => {
                                                     </Form.Select>
 
                                                     <label>Type:</label>
-                                                    <Form.Select id='FS' size='lg' value={selectedBrand} onChange={handleBrandChange}>
+                                                    <Form.Select id='FS' size='lg' >
                                                         <option size="lg" value="">Marka Seçiniz</option>
                                                         {carType.map((type, index) => (
                                                             <option id="asd" key={index} value={type.type}>
@@ -166,7 +166,7 @@ const CreateCar = () => {
                                                     </Form.Select>
 
                                                     <label>Category:</label>
-                                                    <Form.Select id='FS' size='lg' value={selectedBrand} onChange={handleBrandChange}>
+                                                    <Form.Select id='FS' size='lg'>
                                                         <option size="lg" value="">Marka Seçiniz</option>
                                                         {carCategory.map((Category, index) => (
                                                             <option id="asd" key={index} value={Category.Category}>
