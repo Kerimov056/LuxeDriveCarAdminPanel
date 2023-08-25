@@ -29,41 +29,44 @@ function NTable() {
 
     return (
         <>
-                <Card className="strpied-tabled-with-hover">
-                    <Card.Header>
-                        <Card.Title as="h4">Striped Table with Hover</Card.Title>
-                        <p className="card-category">
-                            Here is a subtitle for this table
-                        </p>
-                    </Card.Header>
-                    <Card.Body className="table-full-width table-responsive px-0">
-                        <Table className="table-hover table-striped">
-                            <thead>
-                                <tr>
-                                    <th className="border-0">Num</th>
-                                    <th className="border-0">FullName</th>
-                                    <th className="border-0">Car</th>
-                                    <th className="border-0">Pickup Date</th>
-                                    <th className="border-0">Return Date</th>
-                                    <th className="border-0">Details</th>
-                                    <th className="border-0">Confirm</th>
-                                    <th className="border-0">Cancel</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <div>{reservPedding?.data?.map((pedding, index) => (
-                                    <NData key={index}
-                                        number={index + 1}
-                                        marka={pedding?.reservCar?.marka}
-                                        model={pedding?.reservCar?.model}
-                                        pick={pedding?.pickupDate}
-                                        return={pedding?.returnDate} />
-                                ))}
-                                </div>
-                            </tbody>
-                        </Table>
-                    </Card.Body>
-                </Card>
+            <Container fluid>
+                <Row>
+                    <Col md="12">
+                        <Card className="strpied-tabled-with-hover">
+                            <Card.Header>
+                                <Card.Title as="h4">Striped Table with Hover</Card.Title>
+                                <p className="card-category">
+                                    Here is a subtitle for this table
+                                </p>
+                            </Card.Header>
+                            <Card.Body className="table-full-width table-responsive px-0">
+                                <Table className="table-hover table-striped">
+                                    <thead>
+                                        <tr sty>
+                                            <th className="border-0">Num</th>
+                                            <th className="border-0">FullName</th>
+                                            <th className="border-0">Car</th>
+                                            <th className="border-0">Pickup Date</th>
+                                            <th className="border-0">Return Date</th>
+                                            <th className="border-0">Details</th>
+                                            <th className="border-0">Confirm</th>
+                                            <th className="border-0">Cancel</th>
+                                        </tr>
+                                    </thead>
+                                        {reservPedding?.data?.map((pedding, index) => (
+                                            <NData key={index}
+                                                number={index + 1}
+                                                marka={pedding?.reservCar?.marka}
+                                                model={pedding?.reservCar?.model}
+                                                pick={pedding?.pickupDate}
+                                                return={pedding?.returnDate} />
+                                        ))}
+                                </Table>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
         </>
     );
 }

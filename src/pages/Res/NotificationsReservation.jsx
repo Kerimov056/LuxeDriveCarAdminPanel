@@ -8,7 +8,10 @@ const NotificationsReservation = () => {
 
     return (
         <>
-            <NTable />
+            <Container>
+                <NTable />
+            </Container>
+
         </>
     )
 }
