@@ -48,7 +48,7 @@ function ConfirmedNTable() {
                             <Card.Body className="table-full-width table-responsive px-0">
                                 <Table className="table-hover table-striped">
                                     <thead>
-                                        <tr sty>
+                                        <tr>
                                             <th className="border-0">Num</th>
                                             <th className="border-0">FullName</th>
                                             <th className="border-0">Car</th>

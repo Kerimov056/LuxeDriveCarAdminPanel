@@ -36,6 +36,7 @@ import AdminLayout from "layouts/Admin.js";
 import CreateCar from "pages/Car/CreateCar";
 import ReservDetail from "pages/Res/ReservDetail";
 import CReservDetail from "pages/Conformeds/CReservDetail";
+import CancledReservations from "pages/Cancleds/CancledReservations"
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -48,6 +49,7 @@ root.render(
         <Route path="/createCar" component={CreateCar} />
         <Route path="/NotificationsReservation" component={NotificationsReservation} />
         <Route path="/ConfirmedReservation" component={ConfirmedReservation} />
+        <Route path="/CancledReservations" component={CancledReservations} />
         <Route path='/ReservDetail/:id' component={ReservDetail} />
         <Route path='/CReservDetail/:id' component={CReservDetail} />
         <Redirect from="/" to="/admin/dashboard" />
