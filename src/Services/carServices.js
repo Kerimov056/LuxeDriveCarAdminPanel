@@ -5,7 +5,7 @@ export const getCar = () => { //carlar
 };
 
 export const postCar = (data) => { //carlar
-  return httpClient.post("api/Car",data)
+  return httpClient.post("api/Car/postCar",data)
 };
 
 

@@ -7,6 +7,7 @@
     "axios": "^1.4.0",
     "bootstrap": "4.6.0",
     "chartist": "0.11.4",
+    "formik": "^2.4.3",
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.9",
     "react": ">=16.8.0",

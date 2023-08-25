@@ -13,10 +13,12 @@ import {
 } from "react-bootstrap";
 import "./createcar.scss";
 import { postCar } from "../../Services/carServices";
+import { useHistory } from "react-router-dom";
+import { Field, useFormik } from "formik";
 import { useMutation, useQueryClient } from "react-query";
 
 const CreateCar = () => {
-    const navigate = useNavigate();
+    const navigate = useHistory();
     const queryClient = useQueryClient();
 
     const HandleGoToCrud = () => {
@@ -30,20 +32,10 @@ const CreateCar = () => {
         },
     });
 
+    // name="name"
+    // value={formik.values.name}
+    // onChange={formik.handleChange}
 
-    const formik = useFormik({
-        initialValues: {
-            name: "",
-            description: "",
-        },
-        onSubmit: async (values) => {
-            try {
-                mutation.mutateAsync(values);
-            } catch (error) {
-                console.log(error);
-            }
-        },
-    });
 
 
 
@@ -157,6 +149,30 @@ const CreateCar = () => {
         setTagFields(updatedFields);
     };
 
+
+
+    const formik = useFormik({
+        initialValues: {
+            Marka: selectedBrand,
+            Model: selectedModel,
+            Price: 0,
+            Year: 0,
+            Description: "",
+            CarType: "",
+            CarCategory: "",
+            CarImages: imageFields,
+            tags: tagFields
+        },
+        onSubmit: async (values) => {
+            try {
+                mutation.mutateAsync(values);
+            } catch (error) {
+                console.log(error);
+            }
+        },
+    });
+
+
     return (
         <>
             <Container fluid>
@@ -200,7 +216,11 @@ const CreateCar = () => {
 
 
                                                     <label>Year:</label>
-                                                    <Form.Select id='FS' size='lg' >
+                                                    <Form.Select
+                                                        name="Year"
+                                                        values={formik.values.Year}
+                                                        onChange={formik.handleChange}
+                                                        id='FS' size='lg' >
                                                         <option size="lg" value="">Marka Seçiniz</option>
                                                         {carYear.map((year, index) => (
                                                             <option id="asd" key={index} value={year.year}>
@@ -210,7 +230,11 @@ const CreateCar = () => {
                                                     </Form.Select>
 
                                                     <label>Type:</label>
-                                                    <Form.Select id='FS' size='lg' >
+                                                    <Form.Select
+                                                        name="CarType"
+                                                        values={formik.values.CarType}
+                                                        onChange={formik.handleChange}
+                                                        id='FS' size='lg' >
                                                         <option size="lg" value="">Marka Seçiniz</option>
                                                         {carType.map((type, index) => (
                                                             <option id="asd" key={index} value={type.type}>
@@ -220,7 +244,11 @@ const CreateCar = () => {
                                                     </Form.Select>
 
                                                     <label>Category:</label>
-                                                    <Form.Select id='FS' size='lg'>
+                                                    <Form.Select
+                                                        name="CarCategory"
+                                                        values={formik.values.CarCategory}
+                                                        onChange={formik.handleChange}
+                                                        id='FS' size='lg'>
                                                         <option size="lg" value="">Marka Seçiniz</option>
                                                         {carCategory.map((Category, index) => (
                                                             <option id="asd" key={index} value={Category.Category}>
@@ -234,7 +262,11 @@ const CreateCar = () => {
                                                         <label>Price</label>
                                                         <InputGroup className="mb-3">
                                                             <InputGroup.Text>$</InputGroup.Text>
-                                                            <Form.Control aria-label="Amount (to the nearest dollar)" />
+                                                            <Form.Control
+                                                                name='Price'
+                                                                value={formik.values.Price}
+                                                                onChange={formik.handleChange}
+                                                                aria-label="Amount (to the nearest dollar)" />
                                                             <InputGroup.Text>.00</InputGroup.Text>
                                                         </InputGroup>
                                                     </Form.Group>
@@ -296,6 +328,9 @@ const CreateCar = () => {
                                                     cols="80"
                                                     defaultValue="Lamborghini Mercy, Your chick she so thirsty, I'm inthat two seat Lambo."
                                                     placeholder="Here can be your description"
+                                                    name="Description"
+                                                    value={formik.values.Description}
+                                                    onChange={formik.handleChange}
                                                     rows="4"
                                                     as="textarea"
                                                 ></Form.Control>
@@ -305,6 +340,7 @@ const CreateCar = () => {
                                     <Button
                                         className="btn-fill pull-right"
                                         type="submit"
+                                        onClick={formik.handleSubmit}
                                         variant="success"
                                     >
                                         Create Car
