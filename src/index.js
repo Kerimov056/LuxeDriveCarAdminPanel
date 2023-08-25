@@ -41,11 +41,11 @@ root.render(
     <QueryClientProvider client={queryClinet} >
       <Switch>
         <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-        <Route path="/AllCar" component={AllCar} />
+        {/* <Route path="/AllCar" component={AllCar} /> */}
         <Route path="/createCar" component={CreateCar} />
         <Route path="/NotificationsReservation" component={NotificationsReservation} />
         <Redirect from="/" to="/admin/dashboard" />
       </Switch>
-    </QueryClientProvider>
+    </QueryClientProvider>  
   </BrowserRouter>
 );
