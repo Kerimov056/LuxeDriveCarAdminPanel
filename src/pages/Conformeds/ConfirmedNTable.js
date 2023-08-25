@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import {
     Badge,
@@ -11,17 +11,17 @@ import {
     Row,
     Col,
 } from "react-bootstrap";
-import NData from "../Res/NData";
+import CNData from "./CNData";
 import { useQuery } from "react-query";
-import { getReservConfirmed } from "../../Services/reservationServices";
+import { getReservAllConfirmeD  } from "../../Services/reservationServices";
 import moment from 'moment';
 
 
 function ConfirmedNTable() {
 
-    const { data: reservConfirmed, isError } = useQuery({
+    const { data: reservConfirmedGetAll, isError } = useQuery({
         queryKey: ["reservAllConfirmed"],
-        queryFn: getReservConfirmed,
+        queryFn: getReservAllConfirmeD,
         staleTime: 0,
     });
     if (isError) {
@@ -31,7 +31,7 @@ function ConfirmedNTable() {
     const formatDate = (inputDate) => {
         const date = moment(inputDate);
         return date.format("DD MMMM YYYY");
-      };
+    };
 
     return (
         <>
@@ -55,19 +55,18 @@ function ConfirmedNTable() {
                                             <th className="border-0">Pickup Date</th>
                                             <th className="border-0">Return Date</th>
                                             <th className="border-0">Details</th>
-                                            <th className="border-0">Confirm</th>
                                             <th className="border-0">Cancel</th>
                                         </tr>
                                     </thead>
-                                        {reservConfirmed?.data?.map((confirmed, index) => ( 
-                                            <NData Id={confirmed?.id}
-                                                key={index}
-                                                number={index + 1}
-                                                marka={confirmed?.reservCar?.marka}
-                                                model={confirmed?.reservCar?.model}
-                                                pick={formatDate(confirmed?.pickupDate)}
-                                                return={formatDate(confirmed?.returnDate)} />
-                                        ))}
+                                    {reservConfirmedGetAll?.data?.map((confirmed, index) => (
+                                        <CNData Id={confirmed?.id}
+                                            key={index}
+                                            number={index + 1}
+                                            marka={confirmed?.reservCar?.marka}
+                                            model={confirmed?.reservCar?.model}
+                                            pick={formatDate(confirmed?.pickupDate)}
+                                            return={formatDate(confirmed?.returnDate)} />
+                                    ))}
                                 </Table>
                             </Card.Body>
                         </Card>

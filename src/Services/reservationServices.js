@@ -1,6 +1,11 @@
 import { httpClient } from "../utils/HttpClient";
 
-export const getReservConfirmed = () => { //tesdiqlenmis olan reservationlar
+export const getReservAllConfirmeD = () => {      //tesdiqlenmis olan reservationlar
+    return httpClient.get("api/CarReservations/IsResevConfirmedGetAll")
+};  
+
+
+export const getReservConfirmed = () => {      //tesdiqlenmis olan reservationlarin sayi
     return httpClient.get("api/CarReservations/ReservConfirmedCount")
 };  
 
@@ -8,6 +13,10 @@ export const putReservConfirmed = (resrcId) => {
   return httpClient.put(`api/CarReservations/Confirmed?Id=${resrcId}`);
 };
 
+export const putReservCancled = (resrcId) => {
+    return httpClient.put(`api/CarReservations/Cancled?Id=${resrcId}`);
+  };
+  
 
 export const getByReserv = (id) => { // getById
     return httpClient.get(`api/CarReservations/${id}`)
