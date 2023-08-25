@@ -2,68 +2,70 @@ import React, { useState } from "react";
 
 // react-bootstrap components
 import {
-  Badge,
-  Button,
-  Card,
-  Navbar,
-  Nav,
-  Table,
-  Container,
-  Row,
-  Col,
+    Badge,
+    Button,
+    Card,
+    Navbar,
+    Nav,
+    Table,
+    Container,
+    Row,
+    Col,
 } from "react-bootstrap";
+import NData from "./NData";
+import { useQuery } from "react-query";
+import { getReservPedding } from "../../Services/reservationServices";
 
 
-function NTable(props) {
+function NTable() {
+    const { data: reservPedding, isError } = useQuery({
+        queryKey: ["reservAllPedding"],
+        queryFn: getReservPedding,
+        staleTime: 0,
+    });
+    if (isError) {
+        return <div>Bir hata oluştu</div>;
+    }
 
-
-  return (
-    <>
-      <Container fluid>
-        <Row>
-          <Col md="12">
-            <Card className="strpied-tabled-with-hover">
-              <Card.Header>
-                <Card.Title as="h4">Striped Table with Hover</Card.Title>
-                <p className="card-category">
-                  Here is a subtitle for this table
-                </p>
-              </Card.Header>
-              <Card.Body className="table-full-width table-responsive px-0">
-                <Table className="table-hover table-striped">
-                  <thead>
-                    <tr>
-                      <th className="border-0">Num</th>
-                      <th className="border-0">FullName</th>
-                      <th className="border-0">Car</th>
-                      <th className="border-0">Pickup Date</th>
-                      <th className="border-0">Return Date</th>
-                      <th className="border-0">Details</th>
-                      <th className="border-0">Confirm</th>
-                      <th className="border-0">Cancel</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>{props.number}</td>
-                      <td>Ulvi Kerimov</td> 
-                      <td>{props.marka} {props.model}</td>
-                      <td>{props.pick}</td>
-                      <td>{props.return}</td>
-                      <td><Button>Details</Button></td>
-                      <td><Button variant="success">Confirm</Button></td>
-                      <td><Button variant="danger">Cancel</Button></td>
-                    </tr>
-
-                  </tbody>
-                </Table>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
-    </>
-  );
+    return (
+        <>
+                <Card className="strpied-tabled-with-hover">
+                    <Card.Header>
+                        <Card.Title as="h4">Striped Table with Hover</Card.Title>
+                        <p className="card-category">
+                            Here is a subtitle for this table
+                        </p>
+                    </Card.Header>
+                    <Card.Body className="table-full-width table-responsive px-0">
+                        <Table className="table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th className="border-0">Num</th>
+                                    <th className="border-0">FullName</th>
+                                    <th className="border-0">Car</th>
+                                    <th className="border-0">Pickup Date</th>
+                                    <th className="border-0">Return Date</th>
+                                    <th className="border-0">Details</th>
+                                    <th className="border-0">Confirm</th>
+                                    <th className="border-0">Cancel</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <div>{reservPedding?.data?.map((pedding, index) => (
+                                    <NData key={index}
+                                        number={index + 1}
+                                        marka={pedding?.reservCar?.marka}
+                                        model={pedding?.reservCar?.model}
+                                        pick={pedding?.pickupDate}
+                                        return={pedding?.returnDate} />
+                                ))}
+                                </div>
+                            </tbody>
+                        </Table>
+                    </Card.Body>
+                </Card>
+        </>
+    );
 }
 
 export default NTable;
