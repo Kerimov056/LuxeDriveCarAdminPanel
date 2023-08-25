@@ -1,9 +1,10 @@
 import React from 'react'
+import TableList from 'views/TableList'
 
 const NotificationsReservation = () => {
     return (
         <>
-            Salam
+            <TableList fullName={""} marka={""} model={""} pick={""} return={""}/>
         </>
     )
 }

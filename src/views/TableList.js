@@ -13,6 +13,7 @@ import {
   Col,
 } from "react-bootstrap";
 
+
 function TableList() {
   return (
     <>
@@ -30,56 +31,28 @@ function TableList() {
                 <Table className="table-hover table-striped">
                   <thead>
                     <tr>
-                      <th className="border-0">ID</th>
-                      <th className="border-0">Name</th>
-                      <th className="border-0">Salary</th>
-                      <th className="border-0">Country</th>
-                      <th className="border-0">City</th>
+                      <th className="border-0">Num</th>
+                      <th className="border-0">FullName</th>
+                      <th className="border-0">Car</th>
+                      <th className="border-0">PickupDate</th>
+                      <th className="border-0">ReturnDate</th>
+                      <th className="border-0">Details</th>
+                      <th className="border-0">Confirm</th>
+                      <th className="border-0">Cancel</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td>1</td>
-                      <td>Dakota Rice</td>
-                      <td>$36,738</td>
-                      <td>Niger</td>
-                      <td>Oud-Turnhout</td>
+                      <td>{props.fullName}</td>
+                      <td>{props.marka} {props.model}</td>
+                      <td>{props.pick}</td>
+                      <td>{props.return}</td>
+                      <td><Button>Details</Button></td>
+                      <td><Button variant="success">Confirm</Button></td>
+                      <td><Button variant="danger">Cancel</Button></td>
                     </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Minerva Hooper</td>
-                      <td>$23,789</td>
-                      <td>Curaçao</td>
-                      <td>Sinaai-Waas</td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Sage Rodriguez</td>
-                      <td>$56,142</td>
-                      <td>Netherlands</td>
-                      <td>Baileux</td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>Philip Chaney</td>
-                      <td>$38,735</td>
-                      <td>Korea, South</td>
-                      <td>Overland Park</td>
-                    </tr>
-                    <tr>
-                      <td>5</td>
-                      <td>Doris Greene</td>
-                      <td>$63,542</td>
-                      <td>Malawi</td>
-                      <td>Feldkirchen in Kärnten</td>
-                    </tr>
-                    <tr>
-                      <td>6</td>
-                      <td>Mason Porter</td>
-                      <td>$78,615</td>
-                      <td>Chile</td>
-                      <td>Gloucester</td>
-                    </tr>
+                    
                   </tbody>
                 </Table>
               </Card.Body>
