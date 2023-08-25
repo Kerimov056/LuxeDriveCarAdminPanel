@@ -1,9 +1,9 @@
 import React from 'react'
 import './reservDetail.scss'
-import { useQuery, useMutation, useQueryClient } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { useParams, useHistory } from "react-router-dom";
-import { getByReserv } from "../../Services/reservationServices";
-import { Card, Col, Container, Form, InputGroup, Row } from 'react-bootstrap';
+import { getByReserv, putReservConfirmed } from "../../Services/reservationServices";
+import {Container, Form, InputGroup, Row } from 'react-bootstrap';
 import CarCard from 'pages/Car/CarCard';
 import moment from 'moment';
 
@@ -18,11 +18,20 @@ const ReservDetail = () => {
         getByReserv(id)
     );
 
-    
+    const handleConfirm = async (reservId) => {
+        try {
+            await putReservConfirmed(reservId);
+            queryClient.invalidateQueries(["reservConform", reservId]);
+            navigate("/NotificationsReservation");
+        } catch (error) {
+            console.error("Error confirming reservation:", error);
+        }
+    };
+
     const formatDate = (inputDate) => {
         const date = moment(inputDate);
         return date.format("DD MMMM YYYY");
-      };
+    };
 
 
     return (
@@ -63,12 +72,12 @@ const ReservDetail = () => {
                                         <input type="text" value={byReserv?.data?.email} />
                                         <label>Email</label>
                                     </div>
-                                    <div style={byReserv?.data?.pickupLocation==null ? {display:"none"} : {}} class="user-box">
-                                        <input type="text" value={byReserv?.data?.pickupLocation==null ? "" : byReserv?.data?.pickupLocation} />
+                                    <div style={byReserv?.data?.pickupLocation == null ? { display: "none" } : {}} class="user-box">
+                                        <input type="text" value={byReserv?.data?.pickupLocation == null ? "" : byReserv?.data?.pickupLocation} />
                                         <label>Pickup Location</label>
                                     </div>
-                                    <div style={byReserv?.data.returnLocation==null ? {display:"none"} : {}} class="user-box">
-                                        <input type="text" value={byReserv?.data?.returnLocation==null ? "" : byReserv?.data?.returnLocation} />
+                                    <div style={byReserv?.data.returnLocation == null ? { display: "none" } : {}} class="user-box">
+                                        <input type="text" value={byReserv?.data?.returnLocation == null ? "" : byReserv?.data?.returnLocation} />
                                         <label>Return Location</label>
                                     </div>
                                     <InputGroup className="mb-3">
@@ -76,8 +85,9 @@ const ReservDetail = () => {
                                         <InputGroup.Text>994</InputGroup.Text>
                                         <Form.Control value={byReserv?.data?.number} />
                                     </InputGroup>
+
                                     <center>
-                                        <a href="#">
+                                        <a href="#" onClick={() => handleConfirm(byReserv?.data?.id)}>
                                             Conform
                                             <span></span>
                                         </a>
