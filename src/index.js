@@ -38,6 +38,7 @@ import ReservDetail from "pages/Res/ReservDetail";
 import CReservDetail from "pages/Conformeds/CReservDetail";
 import CancledReservations from "pages/Cancleds/CancledReservations"
 import CancledReservDetail from "pages/Cancleds/CancledReservDetail";
+import RightNowReserv from "pages/NowReserv/RightNowReserv";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -51,6 +52,7 @@ root.render(
         <Route path="/NotificationsReservation" component={NotificationsReservation} />
         <Route path="/ConfirmedReservation" component={ConfirmedReservation} />
         <Route path="/CancledReservations" component={CancledReservations} />
+        <Route path="/RightNowReserv" component={RightNowReserv} />
         <Route path='/ReservDetail/:id' component={ReservDetail} />
         <Route path='/CReservDetail/:id' component={CReservDetail} />
         <Route path='/CancledReservDetail/:id' component={CancledReservDetail} />

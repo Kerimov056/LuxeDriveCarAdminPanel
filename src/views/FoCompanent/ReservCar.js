@@ -6,6 +6,7 @@ import {
 } from "react-bootstrap";
 import { useQuery } from "react-query";
 import { getReservCarCount } from "../../Services/carServices";
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const ReservCar = () => {
 
@@ -38,7 +39,7 @@ const ReservCar = () => {
                         <hr></hr>
                         <div className="stats">
                             <i className="far fa-calendar-alt mr-1"></i>
-                            Reservation Car
+                           <Link to="./RightNowReserv">Reservation Car</Link> 
                         </div>
                     </Card.Footer>
                 </Card>

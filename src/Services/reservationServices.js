@@ -18,7 +18,7 @@ export const putReservCancled = (resrcId) => {
 };
 
 export const putReservRemove = (resrcId) => {
-    return httpClient.put(`api/CarReservations/${resrcId}`);
+    return httpClient.delete(`api/CarReservations/${resrcId}`);
 };
 
 export const getByReserv = (id) => { // getById

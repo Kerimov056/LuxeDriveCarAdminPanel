@@ -2,7 +2,7 @@ import React from 'react'
 import './cancledReservD.scss'
 import { useQuery, useQueryClient } from "react-query";
 import { useParams, useHistory } from "react-router-dom";
-import { getByReserv, putReservCancled } from "../../Services/reservationServices";
+import { getByReserv, putReservRemove } from "../../Services/reservationServices";
 import { Button, Container, Form, InputGroup } from 'react-bootstrap';
 import CarCard from 'pages/Car/CarCard';
 import moment from 'moment';
@@ -19,11 +19,11 @@ const CancledReservDetail = () => {
         getByReserv(id)
     );
 
-    const handleCancled = async (reservId) => {
+    const handleRemove = async (reservId) => {
         try {
-            await putReservCancled(reservId);
+            await putReservRemove(reservId);
             queryClient.invalidateQueries(["reservcancled", reservId]);
-            navigate.push("/ConfirmedReservation");
+            navigate.push("/CancledReservations");
         } catch (error) {
             console.error("Error confirming reservation:", error);
         }
@@ -87,17 +87,17 @@ const CancledReservDetail = () => {
                                         <Form.Control value={byReserv?.data?.number} />
                                     </InputGroup>
 
-                                    {/* <center>
-                                        <a href="#" onClick={() => handleCancled(byReserv?.data?.id)}>
-                                            Cancled
+                                    <center>
+                                        <a href="#" onClick={() => handleRemove(byReserv?.data?.id)}>
+                                            Remove
                                             <span></span>
                                         </a>
-                                    </center> */}
+                                    </center>
                                 </form>
                             </div>
                         </div>
                     </div>
-                  <Link to="/CancledReservations"><Button id='GoToBack'>Go To Back</Button></Link> 
+                    <Link to="/CancledReservations"><Button id='GoToBack'>Go To Back</Button></Link>
                 </div>
             </Container>
         </>
