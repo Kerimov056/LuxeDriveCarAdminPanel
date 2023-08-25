@@ -28,7 +28,7 @@ const CancledNData = (props) => {
                     <td>{props.marka} {props.model}</td>
                     <td>{props.pick}</td>
                     <td>{props.return}</td>
-                    <Link to={`/CReservDetail/${props.Id}`}><td><Button>Details</Button></td></Link>
+                    <Link to={`/CancledReservDetail/${props.Id}`}><td><Button>Details</Button></td></Link>
                 </tr>
             </tbody>
         </>

@@ -1,5 +1,5 @@
 import React from 'react'
-import './creservDetail.scss'
+import './cancledReservD.scss'
 import { useQuery, useQueryClient } from "react-query";
 import { useParams, useHistory } from "react-router-dom";
 import { getByReserv, putReservCancled } from "../../Services/reservationServices";
@@ -87,17 +87,17 @@ const CancledReservDetail = () => {
                                         <Form.Control value={byReserv?.data?.number} />
                                     </InputGroup>
 
-                                    <center>
+                                    {/* <center>
                                         <a href="#" onClick={() => handleCancled(byReserv?.data?.id)}>
                                             Cancled
                                             <span></span>
                                         </a>
-                                    </center>
+                                    </center> */}
                                 </form>
                             </div>
                         </div>
                     </div>
-                  <Link to="/ConfirmedReservation"><Button id='GoToBack'>Go To Back</Button></Link> 
+                  <Link to="/CancledReservations"><Button id='GoToBack'>Go To Back</Button></Link> 
                 </div>
             </Container>
         </>

@@ -35,15 +35,15 @@ const CancledTableR = () => {
                                     <th className="border-0">Cancel</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Dakota Rice</td>
-                                    <td>$36,738</td>
-                                    <td>Niger</td>
-                                    <td>Oud-Turnhout</td>
-                                </tr>
-                            </tbody>
+                            {reservConfirmedGetAll?.data?.map((confirmed, index) => (
+                                <CNData Id={confirmed?.id}
+                                    key={index}
+                                    number={index + 1}
+                                    marka={confirmed?.reservCar?.marka}
+                                    model={confirmed?.reservCar?.model}
+                                    pick={formatDate(confirmed?.pickupDate)}
+                                    return={formatDate(confirmed?.returnDate)} />
+                            ))}
                         </Table>
                     </Card.Body>
                 </Card>
