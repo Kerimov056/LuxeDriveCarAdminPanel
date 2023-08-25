@@ -14,7 +14,7 @@ import {
 } from "react-bootstrap";
 
 
-function TableList(props) {
+function NTable(props) {
 
 
   return (
@@ -66,4 +66,4 @@ function TableList(props) {
   );
 }
 
-export default TableList;
+export default NTable;
