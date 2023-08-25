@@ -2,7 +2,7 @@ import React from 'react'
 import { Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 import { useQuery, useQueryClient } from "react-query";
-import { putReservCancled } from "../../Services/reservationServices";
+import { putReservRemove } from "../../Services/reservationServices";
 
 const CancledNData = (props) => {
 
@@ -10,7 +10,7 @@ const CancledNData = (props) => {
 
     const handleRemove = async (reservId) => {
         try {
-            await putReservCancled(reservId);
+            await putReservRemove(reservId);
             queryClient.invalidateQueries(["reservCancled", reservId]);
             queryClient.invalidateQueries(["reservAllCancled"]);
         } catch (error) {
