@@ -8,11 +8,11 @@ const CancledNData = (props) => {
 
     const queryClient = useQueryClient();
 
-    const handleConfirm = async (reservId) => {
+    const handleRemove = async (reservId) => {
         try {
             await putReservCancled(reservId);
-            queryClient.invalidateQueries(["reservConformed", reservId]);
-            queryClient.invalidateQueries(["reservAllConfirmed"]);
+            queryClient.invalidateQueries(["reservCancled", reservId]);
+            queryClient.invalidateQueries(["reservAllCancled"]);
         } catch (error) {
             console.error("Error confirming reservation:", error);
         }
@@ -29,6 +29,7 @@ const CancledNData = (props) => {
                     <td>{props.pick}</td>
                     <td>{props.return}</td>
                     <Link to={`/CancledReservDetail/${props.Id}`}><td><Button>Details</Button></td></Link>
+                    <td><Button onClick={() => handleRemove(props.Id)}  variant="danger">Cancel</Button></td>
                 </tr>
             </tbody>
         </>

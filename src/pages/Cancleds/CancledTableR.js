@@ -52,7 +52,6 @@ const CancledTableR = () => {
                                     <th className="border-0">Pickup Date</th>
                                     <th className="border-0">Return Date</th>
                                     <th className="border-0">Details</th>
-                                    <th className="border-0">Cancel</th>
                                 </tr>
                             </thead>
                             {reservCancledGetAll?.data?.map((confirmed, index) => (

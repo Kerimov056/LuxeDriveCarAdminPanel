@@ -6,6 +6,7 @@ import {
 } from "react-bootstrap";
 import { useQuery } from "react-query";
 import { getReservCancledCount } from "../../Services/reservationServices";
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const CanceledReservation = () => {
 
@@ -38,7 +39,7 @@ const CanceledReservation = () => {
                         <hr></hr>
                         <div className="stats">
                             <i className="nc-icon nc-simple-remove"></i>
-                            Reservation
+                          <Link to='/CancledReservations'>Reservation</Link> 
                         </div>
                     </Card.Footer>
                 </Card>
