@@ -10,8 +10,28 @@ import {
     Row,
     Col,
 } from "react-bootstrap";
+import { useQuery } from "react-query";
+import { getGetAllReservCancled  } from "../../Services/reservationServices";
+import moment from 'moment';
+import CancledNData from './CancledNData';
+
 
 const CancledTableR = () => {
+
+    const { data: reservCancledGetAll, isError } = useQuery({
+        queryKey: ["reservAllCancled"],
+        queryFn: getGetAllReservCancled,
+        staleTime: 0,
+    });
+    if (isError) {
+        return <div>Bir hata oluştu</div>;
+    }
+
+    const formatDate = (inputDate) => {
+        const date = moment(inputDate);
+        return date.format("DD MMMM YYYY");
+    };
+
     return (
         <>
             <Col md="12">
@@ -35,8 +55,8 @@ const CancledTableR = () => {
                                     <th className="border-0">Cancel</th>
                                 </tr>
                             </thead>
-                            {reservConfirmedGetAll?.data?.map((confirmed, index) => (
-                                <CNData Id={confirmed?.id}
+                            {reservCancledGetAll?.data?.map((confirmed, index) => (
+                                <CancledNData Id={confirmed?.id}
                                     key={index}
                                     number={index + 1}
                                     marka={confirmed?.reservCar?.marka}
