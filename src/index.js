@@ -27,6 +27,7 @@ import "./assets/css/demo.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import AllCar from "../src/pages/Car/AllCar";
 import NotificationsReservation from "../src/pages/Res/NotificationsReservation";
+import ConfirmedReservation from '../src/pages/Conformeds/ConfirmedReservation'
 import { QueryClient, QueryClientProvider } from "react-query";
 const queryClinet = new QueryClient();
 
@@ -45,6 +46,7 @@ root.render(
         <Route path="/AllCar" component={AllCar} />
         <Route path="/createCar" component={CreateCar} />
         <Route path="/NotificationsReservation" component={NotificationsReservation} />
+        <Route path="/ConfirmedReservation" component={ConfirmedReservation} />
         <Route path='/ReservDetail/:id' component={ReservDetail} />
         <Redirect from="/" to="/admin/dashboard" />
       </Switch>
