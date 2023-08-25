@@ -103,6 +103,28 @@ const CreateCar = () => {
     };
 
 
+    const [tagFields, setTagFields] = useState([{ id: 1, value: '' }]);
+
+    const addTagField = () => {
+        const newId = tagFields[tagFields.length - 1].id + 1;
+        setTagFields([...tagFields, { id: newId, value: '' }]);
+    };
+
+    const removeTagField = (id) => {
+        const updatedFields = tagFields.filter((field) => field.id !== id);
+        setTagFields(updatedFields);
+    };
+
+    const handleTagChange = (event, id) => {
+        const updatedFields = tagFields.map((field) => {
+            if (field.id === id) {
+                return { ...field, value: event.target.value };
+            }
+            return field;
+        });
+        setTagFields(updatedFields);
+    };
+
     return (
         <>
             <Container fluid>
@@ -200,7 +222,7 @@ const CreateCar = () => {
                                         <Col className="pr-" md="6">
                                             {imageFields.map((field) => (
                                                 <div id='ImgUpload' key={field.id}>
-                                                    <Form.Group style={field.id==1 ? {marginLeft:"-70px"} : {}} controlId={`formFileMultiple_${field.id}`} className="mb-3">
+                                                    <Form.Group style={field.id == 1 ? { marginLeft: "-70px" } : {}} controlId={`formFileMultiple_${field.id}`} className="mb-3">
                                                         <Form.Label>Car Images</Form.Label>
                                                         <Form.Control type="file" multiple onChange={(event) => handleFileChange(event, field.id)} />
                                                     </Form.Group>
@@ -212,6 +234,27 @@ const CreateCar = () => {
                                             <Button onClick={addImageField}>+</Button>
                                         </Col>
 
+                                        <Col className="pr-" md="6">
+                                            {tagFields.map((field) => (
+                                                <div id="ImgUpload" key={field.id}>
+                                                    <Form.Group key={field.id}>
+                                                        <label style={field.id == 1 ? { marginLeft: "-70px" } : {}} controlId={`formFileMultiple_${field.id}`} >Tag</label>
+                                                        <InputGroup style={field.id == 1 ? { marginLeft: "-70px" } : {}} controlId={`formFileMultiple_${field.id}`}  className="mb-3">
+                                                            <InputGroup.Text>#</InputGroup.Text>
+                                                            <Form.Control
+                                                                aria-label="Tag input"
+                                                                value={field.value}
+                                                                onChange={(event) => handleTagChange(event, field.id)}
+                                                            />
+                                                        </InputGroup>
+                                                    </Form.Group>
+                                                    {field.id > 1 &&
+                                                        <Button onClick={() => removeTagField(field.id)}>-</Button>
+                                                    }
+                                                </div>
+                                            ))}
+                                            <Button onClick={addTagField}>+</Button>
+                                        </Col>
                                     </Row>
                                     <Row>
                                         <Col md="12">
