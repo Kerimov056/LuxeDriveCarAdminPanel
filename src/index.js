@@ -56,6 +56,7 @@ root.render(
         <Route path='/ReservDetail/:id' component={ReservDetail} />
         <Route path='/CReservDetail/:id' component={CReservDetail} />
         <Route path='/CancledReservDetail/:id' component={CancledReservDetail} />
+        <Route path='/CancledReservDetail/:id' component={NowDetail} />
         <Redirect from="/" to="/admin/dashboard" />
       </Switch>
     </QueryClientProvider>  

@@ -1,13 +1,8 @@
 import React from 'react'
-import { Button} from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
-import { useQueryClient } from "react-query";
 
 const NowData = (props) => {
-
-    const queryClient = useQueryClient();
-
-
     return (
         <>
             <tbody>
