@@ -11,17 +11,17 @@ import {
     Row,
     Col,
 } from "react-bootstrap";
-import NData from "./NData";
+import NData from "../Res/NData";
 import { useQuery } from "react-query";
-import { getReservPedding } from "../../Services/reservationServices";
+import { getReservConfirmed } from "../../Services/reservationServices";
 import moment from 'moment';
 
 
 function ConfirmedNTable() {
 
-    const { data: reservPedding, isError } = useQuery({
-        queryKey: ["reservAllPedding"],
-        queryFn: getReservPedding,
+    const { data: reservConfirmed, isError } = useQuery({
+        queryKey: ["reservAllConfirmed"],
+        queryFn: getReservConfirmed,
         staleTime: 0,
     });
     if (isError) {
@@ -59,14 +59,14 @@ function ConfirmedNTable() {
                                             <th className="border-0">Cancel</th>
                                         </tr>
                                     </thead>
-                                        {reservPedding?.data?.map((pedding, index) => ( 
-                                            <NData Id={pedding?.id}
+                                        {reservConfirmed?.data?.map((confirmed, index) => ( 
+                                            <NData Id={confirmed?.id}
                                                 key={index}
                                                 number={index + 1}
-                                                marka={pedding?.reservCar?.marka}
-                                                model={pedding?.reservCar?.model}
-                                                pick={formatDate(pedding?.pickupDate)}
-                                                return={formatDate(pedding?.returnDate)} />
+                                                marka={confirmed?.reservCar?.marka}
+                                                model={confirmed?.reservCar?.model}
+                                                pick={formatDate(confirmed?.pickupDate)}
+                                                return={formatDate(confirmed?.returnDate)} />
                                         ))}
                                 </Table>
                             </Card.Body>
