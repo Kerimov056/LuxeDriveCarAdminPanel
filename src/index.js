@@ -35,6 +35,7 @@ const queryClinet = new QueryClient();
 import AdminLayout from "layouts/Admin.js";
 import CreateCar from "pages/Car/CreateCar";
 import ReservDetail from "pages/Res/ReservDetail";
+import CReservDetail from "pages/Conformeds/CReservDetail";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -48,6 +49,7 @@ root.render(
         <Route path="/NotificationsReservation" component={NotificationsReservation} />
         <Route path="/ConfirmedReservation" component={ConfirmedReservation} />
         <Route path='/ReservDetail/:id' component={ReservDetail} />
+        <Route path='/CReservDetail/:id' component={CReservDetail} />
         <Redirect from="/" to="/admin/dashboard" />
       </Switch>
     </QueryClientProvider>  

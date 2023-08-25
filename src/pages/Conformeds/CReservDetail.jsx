@@ -1,15 +1,15 @@
 import React from 'react'
-import './reservDetail.scss'
+import './creservDetail.scss'
 import { useQuery, useQueryClient } from "react-query";
 import { useParams, useHistory } from "react-router-dom";
-import { getByReserv, putReservConfirmed } from "../../Services/reservationServices";
-import { Button, Container, Form, InputGroup, Row } from 'react-bootstrap';
+import { getByReserv, putReservCancled } from "../../Services/reservationServices";
+import { Button, Container, Form, InputGroup } from 'react-bootstrap';
 import CarCard from 'pages/Car/CarCard';
 import moment from 'moment';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 
-const ReservDetail = () => {
+const CReservDetail = () => {
 
     const { id } = useParams();
     const queryClient = useQueryClient();
@@ -21,9 +21,9 @@ const ReservDetail = () => {
 
     const handleConfirm = async (reservId) => {
         try {
-            await putReservConfirmed(reservId);
-            queryClient.invalidateQueries(["reservConform", reservId]);
-            navigate.push("/NotificationsReservation");
+            await putReservCancled(reservId);
+            queryClient.invalidateQueries(["reservcancled", reservId]);
+            navigate.push("/ConfirmedReservation");
         } catch (error) {
             console.error("Error confirming reservation:", error);
         }
@@ -89,7 +89,7 @@ const ReservDetail = () => {
 
                                     <center>
                                         <a href="#" onClick={() => handleConfirm(byReserv?.data?.id)}>
-                                            Conform
+                                            Cancled
                                             <span></span>
                                         </a>
                                     </center>
@@ -104,4 +104,4 @@ const ReservDetail = () => {
     )
 }
 
-export default ReservDetail
+export default CReservDetail

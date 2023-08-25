@@ -38,7 +38,7 @@ const NData = (props) => {
                     <td>{props.marka} {props.model}</td>
                     <td>{props.pick}</td>
                     <td>{props.return}</td>
-                    <Link to={`/ReservDetail/${props.Id}`}><td><Button>Details</Button></td></Link>
+                    <Link to={`/CReservDetail/${props.Id}`}><td><Button>Details</Button></td></Link>
                     <td><Button onClick={() => handleConfirm(props.Id)} variant="success">Confirm</Button></td>
                     <td><Button onClick={() => handleCancled(props.Id)} variant="danger">Cancel</Button></td>
                 </tr>
