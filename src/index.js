@@ -33,6 +33,7 @@ const queryClinet = new QueryClient();
 
 import AdminLayout from "layouts/Admin.js";
 import CreateCar from "pages/Car/CreateCar";
+import ReservDetail from "pages/Res/ReservDetail";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -41,9 +42,10 @@ root.render(
     <QueryClientProvider client={queryClinet} >
       <Switch>
         <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-        {/* <Route path="/AllCar" component={AllCar} /> */}
+        <Route path="/AllCar" component={AllCar} />
         <Route path="/createCar" component={CreateCar} />
         <Route path="/NotificationsReservation" component={NotificationsReservation} />
+        <Route path='/ReservDetail/:id' element={<ReservDetail/>} />
         <Redirect from="/" to="/admin/dashboard" />
       </Switch>
     </QueryClientProvider>  

@@ -15,6 +15,7 @@ import {
 import NData from "./NData";
 import { useQuery } from "react-query";
 import { getReservPedding } from "../../Services/reservationServices";
+import moment from 'moment';
 
 
 function NTable() {
@@ -26,6 +27,11 @@ function NTable() {
     if (isError) {
         return <div>Bir hata oluştu</div>;
     }
+
+    const formatDate = (inputDate) => {
+        const date = moment(inputDate);
+        return date.format("DD MMMM YYYY");
+      };
 
     return (
         <>
@@ -53,13 +59,14 @@ function NTable() {
                                             <th className="border-0">Cancel</th>
                                         </tr>
                                     </thead>
-                                        {reservPedding?.data?.map((pedding, index) => (
-                                            <NData key={index}
+                                        {reservPedding?.data?.map((pedding, index) => ( 
+                                            <NData Id={pedding?.id}
+                                                key={index}
                                                 number={index + 1}
                                                 marka={pedding?.reservCar?.marka}
                                                 model={pedding?.reservCar?.model}
-                                                pick={pedding?.pickupDate}
-                                                return={pedding?.returnDate} />
+                                                pick={formatDate(pedding?.pickupDate)}
+                                                return={formatDate(pedding?.returnDate)} />
                                         ))}
                                 </Table>
                             </Card.Body>
