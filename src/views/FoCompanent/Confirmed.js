@@ -6,6 +6,7 @@ import {
 } from "react-bootstrap";
 import { useQuery } from "react-query";
 import { getReservConfirmed } from "../../Services/reservationServices";
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Confirmed = () => {
 
@@ -17,7 +18,7 @@ const Confirmed = () => {
 
     return (
         <>
-            <Col style={{cursor:"pointer"}} id='CCCC' lg="3" sm="6">
+            <Col style={{ cursor: "pointer" }} id='CCCC' lg="3" sm="6">
                 <Card className="card-stats">
                     <Card.Body>
                         <Row>
@@ -38,7 +39,7 @@ const Confirmed = () => {
                         <hr></hr>
                         <div className="stats">
                             <i className="nc-icon nc-check-2"></i>
-                            Confirmed Reservation
+                            <Link to="/">Confirmed Reservation</Link>
                         </div>
                     </Card.Footer>
                 </Card>
