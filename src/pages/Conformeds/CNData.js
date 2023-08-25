@@ -28,7 +28,7 @@ const CNData = (props) => {
                     <td>{props.marka} {props.model}</td>
                     <td>{props.pick}</td>
                     <td>{props.return}</td>
-                    <Link to={`/ReservDetail/${props.Id}`}><td><Button>Details</Button></td></Link>
+                    <Link to={`/CReservDetail/${props.Id}`}><td><Button>Details</Button></td></Link>
                     <td><Button onClick={() => handleConfirm(props.Id)}  variant="danger">Cancel</Button></td>
                 </tr>
             </tbody>

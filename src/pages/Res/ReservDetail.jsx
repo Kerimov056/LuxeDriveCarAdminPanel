@@ -88,7 +88,7 @@ const ReservDetail = () => {
                                     </InputGroup>
 
                                     <center>
-                                        <a href="#" onClick={() => handleConfirm(byReserv?.data?.id)}>
+                                        <a id='rdC' href="#" onClick={() => handleConfirm(byReserv?.data?.id)}>
                                             Conform
                                             <span></span>
                                         </a>

@@ -19,7 +19,7 @@ const CReservDetail = () => {
         getByReserv(id)
     );
 
-    const handleConfirm = async (reservId) => {
+    const handleCancled = async (reservId) => {
         try {
             await putReservCancled(reservId);
             queryClient.invalidateQueries(["reservcancled", reservId]);
@@ -88,7 +88,7 @@ const CReservDetail = () => {
                                     </InputGroup>
 
                                     <center>
-                                        <a href="#" onClick={() => handleConfirm(byReserv?.data?.id)}>
+                                        <a href="#" onClick={() => handleCancled(byReserv?.data?.id)}>
                                             Cancled
                                             <span></span>
                                         </a>
@@ -97,7 +97,7 @@ const CReservDetail = () => {
                             </div>
                         </div>
                     </div>
-                  <Link to="/NotificationsReservation"><Button id='GoToBack'>Go To Back</Button></Link> 
+                  <Link to="/ConfirmedReservation"><Button id='GoToBack'>Go To Back</Button></Link> 
                 </div>
             </Container>
         </>
