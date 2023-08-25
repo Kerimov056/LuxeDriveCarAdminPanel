@@ -34,10 +34,10 @@ const ReservDetail = () => {
                             <img src='https://cdn4.buysellads.net/uu/1/138663/1691614506-Considerations_for_a_Highly_Available_260x200.jpg' />
                         </div>
                         <div class="cardDesc shadowDesc">
-                            <p>{byReserv.data.notes}</p>
+                            <p>{byReserv?.data?.notes}</p>
                         </div>
                         <div className='reservCarOne'>
-                            <CarCard marka={byReserv?.data.reservCar.marka} model={byReserv?.data.reservCar.model} year={byReserv?.data.reservCar.year} />
+                            <CarCard marka={byReserv?.data?.reservCar.marka} model={byReserv?.data.reservCar.model} year={byReserv?.data.reservCar.year} />
                         </div>
                         <div className='details'>
                             <div class="login-box">
@@ -52,29 +52,29 @@ const ReservDetail = () => {
                                         <label>Surname</label>
                                     </div>
                                     <div class="user-box">
-                                        <input type="text" value={formatDate(byReserv?.data.pickupDate)} />
+                                        <input type="text" value={formatDate(byReserv?.data?.pickupDate)} />
                                         <label>Picakup Date</label>
                                     </div>
                                     <div class="user-box">
-                                        <input type="text" value={formatDate(byReserv?.data.returnDate)} />
+                                        <input type="text" value={formatDate(byReserv?.data?.returnDate)} />
                                         <label>Return Date</label>
                                     </div>
                                     <div class="user-box">
-                                        <input type="text" value={byReserv?.data.email} />
+                                        <input type="text" value={byReserv?.data?.email} />
                                         <label>Email</label>
                                     </div>
-                                    <div style={byReserv?.data.pickupLocation==null ? {display:"none"} : {}} class="user-box">
-                                        <input type="text" value={byReserv?.data.pickupLocation==null ? "" : byReserv?.data.pickupLocation} />
+                                    <div style={byReserv?.data?.pickupLocation==null ? {display:"none"} : {}} class="user-box">
+                                        <input type="text" value={byReserv?.data?.pickupLocation==null ? "" : byReserv?.data?.pickupLocation} />
                                         <label>Pickup Location</label>
                                     </div>
                                     <div style={byReserv?.data.returnLocation==null ? {display:"none"} : {}} class="user-box">
-                                        <input type="text" value={byReserv?.data.returnLocation==null ? "" : byReserv?.data.returnLocation} />
+                                        <input type="text" value={byReserv?.data?.returnLocation==null ? "" : byReserv?.data?.returnLocation} />
                                         <label>Return Location</label>
                                     </div>
                                     <InputGroup className="mb-3">
                                         <InputGroup.Text>+</InputGroup.Text>
                                         <InputGroup.Text>994</InputGroup.Text>
-                                        <Form.Control value={byReserv?.data.number} />
+                                        <Form.Control value={byReserv?.data?.number} />
                                     </InputGroup>
                                     <center>
                                         <a href="#">
