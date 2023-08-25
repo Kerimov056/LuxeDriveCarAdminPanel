@@ -4,6 +4,11 @@ export const getCar = () => { //carlar
   return httpClient.get("api/Car")
 };
 
+export const postCar = (data) => { //carlar
+  return httpClient.post("api/Car",data)
+};
+
+
 export const getCarCount = () => { //carlarin sayini gosteriri
   return httpClient.get("api/Car/Count")
 };

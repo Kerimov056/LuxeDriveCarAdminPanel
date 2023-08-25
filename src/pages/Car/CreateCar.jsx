@@ -12,8 +12,40 @@ import {
     InputGroup
 } from "react-bootstrap";
 import "./createcar.scss";
+import { postCar } from "../../Services/carServices";
+import { useMutation, useQueryClient } from "react-query";
 
 const CreateCar = () => {
+    const navigate = useNavigate();
+    const queryClient = useQueryClient();
+
+    const HandleGoToCrud = () => {
+        navigate("/");
+    };
+
+    const mutation = useMutation(postCar, {
+        onSuccess: () => {
+            navigate("/");
+            queryClient.invalidateQueries("newCar");
+        },
+    });
+
+
+    const formik = useFormik({
+        initialValues: {
+            name: "",
+            description: "",
+        },
+        onSubmit: async (values) => {
+            try {
+                mutation.mutateAsync(values);
+            } catch (error) {
+                console.log(error);
+            }
+        },
+    });
+
+
 
     const carCategory = [
         {
@@ -239,7 +271,7 @@ const CreateCar = () => {
                                                 <div id="ImgUpload" key={field.id}>
                                                     <Form.Group key={field.id}>
                                                         <label style={field.id == 1 ? { marginLeft: "-70px" } : {}} controlId={`formFileMultiple_${field.id}`} >Tag</label>
-                                                        <InputGroup style={field.id == 1 ? { marginLeft: "-70px" } : {}} controlId={`formFileMultiple_${field.id}`}  className="mb-3">
+                                                        <InputGroup style={field.id == 1 ? { marginLeft: "-70px" } : {}} controlId={`formFileMultiple_${field.id}`} className="mb-3">
                                                             <InputGroup.Text>#</InputGroup.Text>
                                                             <Form.Control
                                                                 aria-label="Tag input"
