@@ -37,6 +37,7 @@ import CreateCar from "pages/Car/CreateCar";
 import ReservDetail from "pages/Res/ReservDetail";
 import CReservDetail from "pages/Conformeds/CReservDetail";
 import CancledReservations from "pages/Cancleds/CancledReservations"
+import CancledReservDetail from "pages/Cancleds/CancledReservDetail";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -52,6 +53,7 @@ root.render(
         <Route path="/CancledReservations" component={CancledReservations} />
         <Route path='/ReservDetail/:id' component={ReservDetail} />
         <Route path='/CReservDetail/:id' component={CReservDetail} />
+        <Route path='/CancledReservDetail/:id' component={CancledReservDetail} />
         <Redirect from="/" to="/admin/dashboard" />
       </Switch>
     </QueryClientProvider>  
