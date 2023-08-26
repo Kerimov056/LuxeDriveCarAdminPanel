@@ -28,7 +28,7 @@ const AllCar = () => {
                 </Row>
                 <Row className='mt-5'>
                     {allCars?.data.map((bycars, index) => (
-                        <CarCard key={index} marka={bycars?.marka} model={bycars?.model} year={bycars?.year} />
+                        <CarCard key={index} Id={bycars?.id} marka={bycars?.marka} model={bycars?.model} year={bycars?.year} />
                     ))}
                 </Row>
             </Container>

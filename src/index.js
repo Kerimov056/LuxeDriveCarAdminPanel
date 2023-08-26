@@ -52,7 +52,6 @@ root.render(
         <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
         <Route path="/AllCar" component={AllCar} />
         <Route path="/createCar" component={CreateCar} />
-        <Route path="/CarDetails" component={CarDetails} />
         <Route path="/NotificationsReservation" render={NotificationsReservation} />
         <Route path="/ConfirmedReservation" component={ConfirmedReservation} />
         <Route path="/CancledReservations" component={CancledReservations} />
@@ -63,6 +62,7 @@ root.render(
         <Route path='/CancledReservDetail/:id' component={CancledReservDetail} />
         <Route path='/CancledReservDetail/:id' component={NowDetail} />
         <Route path='/ComlatedRDetails/:id' component={ComlatedRDetails} />
+        <Route path="/CarDetails/:id" component={CarDetails} />
         <Redirect from="/" to="/admin/dashboard" />
       </Switch>
     </QueryClientProvider>  
