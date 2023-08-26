@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
-import { useQuery, useQueryClient } from "react-query";
+import {  useQueryClient } from "react-query";
 import { putReservRemove } from "../../Services/reservationServices";
 
 const CancledNData = (props) => {
