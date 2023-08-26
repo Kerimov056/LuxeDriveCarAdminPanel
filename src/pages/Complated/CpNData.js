@@ -28,7 +28,7 @@ const CpNData = (props) => {
                     <td>{props.marka} {props.model}</td>
                     <td>{props.pick}</td>
                     <td>{props.return}</td>
-                    <Link to={`/CancledReservDetail/${props.Id}`}><td><Button>Details</Button></td></Link>
+                    <Link to={`/ComlatedRDetails/${props.Id}`}><td><Button>Details</Button></td></Link>
                     <td><Button onClick={() => handleRemove(props.Id)}  variant="danger">Remove</Button></td>
                 </tr>
             </tbody>
