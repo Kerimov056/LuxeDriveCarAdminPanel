@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 const ComplatedReservation = () => {
 
     const { data: reservComlated } = useQuery({
-        queryKey: ["ReservCarCount"],
+        queryKey: ["resercComplated"],
         queryFn: getReservComplatedCount,
         staleTime: 0,
     });

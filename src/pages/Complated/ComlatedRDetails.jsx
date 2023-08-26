@@ -1,5 +1,5 @@
 import React from 'react'
-import './cancledReservD.scss'
+import '../Cancleds/cancledReservD.scss'
 import { useQuery, useQueryClient } from "react-query";
 import { useParams, useHistory } from "react-router-dom";
 import { getByReserv, putReservRemove } from "../../Services/reservationServices";
@@ -22,8 +22,8 @@ const ComlatedRDetails = () => {
     const handleRemove = async (reservId) => {
         try {
             await putReservRemove(reservId);
-            queryClient.invalidateQueries(["reservcancled", reservId]);
-            navigate.push("/CancledReservations");
+            queryClient.invalidateQueries(["reservcomplated", reservId]);
+            navigate.push("/ComplatedReservation");
         } catch (error) {
             console.error("Error confirming reservation:", error);
         }

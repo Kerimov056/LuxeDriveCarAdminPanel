@@ -11,7 +11,7 @@ const CpNData = (props) => {
     const handleRemove = async (reservId) => {
         try {
             await putReservRemove(reservId);
-            queryClient.invalidateQueries(["reservCancled", reservId]);
+            queryClient.invalidateQueries(["reservcomplated", reservId]);
             queryClient.invalidateQueries(["getAllReservComplated"]);
         } catch (error) {
             console.error("Error confirming reservation:", error);
