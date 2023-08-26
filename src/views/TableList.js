@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-
-// react-bootstrap components
 import {
   Badge,
   Button,
@@ -19,18 +17,17 @@ import { useQuery } from "react-query";
 import { useFormik } from "formik";
 import { useMutation, useQueryClient } from "react-query";
 
-
 function TableList(props) {
 
   const [createSlider, setCreateSlider] = useState(false);
 
   const queryClient = useQueryClient();
 
-  const mutation = useMutation(postSlider, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("getAllSlider");
-    },
-  });
+  // const mutation = useMutation(postSlider, {
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries("getAllSlider");
+  //   },
+  // });
 
 
   const { data: getSliders, isError } = useQuery({
@@ -42,18 +39,44 @@ function TableList(props) {
     return <div>Bir hata oluştu</div>;
   }
 
-  const formik = useFormik({
-    initialValues: {
-      image: ""
-    },
-    onSubmit: async (values) => {
-      try {
-        mutation.mutateAsync(values);
-      } catch (error) {
-        console.log(error);
+  // const formik = useFormik({
+  //   initialValues: {
+  //     image: ""
+  //   },
+  //   onSubmit: async (values) => {
+  //     try {
+  //       mutation.mutateAsync(values);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   },
+  // });
+
+  const [file, setFile] = useState();
+
+  function handleFile(event) {
+    setFile(event.target.files[0])
+    console.log(event.target.files[0]);
+  }
+
+  function handleUpload() {
+    const formData = new FormData()
+    formData.append('file', file)
+    fetch(
+      'https://localhost:7152/api/Sliders',
+      {
+        method: "POST",
+        body: formData
       }
-    },
-  });
+    ).then((respon) => respon.json()).then(
+      (result) => {
+        console.log('success', result);
+      }
+    )
+      .catch(error => {
+        console.log("error", error);
+      })
+  }
 
   return (
     <>
@@ -61,20 +84,23 @@ function TableList(props) {
         <Row>
           <div className='LxDrC'>
             <button onClick={() => setCreateSlider(!createSlider)} data-text="Awesome" class="buttonLXDC">
-              <span class="actual-text">&nbsp;Create Slider&nbsp;</span>
-              <span class="hover-textLCD" aria-hidden="true">&nbsp;Create Slider&nbsp;</span>
+              <span class="actual-text">&nbsp;Slider&nbsp;</span>
+              <span class="hover-textLCD" aria-hidden="true">&nbsp;Slider&nbsp;</span>
             </button>
           </div>
+          <div style={{marginBottom:"20px",marginLeft:"20px"}}>
+            <Button>Create Slider</Button>
+          </div>
           {createSlider == true ? <div style={{ width: "100%", height: "120px", display: "flex", alignItems: "center" }}>
-            <div style={{ width: "90%", height: "120px",display: "flex",justifyContent:"space-around" , alignItems: "center" }}>
-              <div style={{width: "70%"}}>
-                <Form.Group controlId="formFileMultiple" className="mb-3">
-                  <Form.Label>Multiple files input example</Form.Label>
-                  <Form.Control type="file" multiple />
-                </Form.Group>
+            <div style={{ width: "90%", height: "120px", display: "flex", justifyContent: "space-around", alignItems: "center" }}>
+              <div style={{ width: "70%" }}>
+                <form onSubmit={handleUpload} controlId="formFileMultiple" className="mb-3">
+                  <Form.Label>Slider Image</Form.Label>
+                  <input type="file" name="file" onClick={handleFile} />
+                </form>
               </div>
-              <p style={{width: "20%",marginTop:"35px"}}>
-                <Button style={{width: "140px"}} variant="success">
+              <p style={{ width: "20%", marginTop: "35px" }}>
+                <Button onClick={handleUpload} type="submit" style={{ width: "140px" }} variant="success">
                   Create
                 </Button>
               </p>

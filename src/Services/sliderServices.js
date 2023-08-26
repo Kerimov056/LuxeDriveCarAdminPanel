@@ -4,8 +4,8 @@ export const getSlider = () => {
   return httpClient.get("api/Sliders")
 };
 
-export const postSlider = () => {
-  return httpClient.post("api/Sliders")
+export const postSlider = (data) => {
+  return httpClient.post("api/Sliders",data)
 };
 
 
