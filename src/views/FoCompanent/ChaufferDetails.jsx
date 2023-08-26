@@ -31,10 +31,10 @@ const ChaufferDetails = () => {
 
     const handleRemove = async (cheufId) => {
         try {
-            await chauffeursRemove(carId);
-            queryClient.invalidateQueries(["chuferRemove", carId]);
+            await chauffeursRemove(cheufId);
+            queryClient.invalidateQueries(["chuferRemove", cheufId]);
             queryClient.invalidateQueries(["getChauffeurs"]);
-            navigate.push(`./admin/typography`);
+            navigate.push(`/admin/typography`);
         } catch (error) {
             console.error("Error confirming car:", error);
         }
@@ -44,7 +44,7 @@ const ChaufferDetails = () => {
     const updateMutation = useMutation(ChaufferDetails, {
         onSuccess: () => {
             queryClient.invalidateQueries(["getByCheuf", id]);
-            navigate("/"); // Navigate back to the home page after update
+            navigate("/admin/typography"); // Navigate back to the home page after update
         },
         onError: (error) => {
             console.error("Error updating Cheuffers:", error);
@@ -87,7 +87,7 @@ const ChaufferDetails = () => {
                 <div className='asdbbb'>
                     <Button onClick={() => setCheufEdit(!CheufEdit)} variant="success">Edit</Button>
                     <Button onClick={() => handleRemove(byCheuf?.data?.id)} variant="danger">Remove</Button>
-                    <Button><Link to='/AllCar'>Go To Back</Link></Button>
+                    <Button><Link to='/admin/typography'>Go To Back</Link></Button>
                 </div>
 
 
