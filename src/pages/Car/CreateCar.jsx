@@ -128,7 +128,8 @@ const CreateCar = () => {
             CarType: "",
             CarCategory: "",
             CarImages: imageFields.map((field) => ({ files: field.files })),
-            tags: tagFields.filter((field) => !field.id).map((field) => ({ value: field.value })),
+             tags: tagFields.filter((field) => !field.id).map((field) => ({ value: field?.value })),
+            // tags: tagFields
         },
         onSubmit: async (values) => {
             try {
@@ -138,6 +139,10 @@ const CreateCar = () => {
             }
         },
     });
+
+    console.log(selectedModel, selectedBrand);
+    console.log(imageFields.map((field) => ({ files: field.files })));
+    console.log(tagFields);
 
     return (
         <>
@@ -151,8 +156,6 @@ const CreateCar = () => {
                             <Card.Body>
                                 <Form>
                                     <Row>
-
-
                                         <Col className="pr-1" md="5">
                                             <Form.Group>
                                                 <div className='MM'>
@@ -274,14 +277,14 @@ const CreateCar = () => {
                                             {tagFields.map((field, index) => (
                                                 <div id="ImgUpload" key={index}>
                                                     <Form.Group>
-                                                        <label style={index === 0 ? { marginLeft: "-70px" } : {}} controlId={`formFileMultiple_${index}`}>Tag</label>
+                                                        <label style={index === 0 ? { marginLeft: "-70px" } : {}}>Tag</label>
                                                         <InputGroup style={index === 0 ? { marginLeft: "-70px" } : {}} controlId={`formFileMultiple_${index}`} className="mb-3">
                                                             <InputGroup.Text>#</InputGroup.Text>
                                                             <Form.Control
                                                                 aria-label="Tag input"
-                                                                name={`tags[${index}].value`}  // Formik'e yönlendirilen alan adı
-                                                                value={formik.values.tags[index]?.value || ''}  // Formik'in yönettiği değer
-                                                                onChange={formik.handleChange}  // Formik tarafından yönetilen değeri güncelle
+                                                                name={`tags[${index}].value`}
+                                                                value={formik.values.tags[index]?.value || ''}  // formik.values.tags dizisinin ilgili indeksi
+                                                                onChange={formik.handleChange}
                                                             />
                                                         </InputGroup>
                                                     </Form.Group>

@@ -19,6 +19,14 @@ const AllCar = () => {
     return (
         <>
             <Container>
+                <Row>
+                    <div className='LxDrC'>
+                        <button data-text="Awesome" class="buttonLXDC">
+                            <span class="actual-text">&nbsp;LuxeDrive&nbsp;</span>
+                            <span class="hover-textLCD" aria-hidden="true">&nbsp;LuxeDrive&nbsp;</span>
+                        </button>
+                    </div>
+                </Row>
                 <Row className='mt-5'>
                     <Link to='/createCar'>
                         <Button variant="primary" size="lg">
