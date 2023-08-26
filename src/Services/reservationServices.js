@@ -42,6 +42,11 @@ export const getReservComplatedCount = () => { //tamamlanmis olan reservationlar
 };
 
 
+export const getAllReservComplated = () => { //tamamlanmis olan reservationlarin sayi
+    return httpClient.get("api/CarReservations/IsResevComplatedGetAll")
+};
+
+
 export const getReservCancledCount = () => { //legv edilmis olan reservationlarin sayi
     return httpClient.get("api/CarReservations/IsResevCanceledCount")
 };
