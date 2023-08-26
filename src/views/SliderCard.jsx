@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./TableListt.scss";
 import { Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 import { useQueryClient } from "react-query";
 import { removeSlider } from "../Services/sliderServices";
 
 const SliderCard = (props) => {
+
+    const [editSlider, setEditSlider] = useState(false);
 
     const queryClient = useQueryClient();
     
@@ -33,9 +34,14 @@ const SliderCard = (props) => {
                             </div>
                         </div>
                     </td>
-                    <td className='Artirrr'><Button variant="primary">Edit</Button></td>
+                    <td className='Artirrr'><Button onClick={() => setEditSlider(!editSlider)} variant="primary">Edit</Button></td>
                     <td className='Artirrr'><Button onClick={() => handleRemove(props.Id)}  variant="danger">Remove</Button></td>
                 </tr>
+                {editSlider==true ? <div  id='SliderEdit'>
+                    asjbdasbads
+                </div>:
+                    <></>
+                }
             </tbody>
         </>
     )

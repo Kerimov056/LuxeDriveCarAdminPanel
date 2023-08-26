@@ -1,10 +1,15 @@
 import { httpClient } from "../utils/HttpClient";
 
-export const getSlider = () =>{
-    return httpClient.get("api/Sliders")
-  };
+export const getSlider = () => {
+  return httpClient.get("api/Sliders")
+};
+
+export const postSlider = () => {
+  return httpClient.post("api/Sliders")
+};
 
 
-  export const removeSlider = (sliderId) =>{
-    return httpClient.delete(`api/Sliders/${sliderId}`)
-  };
+
+export const removeSlider = (sliderId) => {
+  return httpClient.delete(`api/Sliders/${sliderId}`)
+};
