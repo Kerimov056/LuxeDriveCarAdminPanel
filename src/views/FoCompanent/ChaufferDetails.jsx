@@ -11,9 +11,9 @@ import {
     InputGroup
 } from 'react-bootstrap'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery, useQueryClient, useMutation } from "react-query";
 import { useParams, useHistory } from "react-router-dom";
-import { useFormik } from "formik";
+import { Formik, Field, useFormik } from "formik";
 import { chauffeursRemove, getByCheuf } from "../../Services/chauffeursServices";
 
 const ChaufferDetails = () => {
@@ -41,27 +41,19 @@ const ChaufferDetails = () => {
     };
 
 
-    const formik = useFormik({
-        initialValues: {
-            Marka: selectedBrand,
-            Model: selectedModel,
-            Price: undefined,
-            Year: undefined,
-            Description: "",
-            CarType: "",
-            CarCategory: "",
-            CarImages: imageFields.map((field) => ({ files: field.files })),
-            tags: byCar?.data?.carTags
+    const updateMutation = useMutation(ChaufferDetails, {
+        onSuccess: () => {
+            queryClient.invalidateQueries(["getByCheuf", id]);
+            navigate("/"); // Navigate back to the home page after update
         },
-        onSubmit: async (values) => {
-            try {
-                mutation.mutateAsync(values);
-            } catch (error) {
-                console.log(error);
-            }
+        onError: (error) => {
+            console.error("Error updating Cheuffers:", error);
         },
     });
 
+    const handleSubmit = async (values) => {
+        updateMutation.mutate({ ...byCheuf, ...values });
+    };
 
 
     return (
@@ -70,7 +62,7 @@ const ChaufferDetails = () => {
                 <div className='details'>
                     <div>
                         <div className='categoryCarImage'>
-                            <img  src='http://localhost:3000/static/media/reactlogo.55f6660be18505517e2e.png' />
+                            <img src='http://localhost:3000/static/media/reactlogo.55f6660be18505517e2e.png' />
                         </div>
                         <div className='CarDetailsIMs'>
                             <div class="cardDetailsAdmin">
@@ -98,42 +90,34 @@ const ChaufferDetails = () => {
                     <Button><Link to='/AllCar'>Go To Back</Link></Button>
                 </div>
 
- 
-               {CheufEdit==true ?  <div id='carEdit'>
-                    <Row>
-                        <Col md="8">
-                            <Card>
-                                <Card.Header>
-                                    <Card.Title as="h4">Car Edit</Card.Title>
-                                </Card.Header>
-                                <Card.Body>
-                                    <Form>
-                                       
-                                        
-                                        <Button
-                                            style={{ width: "200px", marginTop: "20px" }}
-                                            className="btn-fill pull-right"
-                                            type="submit"
-                                            // onClick={formik.handleSubmit}
-                                            variant="primary"
-                                        >
-                                            Edit
-                                        </Button>
-                                        <Button
-                                            style={{ width: "200px", marginTop: "20px",marginLeft:"20px" }}
-                                            type="submit"
-                                            variant="primary"
-                                            onClick={() => setCheufEdit(false)}
-                                            >   
-                                            Details
-                                        </Button>
-                                        <div className="clearfix"></div>
-                                    </Form>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    </Row>
-                </div> : <div></div>} 
+
+                {CheufEdit == true ? <div id='cheufEdit'>
+                    <div>
+                        {byCheuf ? (
+                            <Formik
+                                // initialValues={{
+                                //     name: category.name,
+                                //     description: category.description,
+                                // }}
+                                onSubmit={handleSubmit}
+                            >
+                                <Form id="ChefuerEdit">
+                                    <Field type="file" name="" placeholder="Chauffer Image" />
+                                    <Field type="text"  placeholder="Chauffer Name" />
+                                    <Field 
+                                        type="text"
+                                        // name="description"
+                                        placeholder="Chauffer"
+                                    />
+                                    <Field type="number" placeholder="Chauffer Price" />
+                                    <Button variant="primary" onClick={() => setCheufEdit(false)} type="submit">Update</Button>
+                                </Form>
+                            </Formik>
+                        ) : (
+                            <div>Loading...</div>
+                        )}
+                    </div>
+                </div> : <div></div>}
             </Container>
         </>
     )
