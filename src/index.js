@@ -32,6 +32,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 const queryClinet = new QueryClient();
 
 import AdminLayout from "layouts/Admin.js";
+import CarDetails from "pages/Car/CarDetails";
 import CreateCar from "pages/Car/CreateCar";
 import ReservDetail from "pages/Res/ReservDetail";
 import CReservDetail from "pages/Conformeds/CReservDetail";
@@ -51,6 +52,7 @@ root.render(
         <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
         <Route path="/AllCar" component={AllCar} />
         <Route path="/createCar" component={CreateCar} />
+        <Route path="/CarDetails" component={CarDetails} />
         <Route path="/NotificationsReservation" render={NotificationsReservation} />
         <Route path="/ConfirmedReservation" component={ConfirmedReservation} />
         <Route path="/CancledReservations" component={CancledReservations} />
