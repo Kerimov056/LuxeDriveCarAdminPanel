@@ -39,7 +39,7 @@ const ReservCar = () => {
                         <hr></hr>
                         <div className="stats">
                             <i className="far fa-calendar-alt mr-1"></i>
-                           <Link to="./RightNowReserv">Reservation Car</Link> 
+                           <Link to="../RightNowReserv">Reservation Car</Link> 
                         </div>
                     </Card.Footer>
                 </Card>

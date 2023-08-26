@@ -6,6 +6,7 @@ import {
 } from "react-bootstrap";
 import { useQuery } from "react-query";
 import { getReservComplatedCount } from "../../Services/reservationServices";
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const ComplatedReservation = () => {
 
@@ -38,7 +39,7 @@ const ComplatedReservation = () => {
                         <hr></hr>
                         <div className="stats">
                             <i className="nc-icon nc-align-left-2"></i>
-                            Reservation 
+                          <Link to="/ComplatedReservation">Reservation </Link>  
                         </div>
                     </Card.Footer>
                 </Card>

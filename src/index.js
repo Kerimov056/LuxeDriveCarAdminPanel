@@ -31,7 +31,6 @@ import ConfirmedReservation from '../src/pages/Conformeds/ConfirmedReservation'
 import { QueryClient, QueryClientProvider } from "react-query";
 const queryClinet = new QueryClient();
 
-
 import AdminLayout from "layouts/Admin.js";
 import CreateCar from "pages/Car/CreateCar";
 import ReservDetail from "pages/Res/ReservDetail";
@@ -40,6 +39,7 @@ import CancledReservations from "pages/Cancleds/CancledReservations"
 import CancledReservDetail from "pages/Cancleds/CancledReservDetail";
 import RightNowReserv from "pages/NowReserv/RightNowReserv";
 import NowDetail from "pages/NowReserv/NowDetail";
+import ComplatedReservation from "pages/Complated/ComplatedReservation";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -54,6 +54,7 @@ root.render(
         <Route path="/ConfirmedReservation" component={ConfirmedReservation} />
         <Route path="/CancledReservations" component={CancledReservations} />
         <Route path="/RightNowReserv" component={RightNowReserv} />
+        <Route path="/ComplatedReservation" component={ComplatedReservation} />
         <Route path='/ReservDetail/:id' component={ReservDetail} />
         <Route path='/CReservDetail/:id' component={CReservDetail} />
         <Route path='/CancledReservDetail/:id' component={CancledReservDetail} />

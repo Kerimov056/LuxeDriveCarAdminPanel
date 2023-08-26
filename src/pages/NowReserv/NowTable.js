@@ -15,6 +15,7 @@ import {
 import { useQuery } from "react-query";
 import { getReservNow } from "../../Services/reservationServices";
 import moment from 'moment';
+import NowData from "./NowData";
 
 
 function NowTable() {
