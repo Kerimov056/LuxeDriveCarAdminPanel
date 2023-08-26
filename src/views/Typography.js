@@ -12,8 +12,22 @@ import {
   Col,
 } from "react-bootstrap";
 import './Chauffeurss.scss'
+import Chauffer from "./FoCompanent/Chauffer";
+import { getChauffeurs } from "../Services/chauffeursServices";
+import { useQuery } from "react-query";
 
 function Typography() {
+
+  const { data: getChufers, isError } = useQuery({
+    queryKey: ["getChauffeurs"],
+    queryFn: getChauffeurs,
+    staleTime: 0,
+  });
+  if (isError) {
+    return <div>Bir hata oluştu</div>;
+  }
+
+
   return (
     <>
       <Container fluid>
@@ -29,8 +43,10 @@ function Typography() {
               <Button>Create Chauffeurss</Button>
             </div>
 
-            <div>
-                maın
+            <div className="Chauffersss">
+              {getChufers?.data?.map((cheuf, index) => (
+                <Chauffer key={index} Id={cheuf?.id} name={cheuf?.name} number={cheuf?.number} />
+              ))}
             </div>
 
           </Col>

@@ -10,7 +10,7 @@ import {
     InputGroup
 } from 'react-bootstrap'
 import { useQuery, useQueryClient } from "react-query";
-import { getByCar, removeCar } from "../../Services/carServices";
+import { getByCar, postCar, removeCar } from "../../Services/carServices";
 import { useParams, useHistory } from "react-router-dom";
 import "./cardetails.scss";
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
@@ -133,6 +133,13 @@ const CarDetails = () => {
         setImageFields(updatedFields);
     };
 
+    
+  const mutation = useMutation(postCar, {
+    onSuccess: () => {
+      navigate("/");
+      queryClient.invalidateQueries("Allcars");
+    },
+  });
 
     const formik = useFormik({
         initialValues: {

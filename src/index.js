@@ -42,6 +42,7 @@ import RightNowReserv from "pages/NowReserv/RightNowReserv";
 import NowDetail from "pages/NowReserv/NowDetail";
 import ComplatedReservation from "pages/Complated/ComplatedReservation";
 import ComlatedRDetails from "pages/Complated/ComlatedRDetails";
+import ChaufferDetails from "views/FoCompanent/ChaufferDetails";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -63,6 +64,7 @@ root.render(
         <Route path='/CancledReservDetail/:id' component={NowDetail} />
         <Route path='/ComlatedRDetails/:id' component={ComlatedRDetails} />
         <Route path="/CarDetails/:id" component={CarDetails} />
+        <Route path="/ChaufferDetails/:id" component={ChaufferDetails} />
         <Redirect from="/" to="/admin/dashboard" />
       </Switch>
     </QueryClientProvider>  

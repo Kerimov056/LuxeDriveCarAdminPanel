@@ -1,0 +1,171 @@
+.details {
+    width: 100%;
+    height: 400px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    &>div {
+        width: 96%;
+        height: 90%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .categoryCarImage {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &>img {
+                width: 100%;
+                height: 60%;
+            }
+        }
+
+        .CarDetailsIMs {
+            width: 50%;
+            height: 100%;
+
+            &>div {
+                width: 100% !important;
+                height: 100% !important;
+
+                .wrapperRRR {
+                    margin: 4rem auto;
+                    width: 90%;
+                    height: 100% !important;
+                    font-size: small;
+                }
+            }
+
+
+            .title {
+                text-align: center;
+                color: #1b1b1b;
+            }
+
+            .heading {
+                font-weight: bold;
+                letter-spacing: 7px;
+                font-size: 1.5rem;
+                position: relative;
+                margin-bottom: 6px;
+            }
+
+            .heading::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: #e8e8e8;
+                z-index: -1;
+                filter: blur(50px);
+                height: 50px;
+            }
+
+            .color {
+                padding: 10px 20px;
+                display: flex;
+                flex-direction: row;
+                font-size: 20px;
+                justify-content: space-between;
+            }
+
+            .hex {
+                text-align: end;
+                font-family: monospace;
+                text-transform: uppercase;
+            }
+
+            .black {
+                background: var(--black);
+                color: var(--ch-white);
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+            }
+
+            .eerie-black {
+                background: var(--ch-black);
+                color: var(--ch-white);
+            }
+
+            .chinese-black {
+                background: var(--eer-black);
+                color: var(--ch-white);
+            }
+
+            .night-rider {
+                background: var(--night-rider);
+                color: var(--ch-white);
+            }
+
+            .chinese-white {
+                background: var(--ch-white);
+                color: var(--night-rider);
+            }
+
+            .anti-flash-white {
+                background: var(--af-white);
+                color: var(--night-rider);
+            }
+
+            .white {
+                background: var(--white);
+                color: var(--night-rider);
+                border-bottom-left-radius: 5px;
+                border-bottom-right-radius: 5px;
+            }
+
+            .border {
+                color: var(--night-rider);
+                padding: 10px 10px;
+                text-align: center;
+            }
+
+            .border span {
+                border-radius: 5px;
+                color: var(--ch-white);
+                padding: 2px 4px;
+                background-color: var(--night-rider);
+            }
+
+        }
+    }
+}
+
+.carDetails {
+    margin-top: 30px;
+    width: 100%;
+    height: 120px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+
+    &>span {
+        font-size: 23px;
+    }
+}
+
+
+.asdbbb {
+    margin-top: 10px;
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    &>button {
+        width: 200px;
+    }
+}
+
+
+
+#carEdit {
+    margin-top: 50px;
+}
