@@ -4,6 +4,10 @@ export const getCar = () => {             //cars
   return httpClient.get("api/Car")
 };
 
+export const removeCar = (carId) => {             //cars
+  return httpClient.delete(`api/Car/${carId}`)
+};
+
 export const postCar = (data) => {         //Create car
   return httpClient.post("api/Car/postCar",data)
 };
