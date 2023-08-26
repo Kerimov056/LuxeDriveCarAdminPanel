@@ -12,7 +12,7 @@ const NowData = (props) => {
                     <td>{props.marka} {props.model}</td>
                     <td>{props.pick}</td>
                     <td>{props.return}</td>
-                    <Link to={`/ReservDetail/${props.Id}`}><td><Button>Details</Button></td></Link>
+                    <Link to={`/CancledReservDetail/${props.Id}`}><td><Button>Details</Button></td></Link>
                 </tr>
             </tbody>
         </>

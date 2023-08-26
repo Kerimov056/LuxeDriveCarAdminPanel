@@ -4,11 +4,9 @@ export const getReservAllConfirmeD = () => {      //tesdiqlenmis olan reservatio
     return httpClient.get("api/CarReservations/IsResevConfirmedGetAll")
 };
 
-
 export const getReservNow = () => {     //halahzirda user'de  olan reservationlar
-    return httpClient.get("api/CarReservations/ReservConfirmedCount")
+    return httpClient.get("api/CarReservations/IsResevNowGetAll")
 };
-
 
 export const getReservConfirmed = () => {     //tesdiqlenmis olan reservationlarin sayi
     return httpClient.get("api/CarReservations/ReservConfirmedCount")

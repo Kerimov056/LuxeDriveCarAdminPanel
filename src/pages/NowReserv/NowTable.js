@@ -15,7 +15,6 @@ import {
 import { useQuery } from "react-query";
 import { getReservNow } from "../../Services/reservationServices";
 import moment from 'moment';
-import NowData from "./NowData";
 
 
 function NowTable() {
@@ -58,14 +57,14 @@ function NowTable() {
                                             <th className="border-0">Details</th>
                                         </tr>
                                     </thead>
-                                        {reservPedding?.data?.map((pedding, index) => ( 
-                                            <NowData Id={pedding?.id}
+                                        {reservNow?.data?.map((now, index) => ( 
+                                            <NowData Id={now?.id}
                                                 key={index}
                                                 number={index + 1}
-                                                marka={pedding?.reservCar?.marka}
-                                                model={pedding?.reservCar?.model}
-                                                pick={formatDate(pedding?.pickupDate)}
-                                                return={formatDate(pedding?.returnDate)} />
+                                                marka={now?.reservCar?.marka}
+                                                model={now?.reservCar?.model}
+                                                pick={formatDate(now?.pickupDate)}
+                                                return={formatDate(now?.returnDate)} />
                                         ))}
                                 </Table>
                             </Card.Body>
