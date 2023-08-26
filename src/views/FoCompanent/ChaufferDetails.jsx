@@ -29,6 +29,22 @@ const ChaufferDetails = () => {
     );
 
 
+    const updateMutation = useMutation(ChaufferDetails, {
+        onSuccess: () => {
+            queryClient.invalidateQueries(["getByCheuf", id]);
+            console.log(setFieldValue);
+            navigate("/admin/typography");
+        },
+        onError: (error) => {
+            console.error("Error updating Cheuffers:", error);
+        },
+    });
+
+    const handleSubmit = async (values) => {
+        updateMutation.mutate({ ...byCheuf, ...values });
+    };
+
+
     const handleRemove = async (cheufId) => {
         try {
             await chauffeursRemove(cheufId);
@@ -38,21 +54,6 @@ const ChaufferDetails = () => {
         } catch (error) {
             console.error("Error confirming car:", error);
         }
-    };
-
-
-    const updateMutation = useMutation(ChaufferDetails, {
-        onSuccess: () => {
-            queryClient.invalidateQueries(["getByCheuf", id]);
-            navigate("/admin/typography"); // Navigate back to the home page after update
-        },
-        onError: (error) => {
-            console.error("Error updating Cheuffers:", error);
-        },
-    });
-
-    const handleSubmit = async (values) => {
-        updateMutation.mutate({ ...byCheuf, ...values });
     };
 
 
@@ -95,26 +96,32 @@ const ChaufferDetails = () => {
                     <div>
                         {byCheuf ? (
                             <Formik
-                                // initialValues={{
-                                //     name: category.name,
-                                //     description: category.description,
-                                // }}
+                                initialValues={{
+                                    name: byCheuf?.data?.name,
+                                    number: byCheuf?.data?.number,
+                                    price: byCheuf?.data?.price,
+                                }}
                                 onSubmit={handleSubmit}
                             >
-                                <Form id="ChefuerEdit">
-                                    <Field type="file" name="" placeholder="Chauffer Image" />
-                                    <Field type="text"  placeholder="Chauffer Name" />
-                                    <Field 
-                                        type="text"
-                                        // name="description"
-                                        placeholder="Chauffer"
-                                    />
-                                    <Field type="number" placeholder="Chauffer Price" />
-                                    <Button variant="primary" onClick={() => setCheufEdit(false)} type="submit">Update</Button>
-                                </Form>
+                                {({ setFieldValue }) => (
+                                    <Form id="ChefuerEdit">
+                                        <input
+                                            type="file"
+                                            onChange={(event) => {
+                                                const selectedFile = event.target.files[0];
+                                                setFieldValue("imagePath", selectedFile);
+                                            }}
+                                        />
+                                        {byCheuf?.data?.imagePath && <div>{byCheuf.data.imagePath.name}</div>}
+                                        <Field type="text" name="name" placeholder="Chauffer Name" />
+                                        <Field type="text" name="number" placeholder="Chauffer Number" />
+                                        <Field type="number" name="price" placeholder="Chauffer Price" />
+                                        <Button variant="primary"  type="submit">Update</Button>
+                                    </Form> 
+                                )}
                             </Formik>
                         ) : (
-                            <div>Loading...</div>
+                            <div>Loading...</div>  //onClick={() => setCheufEdit(false)}
                         )}
                     </div>
                 </div> : <div></div>}
