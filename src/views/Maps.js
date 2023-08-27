@@ -22,7 +22,7 @@ const Maps = () => {
         <Row>
           <Col md="12">
             <div className='LxDrC'>
-              <button onClick={() => setCreateSlider(!createSlider)} data-text="Awesome" class="buttonLXDC">
+              <button data-text="Awesome" class="buttonLXDC">
                 <span class="actual-text">&nbsp;Blog&nbsp;</span>
                 <span class="hover-textLCD" aria-hidden="true">&nbsp;Blog&nbsp;</span>
               </button>

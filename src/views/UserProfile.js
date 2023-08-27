@@ -105,7 +105,7 @@ function User() {
                     </tr>
                   </thead>
                   {getadvantage?.data?.map((byAdvantage, index) => (
-                    <Advantagecard key={index} number={index} Id={byAdvantage?.id} title={byAdvantage?.title} description={byAdvantage?.descrption.slice(0, 120)} />
+                    <Advantagecard key={index} number={index+1} Id={byAdvantage?.id} title={byAdvantage?.title} description={byAdvantage?.descrption.slice(0, 120)} />
                   ))}
                 </Table>
               </Card.Body>

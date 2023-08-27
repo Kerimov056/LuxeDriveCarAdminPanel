@@ -5,7 +5,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { Formik, Field } from "formik";
 import { removeAdvatages, byAdvatages } from "../../Services/advantageServices";
 import "./advantagecard.scss";
-
+import { removeFaqs } from "../../Services/faqsServices";
 
 const Advantagecard = (props) => {
 
@@ -29,6 +29,17 @@ const Advantagecard = (props) => {
         }
     };
 
+    const handleRemoveFaqs = async (faqsId) => {
+        try {
+            await removeFaqs(faqsId);
+            queryClient.invalidateQueries(["FaqsRemove", faqsId]);
+            queryClient.invalidateQueries(["getFaqs"]);
+        } catch (error) {
+            console.error("Error confirming reservation:", error);
+        }
+    };
+
+
     const updateMutation = useMutation(Advantagecard, {
         onSuccess: () => {
             queryClient.invalidateQueries(["advantages", props.Id]);
@@ -51,7 +62,7 @@ const Advantagecard = (props) => {
                     <td >{props.title}</td>
                     <td className='Slidersss'>{props.description}</td>
                     <td className='Artirrr'><Button onClick={() => setEditAdvantages(!editAdvantages)} variant="primary">Edit</Button></td>
-                    <td className='Artirrr'><Button onClick={() => handleRemove(props.Id)} variant="danger">Remove</Button></td>
+                    <td className='Artirrr'><Button onClick={() =>  {handleRemove(props.Id), handleRemoveFaqs(props.FaqId)}} variant="danger">Remove</Button></td>
                 </tr>
                 {editAdvantages == true ? <div style={{ height: "250px" }} id='SliderEdit'>
                     <Formik

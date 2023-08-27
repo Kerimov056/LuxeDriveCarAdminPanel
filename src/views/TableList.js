@@ -83,12 +83,12 @@ function TableList(props) {
       <Container fluid>
         <Row>
           <div className='LxDrC'>
-            <button onClick={() => setCreateSlider(!createSlider)} data-text="Awesome" class="buttonLXDC">
+            <button data-text="Awesome" class="buttonLXDC">
               <span class="actual-text">&nbsp;Slider&nbsp;</span>
               <span class="hover-textLCD" aria-hidden="true">&nbsp;Slider&nbsp;</span>
             </button>
           </div>
-          <div style={{marginBottom:"20px",marginLeft:"20px"}}>
+          <div onClick={() => setCreateSlider(!createSlider)}  style={{marginBottom:"20px",marginLeft:"20px"}}>
             <Button>Create Slider</Button>
           </div>
           {createSlider == true ? <div style={{ width: "100%", height: "120px", display: "flex", alignItems: "center" }}>
@@ -122,7 +122,7 @@ function TableList(props) {
                     </tr>
                   </thead>
                   {getSliders?.data?.map((bySlider, index) => (
-                    <SliderCard key={index} number={index} Id={bySlider.id} />
+                    <SliderCard key={index} number={index+1} Id={bySlider.id} />
                   ))}
                 </Table>
               </Card.Body>
