@@ -9,25 +9,33 @@ const ChaufCreate = () => {
             <Container>
                 <Row>
                     <div class="containerCheuf">
-                        <div class="cardCheufff">
-                            <a class="singupCheuf">Chauffeurs Create</a>
-                            <div class="inputBox1">
-                                <input type="email" required="required" />
-                                    <span class="user">Email</span>
-                            </div>
+                        <form>
+                            <div class="cardCheufff">
+                                <a style={{ fontSize: "23px" }} class="singupCheuf">Chauffeurs Create</a>
+                                <div class="inputBox1">
+                                    <input type="text" required="required" />
+                                    <span class="user">Fullname</span>
+                                </div>
 
-                            <div class="inputBox">
-                                <input type="text" required="required" />
-                                    <span>Username</span>
-                            </div>
 
-                            <div class="inputBox">
-                                <input type="password" required="required" />
-                                    <span>Password</span>
-                            </div>
+                                <div class="inputBox">
+                                    <input type="file" required="required" />
+                                    <span>Profile Image</span>
+                                </div>
 
-                            <button class="enter">Create</button>
-                        </div>
+                                <div class="inputBox">
+                                    <input type="text" required="required" />
+                                    <span>Telefon</span>
+                                </div>
+
+                                <div class="inputBox">
+                                    <input type="number" required="required" />
+                                    <span>Price</span>
+                                </div>
+
+                                <button class="enter">Create</button>
+                            </div>
+                        </form>
                     </div>
                 </Row>
             </Container>
