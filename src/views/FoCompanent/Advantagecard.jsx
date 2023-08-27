@@ -38,7 +38,6 @@ const Advantagecard = (props) => {
         },
     });
 
-
     const handleSubmit = async (values) => {
         updateMutation.mutate({ ...advantag, ...values });
     };
@@ -47,6 +46,7 @@ const Advantagecard = (props) => {
         <>
             <tbody>
                 <tr>
+                    <td style={{display:'none'}}>{props.dto}</td>
                     <td >{props.number}</td>
                     <td >{props.title}</td>
                     <td className='Slidersss'>{props.description}</td>
