@@ -15,7 +15,7 @@ const BlogCard = (props) => {
                         <p class="title">{props.title}</p>
                         <p>{props.desc}</p>
                         <Button  >
-                            <Link to={`/ChaufferDetails/${props.Id}`}>
+                            <Link to={`/BlogDetails/${props.Id}`}>
                                 Details
                             </Link>
                         </Button>

@@ -7,3 +7,17 @@ export const getBlog = () => {
 export const getByBlog = (id) => {
   return httpClient.get(`api/Blogs/${id}`);
 };
+
+export const removeBlog = (blogId) => {             //cars
+  return httpClient.delete(`api/Blogs/${blogId}`)
+};
+
+export const postCar = (data) => {         //Create car
+  return httpClient.post("api/Blogs",data)
+};
+
+
+export const UpdateBlog = (id,data) =>{
+  return httpClient.put(`/api/Blogs/${id}`,data)
+};
+
