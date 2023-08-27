@@ -42,22 +42,22 @@ const dashboardRoutes = [
   },
   {
     path: "/user",
-    name: "User Profile",
-    icon: "nc-icon nc-circle-09",
+    name: " ADVANTAGES",
+    icon: "nc-icon nc-paper-2",
     component: UserProfile,
     layout: "/admin"
   },
   {
     path: "/table",
-    name: "Table List",
-    icon: "nc-icon nc-notes",
+    name: "Slider",
+    icon: "nc-icon nc-button-play",
     component: TableList,
     layout: "/admin"
   },
   {
     path: "/typography",
-    name: "Typography",
-    icon: "nc-icon nc-paper-2",
+    name: " CHAUFFEURS",
+    icon: "nc-icon nc-circle-09",
     component: Typography,
     layout: "/admin"
   },
@@ -70,14 +70,14 @@ const dashboardRoutes = [
   },
   {
     path: "/maps",
-    name: "Maps",
-    icon: "nc-icon nc-pin-3",
+    name: "Blog",
+    icon: "nc-icon nc-align-left-2",
     component: Maps,
     layout: "/admin"
   },
   {
     path: "/notifications",
-    name: "Notifications",
+    name: "FAQS",
     icon: "nc-icon nc-bell-55",
     component: Notifications,
     layout: "/admin"
