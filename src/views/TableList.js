@@ -95,7 +95,7 @@ function TableList(props) {
             <div style={{ width: "90%", height: "120px", display: "flex", justifyContent: "space-around", alignItems: "center" }}>
               <div style={{ width: "70%" }}>
                 <form onSubmit={handleUpload} controlId="formFileMultiple" className="mb-3">
-                  <Form.Label>Slider Image</Form.Label>
+                  <Form.Label>Image:   </Form.Label>
                   <input type="file" name="file" onClick={handleFile} />
                 </form>
               </div>

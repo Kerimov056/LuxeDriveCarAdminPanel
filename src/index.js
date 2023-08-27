@@ -32,6 +32,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 const queryClinet = new QueryClient();
 
 import AdminLayout from "layouts/Admin.js";
+import ChaufCreate from "views/FoCompanent/ChaufCreate";
 import CarDetails from "pages/Car/CarDetails";
 import CreateCar from "pages/Car/CreateCar";
 import ReservDetail from "pages/Res/ReservDetail";
@@ -52,6 +53,7 @@ root.render(
       <Switch>
         <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
         <Route path="/AllCar" component={AllCar} />
+        <Route path="/ChaufCreate" component={ChaufCreate} />
         <Route path="/createCar" component={CreateCar} />
         <Route path="/NotificationsReservation" render={NotificationsReservation} />
         <Route path="/ConfirmedReservation" component={ConfirmedReservation} />

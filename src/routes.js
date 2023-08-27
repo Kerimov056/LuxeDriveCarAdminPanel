@@ -78,7 +78,7 @@ const dashboardRoutes = [
   {
     path: "/notifications",
     name: "FAQS",
-    icon: "nc-icon nc-bell-55",
+    icon: "nc-icon nc-email-85",
     component: Notifications,
     layout: "/admin"
   }

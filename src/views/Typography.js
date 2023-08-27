@@ -15,6 +15,7 @@ import './Chauffeurss.scss'
 import Chauffer from "./FoCompanent/Chauffer";
 import { getChauffeurs } from "../Services/chauffeursServices";
 import { useQuery } from "react-query";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 function Typography() {
 
@@ -40,7 +41,7 @@ function Typography() {
               </button>
             </div>
             <div>
-              <Button>Create Chauffeurss</Button>
+              <Button><Link to='/ChaufCreate'>Create Chauffeurss</Link></Button>
             </div>
 
             <div className="Chauffersss">
