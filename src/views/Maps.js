@@ -3,6 +3,7 @@ import { Button, Col, Container, Row } from 'react-bootstrap'
 import { getBlog } from "../Services/blogServices";
 import { useQuery } from "react-query";
 import BlogCard from './FoCompanent/BlogCard';
+import './FoCompanent/blogcard.scss'
 
 const Maps = () => {
 
@@ -30,7 +31,7 @@ const Maps = () => {
               <Button>Create Blog</Button>
             </div>
 
-            <div className="Chauffersss">
+            <div className="blogssss">
               {getByBlog?.data?.map((blog, index) => (
                 <BlogCard key={index} Id={blog?.id} title={blog?.title} desc={blog?.descrtion?.slice(0, 60)} />
               ))}

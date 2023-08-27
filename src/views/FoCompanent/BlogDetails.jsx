@@ -73,19 +73,11 @@ const BlogDetails = () => {
                     </div>
                     <div className="BlofDtext">
                         <div class="w-60 bg-gradient-to-l from-slate-300 to-slate-100 text-slate-600 border border-slate-300 grid grid-col-2 justify-center p-4 gap-4 rounded-lg shadow-md">
-                            <div style={{fontSize:"30px"}} class="col-span-2 text-lg font-bold capitalize rounded-md">
-                                Blog Name
+                            <div style={{ fontSize: "30px" }} class="col-span-2 text-lg font-bold capitalize rounded-md">
+                                {byblog?.data?.title}
                             </div>
                             <div class="col-span-2 rounded-md">
-                                Using Lorem ipsum to focus attention on graphic elements in a webpage design proposal · One of the earliest examples
-                                of the Lorem ipsum Using Lorem ipsum to focus attention on graphic elements in a webpage design proposal · One of the earliest examples
-                                of the Lorem ipsum  placeholder text on 1960s ad  Using Lorem ipsum to focus attention on graphic elements in a webpage design proposal · One of the earliest examples
-                                of the Lorem ipsum Using Lorem ipsum to focus attention on graphic elements in a webpage design proposal · One of the earliest examples
-                                of the Lorem ipsum  placeholder text on 1960s ad  Using Lorem ipsum to focus attention on graphic elements in a webpage design proposal · One of the earliest examples
-                                of the Lorem ipsum Using Lorem ipsum to focus attention on graphic elements in a webpage design proposal · One of the earliest examples
-                                of the Lorem ipsum  placeholder text on 1960s ad  Using Lorem ipsum to focus attention on graphic elements in a webpage design proposal · One of the earliest examples
-                                of the Lorem ipsum Using Lorem ipsum to focus attention on graphic elements in a webpage design proposal · One of the earliest examples
-                                of the Lorem ipsum  placeholder text on 1960s ad
+                                {byblog?.data?.description}
                             </div>
                             <div class="col-span-1">
                             </div>
@@ -94,9 +86,41 @@ const BlogDetails = () => {
                 </div>
                 <div className="OptionsByBlog">
                     <Button onClick={() => setBlogEdit(!blogEdit)} variant="info">Edit</Button>
-                    <Button onClick={() =>handleRemove(byblog?.data?.id)} variant="danger">Remove</Button>
+                    <Button onClick={() => handleRemove(byblog?.data?.id)} variant="danger">Remove</Button>
                     <Button variant="dark"><Link to='/admin/maps'>Go To Back</Link></Button>
                 </div>
+                {blogEdit == true ? <div id='cheufEdit'>
+                    <div>
+                        {byblog ? (
+                            <Formik
+                                initialValues={{
+                                    name: byblog?.data?.title,
+                                    number: byblog?.data?.description,
+                                    //image: byblog?.
+                                }}
+                                onSubmit={handleSubmit}
+                            >
+                                {({ setFieldValue }) => (
+                                    <Form id="ChefuerEdit">
+                                        <input
+                                            type="file"
+                                            onChange={(event) => {
+                                                const selectedFile = event.target.files[0];
+                                                setFieldValue("imagePath", selectedFile);
+                                            }}
+                                        />
+                                        {/* {byblog?.data?.imagePath && <div>{byCheuf.data.imagePath.name}</div>} */}
+                                        <Field type="text" name="name" placeholder="Blog Title" />
+                                        <Field type="text" name="number" placeholder="Blog Description" />
+                                        <Button variant="primary" type="submit">Update</Button>
+                                    </Form>
+                                )}
+                            </Formik>
+                        ) : (
+                            <div>Loading...</div>  //onClick={() => setCheufEdit(false)}
+                        )}
+                    </div>
+                </div> : <div></div>}
             </Container>
         </>
     )
