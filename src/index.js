@@ -29,6 +29,7 @@ import AllCar from "../src/pages/Car/AllCar";
 import NotificationsReservation from "../src/pages/Res/NotificationsReservation";
 import ConfirmedReservation from '../src/pages/Conformeds/ConfirmedReservation'
 import { QueryClient, QueryClientProvider } from "react-query";
+import { ChakraProvider } from '@chakra-ui/react'
 const queryClinet = new QueryClient();
 
 import AdminLayout from "layouts/Admin.js";
@@ -50,26 +51,28 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <QueryClientProvider client={queryClinet} >
-      <Switch>
-        <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-        <Route path="/AllCar" component={AllCar} />
-        <Route path="/ChaufCreate" component={ChaufCreate} />
-        <Route path="/createCar" component={CreateCar} />
-        <Route path="/NotificationsReservation" render={NotificationsReservation} />
-        <Route path="/ConfirmedReservation" component={ConfirmedReservation} />
-        <Route path="/CancledReservations" component={CancledReservations} />
-        <Route path="/RightNowReserv" component={RightNowReserv} />
-        <Route path="/ComplatedReservation" component={ComplatedReservation} />
-        <Route path='/ReservDetail/:id' component={ReservDetail} />
-        <Route path='/CReservDetail/:id' component={CReservDetail} />
-        <Route path='/CancledReservDetail/:id' component={CancledReservDetail} />
-        <Route path='/CancledReservDetail/:id' component={NowDetail} />
-        <Route path='/ComlatedRDetails/:id' component={ComlatedRDetails} />
-        <Route path="/CarDetails/:id" component={CarDetails} />
-        <Route path="/ChaufferDetails/:id" component={ChaufferDetails} />
-        <Route path="/BlogDetails/:id" component={BlogDetails} />
-        <Redirect from="/" to="/admin/dashboard" />
-      </Switch>
-    </QueryClientProvider>  
+      <ChakraProvider>
+        <Switch>
+          <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
+          <Route path="/AllCar" component={AllCar} />
+          <Route path="/ChaufCreate" component={ChaufCreate} />
+          <Route path="/createCar" component={CreateCar} />
+          <Route path="/NotificationsReservation" render={NotificationsReservation} />
+          <Route path="/ConfirmedReservation" component={ConfirmedReservation} />
+          <Route path="/CancledReservations" component={CancledReservations} />
+          <Route path="/RightNowReserv" component={RightNowReserv} />
+          <Route path="/ComplatedReservation" component={ComplatedReservation} />
+          <Route path='/ReservDetail/:id' component={ReservDetail} />
+          <Route path='/CReservDetail/:id' component={CReservDetail} />
+          <Route path='/CancledReservDetail/:id' component={CancledReservDetail} />
+          <Route path='/CancledReservDetail/:id' component={NowDetail} />
+          <Route path='/ComlatedRDetails/:id' component={ComlatedRDetails} />
+          <Route path="/CarDetails/:id" component={CarDetails} />
+          <Route path="/ChaufferDetails/:id" component={ChaufferDetails} />
+          <Route path="/BlogDetails/:id" component={BlogDetails} />
+          <Redirect from="/" to="/admin/dashboard" />
+        </Switch>
+      </ChakraProvider>
+    </QueryClientProvider>
   </BrowserRouter>
 );

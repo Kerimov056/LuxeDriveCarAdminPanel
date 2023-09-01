@@ -23,6 +23,7 @@ import Icons from "views/Icons.js";
 import Maps from "views/Maps.js";
 import Notifications from "views/Notifications.js";
 import Upgrade from "views/Upgrade.js";
+import Blog from "views/Blog";
 
 const dashboardRoutes = [
   {
@@ -70,8 +71,8 @@ const dashboardRoutes = [
   },
   {
     path: "/maps",
-    name: "Blog",
-    icon: "nc-icon nc-align-left-2",
+    name: "maps",
+    icon: "nc-icon nc-square-pin",
     component: Maps,
     layout: "/admin"
   },
@@ -81,7 +82,14 @@ const dashboardRoutes = [
     icon: "nc-icon nc-email-85",
     component: Notifications,
     layout: "/admin"
-  }
+  },
+  {
+    path: "/blog",
+    name: "Blog",
+    icon: "nc-icon nc-align-left-2",
+    component: Blog,
+    layout: "/admin"
+  },
 ];
 
 export default dashboardRoutes;

@@ -1,18 +1,20 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom/cjs/react-router-dom.min'
+import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 import {  useQueryClient } from "react-query";
 import { putReservRemove } from "../../Services/reservationServices";
 
 const CancledNData = (props) => {
 
     const queryClient = useQueryClient();
+    const naviqate = useHistory();
 
     const handleRemove = async (reservId) => {
         try {
             await putReservRemove(reservId);
             queryClient.invalidateQueries(["reservCancled", reservId]);
             queryClient.invalidateQueries(["reservAllCancled"]);
+            naviqate.push('/CancledReservations');
         } catch (error) {
             console.error("Error confirming reservation:", error);
         }

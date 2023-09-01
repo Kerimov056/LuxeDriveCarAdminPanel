@@ -5,11 +5,13 @@ import { useParams, useHistory } from "react-router-dom";
 import { Formik, Field } from "formik";
 import { removeAdvatages, byAdvatages } from "../../Services/advantageServices";
 import "./advantagecard.scss";
-import { removeFaqs } from "../../Services/faqsServices";
+import { removeFaqs, UpdateFaqs } from "../../Services/faqsServices";
 
 const Advantagecard = (props) => {
 
     const [editAdvantages, setEditAdvantages] = useState(false);
+    const [editFaqs, setEditFaqs] = useState(false);
+
 
     const { id } = useParams();
     const queryClient = useQueryClient();
@@ -53,16 +55,35 @@ const Advantagecard = (props) => {
         updateMutation.mutate({ ...advantag, ...values });
     };
 
+
+
+    const mutation = useMutation((updatedData) => UpdateFaqs(props.Id, updatedData), {
+        onSuccess: () => {
+            queryClient.invalidateQueries("getFaqs");
+        },
+    });
+
+
+    const handleUpdate = async (values) => {
+        try {
+            await mutation.mutateAsync(values);
+        } catch (error) {
+            console.error("Error updating FAQ:", error);
+        }
+    };
+
     return (
         <>
             <tbody>
                 <tr>
-                    <td style={{display:'none'}}>{props.dto}</td>
+                    <td style={{ display: 'none' }}>{props.dto}</td>
                     <td >{props.number}</td>
                     <td >{props.title}</td>
                     <td className='Slidersss'>{props.description}</td>
-                    <td className='Artirrr'><Button onClick={() => setEditAdvantages(!editAdvantages)} variant="primary">Edit</Button></td>
-                    <td className='Artirrr'><Button onClick={() =>  {handleRemove(props.Id), handleRemoveFaqs(props.FaqId)}} variant="danger">Remove</Button></td>
+                    <td className='Artirrr' style={props.berirleme == 1 ? {} : { display: "none" }}  ><Button onClick={() => setEditAdvantages(!editAdvantages)} variant="primary">Edit</Button></td>
+                    <td className='Artirrr' style={props.berirleme == 2 ? {} : { display: "none" }} ><Button onClick={() => setEditFaqs(!editFaqs)} variant="primary">Edit</Button></td>
+                    <td style={props.berirleme == 1 ? {} : { display: "none" }} className='Artirrr'><Button onClick={() => handleRemove(props.Id)} variant="danger">Remove</Button></td>
+                    <td style={props.berirleme == 2 ? {} : { display: "none" }} className='Artirrr'><Button onClick={() => handleRemoveFaqs(props.FaqId)} variant="danger">Remove</Button></td>
                 </tr>
                 {editAdvantages == true ? <div style={{ height: "250px" }} id='SliderEdit'>
                     <Formik
@@ -87,6 +108,43 @@ const Advantagecard = (props) => {
                             </div>
                             <Button type="submit">Update</Button>
                         </Form>
+                    </Formik>
+                </div> :
+                    <></>
+                }
+                {editFaqs == true ? <div style={{ height: "250px" }} id='SliderEdit'>
+                    <Formik
+                        initialValues={{
+                            title: props.title,
+                            description: props.description,
+                        }}
+                        onSubmit={handleUpdate}
+                    >
+                        {({ values, handleChange, handleSubmit }) => (
+                            <form id='EditAdvantage' onSubmit={handleSubmit}>
+                                <div>
+                                    <label>Title</label>
+                                    <input
+                                        type="text"
+                                        name="title"
+                                        value={values.title}
+                                        onChange={handleChange}
+                                        placeholder="Faqs Title"
+                                    />
+                                </div>
+                                <div>
+                                    <label>Descrption</label>
+                                    <input
+                                        type="text"
+                                        name="description"
+                                        value={values.description}
+                                        onChange={handleChange}
+                                        placeholder="Faqs Description"
+                                    />
+                                </div>
+                                <button type="submit">Update</button>
+                            </form>
+                        )}
                     </Formik>
                 </div> :
                     <></>

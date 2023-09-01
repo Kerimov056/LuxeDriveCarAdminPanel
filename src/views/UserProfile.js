@@ -1,20 +1,17 @@
 import React, { useState } from "react";
 
 import {
-  Button, Container, Badge,
+  Button, Container,
   Card,
-  Form,
-  Navbar,
-  Nav,
   Row, Table,
-  Col,
-  InputGroup
+  Col
 } from 'react-bootstrap'
 import Advantagecard from "./FoCompanent/Advantagecard";
 import { useQuery } from "react-query";
 import { useFormik } from "formik";
 import { useMutation, useQueryClient } from "react-query";
 import { getAdvatages, postAdvatages } from "../Services/advantageServices";
+import { FormControl, Input } from "@chakra-ui/react";
 
 function User() {
 
@@ -33,9 +30,12 @@ function User() {
 
 
   const mutation = useMutation(postAdvatages, {
-    onSuccess: () => {
-      navigate("/");
-      queryClient.invalidateQueries("getAllAdvatages");
+    onSuccess: (data) => {
+      console.log("Success:", data);
+      queryClient.invalidateQueries("postAdvatage");
+    },
+    onError: (error) => {
+      console.log("Error:", error);
     },
   });
 
@@ -46,7 +46,8 @@ function User() {
     },
     onSubmit: async (values) => {
       try {
-        mutation.mutateAsync(values);
+        console.log(values);
+        await mutation.mutateAsync(values);
       } catch (error) {
         console.log(error);
       }
@@ -67,27 +68,40 @@ function User() {
           <div style={{ marginBottom: "20px", marginLeft: "20px" }}>
             <Button onClick={() => setcreateAdvantage(!createAdvantage)}>Create Advantages</Button>
           </div>
-          {createAdvantage == true ? <div style={{ width: "100%", height: "120px", display: "flex", alignItems: "center", marginTop: "20px" }}>
-            <div style={{ width: "90%", height: "120px", display: "flex", justifyContent: "space-around", alignItems: "center" }}>
-              <div style={{ width: "70%" }}>
+          {createAdvantage === true ?
+
+
+            <div style={{ width: "100%", height: "120px", display: "flex", alignItems: "center", marginTop: "20px" }}>
+              <div style={{ width: "90%", height: "120px", display: "flex", justifyContent: "space-around", alignItems: "center" }}>
+                <div style={{ width: "70%" }}>
+
+
+                  <form style={{ display: "flex", flexDirection: "column" }} controlId="formFileMultiple" className="mb-3">
+                    <FormControl>
+                      
+                      <label>Title : </label>
+                      <Input type="text" name="Title" value={formik.values.Title} onChange={formik.handleChange} />
+
+                      <label style={{ marginTop: "20px" }}>Description : </label>
+                      <Input type="text" style={{ height: "40px" }} name="Descrption" value={formik.values.Descrption} onChange={formik.handleChange} />
+
+                      <p style={{ width: "20%", marginTop: "35px" }}>
+                        <Button type="submit" onClick={formik.handleSubmit} style={{ width: "140px" }} variant="success">
+                          Create
+                        </Button>
+                      </p>
+
+                    </FormControl>
+                  </form>
 
 
 
-                <form style={{ display: "flex", flexDirection: "column" }} controlId="formFileMultiple" className="mb-3">
-                  <Form.Label>Title : </Form.Label>
-                  <input type="text" name="Title" value={formik.values.Title} onChange={formik.handleChange} />
-                  <Form.Label style={{ marginTop: "20px" }}>Description : </Form.Label>
-                  <input type="text" style={{ height: "40px" }} name="Descrption" value={formik.values.Descrption} onChange={formik.handleChange} />
-                </form>
-
+                </div>
               </div>
-              <p style={{ width: "20%", marginTop: "35px" }}>
-                <Button type="submit" onClick={formik.handleSubmit} style={{ width: "140px" }} variant="success">
-                  Create
-                </Button>
-              </p>
             </div>
-          </div> : <></>
+
+
+            : <></>
           }
         </Row>
         <Row style={{ marginTop: "30px" }}>
@@ -105,7 +119,7 @@ function User() {
                     </tr>
                   </thead>
                   {getadvantage?.data?.map((byAdvantage, index) => (
-                    <Advantagecard key={index} number={index+1} Id={byAdvantage?.id} title={byAdvantage?.title} description={byAdvantage?.descrption.slice(0, 120)} />
+                    <Advantagecard berirleme={1} key={index} number={index + 1} Id={byAdvantage?.id} title={byAdvantage?.title} description={byAdvantage?.descrption.slice(0, 120)} />
                   ))}
                 </Table>
               </Card.Body>

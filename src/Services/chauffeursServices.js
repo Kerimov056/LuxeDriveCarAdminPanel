@@ -14,6 +14,10 @@ export const getByCheuf = (id) => {
 };
 
 
-export const putCheufers = (id) => {
-  return httpClient.put(`api/Chauffeurss/${id}`)
+export const PostCheuf = (data) => {
+  return httpClient.post("/api/Chauffeurss", data)
+};
+
+export const putCheufers = (id, data) => {
+  return httpClient.put(`api/Chauffeurss/${id}`, data)
 };

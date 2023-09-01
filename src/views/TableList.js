@@ -15,21 +15,12 @@ import SliderCard from "./SliderCard";
 import { getSlider, postSlider } from "../Services/sliderServices";
 import { useQuery } from "react-query";
 import { useFormik } from "formik";
+import axios from 'axios';
 import { useMutation, useQueryClient } from "react-query";
 
 function TableList(props) {
 
   const [createSlider, setCreateSlider] = useState(false);
-
-  const queryClient = useQueryClient();
-
-  // const mutation = useMutation(postSlider, {
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries("getAllSlider");
-  //   },
-  // });
-
-
   const { data: getSliders, isError } = useQuery({
     queryKey: ["getAllSlider"],
     queryFn: getSlider,
@@ -39,44 +30,47 @@ function TableList(props) {
     return <div>Bir hata oluştu</div>;
   }
 
-  // const formik = useFormik({
-  //   initialValues: {
-  //     image: ""
-  //   },
-  //   onSubmit: async (values) => {
-  //     try {
-  //       mutation.mutateAsync(values);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   },
-  // });
 
-  const [file, setFile] = useState();
 
-  function handleFile(event) {
-    setFile(event.target.files[0])
-    console.log(event.target.files[0]);
-  }
+  const queryClient = useQueryClient();
+  const [showImage, setShowImage] = useState(null);
+  const [image, setImage] = useState();
 
-  function handleUpload() {
-    const formData = new FormData()
-    formData.append('file', file)
-    fetch(
-      'https://localhost:7152/api/Sliders',
-      {
-        method: "POST",
-        body: formData
+
+  const newSlider = {
+    photo: image,
+  };
+
+  const CreateSlider = async (e) => {
+    e.preventDefault();
+
+
+    const formData = new FormData();
+    for (const [key, value] of Object.entries(newSlider)) {
+      formData.append(key, value);
+    };
+
+
+    await axios.post(`https://localhost:7152/api/Sliders`, formData, {
+      headers: {
+        Accept: "*/*"
       }
-    ).then((respon) => respon.json()).then(
-      (result) => {
-        console.log('success', result);
-      }
-    )
-      .catch(error => {
-        console.log("error", error);
+    })
+      .then((res) => {
+        console.log(res);
       })
+      .catch((err) => {
+        console.log(err);
+      });
+
   }
+
+  const fileUploadHandler = async (e) => {
+    const files = e.target.files[0];
+    setImage(files);
+    setShowImage(URL.createObjectURL(files));
+  };
+
 
   return (
     <>
@@ -88,24 +82,46 @@ function TableList(props) {
               <span class="hover-textLCD" aria-hidden="true">&nbsp;Slider&nbsp;</span>
             </button>
           </div>
-          <div onClick={() => setCreateSlider(!createSlider)}  style={{marginBottom:"20px",marginLeft:"20px"}}>
+          <div onClick={() => setCreateSlider(!createSlider)} style={{ marginBottom: "20px", marginLeft: "20px" }}>
             <Button>Create Slider</Button>
           </div>
-          {createSlider == true ? <div style={{ width: "100%", height: "120px", display: "flex", alignItems: "center" }}>
-            <div style={{ width: "90%", height: "120px", display: "flex", justifyContent: "space-around", alignItems: "center" }}>
-              <div style={{ width: "70%" }}>
-                <form onSubmit={handleUpload} controlId="formFileMultiple" className="mb-3">
-                  <Form.Label>Image:   </Form.Label>
-                  <input type="file" name="file" onClick={handleFile} />
+          {createSlider == true ?
+            <div style={{ width: "100%", height: "290px", display: "flex", alignItems: "center" }}>
+              <div style={{ width: "90%", height: "120px", display: "flex", justifyContent: "space-around", alignItems: "center" }}>
+
+                <form controlId="formFileMultiple" onSubmit={(e) => CreateSlider(e)} className="mb-3">
+                  <div style={{ width: "70%" }}>
+
+                    <Form.Label>Image:</Form.Label>
+                    <p>Image</p>
+                    {
+                      showImage !== null ?
+                        <img
+                          style={{
+                            width: "200px",
+                            height: "100px",
+                            marginBottom: "10px",
+                            borderRadius: "unset",
+                          }}
+                          src={showImage}
+                          alt="header image"
+                        /> : null
+                    }
+                    <Form.Control
+                      type="file"
+                      required
+                      onChange={(e) => fileUploadHandler(e)}
+                    />
+                  </div>
+                  <p style={{ width: "20%", marginTop: "35px" }}>
+                    <Button type="submit" style={{ width: "140px" }} variant="success">
+                      Create
+                    </Button>
+                  </p>
                 </form>
+
               </div>
-              <p style={{ width: "20%", marginTop: "35px" }}>
-                <Button onClick={handleUpload} type="submit" style={{ width: "140px" }} variant="success">
-                  Create
-                </Button>
-              </p>
-            </div>
-          </div> : <></>
+            </div> : <></>
           }
         </Row>
         <Row>
@@ -122,7 +138,7 @@ function TableList(props) {
                     </tr>
                   </thead>
                   {getSliders?.data?.map((bySlider, index) => (
-                    <SliderCard key={index} number={index+1} Id={bySlider.id} />
+                    <SliderCard key={index} number={index + 1} Id={bySlider.id} />
                   ))}
                 </Table>
               </Card.Body>

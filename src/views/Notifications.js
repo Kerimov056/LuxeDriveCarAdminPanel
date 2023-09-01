@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import {
-  Button, Container, Badge,
+  Container, Badge,
   Card,
   Form,
   Navbar,
   Nav,
   Row, Table,
   Col,
-  InputGroup
+  InputGroup,
 } from 'react-bootstrap'
+import { Input, Text, Button, FormControl } from '@chakra-ui/react'
 import { useQuery } from "react-query";
 import { useFormik } from "formik";
 import { useMutation, useQueryClient } from "react-query";
 import { getFaqs, postFaqs } from "../Services/faqsServices";
 import Advantagecard from "./FoCompanent/Advantagecard";
+import { error } from "jquery";
 
 const Notifications = () => {
 
@@ -32,27 +34,26 @@ const Notifications = () => {
   }
 
 
-  const mutation = useMutation(postFaqs, {
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
+
+  const handleTitle = (event) => {
+    setTitle(event.target.value);
+  };
+
+  const handleDesc = (event) => {
+    setDesc(event.target.value);
+  };
+
+  const mutation = useMutation(() => postFaqs(title, desc), {
     onSuccess: () => {
-      navigate("/admin/notifications");
       queryClient.invalidateQueries("getFaqs");
     },
   });
 
-  const formik = useFormik({
-    initialValues: {
-      Title: "",
-      Descrption: "",
-    },
-    onSubmit: async (values) => {
-      try {
-        mutation.mutateAsync(values);
-      } catch (error) {
-        console.log(error);
-      }
-    },
-  });
-
+  const faqsCreate = async () => {
+    await mutation.mutateAsync(title, desc);
+  };
 
   return (
     <>
@@ -68,25 +69,23 @@ const Notifications = () => {
             <Button onClick={() => setCreateFaqs(!createFaqs)}>Create Faqs</Button>
           </div>
           {createFaqs == true ? <div style={{ width: "100%", height: "120px", display: "flex", alignItems: "center", marginTop: "40px" }}>
-            <div style={{ width: "90%", height: "120px", display: "flex", justifyContent: "space-around", alignItems: "center" }}>
-              <div style={{ width: "70%" }}>
-
-
-
-                <form style={{ display: "flex", flexDirection: "column" }} controlId="formFileMultiple" className="mb-3">
-                  <Form.Label>Title : </Form.Label>
-                  <input type="text" name="Title" value={formik.values.Title} onChange={formik.handleChange} />
-                  <Form.Label style={{ marginTop: "20px" }}>Description : </Form.Label>
-                  <input type="text" style={{ height: "40px" }} name="Descrption" value={formik.values.Descrption} onChange={formik.handleChange} />
-                </form>
-
-              </div>
-              <p style={{ width: "20%", marginTop: "35px" }}>
-                <Button type="submit" onClick={formik.handleSubmit} style={{ width: "140px" }} variant="success">
-                  Create
-                </Button>
-              </p>
-            </div>
+            <form style={{ display: "flex", flexDirection: "column" }}>
+              <FormControl>
+                <div style={{ width: "90%", height: "120px", display: "flex", justifyContent: "space-around", alignItems: "center" }}>
+                  <div style={{ width: "70%" }}>
+                    <label>Title : </label>
+                    <Input type="text" value={title} onChange={handleTitle} />
+                    <label style={{ marginTop: "20px" }}>Description : </label>
+                    <Input type="text" style={{ height: "40px" }} value={desc} onChange={handleDesc} />
+                  </div>
+                  <p style={{ width: "20%", marginTop: "35px" }}>
+                    <Button type="button" onClick={faqsCreate} style={{ width: "140px" }} colorScheme="green">
+                      Create
+                    </Button>
+                  </p>
+                </div>
+              </FormControl>
+            </form>
           </div> : <></>
           }
         </Row>
@@ -105,7 +104,7 @@ const Notifications = () => {
                     </tr>
                   </thead>
                   {getFaq?.data?.map((byFaqs, index) => (
-                    <Advantagecard key={index} number={index+1} FaqId={byFaqs?.id} title={byFaqs?.title} description={byFaqs?.descrption.slice(0, 120)} />
+                    <Advantagecard berirleme={2} Id={byFaqs?.id} key={index} number={index + 1} FaqId={byFaqs?.id} title={byFaqs?.title} description={byFaqs?.descrption.slice(0, 120)} />
                   ))}
                 </Table>
               </Card.Body>
@@ -118,3 +117,42 @@ const Notifications = () => {
 }
 
 export default Notifications
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const mutation = useMutation(postFaqs, {
+//   onSuccess: () => {
+//     queryClient.invalidateQueries("getFaqsCreate");
+//     queryClient.invalidateQueries("getFaqs");
+//     navigate("/admin/notifications");
+//   },
+//   onError: () => {
+//     console.log(error.response);
+//   },
+// });
+
+// const formik = useFormik({
+//   initialValues: {
+//     Title: "",
+//     Descrption: "",
+//   },
+//   onSubmit: async (values) => {
+//     try {
+//       console.log(values);
+//       await mutation.mutateAsync(values);
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   },
+// });

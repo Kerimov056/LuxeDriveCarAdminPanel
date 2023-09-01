@@ -5,9 +5,9 @@ export const getSlider = () => {
 };
 
 export const postSlider = (data) => {
-  return httpClient.post("api/Sliders",data)
+  console.log(data);
+  return httpClient.post("api/Sliders", data)
 };
-
 
 
 export const removeSlider = (sliderId) => {

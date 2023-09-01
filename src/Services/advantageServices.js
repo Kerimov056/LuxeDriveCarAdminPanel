@@ -14,6 +14,7 @@ export const byAdvatages=(id) =>{
 
 
 export const postAdvatages=(data) =>{
+    console.log(data);
     return httpClient.post(`api/Advantages`,data);
 };
 
