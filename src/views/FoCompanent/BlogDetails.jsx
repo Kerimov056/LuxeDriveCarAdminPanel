@@ -20,6 +20,8 @@ import { getByBlog, removeBlog, UpdateBlog } from "../../Services/blogServices";
 const BlogDetails = () => {
 
     const [blogEdit, setBlogEdit] = useState(false)
+    const [image, setImage] = useState(null);
+
 
     const { id } = useParams();
     const queryClient = useQueryClient();
@@ -28,27 +30,6 @@ const BlogDetails = () => {
     const { data: byblog } = useQuery(["getByBlog", id], () =>
         getByBlog(id)
     );
-
-
-    // const updateMutation = useMutation(BlogDetails, {
-    //     onSuccess: () => {
-    //         queryClient.invalidateQueries(["getByBlog", id]);
-    //         console.log(setFieldValue);
-    //         navigate("/admin/blog");
-    //     },
-    //     onError: (error) => {
-    //         console.error("Error updating Blog:", error);
-    //     },
-    // });
-
-    // const handleSubmit = async (values) => {
-    //     updateMutation.mutate({ ...byCheuf, ...values });
-    // };
-
-    const updateMutation = useMutation((updatedData) =>
-        UpdateBlog(byblog?.data?.id, updatedData)
-    );
-
 
     const handleRemove = async (blogId) => {
         try {
@@ -59,6 +40,18 @@ const BlogDetails = () => {
         } catch (error) {
             console.error("Error confirming car:", error);
         }
+    };
+
+    const [updatedTitle, setUpdatedTitle] = useState(byblog?.data?.title);
+    const [updatedDescription, setUpdatedDescription] = useState(yblog?.data?.description);
+
+
+    const handleUpdateSubmit = async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData();
+        formData.append("Title", image)
+        formData.append("Title", image)
     };
 
 
@@ -96,46 +89,50 @@ const BlogDetails = () => {
                 {blogEdit == true ? <div id='cheufEdit'>
                     <div>
                         {byblog ? (
-                            <Formik
-                                initialValues={{
-                                    Title: byblog?.data?.title,
-                                    Description: byblog?.data?.description,
-                                    blogImages: byblog?.data?.blogImages?.imagePath,
-                                }}
-                                onSubmit={(values) => {
-                                    updateMutation.mutate(values, {
-                                        onSuccess: () => {
-                                            queryClient.invalidateQueries(["getByBlog", id]);
-                                            navigate("/admin/blog");
-                                        },
-                                        onError: (error) => {
-                                            console.error("Error updating Blog:", error);
-                                        },
-                                    });
-                                }}
-                            >
-                                {({ setFieldValue, handleSubmit }) => (
-                                    <Form id="ChefuerEdit" onSubmit={handleSubmit}>
-                                        <input
-                                            type="file"
-                                            name="blogImages"
-                                            onChange={(event) => {
-                                                const selectedFile = event.target.files[0];
-                                                setFieldValue("imagePath", selectedFile);
-                                            }}
-                                        />
-                                        <Field type="text" name="Title" placeholder="Blog Title" />
-                                        <Field
-                                            type="text"
-                                            name="Description"
-                                            placeholder="Blog Description"
-                                        />
-                                        <Button variant="primary" type="submit">
-                                            Update
-                                        </Button>
-                                    </Form>
-                                )}
-                            </Formik>
+                            <form className="form" onSubmit={handleUpdateSubmit}>
+                                <div className="form-group">
+                                    <label htmlFor="Title">Blog Title</label>
+                                    <input
+                                        value={updatedTitle}
+                                        onChange={(e) => setUpdatedTitle(e.target.value)}
+                                        type="text"
+                                        id="Title"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="blogImages">Blog Image</label>
+                                    <input
+                                        multiple
+                                        name="blogImages"
+                                        type="file"
+                                        onChange={(e) =>
+                                            formik.setFieldValue('blogImages', e.target.files)
+                                        }
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="Description">Blog Description</label>
+                                    <textarea
+                                        value={updatedDescription} 
+                                        onChange={(e) => setUpdatedDescription(e.target.value)}
+                                        id="Description"
+                                        rows="10"
+                                        cols="50"
+                                    />
+                                </div>
+                                <div style={{ display: 'flex' }}>
+                                    <button className="form-submit-btn" type="submit">
+                                        Submit
+                                    </button>
+                                    <button
+                                        style={{ marginLeft: '50px' }}
+                                        className="form-submit-btn"
+                                        type="button"
+                                    >
+                                        <Link to={'/admin/blog'}>Go to back</Link>
+                                    </button>
+                                </div>
+                            </form>
 
                         ) : (
                             <div>Loading...</div>  //onClick={() => setCheufEdit(false)}
