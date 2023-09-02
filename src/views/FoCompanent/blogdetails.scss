@@ -116,3 +116,43 @@
         width: 160px;
     }
   }
+
+
+
+  #BlogUpdateE{
+    width: 100%;
+    height: auto;
+    background-color: red;
+
+    &>div{
+      width: 100%;
+      height: auto;
+      background-color: orange;
+      
+      &>label, input{
+        display: block;
+        color: white;
+      }
+
+      &>label{
+        font-size: 23px;
+        color: white;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      }
+
+      &>input{
+        width: 100%;
+        height: 50px;
+        font-size: 19px;
+      }
+
+      &>textarea{
+        width: 100%;
+        font-size: 20px;
+      }
+
+      &>button{
+        width: 140px;
+      }
+    }
+  }

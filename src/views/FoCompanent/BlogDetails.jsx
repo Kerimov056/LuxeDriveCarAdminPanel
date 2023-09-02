@@ -1,14 +1,7 @@
 import "./blogdetails.scss";
 import React, { useState, useEffect } from 'react'
 import {
-    Button, Container, Badge,
-    Card,
-    Form,
-    Navbar,
-    Nav,
-    Row,
-    Col,
-    InputGroup
+    Button, Container,
 } from 'react-bootstrap'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { useQuery, useQueryClient, useMutation } from "react-query";
@@ -52,7 +45,7 @@ const BlogDetails = () => {
         const formData = new FormData();
         formData.append('Title', updatedTitle);
         formData.append('Description', updatedDescription);
-
+        
         for (let i = 0; i < updatedImageBlog.length; i++) {
             formData.append('blogImages', updatedImageBlog[i]);
         }
@@ -104,7 +97,7 @@ const BlogDetails = () => {
                 {blogEdit == true ? <div id='cheufEdit'>
                     <div>
                         {byblog ? (
-                            <form className="form" onSubmit={handleUpdateSubmit}>
+                            <form className="form" id="BlogUpdateE" onSubmit={handleUpdateSubmit}>
                                 <div className="form-group">
                                     <label htmlFor="Title">Blog Title</label>
                                     <input
@@ -133,16 +126,16 @@ const BlogDetails = () => {
                                     />
                                 </div>
                                 <div style={{ display: 'flex' }}>
-                                    <button className="form-submit-btn" type="submit">
+                                    <Button className="form-submit-btn" type="submit">
                                         Submit
-                                    </button>
-                                    <button
+                                    </Button>
+                                    <Button
                                         style={{ marginLeft: '50px' }}
                                         className="form-submit-btn"
                                         type="button"
                                     >
                                         <Link to={'/admin/blog'}>Go to back</Link>
-                                    </button>
+                                    </Button>
                                 </div>
                             </form>
 
