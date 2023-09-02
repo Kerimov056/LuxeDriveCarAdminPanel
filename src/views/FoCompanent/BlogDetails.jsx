@@ -42,6 +42,13 @@ const BlogDetails = () => {
     const handleUpdateSubmit = async (e) => {
         e.preventDefault();
 
+        const currentImages = byblog?.data?.blogImages || [];
+
+        const updatedImages = [...currentImages];
+        for (let i = 0; i < updatedImageBlog.length; i++) {
+            updatedImages.push(updatedImageBlog[i]);
+        }
+
         const formData = new FormData();
         formData.append('Title', updatedTitle);
         formData.append('Description', updatedDescription);
