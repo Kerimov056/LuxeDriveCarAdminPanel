@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import "./TableListt.scss";
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { useQueryClient } from "react-query";
 import { removeSlider } from "../Services/sliderServices";
 
@@ -9,7 +9,7 @@ const SliderCard = (props) => {
     const [editSlider, setEditSlider] = useState(false);
 
     const queryClient = useQueryClient();
-    
+
     const handleRemove = async (sliderId) => {
         try {
             await removeSlider(sliderId);
@@ -21,6 +21,15 @@ const SliderCard = (props) => {
     };
 
 
+    const fileUploadHandler = (e) => {
+        const file = e.target.files[0];
+        setImage(file);
+        setShowImage(URL.createObjectURL(file));
+    };
+
+
+
+
     return (
         <>
             <tbody>
@@ -28,18 +37,32 @@ const SliderCard = (props) => {
                     <td>{props.number}</td>
                     <td className='Slidersss'>
                         <div class="cardSlider">
-                                {/* <img src='https://hips.hearstapps.com/hmg-prod/images/2023-bentley-continental-gt-s-coupe-101-1654526518.jpg?crop=0.678xw:0.763xh;0.116xw,0.176xh&resize=640:*' /> */}
                             <div class="cardSlider2">
-                                <img src={props.imgUrl} />
+                                <img src='https://hips.hearstapps.com/hmg-prod/images/2023-bentley-continental-gt-s-coupe-101-1654526518.jpg?crop=0.678xw:0.763xh;0.116xw,0.176xh&resize=640:*' />
+                                {/* <img src={props.imgUrl} /> */}
                             </div>
                         </div>
                     </td>
                     <td className='Artirrr'><Button onClick={() => setEditSlider(!editSlider)} variant="primary">Edit</Button></td>
-                    <td className='Artirrr'><Button onClick={() => handleRemove(props.Id)}  variant="danger">Remove</Button></td>
+                    <td className='Artirrr'><Button onClick={() => handleRemove(props.Id)} variant="danger">Remove</Button></td>
                 </tr>
-                {editSlider==true ? <div  id='SliderEdit'>
-                    asjbdasbads
-                </div>:
+                {editSlider == true ?
+                    <div id='SliderEdit' style={{ marginTop: "30px" }}>
+                        <form className="mb-3">
+                            <div>
+                                <Form.Control
+                                    type="file"
+                                    required
+                                    onChange={(e) => fileUploadHandler(e)}
+                                />
+                                <p style={{ width: "20%", marginTop: "35px" }}>
+                                    <Button type="submit" style={{ width: "140px" }} variant="success">
+                                        Update
+                                    </Button>
+                                </p>
+                            </div>
+                        </form>
+                    </div> :
                     <></>
                 }
             </tbody>

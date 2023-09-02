@@ -28,9 +28,6 @@ function TableList(props) {
     return <div>Bir hata oluştu</div>;
   }
 
-  const newSlider = {
-    photo: image,
-  };
 
   const fileUploadHandler = (e) => {
     const file = e.target.files[0];
