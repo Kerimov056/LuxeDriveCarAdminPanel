@@ -64,9 +64,10 @@ const Advantagecard = (props) => {
                 Title: updatedTitleFaq,
                 Descrption: updatedDescriptionFaq,
             };
+
             await UpdateFaqs(props.Id, updatedData);
-            setEditFaqs(false);
             queryClient.invalidateQueries(['getFaqs']);
+            setEditFaqs(false);
         } catch (error) {
             console.error('Error updating faqs:', error);
         }
