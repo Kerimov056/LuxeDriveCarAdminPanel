@@ -54,11 +54,15 @@ const Advantagecard = (props) => {
         }
     };
 
+
+    const [updatedTitleFaq, setUpdatedTitleFaq] = useState(props.title);
+    const [updatedDescriptionFaq, setUpdatedDescriptionFaq] = useState(props.description);
+
     const handleUpdateFaqs = async () => {
         try {
             const updatedData = {
-                Title: updatedTitle,
-                Descrption: updatedDescription,
+                Title: updatedTitleFaq,
+                Descrption: updatedDescriptionFaq,
             };
             await UpdateFaqs(props.Id, updatedData);
             setEditFaqs(false);
@@ -107,13 +111,13 @@ const Advantagecard = (props) => {
                     </td>
                 </tr>
                 {editAdvantages === true ? (
-                    <div  id="SliderEdit">
+                    <div id="SliderEdit">
                         <div className='Advantegeedit'>
-                            <label>Title</label><br/>
+                            <label>Title</label><br />
                             <input type="text" value={updatedTitle} onChange={(e) => setUpdatedTitle(e.target.value)} />
                         </div>
                         <div className='Advantegeedit'>
-                            <label>Descrption</label><br/>
+                            <label>Descrption</label><br />
                             <input type="text" value={updatedDescription} onChange={(e) => setUpdatedDescription(e.target.value)} />
                         </div>
                         <Button onClick={handleUpdate} variant="success">
@@ -125,25 +129,19 @@ const Advantagecard = (props) => {
                 )}
                 {editFaqs === true ? (
                     <div style={{ height: '250px' }} id="SliderEditFaqs">
-                        <Formik
-                            initialValues={{
-                                title: props.title,
-                                description: props.description,
-                            }}
-                            onSubmit={handleUpdateFaqs}
-                        >
-                            <Form>
-                                <div className='Advantegeedit' >
-                                    <label >Title</label>
-                                    <Field type="text" name="title" placeholder="FAQ Title" />
-                                </div>
-                                <div className='Advantegeedit'>
-                                    <label>Description</label>
-                                    <Field type="text" name="description" placeholder="FAQ Description" />
-                                </div>
-                                <Button className='UpdpateFaq' type="submit">Update</Button>
-                            </Form>
-                        </Formik>
+                        <Form>
+                            <div className='Advantegeedit' >
+                                <label >Title</label>
+                                <input type="text" value={updatedTitleFaq} onChange={(e) => setUpdatedTitleFaq(e.target.value)} />
+                            </div>
+                            <div className='Advantegeedit'>
+                                <label>Description</label>
+                                <input type="text" value={updatedDescriptionFaq} onChange={(e) => setUpdatedDescriptionFaq(e.target.value)} />
+                            </div>
+                            <Button onClick={handleUpdateFaqs} className='UpdpateFaq' type="submit">
+                                Update
+                            </Button>
+                        </Form>
                     </div>
                 ) : (
                     <></>
