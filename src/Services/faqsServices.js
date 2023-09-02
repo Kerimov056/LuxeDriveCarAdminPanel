@@ -19,8 +19,6 @@ export const removeFaqs = (blogId) => {             //cars
 };
 
 export const UpdateFaqs = (id, data) => {
-  console.log(id);
-  console.log(data);
   return httpClient.put(`api/Faqs/${id}`, data)
 };
 

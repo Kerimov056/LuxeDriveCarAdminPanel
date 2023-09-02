@@ -15,7 +15,6 @@ import { useFormik } from "formik";
 import { useMutation, useQueryClient } from "react-query";
 import { getFaqs, postFaqs } from "../Services/faqsServices";
 import Advantagecard from "./FoCompanent/Advantagecard";
-import { error } from "jquery";
 
 const Notifications = () => {
 

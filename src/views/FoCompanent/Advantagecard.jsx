@@ -54,6 +54,20 @@ const Advantagecard = (props) => {
         }
     };
 
+    const handleUpdateFaqs = async () => {
+        try {
+            const updatedData = {
+                Title: updatedTitle,
+                Descrption: updatedDescription,
+            };
+            await UpdateFaqs(props.Id, updatedData);
+            setEditFaqs(false);
+            queryClient.invalidateQueries(['getFaqs']);
+        } catch (error) {
+            console.error('Error updating faqs:', error);
+        }
+    };
+
     return (
         <>
             <tbody>
@@ -110,24 +124,24 @@ const Advantagecard = (props) => {
                     <></>
                 )}
                 {editFaqs === true ? (
-                    <div style={{ height: '250px' }} id="SliderEdit">
+                    <div style={{ height: '250px' }} id="SliderEditFaqs">
                         <Formik
                             initialValues={{
                                 title: props.title,
                                 description: props.description,
                             }}
-                            onSubmit={handleUpdate}
+                            onSubmit={handleUpdateFaqs}
                         >
                             <Form>
                                 <div className='Advantegeedit' >
-                                    <label style={{width:"50px"}}>Title</label>
+                                    <label >Title</label>
                                     <Field type="text" name="title" placeholder="FAQ Title" />
                                 </div>
                                 <div className='Advantegeedit'>
                                     <label>Description</label>
                                     <Field type="text" name="description" placeholder="FAQ Description" />
                                 </div>
-                                <button type="submit">Update</button>
+                                <Button className='UpdpateFaq' type="submit">Update</Button>
                             </Form>
                         </Formik>
                     </div>
