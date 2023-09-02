@@ -131,7 +131,7 @@ const BlogDetails = () => {
                                     </Button>
                                     <Button
                                         style={{ marginLeft: '50px' }}
-                                        className="form-submit-btn"
+                                        className="form-submit-btn ssE"
                                         type="button"
                                     >
                                         <Link to={'/admin/blog'}>Go to back</Link>
