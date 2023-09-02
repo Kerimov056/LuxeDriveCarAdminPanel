@@ -6,6 +6,7 @@ import { Formik, Field } from "formik";
 import { removeAdvatages, byAdvatages } from "../../Services/advantageServices";
 import "./advantagecard.scss";
 import { removeFaqs, UpdateFaqs } from "../../Services/faqsServices";
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Advantagecard = (props) => {
 
@@ -80,7 +81,7 @@ const Advantagecard = (props) => {
                     <td style={{ display: 'none' }}>{props.dto}</td>
                     <td >{props.number}</td>
                     <td >{props.title}</td>
-                    <td className='Slidersss'>{props.description}</td>
+                    <td className='Slidersss'><Button style={{backgroundColor:"yellow"}} ><Link to={""}>Details</Link></Button></td>
                     <td className='Artirrr' style={props.berirleme == 1 ? {} : { display: "none" }}  ><Button onClick={() => setEditAdvantages(!editAdvantages)} variant="primary">Edit</Button></td>
                     <td className='Artirrr' style={props.berirleme == 2 ? {} : { display: "none" }} ><Button onClick={() => setEditFaqs(!editFaqs)} variant="primary">Edit</Button></td>
                     <td style={props.berirleme == 1 ? {} : { display: "none" }} className='Artirrr'><Button onClick={() => handleRemove(props.Id)} variant="danger">Remove</Button></td>

@@ -47,6 +47,7 @@ import ComlatedRDetails from "pages/Complated/ComlatedRDetails";
 import ChaufferDetails from "views/FoCompanent/ChaufferDetails";
 import BlogDetails from "views/FoCompanent/BlogDetails";
 import BlogCreate from "views/FoCompanent/BlogCreate";
+import AdvantagesDetails from "views/FoCompanent/AdvantagesDetails";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
@@ -64,6 +65,7 @@ root.render(
           <Route path="/RightNowReserv" component={RightNowReserv} />
           <Route path="/BlogCreate" component={BlogCreate} />
           <Route path="/ComplatedReservation" component={ComplatedReservation} />
+          <Route path="/AdvantagesDetails" component={AdvantagesDetails} />
           <Route path='/ReservDetail/:id' component={ReservDetail} />
           <Route path='/CReservDetail/:id' component={CReservDetail} />
           <Route path='/CancledReservDetail/:id' component={CancledReservDetail} />

@@ -114,7 +114,7 @@ function User() {
                     <tr>
                       <th className="border-0">Num</th>
                       <th className="border-0">Title</th>
-                      <th className="border-0">Description</th>
+                      <th className="border-0">Details</th>
                       <th className="border-0">Edit</th>
                       <th className="border-0">Remove</th>
                     </tr>

@@ -132,18 +132,23 @@ const CreateCar = () => {
             // tags: tagFields
         },
         onSubmit: async (values) => {
+            const formData = new FormData();
+
+            formData.append("CarCategory", values.carCategory)
+            formData
+
             console.log(values)
             try {
-                mutation.mutateAsync(values);
+                mutation.mutateAsync(formData);
             } catch (error) {
                 console.log(error);
             }
         },
     });
 
-    console.log(selectedModel, selectedBrand);
-    console.log(imageFields.map((field) => ({ files: field.files })));
-    console.log(tagFields);
+    // console.log(selectedModel, selectedBrand);
+    // console.log(imageFields.map((field) => ({ files: field.files })));
+    // console.log(tagFields);
 
     return (
         <>
