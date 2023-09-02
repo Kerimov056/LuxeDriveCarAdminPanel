@@ -1,32 +1,41 @@
 import React from 'react'
-import { Button, Container } from 'react-bootstrap'
+import './BlogCreate.scss'
+import { Button, Container, Row } from 'react-bootstrap'
 import { Field, useFormik, Form } from "formik";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import { postBlog } from "../../Services/blogServices";
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 const BlogCreate = () => {
 
 
-    
-
 
     return (
-        <Container >
-            <div style={{display:"flex", justifyContent:"center", alignItems:"center",marginTop:"140px"}}>
-                <form>
-                    <label>Image</label><br/>
-                    <input style={{backgroundColor:"gray"}} type='file' /><br />
-
-
-                    <label>name</label> <br/>
-                    <input style={{backgroundColor:"gray"}} type='text' /><br />
-
-
-                    <label>Description</label><br/>
-                    <input style={{backgroundColor:"gray"}} type='text' /><br />
-                </form>
-            </div>
+        <Container>
+            <h1>Blog Create</h1>
+            <Row style={{ marginLeft: "350px", marginTop: "100px" }}>
+                <div class="form-container">
+                    <form class="form">
+                        <div class="form-group">
+                            <label for="email">Blog Title</label>
+                            <input type="text" id="email" required="" />
+                        </div>
+                        <div class="form-group">
+                            <label for="textarea">Blog Image</label>
+                            <input multiple type='file' rows="10" cols="50" required="" />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Blog Description</label>
+                            <textarea name="textarea" id="textarea" rows="10" cols="50" required="">          </textarea>
+                        </div>
+                        <div style={{ display: "flex" }}>
+                            <button class="form-submit-btn" type="submit">Submit</button>
+                            <button style={{ marginLeft: "50px" }} class="form-submit-btn" type="submit"><Link to={'/admin/blog'}>Go to back</Link></button>
+                        </div>
+                    </form>
+                </div>
+            </Row>
         </Container>
     )
 }
