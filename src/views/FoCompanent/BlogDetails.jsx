@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { useQuery, useQueryClient, useMutation } from "react-query";
 import { useParams, useHistory } from "react-router-dom";
 import { Formik, Field, useFormik } from "formik";
-import { getByBlog, removeBlog } from "../../Services/blogServices";
+import { getByBlog, removeBlog, UpdateBlog } from "../../Services/blogServices";
 
 
 const BlogDetails = () => {
@@ -30,20 +30,24 @@ const BlogDetails = () => {
     );
 
 
-    const updateMutation = useMutation(BlogDetails, {
-        onSuccess: () => {
-            queryClient.invalidateQueries(["getByBlog", id]);
-            console.log(setFieldValue);
-            navigate("/admin/maps");
-        },
-        onError: (error) => {
-            console.error("Error updating Blog:", error);
-        },
-    });
+    // const updateMutation = useMutation(BlogDetails, {
+    //     onSuccess: () => {
+    //         queryClient.invalidateQueries(["getByBlog", id]);
+    //         console.log(setFieldValue);
+    //         navigate("/admin/blog");
+    //     },
+    //     onError: (error) => {
+    //         console.error("Error updating Blog:", error);
+    //     },
+    // });
 
-    const handleSubmit = async (values) => {
-        updateMutation.mutate({ ...byCheuf, ...values });
-    };
+    // const handleSubmit = async (values) => {
+    //     updateMutation.mutate({ ...byCheuf, ...values });
+    // };
+
+    const updateMutation = useMutation((updatedData) =>
+        UpdateBlog(byblog?.data?.id, updatedData)
+    );
 
 
     const handleRemove = async (blogId) => {
@@ -51,7 +55,7 @@ const BlogDetails = () => {
             await removeBlog(blogId);
             queryClient.invalidateQueries(["chuferRemove", blogId]);
             queryClient.invalidateQueries(["getChauffeurs"]);
-            navigate.push(`/admin/maps`);
+            navigate.push(`/admin/blog`);
         } catch (error) {
             console.error("Error confirming car:", error);
         }
@@ -87,35 +91,52 @@ const BlogDetails = () => {
                 <div className="OptionsByBlog">
                     <Button onClick={() => setBlogEdit(!blogEdit)} variant="info">Edit</Button>
                     <Button onClick={() => handleRemove(byblog?.data?.id)} variant="danger">Remove</Button>
-                    <Button variant="dark"><Link to='/admin/maps'>Go To Back</Link></Button>
+                    <Button variant="dark"><Link to='/admin/blog'>Go To Back</Link></Button>
                 </div>
                 {blogEdit == true ? <div id='cheufEdit'>
                     <div>
                         {byblog ? (
                             <Formik
                                 initialValues={{
-                                    name: byblog?.data?.title,
-                                    number: byblog?.data?.description,
-                                    //image: byblog?.
+                                    Title: byblog?.data?.title,
+                                    Description: byblog?.data?.description,
+                                    blogImages: byblog?.data?.blogImages?.imagePath,
                                 }}
-                                onSubmit={handleSubmit}
+                                onSubmit={(values) => {
+                                    updateMutation.mutate(values, {
+                                        onSuccess: () => {
+                                            queryClient.invalidateQueries(["getByBlog", id]);
+                                            navigate("/admin/blog");
+                                        },
+                                        onError: (error) => {
+                                            console.error("Error updating Blog:", error);
+                                        },
+                                    });
+                                }}
                             >
-                                {({ setFieldValue }) => (
-                                    <Form id="ChefuerEdit">
+                                {({ setFieldValue, handleSubmit }) => (
+                                    <Form id="ChefuerEdit" onSubmit={handleSubmit}>
                                         <input
                                             type="file"
+                                            name="blogImages"
                                             onChange={(event) => {
                                                 const selectedFile = event.target.files[0];
                                                 setFieldValue("imagePath", selectedFile);
                                             }}
                                         />
-                                        {/* {byblog?.data?.imagePath && <div>{byCheuf.data.imagePath.name}</div>} */}
-                                        <Field type="text" name="name" placeholder="Blog Title" />
-                                        <Field type="text" name="number" placeholder="Blog Description" />
-                                        <Button variant="primary" type="submit">Update</Button>
+                                        <Field type="text" name="Title" placeholder="Blog Title" />
+                                        <Field
+                                            type="text"
+                                            name="Description"
+                                            placeholder="Blog Description"
+                                        />
+                                        <Button variant="primary" type="submit">
+                                            Update
+                                        </Button>
                                     </Form>
                                 )}
                             </Formik>
+
                         ) : (
                             <div>Loading...</div>  //onClick={() => setCheufEdit(false)}
                         )}

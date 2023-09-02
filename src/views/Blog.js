@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Col, Container, Row } from 'react-bootstrap'
 import { getBlog } from "../Services/blogServices";
 import { useQuery } from "react-query";
@@ -7,11 +7,14 @@ import './FoCompanent/blogcard.scss'
 
 const Blog = () => {
 
+  const [create, setCreate] = useState(false);
+
   const { data: getByBlog, isError } = useQuery({
     queryKey: ["getBlogs"],
     queryFn: getBlog,
     staleTime: 0,
   });
+
   if (isError) {
     return <div>Bir hata oluştu</div>;
   }
@@ -29,6 +32,9 @@ const Blog = () => {
             </div>
             <div>
               <Button>Create Blog</Button>
+              {
+
+              }
             </div>
 
             <div className="blogssss">

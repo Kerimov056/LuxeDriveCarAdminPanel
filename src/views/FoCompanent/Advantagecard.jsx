@@ -44,7 +44,7 @@ const Advantagecard = (props) => {
 
     const updateMutation = useMutation(Advantagecard, {
         onSuccess: () => {
-            queryClient.invalidateQueries(["advantages", props.Id]);
+            queryClient.invalidateQueries(["advantages", id]);
         },
         onError: (error) => {
             console.error("Error updating category:", error);
@@ -62,6 +62,7 @@ const Advantagecard = (props) => {
             queryClient.invalidateQueries("getFaqs");
         },
     });
+
 
 
     const handleUpdate = async (values) => {
@@ -120,31 +121,17 @@ const Advantagecard = (props) => {
                         }}
                         onSubmit={handleUpdate}
                     >
-                        {({ values, handleChange, handleSubmit }) => (
-                            <form id='EditAdvantage' onSubmit={handleSubmit}>
-                                <div>
-                                    <label>Title</label>
-                                    <input
-                                        type="text"
-                                        name="title"
-                                        value={values.title}
-                                        onChange={handleChange}
-                                        placeholder="Faqs Title"
-                                    />
-                                </div>
-                                <div>
-                                    <label>Descrption</label>
-                                    <input
-                                        type="text"
-                                        name="description"
-                                        value={values.description}
-                                        onChange={handleChange}
-                                        placeholder="Faqs Description"
-                                    />
-                                </div>
-                                <button type="submit">Update</button>
-                            </form>
-                        )}
+                        <Form>
+                            <div>
+                                <label>Title</label>
+                                <Field type="text" name="title" placeholder="FAQ Title" />
+                            </div>
+                            <div>
+                                <label>Description</label>
+                                <Field type="text" name="description" placeholder="FAQ Description" />
+                            </div>
+                            <button type="submit">Update</button>
+                        </Form>
                     </Formik>
                 </div> :
                     <></>

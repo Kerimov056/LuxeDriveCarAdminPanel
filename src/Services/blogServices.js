@@ -18,6 +18,7 @@ export const postCar = (data) => {         //Create car
 
 
 export const UpdateBlog = (id,data) =>{
+  console.log(data);
   return httpClient.put(`/api/Blogs/${id}`,data)
 };
 

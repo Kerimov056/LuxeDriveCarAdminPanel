@@ -5,7 +5,6 @@ import 'leaflet/dist/leaflet.css';
 import { useQuery } from "react-query";
 import { getReservNow } from "../Services/reservationServices";
 import { useMutation, useQueryClient } from "react-query";
-import Moment from "moment";
 import { Button } from '@chakra-ui/react';
 
 const markerIcon = new L.Icon({
