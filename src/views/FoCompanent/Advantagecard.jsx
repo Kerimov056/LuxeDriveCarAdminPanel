@@ -25,13 +25,12 @@ const Advantagecard = (props) => {
     const handleRemove = async (advantagesId) => {
         try {
             await removeAdvatages(advantagesId);
-            queryClient.invalidateQueries(["AdvantagesRemove", advantagesId]);
-            queryClient.invalidateQueries(["getAllAdvatages"]);
+            queryClient.invalidateQueries(['AdvantagesRemove', advantagesId]);
+            queryClient.invalidateQueries(['getAllAdvatages']);
         } catch (error) {
-            console.error("Error confirming reservation:", error);
+            console.error('Error removing advantages:', error);
         }
-    };
-
+    }
     const handleRemoveFaqs = async (faqsId) => {
         try {
             await removeFaqs(faqsId);
@@ -40,9 +39,7 @@ const Advantagecard = (props) => {
         } catch (error) {
             console.error("Error confirming reservation:", error);
         }
-    };
-
-
+    }
     const updateMutation = useMutation(Advantagecard, {
         onSuccess: () => {
             queryClient.invalidateQueries(["advantages", id]);
@@ -50,29 +47,23 @@ const Advantagecard = (props) => {
         onError: (error) => {
             console.error("Error updating category:", error);
         },
-    });
-
+    })
     const handleSubmit = async (values) => {
         updateMutation.mutate({ ...advantag, ...values });
-    };
-
-
-
+    }
     const mutation = useMutation((updatedData) => UpdateFaqs(props.Id, updatedData), {
         onSuccess: () => {
             queryClient.invalidateQueries("getFaqs");
         },
-    });
-
-
-
+    })
     const handleUpdate = async (values) => {
         try {
             await mutation.mutateAsync(values);
         } catch (error) {
             console.error("Error updating FAQ:", error);
         }
-    };
+    }
+    console.log(props.Id);
 
     return (
         <>
@@ -81,7 +72,7 @@ const Advantagecard = (props) => {
                     <td style={{ display: 'none' }}>{props.dto}</td>
                     <td >{props.number}</td>
                     <td >{props.title}</td>
-                    <td className='Slidersss'><Button style={{backgroundColor:"yellow"}} ><Link to={""}>Details</Link></Button></td>
+                    <td className='Slidersss'><Button style={{ backgroundColor: "yellow" }} ><Link to={`/AdvantagesDetails/${props.Id}`}>Details</Link></Button></td>
                     <td className='Artirrr' style={props.berirleme == 1 ? {} : { display: "none" }}  ><Button onClick={() => setEditAdvantages(!editAdvantages)} variant="primary">Edit</Button></td>
                     <td className='Artirrr' style={props.berirleme == 2 ? {} : { display: "none" }} ><Button onClick={() => setEditFaqs(!editFaqs)} variant="primary">Edit</Button></td>
                     <td style={props.berirleme == 1 ? {} : { display: "none" }} className='Artirrr'><Button onClick={() => handleRemove(props.Id)} variant="danger">Remove</Button></td>

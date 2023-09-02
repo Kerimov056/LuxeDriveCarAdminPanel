@@ -65,7 +65,7 @@ root.render(
           <Route path="/RightNowReserv" component={RightNowReserv} />
           <Route path="/BlogCreate" component={BlogCreate} />
           <Route path="/ComplatedReservation" component={ComplatedReservation} />
-          <Route path="/AdvantagesDetails" component={AdvantagesDetails} />
+          <Route path="/AdvantagesDetails/:id" component={AdvantagesDetails} />
           <Route path='/ReservDetail/:id' component={ReservDetail} />
           <Route path='/CReservDetail/:id' component={CReservDetail} />
           <Route path='/CancledReservDetail/:id' component={CancledReservDetail} />

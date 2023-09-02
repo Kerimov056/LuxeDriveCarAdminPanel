@@ -9,7 +9,7 @@ export const removeAdvatages=(id) =>{
 };
 
 export const byAdvatages=(id) =>{
-    return httpClient.delete(`api/Advantages/${id}`);
+    return httpClient.get(`api/Advantages/${id}`);
 };
 
 
