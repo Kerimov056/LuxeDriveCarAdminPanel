@@ -3,8 +3,8 @@ import { Button, Form } from 'react-bootstrap';
 import { useQuery, useQueryClient, useMutation } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { Formik, Field } from 'formik';
-import { removeAdvatages, byAdvatages } from '../../Services/advantageServices';
 import { removeFaqs, UpdateFaqs } from '../../Services/faqsServices';
+import { removeAdvatages, byAdvatages, UpdateAdvantage } from '../../Services/advantageServices';
 import './advantagecard.scss';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
@@ -37,32 +37,20 @@ const Advantagecard = (props) => {
         }
     };
 
-    const updateAdvantageMutation = useMutation((updatedData) => UpdateAdvantage(id, updatedData), {
-        onSuccess: () => {
-            queryClient.invalidateQueries(['advantages', id]);
-            setEditAdvantages(false);
-        },
-        onError: (error) => {
-            console.error('Error updating advantages:', error);
-        },
-    });
+    const [updatedTitle, setUpdatedTitle] = useState(props.title);
+    const [updatedDescription, setUpdatedDescription] = useState(props.description);
 
-    const handleAdvantageSubmit = async (values) => {
-        updateAdvantageMutation.mutate({ ...advantag, ...values });
-    };
-
-    const mutation = useMutation((updatedData) => UpdateFaqs(props.Id, updatedData), {
-        onSuccess: () => {
-            queryClient.invalidateQueries('getFaqs');
-            setEditFaqs(false);
-        },
-    });
-
-    const handleUpdate = async (values) => {
+    const handleUpdate = async () => {
         try {
-            await mutation.mutateAsync(values);
+            const updatedData = {
+                Title: updatedTitle,
+                Descrption: updatedDescription,
+            };
+            await UpdateAdvantage(props.Id, updatedData);
+            setEditAdvantages(false);
+            queryClient.invalidateQueries(['getAllAdvantages']);
         } catch (error) {
-            console.error('Error updating FAQ:', error);
+            console.error('Error updating advantage:', error);
         }
     };
 
@@ -106,33 +94,17 @@ const Advantagecard = (props) => {
                 </tr>
                 {editAdvantages === true ? (
                     <div style={{ height: '250px' }} id="SliderEdit">
-                        <Formik
-                            initialValues={{
-                                Title: advantag?.title,
-                                Descrption: advantag?.description,
-                            }}
-                            onSubmit={handleAdvantageSubmit}
-                        >
-                            <Form id="EditAdvantage">
-                                <div>
-                                    <label>Title</label>
-                                    <Field
-                                        type="text"
-                                        name="Title"
-                                        placeholder="Advantages Title"
-                                    />
-                                </div>
-                                <div>
-                                    <label>Descrption</label>
-                                    <Field
-                                        type="text"
-                                        name="Descrption"
-                                        placeholder="Advantages Description"
-                                    />
-                                </div>
-                                <Button type="submit">Update</Button>
-                            </Form>
-                        </Formik>
+                        <div>
+                            <label>Title</label>
+                            <input type="text" value={updatedTitle} onChange={(e) => setUpdatedTitle(e.target.value)} />
+                        </div>
+                        <div>
+                            <label>Descrption</label>
+                            <input type="text" value={updatedDescription} onChange={(e) => setUpdatedDescription(e.target.value)} />
+                        </div>
+                        <Button onClick={handleUpdate} variant="success">
+                            Update
+                        </Button>
                     </div>
                 ) : (
                     <></>

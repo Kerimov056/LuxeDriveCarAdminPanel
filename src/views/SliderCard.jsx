@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import "./TableListt.scss";
 import { Button, Form } from 'react-bootstrap';
 import { useQueryClient } from "react-query";
-import { removeSlider } from "../Services/sliderServices";
+import { removeSlider, UpdateSliders } from "../Services/sliderServices";
+import axios from 'axios';
 
 const SliderCard = (props) => {
-
     const [editSlider, setEditSlider] = useState(false);
-
+    const [image, setImage] = useState(null);
+    const [showImage, setShowImage] = useState(null);
     const queryClient = useQueryClient();
 
     const handleRemove = async (sliderId) => {
@@ -20,35 +21,59 @@ const SliderCard = (props) => {
         }
     };
 
-
     const fileUploadHandler = (e) => {
         const file = e.target.files[0];
         setImage(file);
         setShowImage(URL.createObjectURL(file));
     };
 
+    const handleUpdateSlider = async (e) => {
+        e.preventDefault();
 
+        const formData = new FormData();
+        formData.append("image", image); // "image" alanı dosyanın yükleneceği alan adıdır.
 
+        await axios.put(`https://localhost:7152/api/Sliders/${props.Id}`, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        })
+            .then((res) => {
+                console.log(res);
+                queryClient.invalidateQueries("getAllSlider");
+                setEditSlider(false);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
 
     return (
         <>
             <tbody>
-                <tr>
+                <tr >
                     <td>{props.number}</td>
                     <td className='Slidersss'>
-                        <div class="cardSlider">
-                            <div class="cardSlider2">
+                        <div className="cardSlider">
+                            <div className="cardSlider2">
                                 <img src='https://hips.hearstapps.com/hmg-prod/images/2023-bentley-continental-gt-s-coupe-101-1654526518.jpg?crop=0.678xw:0.763xh;0.116xw,0.176xh&resize=640:*' />
-                                {/* <img src={props.imgUrl} /> */}
                             </div>
                         </div>
                     </td>
-                    <td className='Artirrr'><Button onClick={() => setEditSlider(!editSlider)} variant="primary">Edit</Button></td>
-                    <td className='Artirrr'><Button onClick={() => handleRemove(props.Id)} variant="danger">Remove</Button></td>
+                    <td className='Artirrr'>
+                        <Button onClick={() => setEditSlider(!editSlider)} variant="primary">
+                            Edit
+                        </Button>
+                    </td>
+                    <td className='Artirrr'>
+                        <Button onClick={() => handleRemove(props.Id)} variant="danger">
+                            Remove
+                        </Button>
+                    </td>
                 </tr>
-                {editSlider == true ?
+                {editSlider == true ? (
                     <div id='SliderEdit' style={{ marginTop: "30px" }}>
-                        <form className="mb-3">
+                        <form className="mb-3" onSubmit={handleUpdateSlider}>
                             <div>
                                 <Form.Control
                                     type="file"
@@ -62,12 +87,13 @@ const SliderCard = (props) => {
                                 </p>
                             </div>
                         </form>
-                    </div> :
+                    </div>
+                ) : (
                     <></>
-                }
+                )}
             </tbody>
         </>
-    )
+    );
 }
 
-export default SliderCard
+export default SliderCard;

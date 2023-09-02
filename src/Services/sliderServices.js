@@ -10,10 +10,9 @@ export const postSlider = (data) => {
 };
 
 export const UpdateSliders = (id, data) => {
+  console.log(data);
   return httpClient.put(`api/Sliders/${id}`, data)
 };
-
-
 
 export const removeSlider = (sliderId) => {
   return httpClient.delete(`api/Sliders/${sliderId}`)
