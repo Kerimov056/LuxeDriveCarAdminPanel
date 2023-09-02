@@ -13,6 +13,7 @@ export const removeBlog = (blogId) => {             //cars
 };
 
 export const postBlog = (data) => {         //Create car
+  console.log(data  );
   return httpClient.post("api/Blogs",data)
 };
 

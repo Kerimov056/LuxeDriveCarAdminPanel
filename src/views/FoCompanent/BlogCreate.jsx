@@ -1,39 +1,44 @@
-import React from 'react'
-import './BlogCreate.scss'
-import { Button, Container, Row } from 'react-bootstrap'
-import { Field, useFormik, Form } from "formik";
-import { useQuery, useMutation, useQueryClient } from "react-query";
-import { postBlog } from "../../Services/blogServices";
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-
+import React from 'react';
+import './BlogCreate.scss';
+import { Button, Container, Row } from 'react-bootstrap';
+import { useFormik } from 'formik';
+import { useQueryClient } from 'react-query';
+import { Link, useHistory } from 'react-router-dom';
+import axios from 'axios'; // Axios ekleyin
 
 const BlogCreate = () => {
-
-    const mutation = useMutation(postBlog, {
-        onSuccess: () => {
-            navigate("/");
-            queryClient.invalidateQueries("newBlog");
-        },
-    });
-
+    const queryClient = useQueryClient();
+    const history = useHistory();
 
     const formik = useFormik({
         initialValues: {
-            Title: "",
-            Description: "",
-            //blogImages   ?  
+            Title: '',
+            Description: '',
+            blogImages: [],
         },
         onSubmit: async (values) => {
-
             const formData = new FormData();
-            formData.append("Title", values.carCategory)
-            formData.append("Description", values.carCategory)
+            formData.append('Title', values.Title);
+            formData.append('Description', values.Description);
 
+            for (let i = 0; i < values.blogImages.length; i++) {
+                formData.append('blogImages', values.blogImages[i]);
+            }
 
             try {
-                mutation.mutateAsync(formData);
+                // Axios ile isteği gönder
+                const response = await axios.post('https://localhost:7152/api/Blogs', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
+
+                if (response.status === 201) {
+                    queryClient.invalidateQueries('newBlog');
+                    history.push('/admin/blog');
+                }
             } catch (error) {
-                console.log(error);
+                console.error('Blog Created error:', error);
             }
         },
     });
@@ -41,105 +46,58 @@ const BlogCreate = () => {
     return (
         <Container>
             <h1>Blog Create</h1>
-            <Row style={{ marginLeft: "350px", marginTop: "100px" }}>
-                <div class="form-container">
-                    <form class="form">
-                        <div class="form-group">
-                            <label for="email">Blog Title</label>
-                            <input name='Title' value={formik.values.Title} onChange={formik.handleChange} type="text" id="email" required="" />
+            <Row style={{ marginLeft: '350px', marginTop: '100px' }}>
+                <div className="form-container">
+                    <form className="form" onSubmit={formik.handleSubmit}>
+                        <div className="form-group">
+                            <label htmlFor="Title">Blog Title</label>
+                            <input
+                                name="Title"
+                                value={formik.values.Title}
+                                onChange={formik.handleChange}
+                                type="text"
+                                id="Title"
+                            />
                         </div>
-                        <div class="form-group">
-                            <label for="textarea">Blog Image</label>
-                            <input multiple type='file' rows="10" cols="50" required="" />
+                        <div className="form-group">
+                            <label htmlFor="blogImages">Blog Image</label>
+                            <input
+                                multiple
+                                name="blogImages"
+                                type="file"
+                                onChange={(e) =>
+                                    formik.setFieldValue('blogImages', e.target.files)
+                                }
+                            />
                         </div>
-                        <div class="form-group">
-                            <label for="email">Blog Description</label>
-                            <textarea  name='Description' value={formik.values.Description} onChange={formik.handleChange} id="textarea" rows="10" cols="50" required=""></textarea>
+                        <div className="form-group">
+                            <label htmlFor="Description">Blog Description</label>
+                            <textarea
+                                name="Description"
+                                value={formik.values.Description}
+                                onChange={formik.handleChange}
+                                id="Description"
+                                rows="10"
+                                cols="50"
+                            />
                         </div>
-                        <div style={{ display: "flex" }}>
-                            <button onClick={formik.handleSubmit}  class="form-submit-btn" type="submit">Submit</button>
-                            <button style={{ marginLeft: "50px" }} class="form-submit-btn" type="submit"><Link to={'/admin/blog'}>Go to back</Link></button>
+                        <div style={{ display: 'flex' }}>
+                            <button className="form-submit-btn" type="submit">
+                                Submit
+                            </button>
+                            <button
+                                style={{ marginLeft: '50px' }}
+                                className="form-submit-btn"
+                                type="button"
+                            >
+                                <Link to={'/admin/blog'}>Go to back</Link>
+                            </button>
                         </div>
                     </form>
                 </div>
             </Row>
         </Container>
-    )
-}
+    );
+};
 
-export default BlogCreate
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// <Form onSubmit={(e) => CreateBlog(e)}>
-//                 <Form.Group className="mb-3" controlId="formBasicEmail">
-//                     <p>Image</p>
-//                     {
-//                         showImage !== null ?
-//                             <img
-//                                 style={{
-//                                     width: "200px",
-//                                     height: "100px",
-//                                     marginBottom: "10px",
-//                                     borderRadius: "unset",
-//                                 }}
-//                                 src={showImage}
-//                                 alt="header image"
-//                             /> : null
-//                     }
-//                     <Form.Control
-//                         type="file"
-//                         required
-//                         onChange={(e) => fileUploadHandler(e)}
-//                     />
-//                 </Form.Group>
-
-//                 <Form.Group className="mb-3" controlId="formBasicPassword">
-//                     <Form.Label>Title</Form.Label>
-//                     <Form.Control
-//                         type="text"
-//                         placeholder="Enter Title"
-//                         required
-//                         onFocus={(e) => e.target.placeholder = ''}
-//                         onBlur={(e) => e.target.placeholder = 'Enter Title'}
-//                         onChange={(e) => setTitle(e.target.value)}
-//                     />
-//                 </Form.Group>
-
-
-//                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-//                     <Form.Label>Description</Form.Label>
-//                     <Form.Control
-//                         as="textarea"
-//                         rows={3}
-//                         type="text"
-//                         placeholder="Enter Description"
-//                         required
-//                         onFocus={(e) => e.target.placeholder = ''}
-//                         onBlur={(e) => e.target.placeholder = 'Enter Description'}
-
-//                         onChange={(e) => setDescription(e.target.value)}
-//                     />
-//                 </Form.Group>
-
-//                 <Button variant="outline-primary" type="submit">
-//                     Create
-//                 </Button>
-//                 <Link to="/blogTable">
-//                     <Button variant="outline-dark" type="submit" className='mx-2'>
-//                         Cancel
-//                     </Button>
-//                 </Link>
-//             </Form>
+export default BlogCreate;
