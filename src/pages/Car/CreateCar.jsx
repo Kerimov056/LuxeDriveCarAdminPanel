@@ -132,6 +132,7 @@ const CreateCar = () => {
             // tags: tagFields
         },
         onSubmit: async (values) => {
+            console.log(values)
             try {
                 mutation.mutateAsync(values);
             } catch (error) {

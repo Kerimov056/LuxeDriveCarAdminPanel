@@ -12,7 +12,7 @@ export const removeBlog = (blogId) => {             //cars
   return httpClient.delete(`api/Blogs/${blogId}`)
 };
 
-export const postCar = (data) => {         //Create car
+export const postBlog = (data) => {         //Create car
   return httpClient.post("api/Blogs",data)
 };
 

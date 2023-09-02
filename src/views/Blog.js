@@ -5,26 +5,10 @@ import BlogCard from './FoCompanent/BlogCard';
 import { Field, useFormik, Form } from "formik";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import './FoCompanent/blogcard.scss'
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+
 
 const Blog = () => {
-  const [create, setCreate] = useState(false);
-  const [imageFields, setImageFields] = useState([{ files: [] }]);
-
-  const addImageField = () => {
-    setImageFields([...imageFields, { files: [] }]);
-  };
-
-  const removeImageField = (index) => {
-    const updatedFields = imageFields.filter((field, i) => i !== index);
-    setImageFields(updatedFields);
-  };
-
-  const handleFileChange = (event, index) => {
-    const updatedFields = [...imageFields];
-    updatedFields[index] = { ...updatedFields[index], files: event.target.files };
-    setImageFields(updatedFields);
-  };
-
 
   const { data: getByBlog, isError } = useQuery({
     queryKey: ["getBlogs"],
@@ -48,14 +32,7 @@ const Blog = () => {
               </button>
             </div>
             <div>
-              <Button onClick={()=> setCreate(!create)}>Create Blog</Button>
-              {create === true &&
-
-                <div>
-                </div>
-
-
-              }
+              <Button><Link to={'/BlogCreate'}>Create Blog</Link></Button>
             </div>
 
             <div className="blogssss">

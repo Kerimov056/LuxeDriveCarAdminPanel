@@ -33,6 +33,7 @@ function User() {
     onSuccess: (data) => {
       console.log("Success:", data);
       queryClient.invalidateQueries("postAdvatage");
+      queryClient.invalidateQueries("getAllAdvatages");
     },
     onError: (error) => {
       console.log("Error:", error);
@@ -71,7 +72,7 @@ function User() {
           {createAdvantage === true ?
 
 
-            <div style={{ width: "100%", height: "120px", display: "flex", alignItems: "center", marginTop: "20px" }}>
+            <div style={{ width: "100%", height: "210px", display: "flex", alignItems: "center", marginTop: "20px" }}>
               <div style={{ width: "90%", height: "120px", display: "flex", justifyContent: "space-around", alignItems: "center" }}>
                 <div style={{ width: "70%" }}>
 
