@@ -130,7 +130,7 @@ const Advantagecard = (props) => {
                 )}
                 {editFaqs === true ? (
                     <div style={{ height: '250px' }} id="SliderEditFaqs">
-                        <Form>
+                        <Form onSubmit={(e) => e.preventDefault()}>
                             <div className='Advantegeedit' >
                                 <label >Title</label>
                                 <input type="text" value={updatedTitleFaq} onChange={(e) => setUpdatedTitleFaq(e.target.value)} />
