@@ -9,7 +9,34 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const BlogCreate = () => {
 
+    const mutation = useMutation(postBlog, {
+        onSuccess: () => {
+            navigate("/");
+            queryClient.invalidateQueries("newBlog");
+        },
+    });
 
+
+    const formik = useFormik({
+        initialValues: {
+            Title: "",
+            Description: "",
+            //blogImages   ?  
+        },
+        onSubmit: async (values) => {
+
+            const formData = new FormData();
+            formData.append("Title", values.carCategory)
+            formData.append("Description", values.carCategory)
+
+
+            try {
+                mutation.mutateAsync(formData);
+            } catch (error) {
+                console.log(error);
+            }
+        },
+    });
 
     return (
         <Container>
@@ -19,7 +46,7 @@ const BlogCreate = () => {
                     <form class="form">
                         <div class="form-group">
                             <label for="email">Blog Title</label>
-                            <input type="text" id="email" required="" />
+                            <input name='Title' value={formik.values.Title} onChange={formik.handleChange} type="text" id="email" required="" />
                         </div>
                         <div class="form-group">
                             <label for="textarea">Blog Image</label>
@@ -27,10 +54,10 @@ const BlogCreate = () => {
                         </div>
                         <div class="form-group">
                             <label for="email">Blog Description</label>
-                            <textarea name="textarea" id="textarea" rows="10" cols="50" required="">          </textarea>
+                            <textarea  name='Description' value={formik.values.Description} onChange={formik.handleChange} id="textarea" rows="10" cols="50" required=""></textarea>
                         </div>
                         <div style={{ display: "flex" }}>
-                            <button class="form-submit-btn" type="submit">Submit</button>
+                            <button onClick={formik.handleSubmit}  class="form-submit-btn" type="submit">Submit</button>
                             <button style={{ marginLeft: "50px" }} class="form-submit-btn" type="submit"><Link to={'/admin/blog'}>Go to back</Link></button>
                         </div>
                     </form>
