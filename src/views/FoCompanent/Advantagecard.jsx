@@ -72,7 +72,8 @@ const Advantagecard = (props) => {
                     <td style={{ display: 'none' }}>{props.dto}</td>
                     <td >{props.number}</td>
                     <td >{props.title}</td>
-                    <td className='Slidersss'><Button style={{ backgroundColor: "yellow" }} ><Link to={`/AdvantagesDetails/${props.Id}`}>Details</Link></Button></td>
+                    <td style={props.berirleme == 1 ? {} : { display: "none" }}  className='Slidersss'><Button style={{ backgroundColor: "yellow" }} ><Link to={`/AdvantagesDetails/${props.Id}`}>Details</Link></Button></td>
+                    <td style={props.berirleme == 1 ? {} : { display: "none" }}  className='Slidersss'><Button style={{ backgroundColor: "yellow" }} ><Link to={`/FaqsDetails/${props.Id}`}>Details</Link></Button></td>
                     <td className='Artirrr' style={props.berirleme == 1 ? {} : { display: "none" }}  ><Button onClick={() => setEditAdvantages(!editAdvantages)} variant="primary">Edit</Button></td>
                     <td className='Artirrr' style={props.berirleme == 2 ? {} : { display: "none" }} ><Button onClick={() => setEditFaqs(!editFaqs)} variant="primary">Edit</Button></td>
                     <td style={props.berirleme == 1 ? {} : { display: "none" }} className='Artirrr'><Button onClick={() => handleRemove(props.Id)} variant="danger">Remove</Button></td>
