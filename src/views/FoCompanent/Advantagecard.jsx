@@ -93,7 +93,7 @@ const Advantagecard = (props) => {
                     </td>
                 </tr>
                 {editAdvantages === true ? (
-                    <div style={{ height: '250px' }} id="SliderEdit">
+                    <div  id="SliderEdit">
                         <div className='Advantegeedit'>
                             <label>Title</label><br/>
                             <input type="text" value={updatedTitle} onChange={(e) => setUpdatedTitle(e.target.value)} />
