@@ -35,7 +35,7 @@ const FaqsDetails = () => {
                         </div>
                     </div>
                 </div>
-                <Button style={{ marginLeft: "900px" }}><Link to={"/admin/user"}>Go To back</Link></Button>
+                <Button style={{ marginLeft: "900px" }}><Link to={"/admin/notifications"}>Go To back</Link></Button>
             </Container>
         </>
     )
