@@ -28,9 +28,9 @@ const SliderCard = (props) => {
                     <td>{props.number}</td>
                     <td className='Slidersss'>
                         <div class="cardSlider">
+                                {/* <img src='https://hips.hearstapps.com/hmg-prod/images/2023-bentley-continental-gt-s-coupe-101-1654526518.jpg?crop=0.678xw:0.763xh;0.116xw,0.176xh&resize=640:*' /> */}
                             <div class="cardSlider2">
-                                <img src='https://hips.hearstapps.com/hmg-prod/images/2023-bentley-continental-gt-s-coupe-101-1654526518.jpg?crop=0.678xw:0.763xh;0.116xw,0.176xh&resize=640:*' />
-                                {/* <img src={props.imgUrl} /> */}
+                                <img src={props.imgUrl} />
                             </div>
                         </div>
                     </td>

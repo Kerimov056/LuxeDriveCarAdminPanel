@@ -51,7 +51,7 @@ function TableList(props) {
         },
         
       });
-      console.log(response.data); // Sunucu yanıtını kontrol etmek için loglayın.
+      setCreateSlider(false);
       queryClient.invalidateQueries("getAllSlider");
     } catch (error) {
       console.error(error); // Hata durumunda hata mesajını loglayın.
