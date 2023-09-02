@@ -15,12 +15,12 @@ import { useQuery, useQueryClient, useMutation } from "react-query";
 import { useParams, useHistory } from "react-router-dom";
 import { Formik, Field, useFormik } from "formik";
 import { getByBlog, removeBlog, UpdateBlog } from "../../Services/blogServices";
+import axios from "axios";
 
 
 const BlogDetails = () => {
 
     const [blogEdit, setBlogEdit] = useState(false)
-    const [image, setImage] = useState(null);
 
 
     const { id } = useParams();
@@ -43,17 +43,32 @@ const BlogDetails = () => {
     };
 
     const [updatedTitle, setUpdatedTitle] = useState(byblog?.data?.title);
-    const [updatedDescription, setUpdatedDescription] = useState(yblog?.data?.description);
-
+    const [updatedDescription, setUpdatedDescription] = useState(byblog?.data?.description);
+    const [updatedImageBlog, setUpdatedImageBlog] = useState(byblog?.data?.blogImages);
 
     const handleUpdateSubmit = async (e) => {
         e.preventDefault();
 
         const formData = new FormData();
-        formData.append("Title", image)
-        formData.append("Title", image)
-    };
+        formData.append('Title', updatedTitle);
+        formData.append('Description', updatedDescription);
 
+        for (let i = 0; i < updatedImageBlog.length; i++) {
+            formData.append('blogImages', updatedImageBlog[i]);
+        }
+
+        try {
+            await axios.put(`https://localhost:7152/api/Blogs/${id}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            queryClient.invalidateQueries(['getByBlog', id]);
+            setBlogEdit(false);
+        } catch (error) {
+            console.error('Error updating Blog:', error);
+        }
+    };
 
     return (
         <>
@@ -103,17 +118,14 @@ const BlogDetails = () => {
                                     <label htmlFor="blogImages">Blog Image</label>
                                     <input
                                         multiple
-                                        name="blogImages"
                                         type="file"
-                                        onChange={(e) =>
-                                            formik.setFieldValue('blogImages', e.target.files)
-                                        }
+                                        onChange={(e) => setUpdatedImageBlog(e.target.files)}
                                     />
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="Description">Blog Description</label>
                                     <textarea
-                                        value={updatedDescription} 
+                                        value={updatedDescription}
                                         onChange={(e) => setUpdatedDescription(e.target.value)}
                                         id="Description"
                                         rows="10"
