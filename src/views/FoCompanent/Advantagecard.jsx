@@ -48,7 +48,7 @@ const Advantagecard = (props) => {
             };
             await UpdateAdvantage(props.Id, updatedData);
             setEditAdvantages(false);
-            queryClient.invalidateQueries(['getAllAdvantages']);
+            queryClient.invalidateQueries(['getAllAdvatages']);
         } catch (error) {
             console.error('Error updating advantage:', error);
         }
@@ -94,12 +94,12 @@ const Advantagecard = (props) => {
                 </tr>
                 {editAdvantages === true ? (
                     <div style={{ height: '250px' }} id="SliderEdit">
-                        <div>
-                            <label>Title</label>
+                        <div className='Advantegeedit'>
+                            <label>Title</label><br/>
                             <input type="text" value={updatedTitle} onChange={(e) => setUpdatedTitle(e.target.value)} />
                         </div>
-                        <div>
-                            <label>Descrption</label>
+                        <div className='Advantegeedit'>
+                            <label>Descrption</label><br/>
                             <input type="text" value={updatedDescription} onChange={(e) => setUpdatedDescription(e.target.value)} />
                         </div>
                         <Button onClick={handleUpdate} variant="success">
@@ -119,11 +119,11 @@ const Advantagecard = (props) => {
                             onSubmit={handleUpdate}
                         >
                             <Form>
-                                <div>
-                                    <label>Title</label>
+                                <div className='Advantegeedit' >
+                                    <label style={{width:"50px"}}>Title</label>
                                     <Field type="text" name="title" placeholder="FAQ Title" />
                                 </div>
-                                <div>
+                                <div className='Advantegeedit'>
                                     <label>Description</label>
                                     <Field type="text" name="description" placeholder="FAQ Description" />
                                 </div>

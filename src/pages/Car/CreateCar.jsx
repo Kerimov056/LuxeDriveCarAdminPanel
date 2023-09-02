@@ -89,33 +89,6 @@ const CreateCar = () => {
     };
 
 
-    const [imageFields, setImageFields] = useState([{ files: [] }]);
-
-    const addImageField = () => {
-        setImageFields([...imageFields, { files: [] }]);
-    };
-
-    const removeImageField = (index) => {
-        const updatedFields = imageFields.filter((field, i) => i !== index);
-        setImageFields(updatedFields);
-    };
-
-    const handleFileChange = (event, index) => {
-        const updatedFields = [...imageFields];
-        updatedFields[index] = { ...updatedFields[index], files: event.target.files };
-        setImageFields(updatedFields);
-    };
-
-    const [tagFields, setTagFields] = useState([{ value: '' }]);
-
-    const addTagField = () => {
-        setTagFields([...tagFields, { value: '' }]);
-    };
-
-    const removeTagField = (index) => {
-        const updatedFields = tagFields.filter((_, i) => i !== index);
-        setTagFields(updatedFields);
-    };
 
 
     const formik = useFormik({
@@ -127,9 +100,9 @@ const CreateCar = () => {
             Description: "",
             CarType: "",
             CarCategory: "",
-            CarImages: imageFields.map((field) => ({ files: field.files })),
-             tags: tagFields.filter((field) => !field.id).map((field) => ({ value: field?.value })),
-            // tags: tagFields
+            CarImages: "",
+            tags: "",
+            // tags: tagField
         },
         onSubmit: async (values) => {
             const formData = new FormData();
@@ -146,9 +119,6 @@ const CreateCar = () => {
         },
     });
 
-    // console.log(selectedModel, selectedBrand);
-    // console.log(imageFields.map((field) => ({ files: field.files })));
-    // console.log(tagFields);
 
     return (
         <>
@@ -256,52 +226,28 @@ const CreateCar = () => {
                                             </Form.Group>
                                         </Col>
 
+                                        <Row>
 
-                                        <Col className="px-1" md="3">
-
-                                        </Col>
-
+                                            <Col >
+                                                <Form.Group>
+                                                    <label>Tags</label>
+                                                    <Form.Control
+                                                        cols="40"
+                                                        as="textarea"
+                                                    ></Form.Control>
+                                                </Form.Group>
+                                            </Col>
+                                        </Row>
                                     </Row>
                                     <Row>
-
                                         <Col className="pr-" md="6">
-                                            {imageFields.map((field, index) => (
-                                                <div id='ImgUpload' key={index}>
-                                                    <Form.Group style={index === 0 ? { marginLeft: "-70px" } : {}} controlId={`formFileMultiple_${index}`} className="mb-3">
-                                                        <Form.Label>Car Images</Form.Label>
-                                                        <Form.Control type="file" multiple onChange={(event) => handleFileChange(event, index)} />
-                                                    </Form.Group>
-                                                    {index > 0 &&
-                                                        <Button onClick={() => removeImageField(index)}>-</Button>
-                                                    }
-                                                </div>
-                                            ))}
-                                            <Button onClick={addImageField}>+</Button>
+                                            <div id='ImgUpload' >
+                                                <Form.Group className="mb-3">
+                                                    <Form.Label>Car Images</Form.Label>
+                                                    <Form.Control type="file" multiple />
+                                                </Form.Group>
+                                            </div>
                                         </Col>
-
-                                        <Col className="pr-" md="6">
-                                            {tagFields.map((field, index) => (
-                                                <div id="ImgUpload" key={index}>
-                                                    <Form.Group>
-                                                        <label style={index === 0 ? { marginLeft: "-70px" } : {}}>Tag</label>
-                                                        <InputGroup style={index === 0 ? { marginLeft: "-70px" } : {}} controlId={`formFileMultiple_${index}`} className="mb-3">
-                                                            <InputGroup.Text>#</InputGroup.Text>
-                                                            <Form.Control
-                                                                aria-label="Tag input"
-                                                                name={`tags[${index}].value`}
-                                                                value={formik.values.tags[index]?.value || ''}  // formik.values.tags dizisinin ilgili indeksi
-                                                                onChange={formik.handleChange}
-                                                            />
-                                                        </InputGroup>
-                                                    </Form.Group>
-                                                    {index > 0 &&
-                                                        <Button onClick={() => removeTagField(index)}>-</Button>
-                                                    }
-                                                </div>
-                                            ))}
-                                            <Button onClick={addTagField}>+</Button>
-                                        </Col>
-
                                     </Row>
                                     <Row>
                                         <Col md="12">
