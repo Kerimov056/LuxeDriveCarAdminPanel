@@ -48,6 +48,7 @@ import ChaufferDetails from "views/FoCompanent/ChaufferDetails";
 import BlogDetails from "views/FoCompanent/BlogDetails";
 import BlogCreate from "views/FoCompanent/BlogCreate";
 import AdvantagesDetails from "views/FoCompanent/AdvantagesDetails";
+import FaqsDetails from "views/FoCompanent/FaqsDetails";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
@@ -66,6 +67,7 @@ root.render(
           <Route path="/BlogCreate" component={BlogCreate} />
           <Route path="/ComplatedReservation" component={ComplatedReservation} />
           <Route path="/AdvantagesDetails/:id" component={AdvantagesDetails} />
+          <Route path="/FaqsDetails/:id" component={FaqsDetails} />
           <Route path='/ReservDetail/:id' component={ReservDetail} />
           <Route path='/CReservDetail/:id' component={CReservDetail} />
           <Route path='/CancledReservDetail/:id' component={CancledReservDetail} />
