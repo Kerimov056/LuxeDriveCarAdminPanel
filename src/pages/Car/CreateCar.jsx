@@ -102,7 +102,6 @@ const CreateCar = () => {
             CarCategory: "",
             CarImages: "",
             tags: "",
-            // tags: tagField
         },
         onSubmit: async (values) => {
             const formData = new FormData();
@@ -123,7 +122,7 @@ const CreateCar = () => {
     return (
         <>
             <Container fluid>
-                <Row>
+                <Row style={{ marginLeft: "400px" }}>
                     <Col md="8">
                         <Card>
                             <Card.Header>
@@ -225,19 +224,6 @@ const CreateCar = () => {
                                                 </div>
                                             </Form.Group>
                                         </Col>
-
-                                        <Row>
-
-                                            <Col >
-                                                <Form.Group>
-                                                    <label>Tags</label>
-                                                    <Form.Control
-                                                        cols="40"
-                                                        as="textarea"
-                                                    ></Form.Control>
-                                                </Form.Group>
-                                            </Col>
-                                        </Row>
                                     </Row>
                                     <Row>
                                         <Col className="pr-" md="6">
@@ -249,6 +235,9 @@ const CreateCar = () => {
                                             </div>
                                         </Col>
                                     </Row>
+                                    <div class="inputBox1">
+                                        <input name='Name' value={formik.values.Name} onChange={formik.handleChange} type="text" required="required" />
+                                    </div>
                                     <Row>
                                         <Col md="12">
                                             <Form.Group>

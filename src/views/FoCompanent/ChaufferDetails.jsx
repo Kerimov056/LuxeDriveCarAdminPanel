@@ -1,14 +1,7 @@
 import "./chaufferDetails.scss";
 import React, { useState, useEffect } from 'react'
 import {
-    Button, Container, Badge,
-    Card,
-    Form,
-    Navbar,
-    Nav,
-    Row,
-    Col,
-    InputGroup
+    Button, Container
 } from 'react-bootstrap'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { useQuery, useQueryClient, useMutation } from "react-query";
