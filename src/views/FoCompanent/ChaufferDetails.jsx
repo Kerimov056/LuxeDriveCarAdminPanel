@@ -13,8 +13,8 @@ import {
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { useQuery, useQueryClient, useMutation } from "react-query";
 import { useParams, useHistory } from "react-router-dom";
-import { Formik, Field, useFormik } from "formik";
 import { chauffeursRemove, getByCheuf } from "../../Services/chauffeursServices";
+import axios from "axios";
 
 const ChaufferDetails = () => {
 
@@ -39,48 +39,40 @@ const ChaufferDetails = () => {
         }
     };
 
-
-    
     const [updatedName, setUpdatedName] = useState(byCheuf?.data?.name);
     const [updatedNumber, setUpdatedNumber] = useState(byCheuf?.data?.number);
     const [updatedPrice, setUpdatedPrice] = useState(byCheuf?.data?.price);
-    const [updatedImageBlog, setUpdatedImageBlog] = useState(byCheuf?.data?.imagePath);
+    const [updatedImageChauf, setUpdatedImageChauf] = useState(null); 
 
+    const fileUploadHandler = (e) => {
+        const file = e.target.files[0];
+        setUpdatedImageChauf(file);
+    };
 
+    const handleUpdateSubmit = async (e) => {
+        e.preventDefault();
 
-    // const handleUpdateSubmit = async (e) => {
-    //     e.preventDefault();
+        const currentImages = byCheuf?.data?.imagePath || [];
 
-    //     const currentImages = byblog?.data?.blogImages || [];
+        const formData = new FormData();
+        formData.append('Name', updatedName);
+        formData.append('Number', updatedNumber);
+        formData.append('Price', parseFloat(updatedPrice)); 
+        formData.append('Image', updatedImageChauf);
 
-    //     const updatedImages = [...currentImages];
-    //     for (let i = 0; i < updatedImageBlog.length; i++) {
-    //         updatedImages.push(updatedImageBlog[i]);
-    //     }
-
-    //     const formData = new FormData();
-    //     formData.append('Title', updatedTitle);
-    //     formData.append('Description', updatedDescription);
         
-    //     for (let i = 0; i < updatedImageBlog.length; i++) {
-    //         formData.append('blogImages', updatedImageBlog[i]);
-    //     }
-
-    //     try {
-    //         await axios.put(`https://localhost:7152/api/Blogs/${id}`, formData, {
-    //             headers: {
-    //                 'Content-Type': 'multipart/form-data',
-    //             },
-    //         });
-    //         queryClient.invalidateQueries(['getByBlog', id]);
-    //         setBlogEdit(false);
-    //     } catch (error) {
-    //         console.error('Error updating Blog:', error);
-    //     }
-    // };
-
-
-
+        try {
+            await axios.put(`https://localhost:7152/api/Chauffeurss/${id}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            queryClient.invalidateQueries(['getByCheuf', id]);
+            setCheufEdit(false);
+        } catch (error) {
+            console.error('Error updating Blog:', error);
+        }
+    };
 
     return (
         <>
@@ -120,27 +112,29 @@ const ChaufferDetails = () => {
                 {CheufEdit == true ? <div id='cheufEdit'>
                     <div>
                         {byCheuf ? (
-                            <div className="UpdateChauffers">
-                                <div class="form-container">
-                                    <div class="form">
-                                        <span class="heading">Update Chauffeurss</span>
-                                        <input placeholder="Name" value={updatedName} onChange={(e) => setUpdatedName(e.target.value)} type="text" class="input" />
-                                        <input placeholder="Number" value={updatedNumber} onChange={(e) => setUpdatedNumber(e.target.value)} type="number" class="input" />
-                                        <input placeholder="Price" value={updatedPrice} onChange={(e) => setUpdatedPrice(e.target.value)} type="number" class="input" />
-                                        <input type="file" onChange={(e) => setUpdatedImageBlog(e.target.files)}  class="input" />
+                            <form onSubmit={handleUpdateSubmit}>
+                                <div className="UpdateChauffers">
+                                    <div class="form-container">
+                                        <div class="form">
+                                            <span class="heading">Update Chauffeurss</span>
+                                            <input placeholder="Name" value={updatedName} onChange={(e) => setUpdatedName(e.target.value)} type="text" class="input" />
+                                            <input placeholder="Number" value={updatedNumber} onChange={(e) => setUpdatedNumber(e.target.value)} type="text" class="input" />
+                                            <input placeholder="Price" value={updatedPrice} onChange={(e) => setUpdatedPrice(e.target.value)} type="number" class="input" />
+                                            <input type="file" onChange={(e) => fileUploadHandler(e)} class="input" />
 
-                                        <div class="button-container">
-                                            <Button style={{width:"150px"}} class="send-button">Send</Button>
-                                            <div class="reset-button-container">
-                                                <div id="reset-btn" class="reset-button">Reset</div>
+                                            <div class="button-container">
+                                                <Button type="submit" style={{ width: "150px" }} class="send-button">Update</Button>
+                                                <div class="reset-button-container">
+                                                    <div id="reset-btn" class="reset-button">Reset</div>
+                                                </div>
+                                                <Button style={{ width: "150px", backgroundColor:"black" }} class="send-button"><Link to={'/admin/typography'}>Go to Back</Link></Button>
                                             </div>
-                                            <Button style={{width:"150px"}} class="send-button"><Link to={'/admin/typography'}>Go to Back</Link></Button>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         ) : (
-                            <div>Loading...</div>  //onClick={() => setCheufEdit(false)}
+                            <div>Loading...</div>
                         )}
                     </div>
                 </div> : <div></div>}
@@ -149,4 +143,4 @@ const ChaufferDetails = () => {
     )
 }
 
-export default ChaufferDetails
+export default ChaufferDetails;
