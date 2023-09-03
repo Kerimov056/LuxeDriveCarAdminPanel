@@ -109,6 +109,7 @@ const CarDetails = () => {
         const brand = event.target.value;
         setSelectedBrand(brand);
         setSelectedModel("");
+        setUpdatedMarka(brand)
     };
 
     const [updatedMarka, setUpdatedMarka] = useState(byCar?.data?.marka);
@@ -237,16 +238,16 @@ const CarDetails = () => {
                                     <Card.Title as="h4">Create Car</Card.Title>
                                 </Card.Header>
                                 <Card.Body>
-                                    <Form onSubmit={formik.handleSubmit}>
+                                    <Form onSubmit={handleUpdateSubmit}>
                                         <Row>
                                             <Col className="pr-1" md="5">
                                                 <Form.Group>
                                                     <div className='MM'>
                                                         <label>Marka:</label>
-                                                        <Form.Select id='FS' size='lg' name='Marka' value={selectedBrand} onChange={(event) => {
-                                                            formik.handleChange(event);
-                                                            handleBrandChange(event);
-                                                        }}>
+                                                        <Form.Select id='FS' size='lg'
+                                                            value={updatedMarka} onChange={(event) => {
+                                                                handleBrandChange(event);
+                                                            }}>
                                                             <option size="lg" value="">Marka option</option>
                                                             {carData.map((car, index) => (
                                                                 <option id="asd" key={index} value={car.brand}>
@@ -258,8 +259,8 @@ const CarDetails = () => {
                                                         {selectedBrand && (
                                                             <div className='MM'>
                                                                 <label>Model:</label>
-                                                                <Form.Select id='FS' name='Model' value={selectedModel} onChange={(e) => {
-                                                                    formik.handleChange(e);
+                                                                <Form.Select id='FS' name='Model' value={updatedModel} onChange={(e) => {
+                                                                    setSelectedModel(e.target.value);
                                                                     setSelectedModel(e.target.value);
                                                                 }}>
                                                                     <option value="">Model option</option>
