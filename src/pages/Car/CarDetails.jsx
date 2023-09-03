@@ -322,8 +322,9 @@ const CarDetails = () => {
                                             <Col className="pr-" md="6">
                                                 <div id='ImgUpload' >
                                                     <Form.Group className="mb-3">
-                                                        <Form.Label className='InputCreateCarimage'>Car Images</Form.Label>
+                                                        <Form.Label style={{marginLeft:"440px"}} className='InputCreateCarimage'>Car Images</Form.Label>
                                                         <input
+                                                            style={{marginLeft:"440px"}}
                                                             className='InputCreateCarimage ll'
                                                             type="file"
                                                             multiple
