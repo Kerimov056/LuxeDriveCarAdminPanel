@@ -40,6 +40,44 @@ const ChaufferDetails = () => {
     };
 
 
+    
+    const [updatedName, setUpdatedName] = useState(byCheuf?.data?.name);
+    const [updatedNumber, setUpdatedNumber] = useState(byCheuf?.data?.number);
+    const [updatedPrice, setUpdatedPrice] = useState(byCheuf?.data?.price);
+    const [updatedImageBlog, setUpdatedImageBlog] = useState(byCheuf?.data?.imagePath);
+
+
+
+    // const handleUpdateSubmit = async (e) => {
+    //     e.preventDefault();
+
+    //     const currentImages = byblog?.data?.blogImages || [];
+
+    //     const updatedImages = [...currentImages];
+    //     for (let i = 0; i < updatedImageBlog.length; i++) {
+    //         updatedImages.push(updatedImageBlog[i]);
+    //     }
+
+    //     const formData = new FormData();
+    //     formData.append('Title', updatedTitle);
+    //     formData.append('Description', updatedDescription);
+        
+    //     for (let i = 0; i < updatedImageBlog.length; i++) {
+    //         formData.append('blogImages', updatedImageBlog[i]);
+    //     }
+
+    //     try {
+    //         await axios.put(`https://localhost:7152/api/Blogs/${id}`, formData, {
+    //             headers: {
+    //                 'Content-Type': 'multipart/form-data',
+    //             },
+    //         });
+    //         queryClient.invalidateQueries(['getByBlog', id]);
+    //         setBlogEdit(false);
+    //     } catch (error) {
+    //         console.error('Error updating Blog:', error);
+    //     }
+    // };
 
 
 
@@ -86,16 +124,17 @@ const ChaufferDetails = () => {
                                 <div class="form-container">
                                     <div class="form">
                                         <span class="heading">Update Chauffeurss</span>
-                                        <input placeholder="Name" type="text" class="input" />
-                                        <input placeholder="Number" type="number" class="input" />
-                                        <input placeholder="Price" type="number" class="input" />
+                                        <input placeholder="Name" value={updatedName} onChange={(e) => setUpdatedName(e.target.value)} type="text" class="input" />
+                                        <input placeholder="Number" value={updatedNumber} onChange={(e) => setUpdatedNumber(e.target.value)} type="number" class="input" />
+                                        <input placeholder="Price" value={updatedPrice} onChange={(e) => setUpdatedPrice(e.target.value)} type="number" class="input" />
                                         <input type="file" onChange={(e) => setUpdatedImageBlog(e.target.files)} />
-                                        
+
                                         <div class="button-container">
-                                            <div class="send-button">Send</div>
+                                            <Button style={{width:"150px"}} class="send-button">Send</Button>
                                             <div class="reset-button-container">
                                                 <div id="reset-btn" class="reset-button">Reset</div>
                                             </div>
+                                            <Button style={{width:"150px"}} class="send-button"><Link to={'/admin/typography'}>Go to Back</Link></Button>
                                         </div>
                                     </div>
                                 </div>
