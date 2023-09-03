@@ -204,7 +204,7 @@ const CarDetails = () => {
                                     </div>
                                     <div class="color anti-flash-white">
                                         Booked cars
-                                        <span class="hex">Reservation Person {">"}</span>
+                                        <Link to={`/CancledReservDetail/${byCar?.data?.reservationsId}`}><span class="hex">Reservation Person {">"}</span></Link>
                                     </div>
                                 </div>
                             </div>
@@ -326,9 +326,9 @@ const CarDetails = () => {
                                             <Col className="pr-" md="6">
                                                 <div id='ImgUpload' >
                                                     <Form.Group className="mb-3">
-                                                        <Form.Label style={{marginLeft:"440px"}} className='InputCreateCarimage'>Car Images</Form.Label>
+                                                        <Form.Label style={{ marginLeft: "440px" }} className='InputCreateCarimage'>Car Images</Form.Label>
                                                         <input
-                                                            style={{marginLeft:"440px"}}
+                                                            style={{ marginLeft: "440px" }}
                                                             className='InputCreateCarimage ll'
                                                             type="file"
                                                             multiple
@@ -365,7 +365,7 @@ const CarDetails = () => {
                                             className="btn-fill pull-right"
                                             type="submit"
                                             variant="success"
-                                            style={{ width: "150px",marginTop:"24px" }}
+                                            style={{ width: "150px", marginTop: "24px" }}
                                         >
                                             Create Car
                                         </Button>
