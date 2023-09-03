@@ -26,12 +26,13 @@ const AllCar = () => {
                         </button>
                     </div>
                 </Row>
-                <Row className='mt-5'>
-                    <Link to='/createCar'>
-                        <Button variant="primary" size="lg">
-                            Create Car
-                        </Button>
-                    </Link>
+                <Row id='AllCarSS' className='mt-5'>
+
+                    <Button variant="primary" size="lg">
+                        <Link to='/createCar'>Create Car</Link>
+                    </Button>
+                    <Button>S</Button>
+                    <Button>S</Button>
                 </Row>
                 <Row className='mt-5'>
                     {allCars?.data.map((bycars, index) => (
