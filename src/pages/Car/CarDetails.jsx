@@ -117,7 +117,7 @@ const CarDetails = () => {
     const [updatedPrice, setUpdatedPrice] = useState(byCar?.data?.price);
     const [updatedYear, setUpdatedYear] = useState(byCar?.data?.year);
     const [updatedDescription, setUpdatedDescription] = useState(byCar?.data?.description);
-    const [updatedType, setUpdatedtype] = useState(byCar?.data?.carType?.type);
+    const [updatedType, setUpdatedType] = useState(byCar?.data?.carType?.type);
     const [updatedCategory, setUpdatedCategory] = useState(byCar?.data?.carCategory?.category);
     const [updatedTags, setUpdatedTags] = useState(byCar?.data?.marka);
     const [updatedCarImages, setUpdatedCarImages] = useState(byCar?.data?.carImages);
@@ -276,9 +276,8 @@ const CarDetails = () => {
 
                                                         <label>Year:</label>
                                                         <Form.Select
-                                                            name="Year"
-                                                            values={formik.values.Year}
-                                                            onChange={formik.handleChange}
+                                                            values={updatedYear}
+                                                            onChange={(e) => setUpdatedYear(e.target.value)}
                                                             id='FS' size='lg' >
                                                             <option size="lg" value="">Year option</option>
                                                             {carYear.map((year, index) => (
@@ -290,9 +289,8 @@ const CarDetails = () => {
 
                                                         <label>Type:</label>
                                                         <Form.Select
-                                                            name="CarType.type"
-                                                            values={formik.values.CarType.type}
-                                                            onChange={formik.handleChange}
+                                                            values={updatedType}
+                                                            onChange={(e) => setUpdatedType(e.target.value)}
                                                             id='FS' size='lg' >
                                                             <option size="lg" value="">Type option</option>
                                                             {carType.map((type, index) => (
@@ -304,9 +302,8 @@ const CarDetails = () => {
 
                                                         <label>Category:</label>
                                                         <Form.Select
-                                                            name="CarCategory.Category"
-                                                            values={formik.values.CarCategory.Category}
-                                                            onChange={formik.handleChange}
+                                                            values={updatedCategory}
+                                                            onChange={(e) => setUpdatedCategory(e.target.value)}
                                                             id='FS' size='lg'>
                                                             <option size="lg" value="">Category option</option>
                                                             {carCategory.map((Category, index) => (
@@ -323,9 +320,8 @@ const CarDetails = () => {
                                                                 <InputGroup.Text>$</InputGroup.Text>
                                                                 <Form.Control
                                                                     type='number'
-                                                                    name='Price'
-                                                                    value={formik.values.Price}
-                                                                    onChange={formik.handleChange}
+                                                                    value={updatedPrice}
+                                                                    onChange={(e) => setUpdatedPrice(e.target.value)}
                                                                     aria-label="Amount (to the nearest dollar)" />
                                                                 <InputGroup.Text>.00</InputGroup.Text>
                                                             </InputGroup>
@@ -342,18 +338,20 @@ const CarDetails = () => {
                                                         <Form.Label className='InputCreateCarimage'>Car Images</Form.Label>
                                                         <input
                                                             className='InputCreateCarimage ll'
-                                                            name='CarImages'
                                                             type="file"
                                                             multiple
-                                                            onChange={(e) =>
-                                                                formik.setFieldValue('CarImages', e.target.files)} />
+                                                            onChange={(e) => setUpdatedCarImages(e.target.files)} />
                                                     </Form.Group>
                                                 </div>
                                             </Col>
                                         </Row>
                                         <div class="inputBox1">
                                             <Form.Label>Car tag</Form.Label>
-                                            <input className='CarCreateTag' name='tags' value={formik.values.tags} onChange={formik.handleChange} type="text" required="required" />
+                                            <input className='CarCreateTag'
+                                                value={updatedTags}
+                                                onChange={(e) => setUpdatedTags(e.target.value)}
+                                                type="text"
+                                                required="required" />
                                         </div>
                                         <Row>
                                             <Col md="12">
@@ -362,11 +360,8 @@ const CarDetails = () => {
                                                     <Form.Control
                                                         className='CarCreateDesc'
                                                         cols="90"
-                                                        defaultValue="Lamborghini Mercy, Your chick she so thirsty, I'm inthat two seat Lambo."
-                                                        placeholder="Here can be your description"
-                                                        name="Description"
-                                                        value={formik.values.Description}
-                                                        onChange={formik.handleChange}
+                                                        value={updatedDescription}
+                                                        onChange={(e) => setUpdatedDescription(e.target.value)}
                                                         rows="4"
                                                         as="textarea"
                                                         style={{ width: "730px" }}
