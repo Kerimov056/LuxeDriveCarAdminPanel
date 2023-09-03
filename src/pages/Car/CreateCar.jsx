@@ -1,43 +1,23 @@
 import React, { useState } from 'react'
 import {
-    Badge,
     Button,
     Card,
     Form,
-    Navbar,
-    Nav,
     Container,
     Row,
     Col,
     InputGroup
 } from "react-bootstrap";
 import "./createcar.scss";
-import { postCar } from "../../Services/carServices";
 import { useHistory } from "react-router-dom";
-import { Field, useFormik } from "formik";
-import { useMutation, useQueryClient } from "react-query";
+import { useFormik } from "formik";
+import { useQueryClient } from "react-query";
+import axios from 'axios';
+
 
 const CreateCar = () => {
     const navigate = useHistory();
     const queryClient = useQueryClient();
-
-    const HandleGoToCrud = () => {
-        navigate("/");
-    };
-
-    const mutation = useMutation(postCar, {
-        onSuccess: () => {
-            navigate("/");
-            queryClient.invalidateQueries("newCar");
-        },
-    });
-
-    // name="name"
-    // value={formik.values.name}
-    // onChange={formik.handleChange}
-
-
-
 
     const carCategory = [
         {
@@ -85,10 +65,8 @@ const CreateCar = () => {
     const handleBrandChange = (event) => {
         const brand = event.target.value;
         setSelectedBrand(brand);
-        setSelectedModel(""); // Marka değiştiğinde model seçimini sıfırla
+        setSelectedModel("");
     };
-
-
 
 
     const formik = useFormik({
@@ -98,20 +76,51 @@ const CreateCar = () => {
             Price: undefined,
             Year: undefined,
             Description: "",
-            CarType: "",
-            CarCategory: "",
-            CarImages: "",
+            CarType: { type: '' },
+            CarCategory: { Category: '' },
+            CarImages: [],
             tags: "",
         },
         onSubmit: async (values) => {
             const formData = new FormData();
 
-            formData.append("CarCategory", values.carCategory)
-            formData
+            formData.append("Marka", values.Marka);
+            formData.append("Model", values.Model);
+            formData.append("Price", values.Price);
+            formData.append("Year", values.Year);
+            formData.append("Description", values.Description);
+            formData.append("CarType.type", values.CarType.type);
+            formData.append("CarCategory.Category", values.CarCategory.Category);
+            formData.append("tags", values.tags);
 
-            console.log(values)
+            for (let i = 0; i < values.CarImages.length; i++) {
+                formData.append('CarImages', values.CarImages[i]);
+            }
+            //////////////////
+            console.log("MARKA-----" + formData.getAll("Marka"));
+            console.log("MODEL-----" + formData.getAll("Model"));
+            console.log("PRICE-----" + formData.getAll("Price"));
+            console.log("YEAR-----" + formData.getAll("Year"));
+            console.log("DESC-----" + formData.getAll("Description"));
+            console.log("TYPE-----" + formData.getAll("CarType"));
+            console.log("CATEGORY-----" + formData.getAll("CarCategory"));
+            console.log("TAG-----" + formData.getAll("tags"));
+            console.log("CarImages-----" + formData.getAll("CarImages"));
+
+            console.log("++++++++++++++++++++" + formData);
+            /////////////////
+
             try {
-                mutation.mutateAsync(formData);
+                const response = await axios.post('https://localhost:7152/api/Car/postCar', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
+
+                if (response.status === 201) {
+                    queryClient.invalidateQueries('newCar');
+                    navigate.push('/AllCar');
+                }
             } catch (error) {
                 console.log(error);
             }
@@ -129,15 +138,15 @@ const CreateCar = () => {
                                 <Card.Title as="h4">Create Car</Card.Title>
                             </Card.Header>
                             <Card.Body>
-                                <Form>
+                                <Form onSubmit={formik.handleSubmit}>
                                     <Row>
                                         <Col className="pr-1" md="5">
                                             <Form.Group>
                                                 <div className='MM'>
                                                     <label>Marka:</label>
                                                     <Form.Select id='FS' size='lg' name='Marka' value={selectedBrand} onChange={(event) => {
-                                                        formik.handleChange(event);  // Formik tarafından sağlanan handleChange fonksiyonu
-                                                        handleBrandChange(event);    // Özel işlev
+                                                        formik.handleChange(event);
+                                                        handleBrandChange(event);
                                                     }}>
                                                         <option size="lg" value="">Marka option</option>
                                                         {carData.map((car, index) => (
@@ -151,8 +160,8 @@ const CreateCar = () => {
                                                         <div className='MM'>
                                                             <label>Model:</label>
                                                             <Form.Select id='FS' name='Model' value={selectedModel} onChange={(e) => {
-                                                                formik.handleChange(e);  // Formik tarafından sağlanan handleChange fonksiyonu
-                                                                setSelectedModel(e.target.value); // Özel işlev
+                                                                formik.handleChange(e);
+                                                                setSelectedModel(e.target.value);
                                                             }}>
                                                                 <option value="">Model option</option>
                                                                 {carData.find((car) => car.brand === selectedBrand).models.map((model, index) => (
@@ -181,8 +190,8 @@ const CreateCar = () => {
 
                                                     <label>Type:</label>
                                                     <Form.Select
-                                                        name="CarType"
-                                                        values={formik.values.CarType}
+                                                        name="CarType.type"
+                                                        values={formik.values.CarType.type}
                                                         onChange={formik.handleChange}
                                                         id='FS' size='lg' >
                                                         <option size="lg" value="">Type option</option>
@@ -195,8 +204,8 @@ const CreateCar = () => {
 
                                                     <label>Category:</label>
                                                     <Form.Select
-                                                        name="CarCategory"
-                                                        values={formik.values.CarCategory}
+                                                        name="CarCategory.Category"
+                                                        values={formik.values.CarCategory.Category}
                                                         onChange={formik.handleChange}
                                                         id='FS' size='lg'>
                                                         <option size="lg" value="">Category option</option>
@@ -213,6 +222,7 @@ const CreateCar = () => {
                                                         <InputGroup className="mb-3">
                                                             <InputGroup.Text>$</InputGroup.Text>
                                                             <Form.Control
+                                                                type='number'
                                                                 name='Price'
                                                                 value={formik.values.Price}
                                                                 onChange={formik.handleChange}
@@ -230,13 +240,18 @@ const CreateCar = () => {
                                             <div id='ImgUpload' >
                                                 <Form.Group className="mb-3">
                                                     <Form.Label>Car Images</Form.Label>
-                                                    <Form.Control type="file" multiple />
+                                                    <input
+                                                        name='CarImages'
+                                                        type="file"
+                                                        multiple
+                                                        onChange={(e) =>
+                                                            formik.setFieldValue('CarImages', e.target.files)}/>
                                                 </Form.Group>
                                             </div>
                                         </Col>
                                     </Row>
                                     <div class="inputBox1">
-                                        <input name='Name' value={formik.values.Name} onChange={formik.handleChange} type="text" required="required" />
+                                        <input name='tags' value={formik.values.tags} onChange={formik.handleChange} type="text" required="required" />
                                     </div>
                                     <Row>
                                         <Col md="12">
@@ -258,7 +273,6 @@ const CreateCar = () => {
                                     <Button
                                         className="btn-fill pull-right"
                                         type="submit"
-                                        onClick={formik.handleSubmit}
                                         variant="success"
                                     >
                                         Create Car
