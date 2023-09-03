@@ -34,9 +34,9 @@ const BlogDetails = () => {
             console.error("Error confirming car:", error);
         }
     };
-    const [image, setImage] = useState(null);
+    // const [image, setImage] = useState(null);
 
-    console.log(image);
+    // console.log(image);
 
     const [updatedTitle, setUpdatedTitle] = useState(byblog?.data?.title);
     const [updatedDescription, setUpdatedDescription] = useState(byblog?.data?.description);

@@ -115,29 +115,23 @@ const CarDetails = () => {
         setSelectedModel(""); 
     };
 
+  //  const [updatedMarka, setUpdatedMarka] = useState(byCar?.data?.marka);
+  //  const [updatedModel, setUpdatedModel] = useState(byCar?.data?.marka);
+  //  const [updatedPrice, setUpdatedPrice] = useState(byCar?.data?.marka);
+  //  const [updatedYear, setUpdatedYear] = useState(byCar?.data?.marka);
+  //  const [updatedDescription, setUpdatedDescription] = useState(byCar?.data?.marka);
+  //  const [updatedType, setUpdatedtype] = useState(byCar?.data?.marka);
+  //  const [updatedCategory, setUpdatedCategory] = useState(byCar?.data?.marka);
+  //  const [updatedTags, setUpdatedTags] = useState(byCar?.data?.marka);
+  //  const [updatedCarImages, setUpdatedCarImages] = useState(byCar?.data?.marka);
 
 
 
-    const formik = useFormik({
-        initialValues: {
-            Marka: selectedBrand,
-            Model: selectedModel,
-            Price: undefined,
-            Year: undefined,
-            Description: "",
-            CarType: "",
-            CarCategory: "",
-            CarImages: imageFields.map((field) => ({ files: field.files })),
-            tags: byCar?.data?.carTags
-        },
-        onSubmit: async (values) => {
-            try {
-                mutation.mutateAsync(values);
-            } catch (error) {
-                console.log(error);
-            }
-        },
-    });
+
+
+
+
+
 
 
     return (
@@ -194,7 +188,7 @@ const CarDetails = () => {
                 </div>
 
 
-                {CarEdit == true ? <div id='carEdit'>
+            {/*    {CarEdit == true ? <div id='carEdit'>
                     <Row style={{ marginLeft: "140px" }}>
                         <Col md="8">
                             <Card>
@@ -351,8 +345,8 @@ const CarDetails = () => {
                                 </Card.Body>
                             </Card>
                         </Col>
-                    </Row>
-                </div> : <div></div>}
+                    </Row> 
+                                                            </div> : <div></div>} */}
             </Container>
         </>
     )
