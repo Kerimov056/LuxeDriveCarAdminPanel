@@ -127,7 +127,7 @@ const ChaufferDetails = () => {
                                         <input placeholder="Name" value={updatedName} onChange={(e) => setUpdatedName(e.target.value)} type="text" class="input" />
                                         <input placeholder="Number" value={updatedNumber} onChange={(e) => setUpdatedNumber(e.target.value)} type="number" class="input" />
                                         <input placeholder="Price" value={updatedPrice} onChange={(e) => setUpdatedPrice(e.target.value)} type="number" class="input" />
-                                        <input type="file" onChange={(e) => setUpdatedImageBlog(e.target.files)} />
+                                        <input type="file" onChange={(e) => setUpdatedImageBlog(e.target.files)}  class="input" />
 
                                         <div class="button-container">
                                             <Button style={{width:"150px"}} class="send-button">Send</Button>
