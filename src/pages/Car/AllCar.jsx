@@ -4,7 +4,6 @@ import './allcar.scss'
 import CarCard from './CarCard'
 import { useQuery } from "react-query";
 import { getCar } from "../../Services/carServices";
-import Admin from 'layouts/Admin';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const AllCar = () => {
@@ -36,7 +35,7 @@ const AllCar = () => {
                 </Row>
                 <Row className='mt-5'>
                     {allCars?.data.map((bycars, index) => (
-                        <CarCard key={index} Id={bycars?.id} marka={bycars?.marka} model={bycars?.model} year={bycars?.year} />
+                        <CarCard key={index} Id={bycars?.id} isReserv={bycars?.isReserv} marka={bycars?.marka} model={bycars?.model} year={bycars?.year} />
                     ))}
                 </Row>
             </Container>

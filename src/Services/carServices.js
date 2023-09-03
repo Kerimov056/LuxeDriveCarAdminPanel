@@ -1,7 +1,7 @@
 import { httpClient } from "../utils/HttpClient";
 
 export const getCar = () => {             //cars
-  return httpClient.get("api/Car")
+  return httpClient.get("api/Car/GetAllCar")
 };
 
 export const removeCar = (carId) => {             //cars
