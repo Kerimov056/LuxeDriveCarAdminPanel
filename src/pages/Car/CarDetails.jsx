@@ -61,10 +61,6 @@ const CarDetails = () => {
         }
     };
 
-
-    //-------------------------------------------------------
-    //-------------------------------------------------------
-
     const carCategory = [
         {
             Category: "Sport"
@@ -112,26 +108,71 @@ const CarDetails = () => {
     const handleBrandChange = (event) => {
         const brand = event.target.value;
         setSelectedBrand(brand);
-        setSelectedModel(""); 
+        setSelectedModel("");
     };
 
-  //  const [updatedMarka, setUpdatedMarka] = useState(byCar?.data?.marka);
-  //  const [updatedModel, setUpdatedModel] = useState(byCar?.data?.model);
-  //  const [updatedPrice, setUpdatedPrice] = useState(byCar?.data?.price);
-  //  const [updatedYear, setUpdatedYear] = useState(byCar?.data?.year);
-  //  const [updatedDescription, setUpdatedDescription] = useState(byCar?.data?.description);
-  //  const [updatedType, setUpdatedtype] = useState(byCar?.data?.carType?.type);
-  //  const [updatedCategory, setUpdatedCategory] = useState(byCar?.data?.carCategory?.category);
-  //  const [updatedTags, setUpdatedTags] = useState(byCar?.data?.marka);
-  //  const [updatedCarImages, setUpdatedCarImages] = useState(byCar?.data?.marka);
+    const [updatedMarka, setUpdatedMarka] = useState(byCar?.data?.marka);
+    const [updatedModel, setUpdatedModel] = useState(byCar?.data?.model);
+    const [updatedPrice, setUpdatedPrice] = useState(byCar?.data?.price);
+    const [updatedYear, setUpdatedYear] = useState(byCar?.data?.year);
+    const [updatedDescription, setUpdatedDescription] = useState(byCar?.data?.description);
+    const [updatedType, setUpdatedtype] = useState(byCar?.data?.carType?.type);
+    const [updatedCategory, setUpdatedCategory] = useState(byCar?.data?.carCategory?.category);
+    const [updatedTags, setUpdatedTags] = useState(byCar?.data?.marka);
+    const [updatedCarImages, setUpdatedCarImages] = useState(byCar?.data?.carImages);
 
 
+    const handleUpdateSubmit = async (e) => {
+        e.preventDefault();
 
+        const currentImages = byCar?.data?.carImages || [];
 
+        const updatedImages = [...currentImages];
+        for (let i = 0; i < updatedCarImages.length; i++) {
+            updatedImages.push(updatedCarImages[i]);
+        }
 
+        const formData = new FormData();
 
+        formData.append("Marka", updatedMarka);
+        formData.append("Model", updatedModel);
+        formData.append("Price", updatedPrice);
+        formData.append("Year", updatedYear);
+        formData.append("Description", updatedDescription);
+        formData.append("CarType.Type", updatedType);
+        formData.append("CarCategory.category", updatedCategory);
+        formData.append("tags", updatedTags);
 
+        for (let i = 0; i < updatedCarImages.length; i++) {
+            formData.append('CarImages', updatedCarImages[i]);
+        }
 
+        //////////////////
+        console.log("MARKA-----" + formData.getAll("Marka"));
+        console.log("MODEL-----" + formData.getAll("Model"));
+        console.log("PRICE-----" + formData.getAll("Price"));
+        console.log("YEAR-----" + formData.getAll("Year"));
+        console.log("DESC-----" + formData.getAll("Description"));
+        console.log("TYPE-----" + formData.getAll("CarType.Type"));
+        console.log("CATEGORY-----" + formData.getAll("CarCategory.category"));
+        console.log("TAG-----" + formData.getAll("tags"));
+        console.log("CarImages-----" + formData.getAll("CarImages"));
+
+        console.log("++++++++++++++++++++" + formData);
+        /////////////////        
+
+        try {
+            await axios.put(`https://localhost:7152/api/Car/${id}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            queryClient.invalidateQueries(['getByCar', id]);
+            setCarEdit(false);
+        } catch (error) {
+            console.error('Error updating Car:', error);
+        }
+    };
 
 
     return (
@@ -188,7 +229,7 @@ const CarDetails = () => {
                 </div>
 
 
-            {/*    {CarEdit == true ? <div id='carEdit'>
+                {CarEdit == true ? <div id='carEdit'>
                     <Row style={{ marginLeft: "140px" }}>
                         <Col md="8">
                             <Card>
@@ -345,8 +386,8 @@ const CarDetails = () => {
                                 </Card.Body>
                             </Card>
                         </Col>
-                    </Row> 
-                                                            </div> : <div></div>} */}
+                    </Row>
+                </div> : <div></div>}
             </Container>
         </>
     )
