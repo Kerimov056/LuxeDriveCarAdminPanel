@@ -202,6 +202,10 @@ const CarDetails = () => {
                                         Category
                                         <span class="hex">{byCar?.data?.carCategory?.category}</span>
                                     </div>
+                                    <div class="color anti-flash-white">
+                                        Booked cars
+                                        <span class="hex">Reservation Person {">"}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
