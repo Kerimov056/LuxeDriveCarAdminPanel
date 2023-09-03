@@ -116,12 +116,12 @@ const CarDetails = () => {
     };
 
   //  const [updatedMarka, setUpdatedMarka] = useState(byCar?.data?.marka);
-  //  const [updatedModel, setUpdatedModel] = useState(byCar?.data?.marka);
-  //  const [updatedPrice, setUpdatedPrice] = useState(byCar?.data?.marka);
-  //  const [updatedYear, setUpdatedYear] = useState(byCar?.data?.marka);
-  //  const [updatedDescription, setUpdatedDescription] = useState(byCar?.data?.marka);
-  //  const [updatedType, setUpdatedtype] = useState(byCar?.data?.marka);
-  //  const [updatedCategory, setUpdatedCategory] = useState(byCar?.data?.marka);
+  //  const [updatedModel, setUpdatedModel] = useState(byCar?.data?.model);
+  //  const [updatedPrice, setUpdatedPrice] = useState(byCar?.data?.price);
+  //  const [updatedYear, setUpdatedYear] = useState(byCar?.data?.year);
+  //  const [updatedDescription, setUpdatedDescription] = useState(byCar?.data?.description);
+  //  const [updatedType, setUpdatedtype] = useState(byCar?.data?.carType?.type);
+  //  const [updatedCategory, setUpdatedCategory] = useState(byCar?.data?.carCategory?.category);
   //  const [updatedTags, setUpdatedTags] = useState(byCar?.data?.marka);
   //  const [updatedCarImages, setUpdatedCarImages] = useState(byCar?.data?.marka);
 
