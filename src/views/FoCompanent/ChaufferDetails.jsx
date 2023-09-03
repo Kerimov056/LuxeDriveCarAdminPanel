@@ -28,23 +28,6 @@ const ChaufferDetails = () => {
         getByCheuf(id)
     );
 
-
-    const updateMutation = useMutation(ChaufferDetails, {
-        onSuccess: () => {
-            queryClient.invalidateQueries(["getByCheuf", id]);
-            console.log(setFieldValue);
-            navigate("/admin/typography");
-        },
-        onError: (error) => {
-            console.error("Error updating Cheuffers:", error);
-        },
-    });
-
-    const handleSubmit = async (values) => {
-        updateMutation.mutate({ ...byCheuf, ...values });
-    };
-
-
     const handleRemove = async (cheufId) => {
         try {
             await chauffeursRemove(cheufId);
@@ -55,6 +38,10 @@ const ChaufferDetails = () => {
             console.error("Error confirming car:", error);
         }
     };
+
+
+
+
 
 
     return (
@@ -95,31 +82,24 @@ const ChaufferDetails = () => {
                 {CheufEdit == true ? <div id='cheufEdit'>
                     <div>
                         {byCheuf ? (
-                            <Formik
-                                initialValues={{
-                                    name: byCheuf?.data?.name,
-                                    number: byCheuf?.data?.number,
-                                    price: byCheuf?.data?.price,
-                                }}
-                                onSubmit={handleSubmit}
-                            >
-                                {({ setFieldValue }) => (
-                                    <Form id="ChefuerEdit">
-                                        <input
-                                            type="file"
-                                            onChange={(event) => {
-                                                const selectedFile = event.target.files[0];
-                                                setFieldValue("imagePath", selectedFile);
-                                            }}
-                                        />
-                                        {byCheuf?.data?.imagePath && <div>{byCheuf.data.imagePath.name}</div>}
-                                        <Field type="text" name="name" placeholder="Chauffer Name" />
-                                        <Field type="text" name="number" placeholder="Chauffer Number" />
-                                        <Field type="number" name="price" placeholder="Chauffer Price" />
-                                        <Button variant="primary"  type="submit">Update</Button>
-                                    </Form> 
-                                )}
-                            </Formik>
+                            <div className="UpdateChauffers">
+                                <div class="form-container">
+                                    <div class="form">
+                                        <span class="heading">Update Chauffeurss</span>
+                                        <input placeholder="Name" type="text" class="input" />
+                                        <input placeholder="Number" type="number" class="input" />
+                                        <input placeholder="Price" type="number" class="input" />
+                                        <input type="file" onChange={(e) => setUpdatedImageBlog(e.target.files)} />
+                                        
+                                        <div class="button-container">
+                                            <div class="send-button">Send</div>
+                                            <div class="reset-button-container">
+                                                <div id="reset-btn" class="reset-button">Reset</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         ) : (
                             <div>Loading...</div>  //onClick={() => setCheufEdit(false)}
                         )}
