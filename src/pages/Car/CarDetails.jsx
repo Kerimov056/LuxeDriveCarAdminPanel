@@ -15,6 +15,8 @@ import { useParams, useHistory } from "react-router-dom";
 import "./cardetails.scss";
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { useFormik } from "formik";
+import axios from 'axios';
+
 
 const CarDetails = () => {
 
@@ -136,7 +138,7 @@ const CarDetails = () => {
         const formData = new FormData();
 
         formData.append("Marka", updatedMarka);
-        formData.append("Model", updatedModel);
+        formData.append("Model", selectedModel);
         formData.append("Price", updatedPrice);
         formData.append("Year", updatedYear);
         formData.append("Description", updatedDescription);
@@ -147,20 +149,6 @@ const CarDetails = () => {
         for (let i = 0; i < updatedCarImages.length; i++) {
             formData.append('CarImages', updatedCarImages[i]);
         }
-
-        //////////////////
-        console.log("MARKA-----" + formData.getAll("Marka"));
-        console.log("MODEL-----" + formData.getAll("Model"));
-        console.log("PRICE-----" + formData.getAll("Price"));
-        console.log("YEAR-----" + formData.getAll("Year"));
-        console.log("DESC-----" + formData.getAll("Description"));
-        console.log("TYPE-----" + formData.getAll("CarType.Type"));
-        console.log("CATEGORY-----" + formData.getAll("CarCategory.category"));
-        console.log("TAG-----" + formData.getAll("tags"));
-        console.log("CarImages-----" + formData.getAll("CarImages"));
-
-        console.log("++++++++++++++++++++" + formData);
-        /////////////////        
 
         try {
             await axios.put(`https://localhost:7152/api/Car/${id}`, formData, {
@@ -260,7 +248,6 @@ const CarDetails = () => {
                                                             <div className='MM'>
                                                                 <label>Model:</label>
                                                                 <Form.Select id='FS' name='Model' value={updatedModel} onChange={(e) => {
-                                                                    setSelectedModel(e.target.value);
                                                                     setSelectedModel(e.target.value);
                                                                 }}>
                                                                     <option value="">Model option</option>
@@ -373,7 +360,7 @@ const CarDetails = () => {
                                             className="btn-fill pull-right"
                                             type="submit"
                                             variant="success"
-                                            style={{ width: "150px" }}
+                                            style={{ width: "150px",marginTop:"24px" }}
                                         >
                                             Create Car
                                         </Button>
