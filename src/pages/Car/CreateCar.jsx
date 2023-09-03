@@ -96,19 +96,6 @@ const CreateCar = () => {
             for (let i = 0; i < values.CarImages.length; i++) {
                 formData.append('CarImages', values.CarImages[i]);
             }
-            //////////////////
-            console.log("MARKA-----" + formData.getAll("Marka"));
-            console.log("MODEL-----" + formData.getAll("Model"));
-            console.log("PRICE-----" + formData.getAll("Price"));
-            console.log("YEAR-----" + formData.getAll("Year"));
-            console.log("DESC-----" + formData.getAll("Description"));
-            console.log("TYPE-----" + formData.getAll("CarType"));
-            console.log("CATEGORY-----" + formData.getAll("CarCategory"));
-            console.log("TAG-----" + formData.getAll("tags"));
-            console.log("CarImages-----" + formData.getAll("CarImages"));
-
-            console.log("++++++++++++++++++++" + formData);
-            /////////////////
 
             try {
                 const response = await axios.post('https://localhost:7152/api/Car/postCar', formData, {
@@ -219,7 +206,7 @@ const CreateCar = () => {
 
                                                     <Form.Group>
                                                         <label>Price</label>
-                                                        <InputGroup className="mb-3">
+                                                        <InputGroup className="mb-2">
                                                             <InputGroup.Text>$</InputGroup.Text>
                                                             <Form.Control
                                                                 type='number'
@@ -239,26 +226,29 @@ const CreateCar = () => {
                                         <Col className="pr-" md="6">
                                             <div id='ImgUpload' >
                                                 <Form.Group className="mb-3">
-                                                    <Form.Label>Car Images</Form.Label>
+                                                    <Form.Label className='InputCreateCarimage'>Car Images</Form.Label>
                                                     <input
+                                                        className='InputCreateCarimage ll'
                                                         name='CarImages'
                                                         type="file"
                                                         multiple
                                                         onChange={(e) =>
-                                                            formik.setFieldValue('CarImages', e.target.files)}/>
+                                                            formik.setFieldValue('CarImages', e.target.files)} />
                                                 </Form.Group>
                                             </div>
                                         </Col>
                                     </Row>
                                     <div class="inputBox1">
-                                        <input name='tags' value={formik.values.tags} onChange={formik.handleChange} type="text" required="required" />
+                                        <Form.Label>Car tag</Form.Label>
+                                        <input className='CarCreateTag' name='tags' value={formik.values.tags} onChange={formik.handleChange} type="text" required="required" />
                                     </div>
                                     <Row>
                                         <Col md="12">
                                             <Form.Group>
                                                 <label>Description</label>
                                                 <Form.Control
-                                                    cols="80"
+                                                    className='CarCreateDesc'
+                                                    cols="90"
                                                     defaultValue="Lamborghini Mercy, Your chick she so thirsty, I'm inthat two seat Lambo."
                                                     placeholder="Here can be your description"
                                                     name="Description"
@@ -266,6 +256,7 @@ const CreateCar = () => {
                                                     onChange={formik.handleChange}
                                                     rows="4"
                                                     as="textarea"
+                                                    style={{ width: "730px" }}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -274,6 +265,7 @@ const CreateCar = () => {
                                         className="btn-fill pull-right"
                                         type="submit"
                                         variant="success"
+                                        style={{ width: "150px" }}
                                     >
                                         Create Car
                                     </Button>
