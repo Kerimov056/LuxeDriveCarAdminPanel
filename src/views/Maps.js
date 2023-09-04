@@ -36,6 +36,11 @@ const Maps = () => {
     return (
         <>
             <div className='ss'>
+                <div>
+                    <Button>1</Button>
+                    <Button>2</Button>
+                    <Button>3</Button>
+                </div>
                 <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -61,7 +66,7 @@ const Maps = () => {
                                 },
                             }}
                         >
-                            <Popup> 
+                            <Popup>
                                 <p style={{ color: "purple" }}>Pickup Location</p>
                                 <Button
                                     onClick={() => setReturnLocation(true)}
@@ -80,7 +85,7 @@ const Maps = () => {
                         </Marker>
                     ))}
 
-                    {selectedMarker===true && (
+                    {selectedMarker === true && (
                         <Marker
                             position={[
                                 selectedMarker?.returnLocation?.latitude,
