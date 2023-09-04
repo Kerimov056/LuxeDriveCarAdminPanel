@@ -3,7 +3,7 @@ import './map.scss'
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
 import { useQuery } from "react-query";
-import { getReservAllConfirmeD } from "../Services/reservationServices";
+import { getReservAllConfirmeD, getReservAllConfirmePickUp, getReservAllConfirmeReturn } from "../Services/reservationServices";
 import { useMutation, useQueryClient } from "react-query";
 import { Button } from '@chakra-ui/react';
 
@@ -18,9 +18,11 @@ const Maps = () => {
     const position = [40.4093, 49.8671]
     const queryClient = useQueryClient();
 
+    const[optionLocation, setOptionLocation] = useState(getReservAllConfirmeD);
+
     const { data: Reservmap, isError } = useQuery({
         queryKey: ["ReservMap"],
-        queryFn: getReservAllConfirmeD,
+        queryFn: optionLocation,
         staleTime: 0,
     });
 
@@ -36,10 +38,10 @@ const Maps = () => {
     return (
         <>
             <div className='ss'>
-                <div>
-                    <Button>1</Button>
-                    <Button>2</Button>
-                    <Button>3</Button>
+                <div className='OptionLocation'>
+                    <Button onClick={() => setOptionLocation(getReservAllConfirmeD) }>PickUp and Return </Button>
+                    <Button onClick={() => setOptionLocation(getReservAllConfirmePickUp) }>Lonely Pickup location</Button>
+                    <Button onClick={() => setOptionLocation(getReservAllConfirmeReturn) }>Lonely Return location</Button>
                 </div>
                 <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
                     <TileLayer

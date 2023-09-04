@@ -2,6 +2,22 @@
   width: 100%;
   height: 93vh;
 
+  .OptionLocation {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    &>button {
+      background-color: rgb(40, 113, 208);
+
+      &:hover {
+        border: 2px solid rgb(0, 0, 0);
+      }
+    }
+  }
+
   .leaflet-container {
     width: 100%;
     height: 100%;
