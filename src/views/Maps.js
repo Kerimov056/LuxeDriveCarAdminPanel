@@ -3,7 +3,7 @@ import './map.scss'
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
 import { useQuery } from "react-query";
-import { getReservNow } from "../Services/reservationServices";
+import { getReservAllConfirmeD } from "../Services/reservationServices";
 import { useMutation, useQueryClient } from "react-query";
 import { Button } from '@chakra-ui/react';
 
@@ -20,7 +20,7 @@ const Maps = () => {
 
     const { data: Reservmap, isError } = useQuery({
         queryKey: ["ReservMap"],
-        queryFn: getReservNow,
+        queryFn: getReservAllConfirmeD,
         staleTime: 0,
     });
 
