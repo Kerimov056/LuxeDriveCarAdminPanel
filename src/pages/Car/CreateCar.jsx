@@ -13,24 +13,13 @@ import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import { useQueryClient } from "react-query";
 import axios from 'axios';
-import { carCategory, carType, carYear } from "../../components/Export/Export";
+import { carCategory, carType, carYear, carData } from "../../components/Export/Export";
 
 const CreateCar = () => {
     const navigate = useHistory();
     const queryClient = useQueryClient();
 
 
-    const carData = [
-        {
-            brand: "BMW",
-            models: ["M5", "M4", "M3"]
-        },
-        {
-            brand: "Mercedes",
-            models: ["S500", "S600", "S450"]
-        },
-        // Diğer markalar ve modeller
-    ];
 
     const [selectedBrand, setSelectedBrand] = useState("");
     const [selectedModel, setSelectedModel] = useState("");
