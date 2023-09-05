@@ -65,12 +65,12 @@ const ShowAllMap = () => {
                             }}
                         >
                             <Popup>
-                                <p style={{ color: "purple" }}>Pickup Location</p>
+                                <p style={{ color: "purple" }}>{returnLocation ? "Return" : "PickUp"} Location</p>
                                 <Button
-                                    onClick={() => setReturnLocation(true)}
+                                    onClick={() => setReturnLocation(!returnLocation)}
                                     style={{ color: "black", cursor: "pointer" }}
                                 >
-                                    Go To Return Location {">"}
+                                    Go To {returnLocation ? "PickUp" : "Return"} Location {">"}
                                 </Button>
                                 <p> FullName: {maps?.fullName}</p>
                                 <p> Email: {maps?.email}</p>
