@@ -1,12 +1,10 @@
-import { getReservAllConfirmLocation, getReservAllConfirmePickUp, getReservAllConfirmeReturn } from "../../Services/reservationServices";
+import { getReservAllConfirmeReturn } from "../../Services/reservationServices";
 import React, { useState } from 'react'
 import '../map.scss'
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useQuery } from "react-query";
 import 'leaflet/dist/leaflet.css';
-import { map } from "jquery";
-import { useMutation, useQueryClient } from "react-query";
-import { Button } from '@chakra-ui/react';
+import { useQueryClient } from "react-query";
 
 const markerIcon = new L.Icon({
     iconUrl: require("../../assets/img/faces/download.png"),
@@ -20,96 +18,64 @@ const ReturnMap = () => {
     const queryClient = useQueryClient();
 
 
-        const { data: Reservmap, isError } = useQuery({
-            queryKey: ["ReservReturnMap"],
-            queryFn: getReservAllConfirmeReturn,
-            staleTime: 0,
-        });
+    const { data: Reservmap, isError } = useQuery({
+        queryKey: ["ReservReturnMap"],
+        queryFn: getReservAllConfirmeReturn,
+        staleTime: 0,
+    });
     queryClient.invalidateQueries(["ReservMap"]);
-    
+
     const formatDateTime = (inputDate) => {
         const date = new Date(inputDate);
         const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
         return date.toLocaleDateString('de-DE', options);
     };
-    
+
     const [returnLocation, setReturnLocation] = useState(false);
     const [selectedMarker, setSelectedMarker] = useState(null);
-    
-    return (    
+
+    return (
         <>
-                <div className='ss'>
-   
+            <div className='ss'>
+
                 <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         url="https://api.maptiler.com/maps/streets-v2/256/{z}/{x}/{y}.png?key=S3UF58mBkVoHt2UkKpEL"
-                        />
+                    />
 
                     {Reservmap?.data?.map((maps, index) => (
                         <Marker
-                        position={[
-                            returnLocation
-                            ? maps?.pickupLocation?.latitude
-                            : maps?.returnLocation?.latitude,
-                            returnLocation
-                            ? maps?.pickupLocation?.longitude
-                            : maps?.returnLocation?.longitude,
-                        ]}
-                        key={index}
-                        icon={markerIcon}
-                        eventHandlers={{
-                            click: () => {
-                                setSelectedMarker(maps);
-                                setReturnLocation(false);
-                            },
-                        }}
+                            position={[
+                                returnLocation
+                                    ? maps?.pickupLocation?.latitude
+                                    : maps?.returnLocation?.latitude,
+                                returnLocation
+                                    ? maps?.pickupLocation?.longitude
+                                    : maps?.returnLocation?.longitude,
+                            ]}
+                            key={index}
+                            icon={markerIcon}
+                            eventHandlers={{
+                                click: () => {
+                                    setSelectedMarker(maps);
+                                    setReturnLocation(false);
+                                },
+                            }}
                         >
-                            <Popup> 
-                                <p style={{ color: "purple" }}>Pickup Location</p>
-                                    {/* <Button
-                                    onClick={() => setReturnLocation(true)}
-                                    style={{ color: "black", cursor: "pointer" }}
-                                    >
-                                    Go To Return Location {">"}
-                                </Button> */}
+                            <Popup>
+                                <p style={{ color: "purple" }}>Return Location</p>
                                 <p> FullName: {maps?.fullName}</p>
                                 <p> Email: {maps?.email}</p>
                                 <p> Pickup Date: {formatDateTime(maps?.pickupDate)}</p>
                                 <img
                                     style={{ width: "300px", height: "210px", objectFit: "cover" }}
                                     src={maps?.reservCar?.carImages[0]?.imagePath}
-                                    />
+                                />
                             </Popup>
                         </Marker>
                     ))}
 
-                    {/* {selectedMarker===true &&  (
-                        <Marker
-                        position={[
-                            selectedMarker?.returnLocation?.latitude,
-                            selectedMarker?.returnLocation?.longitude,
-                        ]}
-                        icon={markerIcon}
-                        >
-                            <Popup>
-                                <p style={{ color: "purple" }}>Pickup Location</p>
-                                <Button backgroundColor={"white"}
-                                    onClick={() => setReturnLocation(false)}
-                                    style={{ color: "white", cursor: "pointer" }}
-                                    >
-                                    Go To Pickup Location {">"}
-                                </Button>
-                                <p> FullName: {selectedMarker?.fullName}</p>
-                                <p> Email: {selectedMarker?.email}</p>
-                                <p> Pickup Date: {formatDateTime(selectedMarker?.returnDate)}</p>
-                                <img
-                                    style={{ width: "300px", height: "210px", objectFit: "cover" }}
-                                    src={selectedMarker?.reservCar?.carImages[0]?.imagePath}
-                                    />
-                            </Popup>
-                        </Marker>
-                    )}  */}
                 </MapContainer>
             </div>
         </>

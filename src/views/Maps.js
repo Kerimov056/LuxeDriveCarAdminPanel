@@ -1,11 +1,7 @@
-import { getReservAllConfirmLocation, getReservAllConfirmePickUp, getReservAllConfirmeReturn } from "../Services/reservationServices";
 import React, { useState } from 'react'
 import './map.scss'
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import { useQuery } from "react-query";
 import 'leaflet/dist/leaflet.css';
-import { map } from "jquery";
-import { useMutation, useQueryClient } from "react-query";
 import { Button } from '@chakra-ui/react';
 import ShowAllMap from "./Maps/ShowAllMap";
 import PickUpMap from "./Maps/PickUpMap";
@@ -36,20 +32,20 @@ const Maps = () => {
         setpickUp(false)
         setReturnL(true)
     }
-    
-    return (    
+
+    return (
         <>
-                <div className='ss'>
-                    
-    <div className='OptionLocation'>
-     <Button onClick={() => PickUpReturn()}>PickUp and Return </Button> 
-     <Button onClick={() => PickUp() }>Lonely Pickup location</Button> 
-     <Button onClick={() => Return() }>Lonely Return location</Button> 
-    </div>
-            {all === true &&   <ShowAllMap />  }
-            {pickUp === true &&   <PickUpMap />  }
-            {returnL === true &&   <ReturnMap />  }
-                
+            <div className='ss'>
+
+                <div className='OptionLocation'>
+                    <Button onClick={() => PickUpReturn()}>PickUp and Return </Button>
+                    <Button onClick={() => PickUp()}>Lonely Pickup location</Button>
+                    <Button onClick={() => Return()}>Lonely Return location</Button>
+                </div>
+                {all === true && <ShowAllMap />}
+                {pickUp === true && <PickUpMap />}
+                {returnL === true && <ReturnMap />}
+
             </div>
         </>
     );

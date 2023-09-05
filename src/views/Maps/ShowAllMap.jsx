@@ -1,4 +1,4 @@
-import { getReservAllConfirmLocation, getReservAllConfirmePickUp, getReservAllConfirmeReturn } from "../../Services/reservationServices";
+import { getReservAllConfirmLocation } from "../../Services/reservationServices";
 import React, { useState } from 'react'
 import '../map.scss'
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
@@ -19,57 +19,57 @@ const ShowAllMap = () => {
     const queryClient = useQueryClient();
 
 
-        const { data: Reservmap, isError } = useQuery({
-            queryKey: ["ReservShowAllMap"],
-            queryFn: getReservAllConfirmLocation,
-            staleTime: 0,
-        });
+    const { data: Reservmap, isError } = useQuery({
+        queryKey: ["ReservShowAllMap"],
+        queryFn: getReservAllConfirmLocation,
+        staleTime: 0,
+    });
     queryClient.invalidateQueries(["ReservMap"]);
-    
+
     const formatDateTime = (inputDate) => {
         const date = new Date(inputDate);
         const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
         return date.toLocaleDateString('de-DE', options);
     };
-    
+
     const [returnLocation, setReturnLocation] = useState(false);
     const [selectedMarker, setSelectedMarker] = useState(null);
-    
-    return (    
+
+    return (
         <>
-                <div className='ss'>
-      
+            <div className='ss'>
+
                 <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         url="https://api.maptiler.com/maps/streets-v2/256/{z}/{x}/{y}.png?key=S3UF58mBkVoHt2UkKpEL"
-                        />
+                    />
 
                     {Reservmap?.data?.map((maps, index) => (
                         <Marker
-                        position={[
-                            returnLocation
-                            ? maps?.returnLocation?.latitude
-                            : maps?.pickupLocation?.latitude,
-                            returnLocation
-                            ? maps?.returnLocation?.longitude
-                            : maps?.pickupLocation?.longitude,
-                        ]}
-                        key={index}
-                        icon={markerIcon}
-                        eventHandlers={{
-                            click: () => {
-                                setSelectedMarker(maps);
-                                setReturnLocation(false);
-                            },
-                        }}
+                            position={[
+                                returnLocation
+                                    ? maps?.returnLocation?.latitude
+                                    : maps?.pickupLocation?.latitude,
+                                returnLocation
+                                    ? maps?.returnLocation?.longitude
+                                    : maps?.pickupLocation?.longitude,
+                            ]}
+                            key={index}
+                            icon={markerIcon}
+                            eventHandlers={{
+                                click: () => {
+                                    setSelectedMarker(maps);
+                                    setReturnLocation(false);
+                                },
+                            }}
                         >
-                            <Popup> 
+                            <Popup>
                                 <p style={{ color: "purple" }}>Pickup Location</p>
-                                    <Button
+                                <Button
                                     onClick={() => setReturnLocation(true)}
                                     style={{ color: "black", cursor: "pointer" }}
-                                    >
+                                >
                                     Go To Return Location {">"}
                                 </Button>
                                 <p> FullName: {maps?.fullName}</p>
@@ -78,37 +78,10 @@ const ShowAllMap = () => {
                                 <img
                                     style={{ width: "300px", height: "210px", objectFit: "cover" }}
                                     src={maps?.reservCar?.carImages[0]?.imagePath}
-                                    />
+                                />
                             </Popup>
                         </Marker>
                     ))}
-
-                    {selectedMarker===true &&  (
-                        <Marker
-                        position={[
-                            selectedMarker?.returnLocation?.latitude,
-                            selectedMarker?.returnLocation?.longitude,
-                        ]}
-                        icon={markerIcon}
-                        >
-                            <Popup>
-                                <p style={{ color: "purple" }}>Pickup Location</p>
-                                <Button backgroundColor={"white"}
-                                    onClick={() => setReturnLocation(false)}
-                                    style={{ color: "white", cursor: "pointer" }}
-                                    >
-                                    Go To Pickup Location {">"}
-                                </Button>
-                                <p> FullName: {selectedMarker?.fullName}</p>
-                                <p> Email: {selectedMarker?.email}</p>
-                                <p> Pickup Date: {formatDateTime(selectedMarker?.returnDate)}</p>
-                                <img
-                                    style={{ width: "300px", height: "210px", objectFit: "cover" }}
-                                    src={selectedMarker?.reservCar?.carImages[0]?.imagePath}
-                                    />
-                            </Popup>
-                        </Marker>
-                    )} 
                 </MapContainer>
             </div>
         </>

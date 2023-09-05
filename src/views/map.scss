@@ -10,10 +10,12 @@
     align-items: center;
 
     &>button {
-      background-color: rgb(40, 113, 208);
+      background-color: rgb(48, 108, 186);
+      margin-bottom: 10px;
 
       &:hover {
-        border: 2px solid rgb(0, 0, 0);
+        background-color: #eb9f48;
+        color: white;
       }
     }
   }
