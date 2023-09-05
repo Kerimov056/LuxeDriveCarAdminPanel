@@ -34,6 +34,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistStore } from 'redux-persist'
 import store from './Redux/store'
+import { useSelector, useDispatch } from "react-redux";
 const queryClinet = new QueryClient();
 
 import Login from "./Auth/Login";
@@ -56,7 +57,12 @@ import AdvantagesDetails from "views/FoCompanent/AdvantagesDetails";
 import FaqsDetails from "views/FoCompanent/FaqsDetails";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
+
+//  const dispatch = useDispatch();
+// const { token } = useSelector((x) => x.authReducer);
+
 root.render(
+
   <BrowserRouter>
     <QueryClientProvider client={queryClinet} >
       <Provider store={store}>
@@ -64,7 +70,9 @@ root.render(
           <ChakraProvider>
             <Switch>
               <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-              <Route path="/Login" component={Login} />
+              {/* {token === null && */}
+                <Route path="/Login" component={Login} />
+              {/* } */}
               <Route path="/AllCar" component={AllCar} />
               <Route path="/ChaufCreate" component={ChaufCreate} />
               <Route path="/createCar" component={CreateCar} />
@@ -84,7 +92,7 @@ root.render(
               <Route path="/CarDetails/:id" component={CarDetails} />
               <Route path="/ChaufferDetails/:id" component={ChaufferDetails} />
               <Route path="/BlogDetails/:id" component={BlogDetails} />
-              <Redirect from="/" to="/admin/dashboard" />
+              <Redirect from="/" to="/Login" />
             </Switch>
           </ChakraProvider>
         </PersistGate>

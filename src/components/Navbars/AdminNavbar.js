@@ -18,10 +18,18 @@
 import React, { Component } from "react";
 import { useLocation } from "react-router-dom";
 import { Navbar, Container, Nav, Dropdown, Button } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { logoutAction } from '../../Redux/Slices/authSlice'
+
 
 import routes from "routes.js";
 
 function Header() {
+  
+  const dispatch = useDispatch();
+
+
+
   const location = useLocation();
   const mobileSidebarToggle = (e) => {
     e.preventDefault();
@@ -198,7 +206,7 @@ function Header() {
                 href="#pablo"
                 onClick={(e) => e.preventDefault()}
               >
-                <span className="no-icon">Log out</span>
+                <span onClick={() => dispatch(logoutAction())}>Log out</span>
               </Nav.Link>
             </Nav.Item>
           </Nav>
