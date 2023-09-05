@@ -13,39 +13,12 @@ import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import { useQueryClient } from "react-query";
 import axios from 'axios';
-
+import { carCategory, carType, carYear } from "../../components/Export/Export";
 
 const CreateCar = () => {
     const navigate = useHistory();
     const queryClient = useQueryClient();
 
-    const carCategory = [
-        {
-            Category: "Sport"
-        },
-        {
-            Category: "Lux"
-        }
-    ];
-
-
-    const carType = [
-        {
-            type: "Sedan"
-        },
-        {
-            type: "Furqon"
-        }
-    ];
-
-    const carYear = [
-        {
-            year: 2023
-        },
-        {
-            year: 2022
-        }
-    ];
 
     const carData = [
         {
