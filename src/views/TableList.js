@@ -147,7 +147,7 @@ function TableList(props) {
                 </thead>
                 <tbody>
                   {getSliders?.data?.map((bySlider, index) => (
-                    <SliderCard key={index} number={index + 1} Id={bySlider.id} />
+                    <SliderCard key={index} imgUrl={bySlider?.imagePath} number={index + 1} Id={bySlider.id} />
                   ))}
                 </tbody>
               </Table>
