@@ -38,12 +38,7 @@ const ShowAllMap = () => {
     return (    
         <>
                 <div className='ss'>
-                    
-    <div className='OptionLocation'>
-    {/* <Button onClick={AllChange }>PickUp and Return </Button> */}
-    {/* <Button onClick={() => setOptionLocation(getReservAllConfirmePickUp) }>Lonely Pickup location</Button> */}
-    {/* <Button onClick={() => setOptionLocation(getReservAllConfirmeReturn) }>Lonely Return location</Button> */}
-    </div>
+      
                 <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

@@ -39,12 +39,7 @@ const PickUpMap = () => {
     return (    
         <>
                 <div className='ss'>
-                    
-    <div className='OptionLocation'>
-    {/* <Button onClick={AllChange }>PickUp and Return </Button> */}
-    {/* <Button onClick={() => setOptionLocation(getReservAllConfirmePickUp) }>Lonely Pickup location</Button> */}
-    {/* <Button onClick={() => setOptionLocation(getReservAllConfirmeReturn) }>Lonely Return location</Button> */}
-    </div>
+       
                 <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -84,32 +79,7 @@ const PickUpMap = () => {
                         </Marker>
                     ))}
 
-                    {/* {selectedMarker===true &&  (
-                        <Marker
-                        position={[
-                            selectedMarker?.returnLocation?.latitude,
-                            selectedMarker?.returnLocation?.longitude,
-                        ]}
-                        icon={markerIcon}
-                        >
-                            <Popup>
-                                <p style={{ color: "purple" }}>Pickup Location</p>
-                                <Button backgroundColor={"white"}
-                                    onClick={() => setReturnLocation(false)}
-                                    style={{ color: "white", cursor: "pointer" }}
-                                    >
-                                    Go To Pickup Location {">"}
-                                </Button>
-                                <p> FullName: {selectedMarker?.fullName}</p>
-                                <p> Email: {selectedMarker?.email}</p>
-                                <p> Pickup Date: {formatDateTime(selectedMarker?.returnDate)}</p>
-                                <img
-                                    style={{ width: "300px", height: "210px", objectFit: "cover" }}
-                                    src={selectedMarker?.reservCar?.carImages[0]?.imagePath}
-                                    />
-                            </Popup>
-                        </Marker>
-                    )}  */}
+                   
                 </MapContainer>
             </div>
         </>
