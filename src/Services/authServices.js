@@ -1,8 +1,10 @@
 import { httpClient } from "../utils/HttpClient";
 
-export const login=(data) =>{
-    return httpClient.post('api/Auth/Login',data);
+export const AdminLogin=(data) =>{
+    return httpClient.post('api/Auth/AdminLogin',data);
 };
+
+
 
 
 

@@ -30,8 +30,13 @@ import NotificationsReservation from "../src/pages/Res/NotificationsReservation"
 import ConfirmedReservation from '../src/pages/Conformeds/ConfirmedReservation'
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ChakraProvider } from '@chakra-ui/react'
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react'
+import { persistStore } from 'redux-persist'
+import store from './Redux/store'
 const queryClinet = new QueryClient();
 
+import Login from "./Auth/Login";
 import AdminLayout from "layouts/Admin.js";
 import ChaufCreate from "views/FoCompanent/ChaufCreate";
 import CarDetails from "pages/Car/CarDetails";
@@ -54,31 +59,36 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <QueryClientProvider client={queryClinet} >
-      <ChakraProvider>
-        <Switch>
-          <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-          <Route path="/AllCar" component={AllCar} />
-          <Route path="/ChaufCreate" component={ChaufCreate} />
-          <Route path="/createCar" component={CreateCar} />
-          <Route path="/NotificationsReservation" render={NotificationsReservation} />
-          <Route path="/ConfirmedReservation" component={ConfirmedReservation} />
-          <Route path="/CancledReservations" component={CancledReservations} />
-          <Route path="/RightNowReserv" component={RightNowReserv} />
-          <Route path="/BlogCreate" component={BlogCreate} />
-          <Route path="/ComplatedReservation" component={ComplatedReservation} />
-          <Route path="/AdvantagesDetails/:id" component={AdvantagesDetails} />
-          <Route path="/FaqsDetails/:id" component={FaqsDetails} />
-          <Route path='/ReservDetail/:id' component={ReservDetail} />
-          <Route path='/CReservDetail/:id' component={CReservDetail} />
-          <Route path='/CancledReservDetail/:id' component={CancledReservDetail} />
-          <Route path='/CancledReservDetail/:id' component={NowDetail} />
-          <Route path='/ComlatedRDetails/:id' component={ComlatedRDetails} />
-          <Route path="/CarDetails/:id" component={CarDetails} />
-          <Route path="/ChaufferDetails/:id" component={ChaufferDetails} />
-          <Route path="/BlogDetails/:id" component={BlogDetails} />
-          <Redirect from="/" to="/admin/dashboard" />
-        </Switch>
-      </ChakraProvider>
+      <Provider store={store}>
+        <PersistGate persistor={persistStore(store)}>
+          <ChakraProvider>
+            <Switch>
+              <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
+              <Route path="/Login" component={Login} />
+              <Route path="/AllCar" component={AllCar} />
+              <Route path="/ChaufCreate" component={ChaufCreate} />
+              <Route path="/createCar" component={CreateCar} />
+              <Route path="/NotificationsReservation" render={NotificationsReservation} />
+              <Route path="/ConfirmedReservation" component={ConfirmedReservation} />
+              <Route path="/CancledReservations" component={CancledReservations} />
+              <Route path="/RightNowReserv" component={RightNowReserv} />
+              <Route path="/BlogCreate" component={BlogCreate} />
+              <Route path="/ComplatedReservation" component={ComplatedReservation} />
+              <Route path="/AdvantagesDetails/:id" component={AdvantagesDetails} />
+              <Route path="/FaqsDetails/:id" component={FaqsDetails} />
+              <Route path='/ReservDetail/:id' component={ReservDetail} />
+              <Route path='/CReservDetail/:id' component={CReservDetail} />
+              <Route path='/CancledReservDetail/:id' component={CancledReservDetail} />
+              <Route path='/CancledReservDetail/:id' component={NowDetail} />
+              <Route path='/ComlatedRDetails/:id' component={ComlatedRDetails} />
+              <Route path="/CarDetails/:id" component={CarDetails} />
+              <Route path="/ChaufferDetails/:id" component={ChaufferDetails} />
+              <Route path="/BlogDetails/:id" component={BlogDetails} />
+              <Redirect from="/" to="/admin/dashboard" />
+            </Switch>
+          </ChakraProvider>
+        </PersistGate>
+      </Provider>
     </QueryClientProvider>
   </BrowserRouter>
 );

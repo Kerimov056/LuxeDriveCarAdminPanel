@@ -19,8 +19,6 @@ const CreateCar = () => {
     const navigate = useHistory();
     const queryClient = useQueryClient();
 
-
-
     const [selectedBrand, setSelectedBrand] = useState("");
     const [selectedModel, setSelectedModel] = useState("");
 
