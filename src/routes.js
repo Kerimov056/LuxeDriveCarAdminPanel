@@ -53,7 +53,7 @@ const dashboardRoutes = [
     name: "Slider",
     icon: "nc-icon nc-button-play",
     component: TableList,
-    layout: "/admin"
+    layout: "/admin",
   },
   {
     path: "/typography",

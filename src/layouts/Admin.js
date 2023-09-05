@@ -25,7 +25,6 @@ import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
 import sidebarImage from "assets/img/sidebar-3.jpg";
 
 import routes from "routes.js";
-import AllCar from "../pages/Car/AllCar";
 
 
 function Admin() {

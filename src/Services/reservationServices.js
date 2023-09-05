@@ -4,6 +4,10 @@ export const getReservAllConfirmeD = () => {      //tesdiqlenmis olan reservatio
     return httpClient.get("api/CarReservations/IsResevConfirmedGetAll")
 };
 
+export const getReservAllConfirmLocation = () => {      //tesdiqlenmis olan reservationlar  PickUpLocation and ReturnLocation
+    return httpClient.get("api/CarReservations/IsResevConfirmedLocationGetAll")
+};
+
 export const getReservAllConfirmePickUp = () => {      //tesdiqlenmis olan Yalniz PickUpLocation'i olanlar   
     return httpClient.get("api/CarReservations/IsResevConfirmedPickUpGetAll")
 };
