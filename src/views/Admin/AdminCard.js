@@ -2,7 +2,7 @@ import React from 'react'
 import { Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from "react-redux";
 import { useMutation, useQueryClient } from "react-query";
-import { adminCreate, UserRemove } from "../../Services/authServices";
+import { adminDelete, UserRemove } from "../../Services/authServices";
 import { Link } from 'react-router-dom/cjs/react-router-dom';
 
 const AdminCard = (props) => {
@@ -10,9 +10,10 @@ const AdminCard = (props) => {
     const dispatch = useDispatch();
     const queryClient = useQueryClient();
 
-    const mutation = useMutation(() => adminCreate(appuserid, props.Id), {
+    const mutation = useMutation(() => adminDelete(appuserid, props.Id), {
         onSuccess: () => {
-            queryClient.invalidateQueries("AdminCreate");
+            queryClient.invalidateQueries("adminDelete");
+            queryClient.invalidateQueries("AllAdmin");
             queryClient.invalidateQueries("MemberAllUsers");
         },
         onError: (error) => {
@@ -20,7 +21,7 @@ const AdminCard = (props) => {
         }
     });
 
-    const adminCreateHandler = () => {
+    const adminDeleteHandler = () => {
         mutation.mutate();
     }
 
@@ -48,7 +49,7 @@ const AdminCard = (props) => {
                     <td>{props.FullName}</td>
                     <td>{props.Email}</td>
                     <td><Button><Link to={`/UserDetails/${props.Id}`}>Details</Link></Button></td>
-                    <td><Button onClick={adminCreateHandler} variant='success'>Admin Create</Button></td>
+                    <td><Button onClick={adminDeleteHandler} variant='success'>Admin Delete</Button></td>
                     <td><Button onClick={userRemoveHandler} variant='danger'>Remove</Button></td>
                 </tr>
             </tbody>
