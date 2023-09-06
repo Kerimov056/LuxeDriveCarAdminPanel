@@ -1,8 +1,22 @@
 import React from 'react'
 import "./userdetails.scss";
 import { Container } from 'react-bootstrap';
+import { useQuery, useQueryClient, useMutation } from "react-query";
+import { useParams, useHistory } from "react-router-dom";
+import { byUser } from "../../Services/authServices";
+
+
 
 const UserDetails = () => {
+
+    const { id } = useParams();
+    const queryClient = useQueryClient();
+    const navigate = useHistory();
+
+    const { data: ByUser } = useQuery(["getByUser", id], () =>
+        byUser(id)
+    );
+
     return (
         <>
             <Container style={{ backgroundColor: "black" }}>
@@ -12,7 +26,7 @@ const UserDetails = () => {
                             <div class="profile">
                                 <div class="overlay">
                                     <div class="about d-flex flex-column">
-                                        <h4>Kim Sarah</h4> <span>Software Developer</span>
+                                        <h4 style={{ color: "white" }}>{ByUser?.data?.userName}</h4> <span>Software Developer</span>
                                     </div>
                                     <ul class="social-icons">
                                         <li><i class="fa fa-facebook"></i></li>
@@ -27,7 +41,7 @@ const UserDetails = () => {
                             <Container>
                                 <div class="cardUserDeatils">
                                     <div class="title">
-                                        <p class="heading">Username</p>
+                                        <p class="heading">{ByUser?.data?.userName}</p>
                                         <p class="desc">Full Name</p>
                                     </div>
                                     <div class="wrapperSS">
@@ -57,7 +71,7 @@ const UserDetails = () => {
                         </div>
                     </div>
                     <div>
-                        
+
                     </div>
                 </div>
             </Container>

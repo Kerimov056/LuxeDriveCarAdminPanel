@@ -21,6 +21,10 @@ export const getUserReservation = (appUserId) => {  //user Reservasiya
     return httpClient.get(`api/CarReservations/UserId?Id=${appUserId}`);
 };
 
+export const byUser = (appUserId) => {  //By User
+    return httpClient.get(`api/Auth/ByUser?userId=${appUserId}`);
+};
+
 
 
 
