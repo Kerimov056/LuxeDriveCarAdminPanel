@@ -17,14 +17,14 @@ import { useQuery } from "react-query";
 const AppUsers = () => {
 
 
-    //   const { data: getMembers, isError } = useQuery({
-    //     queryKey: ["MemberAllUsers"],
-    //     queryFn: MemberAllUser,
-    //     staleTime: 0,
-    //   });
-    //   if (isError) {
-    //     return <div>Bir hata oluştu</div>;
-    //   }
+      const { data: getMembers, isError } = useQuery({
+        queryKey: ["MemberAllUsers"],
+        queryFn: MemberAllUser,
+        staleTime: 0,
+      });
+      if (isError) {
+        return <div>Bir hata oluştu</div>;
+      }
 
 
     return (
@@ -50,7 +50,7 @@ const AppUsers = () => {
                                 </tr>
                             </thead>
                             {getMembers?.data?.map((users, index) => (
-                                <UserCard key={index} Num={index+1} FullName={users.FullName} Email={users.Email} />
+                                <UserCard key={index} Num={index+1} FullName={users?.fullName} Email={users?.email} />
                             ))}
                         </Table>
                     </Card.Body>
