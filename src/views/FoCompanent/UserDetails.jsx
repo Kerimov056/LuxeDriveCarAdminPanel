@@ -80,7 +80,9 @@ const UserDetails = () => {
                     <div id='ByUserCarReservation'>
                         <hr />
                         <div style={{ marginTop: "90px" }}>
-                            <ResrervationCard />
+                            {ByUserReservs?.data?.map((reserv, index) => (
+                                <ResrervationCard key={index} PickUpDate={reserv?.pickupDate} marka={reserv?.reservCar?.marka} model={reserv?.reservCar?.model} price={reserv?.reservCar?.price} />
+                            ))}
                         </div>
                     </div>
                 </div>
