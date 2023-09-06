@@ -57,7 +57,7 @@ import AdvantagesDetails from "views/FoCompanent/AdvantagesDetails";
 import FaqsDetails from "views/FoCompanent/FaqsDetails";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-
+import UserDetails from "views/FoCompanent/UserDetails";
 //  const dispatch = useDispatch();
 // const { token } = useSelector((x) => x.authReducer);
 
@@ -92,6 +92,7 @@ root.render(
               <Route path="/CarDetails/:id" component={CarDetails} />
               <Route path="/ChaufferDetails/:id" component={ChaufferDetails} />
               <Route path="/BlogDetails/:id" component={BlogDetails} />
+              <Route path="/UserDetails/:id" component={UserDetails} />
               <Redirect from="/" to="/Login" />
             </Switch>
           </ChakraProvider>

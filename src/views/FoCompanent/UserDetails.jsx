@@ -1,0 +1,68 @@
+import React from 'react'
+import "./userdetails.scss";
+import { Container } from 'react-bootstrap';
+
+const UserDetails = () => {
+    return (
+        <>
+            <Container style={{ backgroundColor: "black" }}>
+                <div id='UserDetailss'>
+                    <div className='UserCard'>
+                        <div class="wrappeasdasr">
+                            <div class="profile">
+                                <div class="overlay">
+                                    <div class="about d-flex flex-column">
+                                        <h4>Kim Sarah</h4> <span>Software Developer</span>
+                                    </div>
+                                    <ul class="social-icons">
+                                        <li><i class="fa fa-facebook"></i></li>
+                                        <li><i class="fa fa-linkedin"></i></li>
+                                        <li><i class="fa fa-twitter"></i></li>
+                                        <li><i class="fa fa-instagram"></i></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='UserInfo'>
+                            <Container>
+                                <div class="cardUserDeatils">
+                                    <div class="title">
+                                        <p class="heading">Username</p>
+                                        <p class="desc">Full Name</p>
+                                    </div>
+                                    <div class="wrapperSS">
+                                        <div class="color black">
+                                            Email
+                                            <span class="hex">#000000</span>
+                                        </div>
+                                        <div class="color eerie-black">
+                                            Number
+                                            <span class="hex">#1b1b1b</span>
+                                        </div>
+                                        <div class="color chinese-black">
+                                            date of birth
+                                            <span class="hex">#141414</span>
+                                        </div>
+                                        <div class="color night-rider">
+                                            Full Name
+                                            <span class="hex">#2e2e2e</span>
+                                        </div>
+                                        <div class="color chinese-white">
+                                            Reservatiom Count
+                                            <span class="hex">#e1e1e1</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Container>
+                        </div>
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+            </Container>
+        </>
+    )
+}
+
+export default UserDetails

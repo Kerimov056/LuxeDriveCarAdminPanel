@@ -52,7 +52,7 @@ const SliderCard = (props) => {
         <>
             <tbody>
                 <tr >
-                    <td>{props.number}</td>
+                    <td style={{width:"30px"}}>{props.number}</td>
                     <td className='Slidersss'>
                         <div className="cardSlider">
                             <div className="cardSlider2">

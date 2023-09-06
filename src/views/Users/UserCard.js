@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from "react-redux";
 import { useMutation, useQueryClient } from "react-query";
 import { adminCreate, UserRemove } from "../../Services/authServices";
+import { Link } from 'react-router-dom/cjs/react-router-dom';
 
 const UserCard = (props) => {
     const { token, username, appuserid } = useSelector((x) => x.authReducer);
@@ -46,7 +47,7 @@ const UserCard = (props) => {
                     <td>{props.Num}</td>
                     <td>{props.FullName}</td>
                     <td>{props.Email}</td>
-                    <td><Button>Details</Button></td>
+                    <td><Button><Link to={`/UserDetails/${props.Id}`}>Details</Link></Button></td>
                     <td><Button onClick={adminCreateHandler} variant='success'>Admin Create</Button></td>
                     <td><Button onClick={userRemoveHandler} variant='danger'>Remove</Button></td>
                 </tr>

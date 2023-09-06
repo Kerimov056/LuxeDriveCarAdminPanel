@@ -1,0 +1,200 @@
+    #UserDetailss {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .UserCard {
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .wrappeasdasr {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 30%;
+        height: 100vh;
+        background: #000
+    }
+
+    .profile {
+        position: relative;
+        width: 300px;
+        height: 350px;
+        background: url("https://i.imgur.com/sAtgYjl.jpg");
+        background-size: cover;
+        cursor: pointer;
+        border: 12px;
+        border-top-right-radius: 35px !important;
+        border-radius: 6px
+    }
+
+    .overlay {
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        border-radius: 12px;
+        cursor: pointer;
+        opacity: 0;
+        transition: all 1s;
+        border-top-right-radius: 35px !important;
+        border-radius: 6px
+    }
+
+    .profile:hover .overlay {
+        opacity: 1
+    }
+
+    .social-icons {
+        display: flex;
+        list-style: none;
+        bottom: 10px;
+        position: absolute;
+        text-align: center;
+        justify-content: center;
+        left: 22px
+    }
+
+    .social-icons li {
+        width: 25px;
+        height: 25px;
+        border: 1px solid #eee;
+        padding: 20px;
+        margin-right: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        border-radius: 5px;
+        transition: all 1s
+    }
+
+    .social-icons li:hover {
+        background: #fff;
+        color: #000
+    }
+
+    .overlay .about {
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        top: 40%;
+        color: #fff;
+        flex: column
+    }
+
+    .UserInfo {
+        width: 60%;
+        height: auto;
+
+
+        .cardUserDeatils {
+            width: 400px;
+            height: 350px;
+            --black: #000000;
+            --ch-black: #141414;
+            --eer-black: #1b1b1b;
+            --night-rider: #2e2e2e;
+            --white: #ffffff;
+            --af-white: #f3f3f3;
+            --ch-white: #e1e1e1;
+            font-family: Helvetica, sans-serif;
+        }
+
+        .wrapperSS {
+            margin: 2rem auto;
+            width: 550px;
+            font-size: small;
+        }
+
+        .title {
+            text-align: center;
+            color: #1b1b1b;
+        }
+
+        .heading {
+            font-weight: bold;
+            letter-spacing: 7px;
+            font-size: 1.5rem;
+            position: relative;
+            margin-bottom: 6px;
+        }
+
+        .heading::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: #e8e8e8;
+            z-index: -1;
+            filter: blur(50px);
+            height: 50px;
+        }
+
+        .color {
+            padding: 13px 20px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .hex {
+            text-align: end;
+            font-family: monospace;
+            text-transform: uppercase;
+        }
+
+        .black {
+            background: var(--black);
+            color: var(--ch-white);
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        .chinese-black {
+            background: var(--eer-black);
+            color: var(--ch-white);
+        }
+
+        .night-rider {
+            background: var(--night-rider);
+            color: var(--ch-white);
+        }
+
+        .chinese-white {
+            background: var(--ch-white);
+            color: var(--night-rider);
+        }
+
+        .anti-flash-white {
+            background: var(--af-white);
+            color: var(--night-rider);
+        }
+
+        .white {
+            background: var(--white);
+            color: var(--night-rider);
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        .border {
+            color: var(--night-rider);
+            padding: 10px 10px;
+            text-align: center;
+        }
+
+        .border span {
+            border-radius: 5px;
+            color: var(--ch-white);
+            padding: 2px 4px;
+            background-color: var(--night-rider);
+        }
+    }
