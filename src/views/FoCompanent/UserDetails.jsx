@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import "./userdetails.scss";
 import { Container } from 'react-bootstrap';
 import { useQuery, useQueryClient, useMutation } from "react-query";
@@ -22,6 +22,14 @@ const UserDetails = () => {
     const { data: ByUserReservs } = useQuery(["getByUserReservations", ByUser?.data?.id], () =>
         getUserReservation(ByUser?.data?.id)
     );
+
+    const [reservationCount, setReservationCount] = useState(0);
+
+    useEffect(() => {
+        if (ByUserReservs?.data) {
+            setReservationCount(ByUserReservs.data.length);
+        }
+    }, [ByUserReservs?.data]);
 
     return (
         <>
@@ -69,7 +77,7 @@ const UserDetails = () => {
                                         </div>
                                         <div class="color chinese-white">
                                             Reservatiom Count
-                                            <span class="hex">#e1e1e1</span>
+                                            <span class="hex">{reservationCount}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -81,7 +89,7 @@ const UserDetails = () => {
                         <hr />
                         <div style={{ marginTop: "90px" }}>
                             {ByUserReservs?.data?.map((reserv, index) => (
-                                <ResrervationCard key={index} PickUpDate={reserv?.pickupDate} marka={reserv?.reservCar?.marka} model={reserv?.reservCar?.model} price={reserv?.reservCar?.price} />
+                                <ResrervationCard key={index} CarId={reserv?.reservCar?.id} PickUpDate={reserv?.pickupDate} marka={reserv?.reservCar?.marka} model={reserv?.reservCar?.model} price={reserv?.reservCar?.price} />
                             ))}
                         </div>
                     </div>
