@@ -67,3 +67,8 @@ export const getReservCancledCount = () => { //legv edilmis olan reservationlari
 export const getGetAllReservCancled = () => { //legv edilmis olan reservationlar
     return httpClient.get("api/CarReservations/IsResevCanceledGetAll")
 };
+
+
+export const getUserReservation = (appUserId) => {  //user Reservasiya
+    return httpClient.get(`api/CarReservations/UserId?Id=${appUserId}`);
+};

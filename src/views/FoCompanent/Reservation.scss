@@ -1,0 +1,64 @@
+.carReservaDetd {
+    margin-top: 20px;
+    width: 690px;
+    height: 200px;
+    background: #ffff;
+    box-shadow: 0 1px 25px rgba(0,0,0,0.2);
+    position: relative;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    padding: 12px 10px;
+  }
+  
+  .card_load {
+    width: 200px;
+    height: 180px;
+    position: relative;
+    float: left;
+    background: linear-gradient(120deg, #e5e5e5 30%, #f0f0f0 38%, #f0f0f0 
+    40%, #e5e5e5 48%);
+    border-radius: 50%;
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    animation: load89234 2s infinite;
+
+    &>img{
+        width: 100%;
+        object-fit: cover;
+        height: 100%;
+    }
+  }
+  
+  .card_load_extreme_title {
+    width: 430px;
+    height: 40px;
+    position: relative;
+    float: right;
+    border-radius: 5px;
+    background: linear-gradient(120deg, #e5e5e5 30%, #f0f0f0 38%, #f0f0f0 
+    40%, #e5e5e5 48%);
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    animation: load89234 2s infinite;
+  }
+  
+  .card_load_extreme_descripion {
+    width: 430px;
+    height: 130px;
+    position: relative;
+    float: right;
+    border-radius: 5px;
+    background: linear-gradient(120deg, #e5e5e5 30%, #f0f0f0 38%, #f0f0f0 
+    40%, #e5e5e5 48%);
+    margin-top: 10px;
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    animation: load89234 2s infinite;
+  }
+  
+  @keyframes load89234 {
+    100% {
+      background-position: -100% 0;
+    }
+  }

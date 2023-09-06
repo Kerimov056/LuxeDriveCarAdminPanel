@@ -4,6 +4,8 @@ import { Container } from 'react-bootstrap';
 import { useQuery, useQueryClient, useMutation } from "react-query";
 import { useParams, useHistory } from "react-router-dom";
 import { byUser } from "../../Services/authServices";
+import { getUserReservation } from "../../Services/reservationServices";
+import ResrervationCard from './ResrervationCard';
 
 
 
@@ -15,6 +17,10 @@ const UserDetails = () => {
 
     const { data: ByUser } = useQuery(["getByUser", id], () =>
         byUser(id)
+    );
+
+    const { data: ByUserReservs } = useQuery(["getByUserReservations", ByUser?.data?.id], () =>
+        getUserReservation(ByUser?.data?.id)
     );
 
     return (
@@ -70,8 +76,12 @@ const UserDetails = () => {
                             </Container>
                         </div>
                     </div>
-                    <div>
-
+                    <h1>Car Reservations</h1>
+                    <div id='ByUserCarReservation'>
+                        <hr />
+                        <div style={{ marginTop: "90px" }}>
+                            <ResrervationCard />
+                        </div>
                     </div>
                 </div>
             </Container>

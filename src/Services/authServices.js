@@ -17,10 +17,6 @@ export const UserRemove=(superAdminId,appUserId) =>{
     return httpClient.delete(`api/Auth/RemoveUser?superAdminId=${superAdminId}&userId=${appUserId}`);
 };
 
-export const getUserReservation = (appUserId) => {  //user Reservasiya
-    return httpClient.get(`api/CarReservations/UserId?Id=${appUserId}`);
-};
-
 export const byUser = (appUserId) => {  //By User
     return httpClient.get(`api/Auth/ByUser?userId=${appUserId}`);
 };
