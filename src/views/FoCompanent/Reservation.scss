@@ -55,6 +55,10 @@
     background-size: 200% 100%;
     background-position: 100% 0;
     animation: load89234 2s infinite;
+
+    &>h4{
+        margin-top: -1px;
+    }
   }
   
   @keyframes load89234 {
