@@ -102,7 +102,7 @@ const dashboardRoutes = [
   {
     path: "/Admin",
     name: "Admin",
-    icon: "nc-icon nc-circle-09",
+    icon: "nc-icon nc-lock-circle-open",
     component: Admin,
     layout: "/admin"
   },

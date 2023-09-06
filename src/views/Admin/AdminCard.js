@@ -49,7 +49,7 @@ const AdminCard = (props) => {
                     <td>{props.FullName}</td>
                     <td>{props.Email}</td>
                     <td><Button><Link to={`/UserDetails/${props.Id}`}>Details</Link></Button></td>
-                    <td><Button onClick={adminDeleteHandler} variant='success'>Admin Delete</Button></td>
+                    <td><Button onClick={adminDeleteHandler} variant="info">Admin Delete</Button></td>
                     <td><Button onClick={userRemoveHandler} variant='danger'>Remove</Button></td>
                 </tr>
             </tbody>

@@ -3,6 +3,7 @@ import {
     Card,
     Table,
 } from "react-bootstrap";
+import AdminCard from './AdminCard';
 import { AllAdmin } from "../../Services/authServices";
 import { useQuery } from "react-query";
 import { Input } from '@chakra-ui/react';
@@ -43,7 +44,7 @@ const Admin = () => {
                         </tr>
                     </thead>
                     {getAdmin?.data?.map((admin, index) => (
-                        <UserCard key={index} Id={admin?.id} Num={index + 1} FullName={admin?.fullName} Email={admin?.email} />
+                        <AdminCard key={index} Id={admin?.id} Num={index + 1} FullName={admin?.fullName} Email={admin?.email} />
                     ))}
                 </Table>
             </Card.Body>
