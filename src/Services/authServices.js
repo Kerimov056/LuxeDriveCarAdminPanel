@@ -9,7 +9,7 @@ export const MemberAllUser=(searchUser) =>{
 };
 
 export const AllAdmin=(searchAdmin) =>{
-    return httpClient.get(`api/Auth/AllMember?searchUser=${searchUser}`);
+    return httpClient.get(`api/Auth/AllMember?searchUser=${searchAdmin}`);
 };
 
 export const adminCreate=(superAdminId,appUserId) =>{

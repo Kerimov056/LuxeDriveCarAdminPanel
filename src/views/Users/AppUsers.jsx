@@ -44,7 +44,7 @@ const AppUsers = () => {
                         </tr>
                     </thead>
                     {getMembers?.data?.map((user, index) => (
-                        <UserCard key={user.id} Id={user?.id} Num={index + 1} FullName={user?.fullName} Email={user?.email} />
+                        <UserCard key={index} Id={user?.id} Num={index + 1} FullName={user?.fullName} Email={user?.email} />
                     ))}
                 </Table>
             </Card.Body>

@@ -4,20 +4,20 @@ import {
     Table,
 } from "react-bootstrap";
 import UserCard from './UserCard';
-import { MemberAllUser } from "../../Services/authServices";
+import { AllAdmin } from "../../Services/authServices";
 import { useQuery } from "react-query";
 import { Input } from '@chakra-ui/react';
 
 
 const Admin = () => {
 
-    const [searchUser, setSearchUser] = useState('');
+    const [searchAdmin, setSearchAdmin] = useState('');
 
-    const handleUserSearch = (event) => {
-        setSearchUser(event.target.value);
+    const handleAdminSearch = (event) => {
+        setSearchAdmin(event.target.value);
     };
 
-    const { data: getMembers, isError, refetch } = useQuery(["MemberAllUsers", searchUser], () => MemberAllUser(searchUser), {
+    const { data: getAdmin, isError, refetch } = useQuery(["AllAdmin", searchAdmin], () => AllAdmin(searchAdmin), {
         staleTime: 0,
     });
 
@@ -29,7 +29,7 @@ const Admin = () => {
         <Card className="card-plain table-plain-bg">
             <Card.Header>
                 <Card.Title as="h4">Search User</Card.Title>
-                <Input value={searchUser} onChange={handleUserSearch} placeholder='Search by user' />
+                <Input value={searchAdmin} onChange={handleAdminSearch} placeholder='Search by user' />
             </Card.Header>
             <Card.Body className="table-full-width table-responsive px-0">
                 <Table className="table-hover">
@@ -43,8 +43,8 @@ const Admin = () => {
                             <th className="border-0">Remove</th>
                         </tr>
                     </thead>
-                    {getMembers?.data?.map((user, index) => (
-                        <UserCard key={user.id} Id={user?.id} Num={index + 1} FullName={user?.fullName} Email={user?.email} />
+                    {getAdmin?.data?.map((admin, index) => (
+                        <UserCard key={index} Id={admin?.id} Num={index + 1} FullName={admin?.fullName} Email={admin?.email} />
                     ))}
                 </Table>
             </Card.Body>
