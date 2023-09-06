@@ -6,7 +6,7 @@ import { adminDelete, UserRemove } from "../../Services/authServices";
 import { Link } from 'react-router-dom/cjs/react-router-dom';
 
 const AdminCard = (props) => {
-    const { token, username, appuserid } = useSelector((x) => x.authReducer);
+    const { appuserid } = useSelector((x) => x.authReducer);
     const dispatch = useDispatch();
     const queryClient = useQueryClient();
 
@@ -30,6 +30,7 @@ const AdminCard = (props) => {
     const removeMutation = useMutation(() => UserRemove(appuserid, props.Id), {
         onSuccess: () => {
             queryClient.invalidateQueries("RemoveUser");
+            queryClient.invalidateQueries("AllAdmin");
             queryClient.invalidateQueries("MemberAllUsers");
         },
         onError: (error) => {

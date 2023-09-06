@@ -6,7 +6,7 @@ import { adminCreate, UserRemove } from "../../Services/authServices";
 import { Link } from 'react-router-dom/cjs/react-router-dom';
 
 const UserCard = (props) => {
-    const { token, username, appuserid } = useSelector((x) => x.authReducer);
+    const { appuserid } = useSelector((x) => x.authReducer);
     const dispatch = useDispatch();
     const queryClient = useQueryClient();
 

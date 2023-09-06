@@ -28,7 +28,7 @@ const Admin = () => {
     return (
         <Card className="card-plain table-plain-bg">
             <Card.Header>
-                <Card.Title as="h4">Search User</Card.Title>
+                <Card.Title as="h4">Search Admin</Card.Title>
                 <Input value={searchAdmin} onChange={handleAdminSearch} placeholder='Search by user' />
             </Card.Header>
             <Card.Body className="table-full-width table-responsive px-0">

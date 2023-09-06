@@ -5,11 +5,11 @@ export const AdminLogin=(data) =>{
 };
 
 export const MemberAllUser=(searchUser) =>{
-    return httpClient.get(`api/Auth/AllAdmin?searchUser=${searchUser}`);
+    return httpClient.get(`api/Auth/AllMember?searchUser=${searchUser}`);
 };
 
 export const AllAdmin=(searchAdmin) =>{
-    return httpClient.get(`api/Auth/AllMember?searchUser=${searchAdmin}`);
+    return httpClient.get(`api/Auth/AllAdmin?searchUser=${searchAdmin}`);
 };
 
 export const adminCreate=(superAdminId,appUserId) =>{
