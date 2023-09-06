@@ -5,12 +5,19 @@ export const AdminLogin=(data) =>{
 };
 
 export const MemberAllUser=(searchUser) =>{
+    return httpClient.get(`api/Auth/AllAdmin?searchUser=${searchUser}`);
+};
+
+export const AllAdmin=(searchAdmin) =>{
     return httpClient.get(`api/Auth/AllMember?searchUser=${searchUser}`);
 };
 
-
 export const adminCreate=(superAdminId,appUserId) =>{
     return httpClient.post(`api/Auth/AdminCreate?superAdminId=${superAdminId}&appUserId=${appUserId}`);
+};
+
+export const adminDelete=(superAdminId,appAdminId) =>{
+    return httpClient.post(`api/Auth/AdminDelete?superAdminId=${superAdminId}&appUserId=${appAdminId}`);
 };
 
 export const UserRemove=(superAdminId,appUserId) =>{
