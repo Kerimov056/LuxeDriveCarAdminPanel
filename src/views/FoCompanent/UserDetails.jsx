@@ -42,24 +42,24 @@ const UserDetails = () => {
                                 <div class="cardUserDeatils">
                                     <div class="title">
                                         <p class="heading">{ByUser?.data?.userName}</p>
-                                        <p class="desc">Full Name</p>
+                                        <p class="desc">{ByUser?.data?.fullName}</p>
                                     </div>
                                     <div class="wrapperSS">
                                         <div class="color black">
                                             Email
-                                            <span class="hex">#000000</span>
+                                            <span class="hex">{ByUser?.data?.email}</span>
                                         </div>
                                         <div class="color eerie-black">
                                             Number
-                                            <span class="hex">#1b1b1b</span>
+                                            <span class="hex">{ByUser?.data?.phoneNumber ? ByUser?.data?.phoneNumber : "xxxxxxxxxxx"} </span>
                                         </div>
                                         <div class="color chinese-black">
                                             date of birth
-                                            <span class="hex">#141414</span>
+                                            <span class="hex">{ByUser?.data?.birthDate}</span>
                                         </div>
                                         <div class="color night-rider">
                                             Full Name
-                                            <span class="hex">#2e2e2e</span>
+                                            <span class="hex">{ByUser?.data?.fullName}</span>
                                         </div>
                                         <div class="color chinese-white">
                                             Reservatiom Count
