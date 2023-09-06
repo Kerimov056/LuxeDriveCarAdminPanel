@@ -9,6 +9,9 @@ export const MemberAllUser=(searchUser) =>{
 };
 
 
+export const adminCreate=(superAdminId,appUserId) =>{
+    return httpClient.post(`api/Auth/AdminCreate?superAdminId=${superAdminId}&appUserId=${appUserId}`);
+};
 
 
 
