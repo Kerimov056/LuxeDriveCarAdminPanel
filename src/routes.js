@@ -24,6 +24,7 @@ import Maps from "views/Maps.js";
 import Notifications from "views/Notifications.js";
 import Upgrade from "views/Upgrade.js";
 import Blog from "views/Blog";
+import AppUsers from "views/Users/AppUsers";
 
 const dashboardRoutes = [
   {
@@ -88,6 +89,13 @@ const dashboardRoutes = [
     name: "Blog",
     icon: "nc-icon nc-align-left-2",
     component: Blog,
+    layout: "/admin"
+  },
+  {
+    path: "/AppUsers",
+    name: "AppUsers",
+    icon: "nc-icon nc-circle-09",
+    component: AppUsers,
     layout: "/admin"
   },
 ];

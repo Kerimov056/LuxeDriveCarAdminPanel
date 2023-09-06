@@ -21,8 +21,7 @@ const Login = () => {
     const { mutate, isLoading , isError} = useMutation((values) => AdminLogin(values), {
         onSuccess: (resp) => {
             dispatch(loginAction(resp.data));
-            history.push('/');
-            history.push('/');
+            history.push('/admin/dashboard');
         },
     });
     

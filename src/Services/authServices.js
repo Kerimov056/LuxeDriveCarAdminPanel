@@ -4,6 +4,11 @@ export const AdminLogin=(data) =>{
     return httpClient.post('api/Auth/AdminLogin',data);
 };
 
+export const MemberAllUser=() =>{
+    return httpClient.get('api/Auth/AllMember');
+};
+
+
 
 
 
