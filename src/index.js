@@ -35,6 +35,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { persistStore } from 'redux-persist'
 import store from './Redux/store'
 import { useSelector, useDispatch } from "react-redux";
+
 const queryClinet = new QueryClient();
 
 import Login from "./Auth/Login";
