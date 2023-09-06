@@ -3,7 +3,6 @@ import {
     Card,
     Table,
 } from "react-bootstrap";
-import UserCard from './UserCard';
 import { AllAdmin } from "../../Services/authServices";
 import { useQuery } from "react-query";
 import { Input } from '@chakra-ui/react';
