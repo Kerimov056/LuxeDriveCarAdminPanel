@@ -1,12 +1,17 @@
 import React from 'react'
 import './reservDetail.scss'
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery, useQueryClient, useMutation } from "react-query";
 import { useParams, useHistory } from "react-router-dom";
 import { getByReserv, putReservConfirmed } from "../../Services/reservationServices";
+import { useFormik } from "formik";
 import { Button, Container, Form, InputGroup, Row } from 'react-bootstrap';
 import CarCard from 'pages/Car/CarCard';
 import moment from 'moment';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { SendEmailMessage } from "../../Services/messageEmail";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 const ReservDetail = () => {
@@ -34,8 +39,32 @@ const ReservDetail = () => {
         return date.format("DD MMMM YYYY");
     };
 
+    const mutation = useMutation(SendEmailMessage, {
+        onSuccess: (data) => {
+            toast.success('Message sent to Email', { position: toast.POSITION.TOP_RIGHT });
 
-    
+            // queryClient.invalidateQueries("postAdvatage");
+        },
+        onError: (error) => {
+            console.log("Error:", error);
+        },
+    });
+
+    const formik = useFormik({
+        initialValues: {
+            Email: "",
+            Message: "",
+        },
+        onSubmit: async (values) => {
+            try {
+                await mutation.mutateAsync(values);
+                resetForm();
+            } catch (error) {
+                console.log(error);
+            }
+        },
+    });
+
 
     return (
         <>
@@ -105,16 +134,18 @@ const ReservDetail = () => {
 
             <Container>
                 <div id='UserEmailMessageSend'>
-                    <form class="formUserEmailMessageSend">
+                    <form onSubmit={formik.handleSubmit} class="formUserEmailMessageSend">
                         <div class="title">Contact us</div>
                         <p>Send an email message to the person making the reservation</p>
-                        <textarea placeholder="Your message"></textarea>
-                        <button>Submit</button>
+                        <input type="email" value={ formik.values.Email=byReserv?.data?.email} onChange={formik.handleChange} placeholder="Your email" class="input" />
+                        <textarea name='Message' value={formik.values.Message} onChange={formik.handleChange} placeholder="Your message"></textarea>
+                        <button style={{width:"150px",backgroundColor:"#0fb81a"}} type="submit">Send</button>
                     </form>
                 </div>
                 <Link to="/NotificationsReservation"><Button id='GoToBack'>Go To Back</Button></Link>
 
             </Container>
+
         </>
     )
 }

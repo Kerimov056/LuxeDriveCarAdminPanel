@@ -31,7 +31,6 @@ function User() {
 
   const mutation = useMutation(postAdvatages, {
     onSuccess: (data) => {
-      console.log("Success:", data);
       queryClient.invalidateQueries("postAdvatage");
       queryClient.invalidateQueries("getAllAdvatages");
     },

@@ -57,6 +57,8 @@ import BlogCreate from "views/FoCompanent/BlogCreate";
 import AdvantagesDetails from "views/FoCompanent/AdvantagesDetails";
 import FaqsDetails from "views/FoCompanent/FaqsDetails";
 const root = ReactDOM.createRoot(document.getElementById("root"));
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import UserDetails from "views/FoCompanent/UserDetails";
 //  const dispatch = useDispatch();
@@ -69,10 +71,11 @@ root.render(
       <Provider store={store}>
         <PersistGate persistor={persistStore(store)}>
           <ChakraProvider>
+            <ToastContainer />
             <Switch>
               <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
               {/* {token === null && */}
-                <Route path="/Login" component={Login} />
+              <Route path="/Login" component={Login} />
               {/* } */}
               <Route path="/AllCar" component={AllCar} />
               <Route path="/ChaufCreate" component={ChaufCreate} />
