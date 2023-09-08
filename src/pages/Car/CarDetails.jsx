@@ -16,6 +16,7 @@ import "./cardetails.scss";
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { useFormik } from "formik";
 import axios from 'axios';
+import { carCategory, carType, carYear, carData} from "../../components/Export/Export";
 
 
 const CarDetails = () => {
@@ -62,46 +63,6 @@ const CarDetails = () => {
             console.error("Error confirming car:", error);
         }
     };
-
-    const carCategory = [
-        {
-            Category: "Sport"
-        },
-        {
-            Category: "Lux"
-        }
-    ];
-
-
-    const carType = [
-        {
-            type: "Sedan"
-        },
-        {
-            type: "Furqon"
-        }
-    ];
-
-    const carYear = [
-        {
-            year: 2023
-        },
-        {
-            year: 2022
-        }
-    ];
-
-    const carData = [
-        {
-            brand: "BMW",
-            models: ["M5", "M4", "M3"]
-        },
-        {
-            brand: "Mercedes",
-            models: ["S500", "S600", "S450"]
-        },
-        // Diğer markalar ve modeller
-    ];
 
 
     const [selectedBrand, setSelectedBrand] = useState("");

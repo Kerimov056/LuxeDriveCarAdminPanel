@@ -38,7 +38,7 @@ const ReservDetail = () => {
     return (
         <>
             <Container>
-                <div class="ReservDetailCard">
+                <div style={{backgroundColor:"black"}} class="ReservDetailCard">
                     <div className='person'>
                         <div class="SrVesiqe">
                             <img src='https://cdn4.buysellads.net/uu/1/138663/1691614506-Considerations_for_a_Highly_Available_260x200.jpg' />
@@ -49,7 +49,7 @@ const ReservDetail = () => {
                         <div className='reservCarOne'>
                             <CarCard marka={byReserv?.data?.reservCar.marka} model={byReserv?.data.reservCar.model} year={byReserv?.data.reservCar.year} />
                         </div>
-                        <div className='details'>
+                        <div style={{backgroundColor:"black"}} className='details'>
                             <div class="login-box">
 
                                 <form>
@@ -97,6 +97,16 @@ const ReservDetail = () => {
                             </div>
                         </div>
                     </div>
+                  <div>
+                    Salam<br/>
+                    Salam<br/>
+                    Salam<br/>
+                    Salam<br/>
+                    Salam<br/>
+                    Salam<br/>
+                    Salam<br/>
+                    Salam<br/>
+                  </div>
                   <Link to="/NotificationsReservation"><Button id='GoToBack'>Go To Back</Button></Link> 
                 </div>
             </Container>

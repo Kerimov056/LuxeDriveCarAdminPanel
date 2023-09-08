@@ -1,6 +1,6 @@
 .ReservDetailCard {
     width: 990px;
-    height: 800px;
+    height: auto;
     border-radius: 30px;
     background: #212121;
     box-shadow: 15px 15px 30px rgb(25, 25, 25),
@@ -16,9 +16,9 @@
 
 
         .SrVesiqe {
-            margin-top: 20px;
+            margin-top: -230px !important;
             order: 2;
-            width: 320px;
+            width: 420px;
             height: 204px;
             border-radius: 30px;
             background: #212121;
@@ -34,6 +34,7 @@
 
         .details {
             order: 1;
+            width: auto;
 
             .login-box {
                 position: absolute;
