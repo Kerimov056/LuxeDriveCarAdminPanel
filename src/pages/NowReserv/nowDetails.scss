@@ -34,6 +34,8 @@
 
         .details {
             order: 1;
+            width: auto;
+            margin-top: 40px !important;
 
             .login-box {
                 position: absolute;
@@ -135,6 +137,7 @@
 
 
         .cardDesc {
+            margin-top: 40px !important;
             width: 320px;
             height: 210px;
             top: 32%;
@@ -160,6 +163,7 @@
         }
 
         .reservCarOne{
+            margin-top: 40px !important;
             top: 59%;
             left: 46%;
             position: absolute;

@@ -90,6 +90,7 @@ const NowDetail = () => {
                     <Link to="/NotificationsReservation"><Button id='GoToBack'>Go To Back</Button></Link>
                 </div>
             </Container>
+            
         </>
     )
 }
