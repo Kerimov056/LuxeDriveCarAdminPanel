@@ -62,7 +62,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import UserDetails from "views/FoCompanent/UserDetails";
 //  const dispatch = useDispatch();
-// const { token } = useSelector((x) => x.authReducer);
+//  const { token } = useSelector((x) => x.authReducer);
 
 root.render(
 
