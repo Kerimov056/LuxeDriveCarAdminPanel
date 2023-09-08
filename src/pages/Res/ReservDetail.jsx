@@ -35,12 +35,15 @@ const ReservDetail = () => {
     };
 
 
+    
+
     return (
         <>
             <Container>
-                <div style={{backgroundColor:"black"}} class="ReservDetailCard">
+                <div style={{ backgroundColor: "black" }} class="ReservDetailCard">
                     <div className='person'>
                         <div class="SrVesiqe">
+                            {/* <img src={byReserv?.data?.reservCar?.imagePath} /> */}
                             <img src='https://cdn4.buysellads.net/uu/1/138663/1691614506-Considerations_for_a_Highly_Available_260x200.jpg' />
                         </div>
                         <div class="cardDesc shadowDesc">
@@ -49,7 +52,7 @@ const ReservDetail = () => {
                         <div className='reservCarOne'>
                             <CarCard marka={byReserv?.data?.reservCar.marka} model={byReserv?.data.reservCar.model} year={byReserv?.data.reservCar.year} />
                         </div>
-                        <div style={{backgroundColor:"black"}} className='details'>
+                        <div style={{ backgroundColor: "black" }} className='details'>
                             <div class="login-box">
 
                                 <form>
@@ -97,18 +100,20 @@ const ReservDetail = () => {
                             </div>
                         </div>
                     </div>
-                  <div>
-                    Salam<br/>
-                    Salam<br/>
-                    Salam<br/>
-                    Salam<br/>
-                    Salam<br/>
-                    Salam<br/>
-                    Salam<br/>
-                    Salam<br/>
-                  </div>
-                  <Link to="/NotificationsReservation"><Button id='GoToBack'>Go To Back</Button></Link> 
                 </div>
+            </Container>
+
+            <Container>
+                <div id='UserEmailMessageSend'>
+                    <form class="formUserEmailMessageSend">
+                        <div class="title">Contact us</div>
+                        <p>Send an email message to the person making the reservation</p>
+                        <textarea placeholder="Your message"></textarea>
+                        <button>Submit</button>
+                    </form>
+                </div>
+                <Link to="/NotificationsReservation"><Button id='GoToBack'>Go To Back</Button></Link>
+
             </Container>
         </>
     )
