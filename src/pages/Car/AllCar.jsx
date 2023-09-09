@@ -4,7 +4,7 @@ import './allcar.scss'
 import CarCard from './CarCard'
 import { useQuery } from "react-query";
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-import { getCar } from "../../Services/carServices";
+import { getCar, IsCampaigns } from "../../Services/carServices";
 import Campaign from './Campaign';
 
 
@@ -15,6 +15,14 @@ const AllCar = () => {
         queryFn: getCar,
         staleTime: 0,
     });
+
+
+    const { data: Compn } = useQuery({
+        queryKey: ["IsCampaigns"],
+        queryFn: IsCampaigns,
+        staleTime: 0,
+    });
+
 
 
     return (
@@ -28,6 +36,13 @@ const AllCar = () => {
                         </button>
                     </div>
                 </Row>
+
+                {Compn?.data === true &&
+                    <Row>
+
+                    </Row>
+                }
+
                 <Row id='AllCarSS' className='mt-5'>
                     <Button variant="primary" size="lg">
                         <Link to='/createCar'>Create Car</Link>
@@ -36,7 +51,7 @@ const AllCar = () => {
                     <Button className='RG G'></Button> <span>Rental cars</span>
                 </Row>
 
-            
+
                 <Campaign />
 
 

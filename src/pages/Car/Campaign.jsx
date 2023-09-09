@@ -76,11 +76,6 @@ const Campaign = () => {
                 formData.append("CampaignsInterest", values.CampaignsInterest);
                 formData.append("SuperAdminId", values.SuperAdminId);
 
-                console.log(formData.getAll("PickUpCampaigns"));
-                console.log(formData.getAll("ReturnCampaigns"));
-                console.log(formData.getAll("CampaignsInterest"));
-                console.log(formData.getAll("SuperAdminId"));
-
                 try {
                     const response = await axios.post('https://localhost:7152/api/Car/Campaigns', formData, {
                         headers: {

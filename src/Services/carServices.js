@@ -4,6 +4,10 @@ export const getCar = () => {             //cars
   return httpClient.get("api/Car/GetAllCar")
 };
 
+export const IsCampaigns = () => {             //companinanin olub olmamasini bildirir
+  return httpClient.get("api/Car/IsCampaigns")
+};
+
 export const removeCar = (carId) => {             //cars
   return httpClient.delete(`api/Car/${carId}`)
 };
