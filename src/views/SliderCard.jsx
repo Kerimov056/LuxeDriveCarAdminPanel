@@ -56,7 +56,8 @@ const SliderCard = (props) => {
                     <td className='Slidersss'>
                         <div className="cardSlider">
                             <div className="cardSlider2">
-                                <img src='https://hips.hearstapps.com/hmg-prod/images/2023-bentley-continental-gt-s-coupe-101-1654526518.jpg?crop=0.678xw:0.763xh;0.116xw,0.176xh&resize=640:*' />
+                                <img src={`data:image/jpg;base64,${props.imgUrl}`} />
+                                {/* <img src='https://hips.hearstapps.com/hmg-prod/images/2023-bentley-continental-gt-s-coupe-101-1654526518.jpg?crop=0.678xw:0.763xh;0.116xw,0.176xh&resize=640:*' /> */}
                             </div>
                         </div>
                     </td>

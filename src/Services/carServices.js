@@ -12,6 +12,9 @@ export const postCar = (data) => {         //Create car
   return httpClient.post("api/Car/postCar",data)
 };
 
+export const PostCampagins = (data) => {         //Campoanies
+  return httpClient.post("api/Car/Campaigns",data)
+};
 
 export const getCarCount = () => {         //carlarin sayini gosteriri
   return httpClient.get("api/Car/Count")
