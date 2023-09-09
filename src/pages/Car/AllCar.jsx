@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Button, Container, Row } from 'react-bootstrap';
 import './allcar.scss';
 import CarCard from './CarCard';
-import { useQuery } from "react-query";
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { getCar, IsCampaigns } from "../../Services/carServices";
 import Campaign from './Campaign';
+import { useMutation, useQuery } from "react-query";
+import { useDispatch, useSelector } from "react-redux";
 
 const CountdownTimer = ({ targetDate }) => {
     const [countdown, setCountdown] = useState('');
@@ -36,6 +37,10 @@ const CountdownTimer = ({ targetDate }) => {
 
 const AllCar = () => {
 
+
+    const { appuserid } = useSelector((x) => x.authReducer);
+    const dispatch = useDispatch();
+
     const { data: allCars } = useQuery({
         queryKey: ["Allcars"],
         queryFn: getCar,
@@ -47,6 +52,8 @@ const AllCar = () => {
         queryFn: IsCampaigns,
         staleTime: 0,
     });
+
+
 
     return (
         <>
@@ -72,6 +79,7 @@ const AllCar = () => {
                                 <CountdownTimer targetDate={new Date(allCars?.data[0]?.returnCampaigns)} /></div>
                             <div>Campaigns Interest: {allCars?.data[0]?.campaignsInterest}%</div>
                         </div>
+
                     </Row>
                 }
 

@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react'
 import './allcar.scss'
 import { Button, Row } from 'react-bootstrap'
 import { Input } from '@chakra-ui/react';
-import { PostCampagins } from "../../Services/carServices";
+import { IsCampaigns, stopCompagins } from "../../Services/carServices";
 import { useFormik } from "formik";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient, useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { SuperAdmin } from "../../components/Export/Export";
 import axios from 'axios';
@@ -51,16 +51,6 @@ const Campaign = () => {
             setSelectedDate1(e.target.value);
         };
 
-
-        // const mutation = useMutation(PostCampagins, {
-        //     onSuccess: (data) => {
-        //     },
-        //     onError: (error) => {
-        //         console.log("Error:", error);
-        //     },
-        // });
-
-
         const formik = useFormik({
             initialValues: {
                 PickUpCampaigns: selectedDate ? selectedDate : '',
@@ -84,6 +74,9 @@ const Campaign = () => {
                     })
                     if (response.status === 201) {
                         queryClient.invalidateQueries('getReservation');
+                        queryClient.invalidateQueries('stopCompagins');
+                        queryClient.invalidateQueries('IsCampaignss');
+                        queryClient.invalidateQueries('IsCampaigns');
                         navigate('/MyProfile');
                     }
 
@@ -93,6 +86,27 @@ const Campaign = () => {
             },
         });
 
+
+
+        const { data: Compn } = useQuery({
+            queryKey: ["IsCampaignss"],
+            queryFn: IsCampaigns,
+            staleTime: 0,
+        });
+
+
+
+        const mutation = useMutation(() => stopCompagins(appuserid), {
+            onSuccess: () => {
+                queryClient.invalidateQueries("stopCompagins");
+                queryClient.invalidateQueries("IsCampaignss");
+                queryClient.invalidateQueries("IsCampaigns");
+            },
+        });
+
+        const stopCompagin = async () => {
+            await mutation.mutateAsync(appuserid);
+        };
 
 
         return (
@@ -145,6 +159,11 @@ const Campaign = () => {
                             <Button type='submit' variant='success' >Start Campaign</Button>
                         </div>
                     </form>
+                    {Compn?.data === true &&
+                        <div id='StopCompagins'>
+                            <Button onClick={stopCompagin} variant='danger' type='submit'>Stop Compagins</Button>
+                        </div>
+                    }
                 </Row>
             </>
         )

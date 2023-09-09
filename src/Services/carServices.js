@@ -12,6 +12,10 @@ export const removeCar = (carId) => {             //cars
   return httpClient.delete(`api/Car/${carId}`)
 };
 
+export const stopCompagins = (superAdminId) => {   //Compagins'in dayandirlmasi
+  return httpClient.post(`api/Car/StopCampaigns?superAdminId=${superAdminId}`)
+};
+
 export const postCar = (data) => {         //Create car
   return httpClient.post("api/Car/postCar",data)
 };
