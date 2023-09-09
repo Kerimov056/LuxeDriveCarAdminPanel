@@ -1,12 +1,38 @@
-import React from 'react'
-import { Button, Container, Row } from 'react-bootstrap'
-import './allcar.scss'
-import CarCard from './CarCard'
+import React, { useState, useEffect } from 'react';
+import { Button, Container, Row } from 'react-bootstrap';
+import './allcar.scss';
+import CarCard from './CarCard';
 import { useQuery } from "react-query";
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { getCar, IsCampaigns } from "../../Services/carServices";
 import Campaign from './Campaign';
 
+const CountdownTimer = ({ targetDate }) => {
+    const [countdown, setCountdown] = useState('');
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const now = new Date();
+            const difference = targetDate - now;
+
+            if (difference <= 0) {
+                clearInterval(interval);
+                setCountdown('Discounts Have Started');
+            } else {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                setCountdown(`${days} day ${hours} hour ${minutes} minute ${seconds} second`);
+            }
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, [targetDate]);
+
+    return <div>{countdown}</div>;
+};
 
 const AllCar = () => {
 
@@ -16,14 +42,11 @@ const AllCar = () => {
         staleTime: 0,
     });
 
-
     const { data: Compn } = useQuery({
         queryKey: ["IsCampaigns"],
         queryFn: IsCampaigns,
         staleTime: 0,
     });
-
-
 
     return (
         <>
@@ -40,6 +63,15 @@ const AllCar = () => {
                 {Compn?.data === true &&
                     <Row id='IsComp'>
                         <img src='https://www.bellwetheragency.com.au/wp-content/uploads/2022/04/Campaign-Brief-logo-1.png' />
+                        <div className='Compagins'>
+                            <div>
+                                PickUp Campaign:
+                                <CountdownTimer targetDate={new Date(allCars?.data[0]?.pickUpCampaigns)} />
+                            </div>
+                            <div>Finsh Campaign:
+                                <CountdownTimer targetDate={new Date(allCars?.data[0]?.returnCampaigns)} /></div>
+                            <div>Campaigns Interest: {allCars?.data[0]?.campaignsInterest}%</div>
+                        </div>
                     </Row>
                 }
 
@@ -51,9 +83,7 @@ const AllCar = () => {
                     <Button className='RG G'></Button> <span>Rental cars</span>
                 </Row>
 
-
                 <Campaign />
-
 
                 <Row className='mt-5'>
                     {allCars?.data.map((bycars, index) => (
@@ -65,4 +95,4 @@ const AllCar = () => {
     )
 }
 
-export default AllCar
+export default AllCar;
