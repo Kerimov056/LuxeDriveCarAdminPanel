@@ -10,6 +10,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import axios from 'axios';
 import { Input } from '@chakra-ui/react';
+import { SuperAdmin } from "../../components/Export/Export";
 
 const AllCar = () => {
     const queryClient = useQueryClient();
@@ -23,6 +24,9 @@ const AllCar = () => {
         staleTime: 0,
     });
 
+    if(appuserid === SuperAdmin){
+        
+    }
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedDate1, setSelectedDate1] = useState(null);
 
@@ -105,41 +109,47 @@ const AllCar = () => {
 
 
                 <Row id='CampaignsInterest'>
+                    <h2>Start a Campaign</h2>
+                    <div>
+                        <label htmlFor="password">When do you want the discount to start?</label>
+                        <Input
+                            placeholder="Select Date and Time"
+                            size="2md"
+                            type="datetime-local"
+                            value={selectedDate}
+                            onChange={handleDateChange}
+                            style={{
+                                borderTop: "none",
+                                borderRight: "none",
+                                borderLeft: "none",
+                                borderBottom: "1px solid white",
+                            }}
+                        />
 
-                    <label htmlFor="password">When do you want the discount to start?</label>
-                    <Input
-                        placeholder="Select Date and Time"
-                        size="2md"
-                        type="datetime-local"
-                        value={selectedDate}
-                        onChange={handleDateChange}
-                        style={{
-                            borderTop: "none",
-                            borderRight: "none",
-                            borderLeft: "none",
-                            borderBottom: "1px solid white",
-                        }}
-                    />
+                    </div>
 
+                    <div>
+                        <label htmlFor="password">When do you want the download to end?</label>
+                        <Input
+                            placeholder="Select Date and Time"
+                            size="2md"
+                            type="datetime-local"
+                            value={selectedDate1}
+                            onChange={handleDateChange1}
+                            style={{
+                                borderTop: "none",
+                                borderRight: "none",
+                                borderLeft: "none",
+                                borderBottom: "1px solid white",
+                            }}
+                        />
+                    </div>
 
-                    <label htmlFor="password">When do you want the download to end?</label>
-                    <Input
-                        placeholder="Select Date and Time"
-                        size="2md"
-                        type="datetime-local"
-                        value={selectedDate1}
-                        onChange={handleDateChange1}
-                        style={{
-                            borderTop: "none",
-                            borderRight: "none",
-                            borderLeft: "none",
-                            borderBottom: "1px solid white",
-                        }}
-                    />
+                    <div>
+                        <label>How much interest rate discount do you want to make?</label>
+                        <Input type='number' placeholder='Enter Campaigns Interest' name='CampaignsInterest' value={formik.values.CampaignsInterest} onChange={formik.handleChange} />
 
-                    <label>How much interest rate discount do you want to make?</label>
-                    <Input type='number' placeholder='Enter Campaigns Interest' name='CampaignsInterest' value={formik.values.CampaignsInterest} onChange={formik.handleChange} />
-
+                    </div>
                 </Row>
 
 
