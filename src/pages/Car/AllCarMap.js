@@ -19,7 +19,7 @@ const AllCarMap = () => {
 
 
     const { data: AllCar } = useQuery({
-        queryKey: ["AllGetCar"],
+        queryKey: ["AllGetCarssS"],
         queryFn: getCar,
         staleTime: 0,
     });
