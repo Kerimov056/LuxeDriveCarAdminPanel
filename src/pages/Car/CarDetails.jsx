@@ -129,7 +129,7 @@ const CarDetails = () => {
         <>
             <Container>
                 <div className='MainCarImg'>
-                    <img src='https://etimg.etb2bimg.com/photo/92392007.cms' />
+                    <img src={`data:image/png;base64,${byCar?.data?.carImages[0]?.imagePath}`} />
                 </div>
                 <div className='details'>
                     <div>
@@ -172,6 +172,7 @@ const CarDetails = () => {
                         </div>
                     </div>
                 </div>
+                
                 <div className='carDetails'>
                     <span>Description</span><br />
                     {byCar?.data?.description}

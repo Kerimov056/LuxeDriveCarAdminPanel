@@ -46,7 +46,7 @@ function Typography() {
 
             <div className="Chauffersss">
               {getChufers?.data?.map((cheuf, index) => (
-                <Chauffer key={index} Id={cheuf?.id} name={cheuf?.name} number={cheuf?.number} />
+                <Chauffer key={index} imgUrl={cheuf?.imagePath} Id={cheuf?.id} name={cheuf?.name} number={cheuf?.number} />
               ))}
             </div>
 

@@ -1,0 +1,27 @@
+.ss {
+    width: 100%;
+    height: 73vh;
+  
+    .OptionLocation {
+      width: 100%;
+      height: 50px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+  
+      &>button {
+        background-color: rgb(48, 108, 186);
+        margin-bottom: 10px;
+  
+        &:hover {
+          background-color: #eb9f48;
+          color: white;
+        }
+      }
+    }
+  
+    .leaflet-container {
+      width: 100%;
+      height: 100%;
+    }
+  }

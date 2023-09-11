@@ -7,6 +7,7 @@ import { getCar, IsCampaigns } from "../../Services/carServices";
 import Campaign from './Campaign';
 import { useMutation, useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
+import AllCarMap from './AllCarMap';
 
 const CountdownTimer = ({ targetDate }) => {
     const [countdown, setCountdown] = useState('');
@@ -92,6 +93,11 @@ const AllCar = () => {
                 </Row>
 
                 <Campaign />
+
+                <Row style={{marginTop:"40px"}}>
+                    <AllCarMap />
+                </Row>
+
 
                 <Row className='mt-5'>
                     {allCars?.data.map((bycars, index) => (

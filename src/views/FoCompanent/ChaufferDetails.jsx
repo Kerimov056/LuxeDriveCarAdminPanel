@@ -73,7 +73,7 @@ const ChaufferDetails = () => {
                 <div className='details'>
                     <div>
                         <div className='categoryCarImage'>
-                            <img src='http://localhost:3000/static/media/reactlogo.55f6660be18505517e2e.png' />
+                            <img style={{objectFit:"cover"}} src={`data:image/png;base64,${byCheuf?.data?.imagePath}`} />
                         </div>
                         <div className='CarDetailsIMs'>
                             <div class="cardDetailsAdmin">

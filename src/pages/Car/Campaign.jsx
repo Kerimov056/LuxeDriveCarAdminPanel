@@ -77,7 +77,6 @@ const Campaign = () => {
                         queryClient.invalidateQueries('stopCompagins');
                         queryClient.invalidateQueries('IsCampaignss');
                         queryClient.invalidateQueries('IsCampaigns');
-                        navigate('/MyProfile');
                     }
 
                 } catch (error) {

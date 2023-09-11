@@ -5,7 +5,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { getByReserv, putReservConfirmed } from "../../Services/reservationServices";
 import { useFormik } from "formik";
 import { Button, Container, Form, InputGroup, Row } from 'react-bootstrap';
-import CarCard from 'pages/Car/CarCard';
+import ReservCarCard from 'pages/Car/ReservCarCard';
 import moment from 'moment';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { SendEmailMessage } from "../../Services/messageEmail";
@@ -72,14 +72,13 @@ const ReservDetail = () => {
                 <div style={{ backgroundColor: "black" }} class="ReservDetailCard">
                     <div className='person'>
                         <div class="SrVesiqe">
-                            {/* <img src={byReserv?.data?.reservCar?.imagePath} /> */}
-                            <img src='https://cdn4.buysellads.net/uu/1/138663/1691614506-Considerations_for_a_Highly_Available_260x200.jpg' />
+                            <img style={{objectFit:"cover"}} src={`data:image/png;base64,${byReserv?.data?.imagePath}`} />
                         </div>
                         <div class="cardDesc shadowDesc">
                             <p>{byReserv?.data?.notes}</p>
                         </div>
                         <div className='reservCarOne'>
-                            <CarCard marka={byReserv?.data?.reservCar.marka} model={byReserv?.data.reservCar.model} year={byReserv?.data.reservCar.year} />
+                            <ReservCarCard carImages={byReserv?.data?.reservCar?.carImages[0]?.imagePath} marka={byReserv?.data?.reservCar.marka} model={byReserv?.data.reservCar.model} year={byReserv?.data.reservCar.year} />
                         </div>
                         <div style={{ backgroundColor: "black" }} className='details'>
                             <div class="login-box">

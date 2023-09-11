@@ -37,7 +37,7 @@ const Blog = () => {
 
             <div className="blogssss">
               {getByBlog?.data?.map((blog, index) => (
-                <BlogCard key={index} Id={blog?.id} title={blog?.title} desc={blog?.descrtion?.slice(0, 60)} />
+                <BlogCard key={index} blogImages={blog?.blogImages} Id={blog?.id} title={blog?.title} desc={blog?.descrtion?.slice(0, 60)} />
               ))}
             </div>
 

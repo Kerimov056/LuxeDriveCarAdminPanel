@@ -11,7 +11,7 @@ const Chauffer = (props) => {
                 <div class="card-border-top">
                 </div>
                 <div class="img">
-                    <img src='http://localhost:3000/static/media/reactlogo.55f6660be18505517e2e.png' />
+                    <img src={`data:image/png;base64,${props.imgUrl}`} />
                 </div>
                 <span>{props.name}</span>
                 <p class="job">{props.number}</p>

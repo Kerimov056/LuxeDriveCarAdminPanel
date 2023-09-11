@@ -4,7 +4,7 @@ import { useQuery, useQueryClient } from "react-query";
 import { useParams, useHistory } from "react-router-dom";
 import { getReservNow } from "../../Services/reservationServices";
 import { Button, Container, Form, InputGroup, Row } from 'react-bootstrap';
-import CarCard from 'pages/Car/CarCard';
+import ReservCarCard from 'pages/Car/ReservCarCard';
 import moment from 'moment';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
@@ -31,13 +31,13 @@ const NowDetail = () => {
                 <div class="ReservDetailCard">
                     <div className='person'>
                         <div class="SrVesiqe">
-                            <img src='https://cdn4.buysellads.net/uu/1/138663/1691614506-Considerations_for_a_Highly_Available_260x200.jpg' />
+                            <img style={{ objectFit: "cover" }} src={`data:image/png;base64,${byReserv?.data?.imagePath}`} />
                         </div>
                         <div class="cardDesc shadowDesc">
                             <p>{byNow?.data?.notes}</p>
                         </div>
                         <div className='reservCarOne'>
-                            <CarCard marka={byNow?.data?.reservCar.marka} model={byNow?.data.reservCar.model} year={byNow?.data.reservCar.year} />
+                            <ReservCarCard carImages={byReserv?.data?.reservCar?.carImages[0]?.imagePath} marka={byReserv?.data?.reservCar.marka} model={byReserv?.data.reservCar.model} year={byReserv?.data.reservCar.year} />
                         </div>
                         <div className='details'>
                             <div class="login-box">
@@ -90,7 +90,7 @@ const NowDetail = () => {
                     <Link to="/NotificationsReservation"><Button id='GoToBack'>Go To Back</Button></Link>
                 </div>
             </Container>
-            
+
         </>
     )
 }
