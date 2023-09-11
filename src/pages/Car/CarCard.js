@@ -13,7 +13,7 @@ const CarCard = (props) => {
                     <div class="alignN">
                         <span class={props.isReserv==true ? "red" : "green"}></span>
                     </div>
-                    <img src={`data:image/png;base64,${props.images[0]?.imagePath}`} />
+                    <img style={{objectFit:"cover"}} src={`data:image/png;base64,${props.images[0]?.imagePath}`} />
                     {/* <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwgtQcrkpPx1x5-tW7ODd3nEUTpS8F_NpmDw&usqp=CAU' /> */}
                     <h4><span>Marka: {props.marka}</span></h4>
                     <h4><span>Model: {props.model}</span></h4>

@@ -77,8 +77,7 @@ const ShowAllMap = () => {
                                 <p> Pickup Date: {formatDateTime(maps?.pickupDate)}</p>
                                 <img
                                     style={{ width: "300px", height: "210px", objectFit: "cover" }}
-                                    src={maps?.reservCar?.carImages[0]?.imagePath}
-                                />
+                                    src={`data:image/png;base64,${maps?.reservCar?.carImages[0]?.imagePath}`}                                />
                             </Popup>
                         </Marker>
                     ))}

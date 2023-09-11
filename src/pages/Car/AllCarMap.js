@@ -45,7 +45,7 @@ const AllCarMap = () => {
                     />
 
                     {AllCar?.data?.map((car, index) => (
-                        <Marker
+                    console.log("lat:", car.latitude),console.log("lnh:", car.longitude),    <Marker
                             position={[ car?.latitude, car?.longitude]}
                             key={index}
                             icon={markerIcon}
@@ -61,11 +61,10 @@ const AllCarMap = () => {
 
                                 <p> Marka: {car?.marka}</p>
                                 <p> Model: {car?.model}</p>
-                                <p> Model: {car?.model}</p>
-                                <p> Pickup Date: {formatDateTime(car?.pickupDate)}</p>
+                                <p> Year: {car?.year}</p>
                                 <img
-                                    style={{ width: "300px", height: "210px", objectFit: "cover" }}
-                                    src={car?.reservCar?.carImages[0]?.imagePath}
+                                    style={{ width: "300px", height: "180px", objectFit: "cover" }}
+                                    src={`data:image/png;base64,${car?.carImages[0]?.imagePath}`}
                                 />
                             </Popup> 
                         </Marker>

@@ -17,38 +17,68 @@
         #asd {
             font-size: 19px;
         }
-        
+
     }
 }
 
-#ImgUpload{
+#ImgUpload {
     display: flex;
     justify-content: center;
     align-items: center;
 
-    &>button{
+    &>button {
         margin-left: 30px;
         margin-bottom: -15px;
     }
 }
 
-.InputCreateCarimage{
+.InputCreateCarimage {
     width: 730px;
     margin-left: 400px;
     height: 40px;
     font-size: 20px;
 }
-.CarCreateTag{
+
+.CarCreateTag {
     width: 730px !important;
 }
 
-.ll{
+.ll {
     border-left: 1px solid gray;
     border-bottom: 1px solid gray;
 }
 
-.CarCreateDesc{
+.CarCreateDesc {
     border-left: 1px solid gray;
     border-bottom: 1px solid gray;
 }
 
+
+
+.ss {
+    width: 100%;
+    height: 53vh !important;
+
+    .OptionLocation {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        &>button {
+            background-color: rgb(48, 108, 186);
+            margin-bottom: 10px;
+
+            &:hover {
+                background-color: #eb9f48;
+                color: white;
+            }
+        }
+    }
+
+    .leaflet-container {
+        width: 100%;
+        height: 100%;
+    }
+}
