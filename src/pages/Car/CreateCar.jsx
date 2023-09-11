@@ -182,6 +182,9 @@ const CreateCar = () => {
                 formData.append('CarImages', values.CarImages[i]);
             }
 
+            console.log(formData.getAll("Latitude"));
+            console.log(formData.getAll("Longitude"));
+
             try {
                 const response = await axios.post('https://localhost:7152/api/Car/postCar', formData, {
                     headers: {

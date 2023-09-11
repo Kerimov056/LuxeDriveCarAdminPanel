@@ -36,7 +36,7 @@ const PickUpMap = () => {
 
     return (
         <>
-            <div className='ss'>
+            <div className='sss'>
 
                 <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
                     <TileLayer

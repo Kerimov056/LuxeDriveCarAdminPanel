@@ -57,7 +57,7 @@ const AllCarMap = () => {
                             }}
                         >
                              <Popup >
-                                <p style={{ color: "purple" }}>Pickup Location</p>
+                                <p style={{ color: "purple" }}>Car Location</p>
 
                                 <p> Marka: {car?.marka}</p>
                                 <p> Model: {car?.model}</p>
