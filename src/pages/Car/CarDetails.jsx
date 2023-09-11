@@ -16,7 +16,32 @@ import "./cardetails.scss";
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { useFormik } from "formik";
 import axios from 'axios';
-import { carCategory, carType, carYear, carData} from "../../components/Export/Export";
+import { carCategory, carType, carYear, carData } from "../../components/Export/Export";
+import L from "leaflet";
+import 'leaflet/dist/leaflet.css';
+import "leaflet-draw/dist/leaflet.draw.css";
+import { MapContainer, TileLayer, Marker, Popup, FeatureGroup } from "react-leaflet";
+import { EditControl } from "react-leaflet-draw";
+import './AllCarMap.scss'
+
+
+
+const markerIcon = new L.Icon({
+    iconUrl: require("../../assets/img/faces/download.png"),
+    iconSize: [45, 35],
+    iconAnchor: [17, 46],
+    popupAnchor: [0, -46],
+});
+
+L.Icon.Default.mergeOptions({
+    iconRetinaUrl:
+        "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/images/marker-icon.png",
+    iconUrl:
+        "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/images/marker-icon.png",
+    shadowUrl:
+        "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/images/marker-shadow.png",
+});
+
 
 
 const CarDetails = () => {
@@ -75,6 +100,24 @@ const CarDetails = () => {
         setUpdatedMarka(brand)
     };
 
+
+    const [returnUpLocationMap, setReturnLocationMap] = useState({ lat: null, lng: null });
+
+    const updatReturnpLocation = (lat, lng) => {
+        setReturnLocationMap({ lat, lng });
+    };
+
+    const handleDrawReturnCreated = (e) => {
+        const { layerType, layer } = e;
+        if (layerType === 'marker') {
+            const latlng = layer.getLatLng();
+            const lat = latlng.lat;
+            const lng = latlng.lng;
+            updatReturnpLocation(lat, lng);
+        }
+    };
+
+
     const [updatedMarka, setUpdatedMarka] = useState(byCar?.data?.marka);
     const [updatedModel, setUpdatedModel] = useState(byCar?.data?.model);
     const [updatedPrice, setUpdatedPrice] = useState(byCar?.data?.price);
@@ -102,6 +145,8 @@ const CarDetails = () => {
         formData.append("Model", selectedModel);
         formData.append("Price", updatedPrice);
         formData.append("Year", updatedYear);
+        formData.append("Latitude", returnUpLocationMap.lat ? returnUpLocationMap.lat : '');
+        formData.append("Longitude", returnUpLocationMap.lng ? returnUpLocationMap.lng : '');
         formData.append("Description", updatedDescription);
         formData.append("CarType.Type", updatedType);
         formData.append("CarCategory.category", updatedCategory);
@@ -110,6 +155,9 @@ const CarDetails = () => {
         for (let i = 0; i < updatedCarImages.length; i++) {
             formData.append('CarImages', updatedCarImages[i]);
         }
+
+        console.log(formData.getAll("Latitude"));
+        console.log(formData.getAll("Longitude"));
 
         try {
             await axios.put(`https://localhost:7152/api/Car/${id}`, formData, {
@@ -124,6 +172,8 @@ const CarDetails = () => {
         }
     };
 
+
+    const position = [byCar?.data?.latitude, byCar?.data?.longitude]
 
     return (
         <>
@@ -172,7 +222,35 @@ const CarDetails = () => {
                         </div>
                     </div>
                 </div>
-                
+                <Row style={{ marginTop: "150px" }}>
+                    <div className='ss'>
+
+                        <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
+                            <TileLayer
+                                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                url="https://api.maptiler.com/maps/streets-v2/256/{z}/{x}/{y}.png?key=S3UF58mBkVoHt2UkKpEL"
+                            />
+                            <FeatureGroup>
+                                <EditControl position='topright' onCreated={handleDrawReturnCreated} draw={{ rectangle: false, circlemarker: false, polygon: false, marker: true, }} />
+                            </FeatureGroup>
+                            <Marker
+                                position={position}
+                                icon={markerIcon}
+                            >
+                                <Popup >
+                                    <p style={{ color: "purple" }}>Car Location</p>
+
+                                    <p> Marka: {byCar?.data?.marka}</p>
+                                    <p> Model: {byCar?.data?.model}</p>
+                                    <p> Year: {byCar?.data?.year}</p>
+                                </Popup>
+                            </Marker>
+
+
+                        </MapContainer>
+                    </div>
+                </Row>
+
                 <div className='carDetails'>
                     <span>Description</span><br />
                     {byCar?.data?.description}
@@ -213,7 +291,7 @@ const CarDetails = () => {
                                                         {selectedBrand && (
                                                             <div className='MM'>
                                                                 <label>Model:</label>
-                                                                <Form.Select id='FS' name='Model' value={updatedModel} onChange={(e) => {
+                                                                <Form.Select id='FS' name='Model' value={selectedModel} onChange={(e) => {
                                                                     setSelectedModel(e.target.value);
                                                                 }}>
                                                                     <option value="">Model option</option>
