@@ -147,8 +147,6 @@ const CreateCar = () => {
         setIsOpen(false);
     }
 
-    const CarLat = returnUpLocationMap.lat
-    const CarLng = returnUpLocationMap.lng
 
     const formik = useFormik({
         initialValues: {
@@ -172,8 +170,8 @@ const CreateCar = () => {
             formData.append("Model", values.Model);
             formData.append("Price", values.Price);
             formData.append("Year", values.Year);
-            formData.append("Latitude", CarLat ? CarLat : '');
-            formData.append("Longitude", CarLng ? CarLng : '');
+            formData.append("Latitude", returnUpLocationMap.lat ? returnUpLocationMap.lat : '');
+            formData.append("Longitude", returnUpLocationMap.lng ? returnUpLocationMap.lng : '');
             formData.append("Description", values.Description);
             formData.append("CarType.type", values.CarType.type);
             formData.append("CarCategory.Category", values.CarCategory.Category);
@@ -182,7 +180,8 @@ const CreateCar = () => {
             for (let i = 0; i < values.CarImages.length; i++) {
                 formData.append('CarImages', values.CarImages[i]);
             }
-
+            console.log(formData.getAll("Latitude"));
+            console.log(formData.getAll("Longitude"));
             try {
                 const response = await axios.post('https://localhost:7152/api/Car/postCar', formData, {
                     headers: {
