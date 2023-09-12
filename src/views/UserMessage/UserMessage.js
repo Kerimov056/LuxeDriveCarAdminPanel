@@ -29,7 +29,7 @@ const UserMessage = (props) => {
                     <td>{props.Num}</td>
                     <td>{props.Name}</td>
                     <td>{props.Email}</td>
-                    <td><Button><Link to={`/UserDetails/${props.Id}`}>Details</Link></Button></td>
+                    <td><Button><Link to={`/CommunucationDetails/${props.Id}`}>Details</Link></Button></td>
                     <td><Button onClick={userRemoveHandler} variant='danger'>Remove</Button></td>
                 </tr>
             </tbody>

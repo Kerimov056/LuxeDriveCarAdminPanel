@@ -56,6 +56,7 @@ import BlogDetails from "views/FoCompanent/BlogDetails";
 import BlogCreate from "views/FoCompanent/BlogCreate";
 import AdvantagesDetails from "views/FoCompanent/AdvantagesDetails";
 import FaqsDetails from "views/FoCompanent/FaqsDetails";
+import CommunucationDetails from "views/FoCompanent/CommunucationDetails/CommunucationDetails";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -97,6 +98,7 @@ root.render(
               <Route path="/ChaufferDetails/:id" component={ChaufferDetails} />
               <Route path="/BlogDetails/:id" component={BlogDetails} />
               <Route path="/UserDetails/:id" component={UserDetails} />
+              <Route path="/CommunucationDetails/:id" component={CommunucationDetails} />
               <Redirect from="/" to="/Login" />
             </Switch>
           </ChakraProvider>

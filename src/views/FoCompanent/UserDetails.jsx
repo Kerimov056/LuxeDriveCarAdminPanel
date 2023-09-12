@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import "./userdetails.scss";
 import { Container } from 'react-bootstrap';
-import { useQuery, useQueryClient, useMutation } from "react-query";
-import { useParams, useHistory } from "react-router-dom";
+import { useQuery } from "react-query";
+import { useParams } from "react-router-dom";
 import { byUser } from "../../Services/authServices";
 import { getUserReservation } from "../../Services/reservationServices";
 import ResrervationCard from './ResrervationCard';
@@ -12,8 +12,6 @@ import ResrervationCard from './ResrervationCard';
 const UserDetails = () => {
 
     const { id } = useParams();
-    const queryClient = useQueryClient();
-    const navigate = useHistory();
 
     const { data: ByUser } = useQuery(["getByUser", id], () =>
         byUser(id)
@@ -37,7 +35,7 @@ const UserDetails = () => {
                 <div id='UserDetailss'>
                     <div className='UserCard'>
                         <div class="wrappeasdasr">
-                            <div class="profile">
+                        <div style={{backgroundImage: `url(${ByUser?.data?.imagePath !== null ? `data:image/png;base64,${ByUser?.data?.imagePath}` : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDgYH1ojUccuNjEZoqcHCZNqRaN3rW9pl9vQ&usqp=CAU"})`}} class="profile">
                                 <div class="overlay">
                                     <div class="about d-flex flex-column">
                                         <h4 style={{ color: "white" }}>{ByUser?.data?.userName}</h4> <span>Software Developer</span>
