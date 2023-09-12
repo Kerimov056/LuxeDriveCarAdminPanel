@@ -29,7 +29,7 @@ const Communication = () => {
         <>
             <Card className="card-plain table-plain-bg">
                 <Card.Header>
-                    <Card.Title as="h4">Search User</Card.Title>
+                    <Card.Title as="h4">Search Communication</Card.Title>
                     <Input value={searchUser} onChange={handleUserSearch} placeholder='Search by user' />
                 </Card.Header>
                 <Card.Body className="table-full-width table-responsive px-0">
@@ -44,7 +44,7 @@ const Communication = () => {
                             </tr>
                         </thead>
                         {getCommun?.data?.map((user, index) => (
-                            <UserMessage key={index} Id={user?.id} Num={index + 1} FullName={user?.fullName} Email={user?.email} />
+                            <UserMessage key={index} Id={user?.id} Num={index + 1} Name={user?.name} Email={user?.email} />
                         ))}
                     </Table>
                 </Card.Body>
