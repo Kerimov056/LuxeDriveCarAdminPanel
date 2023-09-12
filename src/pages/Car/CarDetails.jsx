@@ -173,7 +173,7 @@ const CarDetails = () => {
     };
 
 
-    const position = [byCar?.data?.latitude, byCar?.data?.longitude]
+    const position = [byCar?.data?.latitude ? byCar?.data?.latitude : '', byCar?.data?.longitude ? byCar?.data?.longitude : '']
 
     return (
         <>

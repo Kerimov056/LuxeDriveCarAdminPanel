@@ -25,6 +25,7 @@ import Notifications from "views/Notifications.js";
 import Upgrade from "views/Upgrade.js";
 import Blog from "views/Blog";
 import AppUsers from "views/Users/AppUsers";
+import Communication from "views/UserMessage/Communication";
 import Admin from "views/Admin/Admin";
 
 const dashboardRoutes = [
@@ -65,13 +66,6 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
-    path: "/icons",
-    name: "Icons",
-    icon: "nc-icon nc-atom",
-    component: Icons,
-    layout: "/admin"
-  },
-  {
     path: "/maps",
     name: "maps",
     icon: "nc-icon nc-square-pin",
@@ -81,7 +75,7 @@ const dashboardRoutes = [
   {
     path: "/notifications",
     name: "FAQS",
-    icon: "nc-icon nc-email-85",
+    icon: "nc-icon nc-app",
     component: Notifications,
     layout: "/admin"
   },
@@ -90,6 +84,13 @@ const dashboardRoutes = [
     name: "Blog",
     icon: "nc-icon nc-align-left-2",
     component: Blog,
+    layout: "/admin"
+  },
+  {
+    path: "/Communication",
+    name: "Communication",
+    icon: "nc-icon nc-email-85",
+    component: Communication,
     layout: "/admin"
   },
   {
