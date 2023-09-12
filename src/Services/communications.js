@@ -1,17 +1,18 @@
 import { httpClient } from "../utils/HttpClient";
 
-export const getAllCommunications = () => {
+
+export const getAllCommunications = () => {         //GetAll Communications
     return httpClient.get("api/Communications")
 };
 
-export const postCommunications = (data) => {
-    return httpClient.post(`api/Communications`,data)
+export const postCommunications = (data) => {       //Post Communications
+    return httpClient.post(`api/Communications`, data)
 }
 
-export const removeCommunicationsId = (CommunicationsId) => {             
+export const removeCommunicationsId = (CommunicationsId) => {     //Remove Communications         
     return httpClient.delete(`api/Communications/${CommunicationsId}`)
 };
 
-export const UpdateCommunications = (id, data) => {
-    return httpClient.put(`api/Communications/${id}`, data)
+export const getByCommunications = (id) => {          //GetBy Communications 
+    return httpClient.get(`api/Car/${id}`);
 };
