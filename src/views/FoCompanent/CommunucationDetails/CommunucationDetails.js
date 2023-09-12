@@ -63,7 +63,7 @@ const CommunucationDetails = () => {
                     <div id='UserEmailMessageSend'>
                         <form onSubmit={formik.handleSubmit} class="formUserEmailMessageSend">
                             <div class="title">Contact us</div>
-                            <p>Send an email message to the person making the reservation</p>
+                            <p>Send message to person</p>
                             <input type="email" disabled value={formik.values.Email = ByComun?.data?.email} onChange={formik.handleChange} placeholder="Your email" class="input" />
                             <textarea name='Message' value={formik.values.Message} onChange={formik.handleChange} placeholder="Your message"></textarea>
                             <button style={{ width: "150px", backgroundColor: "#0fb81a" }} type="submit">Send</button>
