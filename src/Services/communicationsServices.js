@@ -1,8 +1,7 @@
 import { httpClient } from "../utils/HttpClient";
 
-
-export const getAllCommunications = () => {         //GetAll Communications
-    return httpClient.get("api/Communications")
+export const CommunicationsGet=(searchUser) =>{         //GetAll Communications
+    return httpClient.get(`api/Communications?searchUser=${searchUser}`);
 };
 
 export const postCommunications = (data) => {       //Post Communications

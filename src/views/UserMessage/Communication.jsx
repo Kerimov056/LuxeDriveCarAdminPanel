@@ -1,19 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
 import UserMessage from './UserMessage'
 import {
     Card,
     Table,
 } from "react-bootstrap";
 import { Input } from '@chakra-ui/react';
-
+import { CommunicationsGet } from "../../Services/communicationsServices";
+import { useQuery } from "react-query";
 
 const Communication = () => {
+
+    const [searchUser, setSearchUser] = useState('');
+
+
+    const handleUserSearch = (event) => {
+        setSearchUser(event.target.value);
+    };
+
+    const { data: getCommun, isError, refetch } = useQuery(["CommunucationAll", searchUser], () => CommunicationsGet(searchUser), {
+        staleTime: 0,
+    });
+
+    if (isError) {
+        return <div>Error</div>;
+    }
+
     return (
         <>
             <Card className="card-plain table-plain-bg">
                 <Card.Header>
                     <Card.Title as="h4">Search User</Card.Title>
-                    <Input value={""} onChange={""} placeholder='Search by user' />
+                    <Input value={searchUser} onChange={handleUserSearch} placeholder='Search by user' />
                 </Card.Header>
                 <Card.Body className="table-full-width table-responsive px-0">
                     <Table className="table-hover">
@@ -26,10 +43,9 @@ const Communication = () => {
                                 <th className="border-0">Remove</th>
                             </tr>
                         </thead>
-                        <UserMessage />
-                        {/* {getMembers?.data?.map((user, index) => (
+                        {getCommun?.data?.map((user, index) => (
                             <UserMessage key={index} Id={user?.id} Num={index + 1} FullName={user?.fullName} Email={user?.email} />
-                        ))} */}
+                        ))}
                     </Table>
                 </Card.Body>
             </Card>

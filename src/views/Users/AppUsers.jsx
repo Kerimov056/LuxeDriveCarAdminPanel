@@ -5,8 +5,8 @@ import {
 } from "react-bootstrap";
 import UserCard from './UserCard';
 import { MemberAllUser } from "../../Services/authServices";
-import { useQuery } from "react-query";
 import { Input } from '@chakra-ui/react';
+import { useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { SuperAdmin } from "../../components/Export/Export";
 
@@ -28,7 +28,7 @@ const AppUsers = () => {
         });
 
         if (isError) {
-            return <div>Bir hata oluştu</div>;
+            return <div>Error</div>;
         }
 
         return (
