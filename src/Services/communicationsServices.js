@@ -9,5 +9,5 @@ export const removeCommunicationsId = (CommunicationsId) => {     //Remove Commu
 };
 
 export const getByCommunications = (id) => {          //GetBy Communications 
-    return httpClient.get(`api/Car/${id}`);
+    return httpClient.get(`api/Communications/${id}`);
 };

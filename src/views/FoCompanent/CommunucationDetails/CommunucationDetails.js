@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap';
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { getByCommunications } from "../../../Services/communicationsServices";
-
+import './CommunDetails.scss'
 
 const CommunucationDetails = () => {
 
@@ -16,11 +16,17 @@ const CommunucationDetails = () => {
 
     return (
         <>
-            <Container>
-                Salam
+            <Container id="CommunSDetails">
+                <div>
+                    Salam
+                </div>
+                <div class="CommunucationDetails">
+                    <h2>{ByComun?.data?.note}</h2>
+                </div>
             </Container>
         </>
     )
 }
 
 export default CommunucationDetails
+
