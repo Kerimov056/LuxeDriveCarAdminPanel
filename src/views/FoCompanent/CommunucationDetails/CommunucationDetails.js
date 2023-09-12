@@ -17,12 +17,18 @@ const CommunucationDetails = () => {
     return (
         <>
             <Container id="CommunSDetails">
-                <div>
-                    Salam
+                <div className='UserComun'>
+                    <h2>Name: <span>{ByComun?.data?.name}</span></h2>
+                    <h2>SurName: <span>{ByComun?.data?.surName}</span></h2>
+                    <h2>Number: <span>{ByComun?.data?.phone}</span></h2>
+                    <h2>Email: <span>{ByComun?.data?.email}</span></h2>
                 </div>
                 <div class="CommunucationDetails">
                     <h2>{ByComun?.data?.note}</h2>
                 </div>
+            </Container>
+            <Container>
+                
             </Container>
         </>
     )

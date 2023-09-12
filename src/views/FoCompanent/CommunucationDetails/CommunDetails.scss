@@ -1,5 +1,20 @@
 #CommunSDetails{
-    
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+
+    .UserComun{
+        width: 300px;
+        height: auto;
+        
+        &>h2{
+
+            &>span{
+                font-size: 27px;
+            }
+        }
+    }
 }
 
 
