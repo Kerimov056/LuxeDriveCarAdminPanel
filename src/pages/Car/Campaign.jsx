@@ -12,7 +12,7 @@ import axios from 'axios';
 
 
 const Campaign = () => {
-
+    const [superAdmin, setSuperAdmin] = useState();
 
     const currentDateTime = new Date().toISOString().slice(0, 16);
 
@@ -21,23 +21,23 @@ const Campaign = () => {
     const { appuserid, email } = useSelector((x) => x.authReducer);
     const dispatch = useDispatch();
 
-    const [superAdmin, setSuperAdmin] = useState('');
 
     useEffect(() => {
-        async function fetchSuperAdmin() {
-            try {
-                const response = await axios.get(`https://localhost:7152/api/Auth/ByAdmin?email=${email}`);
-                setSuperAdmin(response.data)
-            } catch (error) {
-                console.error(error);
-            }
-        }
         if (email) {
+            async function fetchSuperAdmin() {
+                try {
+                    const response = await axios.get(`https://localhost:7152/api/Auth/ByAdmin?email=${email}`);
+                    setSuperAdmin(response.data)
+                } catch (error) {
+                    console.error(error);
+                }
+            }
             fetchSuperAdmin();
         }
     }, [email]);
+    
 
-    if (appuserid === superAdmin) {
+    if (superAdmin!==null) {
 
         const [selectedDate, setSelectedDate] = useState(null);
         const [selectedDate1, setSelectedDate1] = useState(null);

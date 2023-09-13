@@ -113,3 +113,5 @@ export const carData = [
     {brand: "Rover", models: ["200", "214", "218", "25", "400", "414", "416", "620", "75"]},
 ];
 
+
+export const SuperAdmin = "d2cb6d2a-0d22-4437-a8fa-29fdaf8b1341";

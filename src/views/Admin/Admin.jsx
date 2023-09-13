@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Card,
     Table,
@@ -8,14 +8,30 @@ import { AllAdmin } from "../../Services/authServices";
 import { useQuery } from "react-query";
 import { Input } from '@chakra-ui/react';
 import { useDispatch, useSelector } from "react-redux";
-import { SuperAdmin } from "../../components/Export/Export";
 
 
 const Admin = () => {
 
-    const { appuserid } = useSelector((x) => x.authReducer);
+    const { email } = useSelector((x) => x.authReducer);
     const dispatch = useDispatch();
-    if (appuserid === SuperAdmin) {
+    const [superAdmin, setSuperAdmin] = useState('');
+
+    useEffect(() => {
+        async function fetchSuperAdmin() {
+            try {
+                const response = await axios.get(`https://localhost:7152/api/Auth/ByAdmin?email=${email}`);
+                setSuperAdmin(response.data)
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        if (email) {
+            fetchSuperAdmin();
+        }
+    }, [email]);
+
+
+    if (superAdmin!==null) {
 
         const [searchAdmin, setSearchAdmin] = useState('');
 
