@@ -5,14 +5,14 @@ import {
     Col,
 } from "react-bootstrap";
 import { useQuery } from "react-query";
-import { getReservCarCount } from "../../Services/carServices";
+import { getReservNowCount } from "../../Services/reservationServices";
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const ReservCar = () => {
 
     const { data: reservCars } = useQuery({
         queryKey: ["ReservCarCount"],
-        queryFn: getReservCarCount,
+        queryFn: getReservNowCount,
         staleTime: 0,
     });
 

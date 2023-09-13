@@ -24,6 +24,10 @@ export const getReservConfirmed = () => {     //tesdiqlenmis olan reservationlar
     return httpClient.get("api/CarReservations/ReservConfirmedCount")
 };
 
+export const getReservNowCount = () => {     //tesdiqlenmis olan reservationlarin sayi
+    return httpClient.get("api/CarReservations/ReservNowCount")
+};
+
 export const putReservConfirmed = (resrcId) => {  //confirim etemk ucun
     return httpClient.put(`api/CarReservations/Confirmed?Id=${resrcId}`);
 };
