@@ -15,21 +15,7 @@ const AppUsers = () => {
     const { email } = useSelector((x) => x.authReducer);
     const dispatch = useDispatch();
 
-    const [superAdmin, setSuperAdmin] = useState('');
-
-    useEffect(() => {
-        async function fetchSuperAdmin() {
-            try {
-                const response = await axios.get(`https://localhost:7152/api/Auth/ByAdmin?email=${email}`);
-                setSuperAdmin(response.data)
-            } catch (error) {
-                console.error(error);
-            }
-        }
-        if (email) {
-            fetchSuperAdmin();
-        }
-    }, [email]);
+    const [superAdmin, setSuperAdmin] = useState(null);
 
 
     if (superAdmin!==null) {

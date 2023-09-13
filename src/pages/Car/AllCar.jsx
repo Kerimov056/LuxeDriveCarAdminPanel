@@ -5,7 +5,7 @@ import CarCard from './CarCard';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { getCar, IsCampaigns } from "../../Services/carServices";
 import Campaign from './Campaign';
-import { useMutation, useQuery } from "react-query";
+import { useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import AllCarMap from './AllCarMap';
 

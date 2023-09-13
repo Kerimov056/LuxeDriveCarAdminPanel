@@ -14,22 +14,24 @@ const Admin = () => {
 
     const { email } = useSelector((x) => x.authReducer);
     const dispatch = useDispatch();
-    const [superAdmin, setSuperAdmin] = useState('');
+    const [superAdmin, setSuperAdmin] = useState(null);
 
     useEffect(() => {
-        async function fetchSuperAdmin() {
-            try {
-                const response = await axios.get(`https://localhost:7152/api/Auth/ByAdmin?email=${email}`);
-                setSuperAdmin(response.data)
-            } catch (error) {
-                console.error(error);
-            }
-        }
         if (email) {
+            async function fetchSuperAdmin() {
+                try {
+                    const response = await axios.get(`https://localhost:7152/api/Auth/ByAdmin?email=${email}`);
+                    if (response.status === 200) {
+                        setSuperAdmin(response.data);
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+            }
             fetchSuperAdmin();
         }
     }, [email]);
-
+    
 
     if (superAdmin!==null) {
 

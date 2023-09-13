@@ -12,11 +12,7 @@ import axios from 'axios';
 
 
 const Campaign = () => {
-    const [superAdmin, setSuperAdmin] = useState();
-
-    const currentDateTime = new Date().toISOString().slice(0, 16);
-
-    const queryClient = useQueryClient();
+    const [superAdmin, setSuperAdmin] = useState(null);
 
     const { appuserid, email } = useSelector((x) => x.authReducer);
     const dispatch = useDispatch();
@@ -27,7 +23,9 @@ const Campaign = () => {
             async function fetchSuperAdmin() {
                 try {
                     const response = await axios.get(`https://localhost:7152/api/Auth/ByAdmin?email=${email}`);
-                    setSuperAdmin(response.data)
+                    if (response.status === 200) {
+                        setSuperAdmin(response.data);
+                    }
                 } catch (error) {
                     console.error(error);
                 }
@@ -37,7 +35,11 @@ const Campaign = () => {
     }, [email]);
     
 
-    if (superAdmin!==null) {
+    if (superAdmin !== null ) {
+
+        const currentDateTime = new Date().toISOString().slice(0, 16);
+
+        const queryClient = useQueryClient();
 
         const [selectedDate, setSelectedDate] = useState(null);
         const [selectedDate1, setSelectedDate1] = useState(null);
