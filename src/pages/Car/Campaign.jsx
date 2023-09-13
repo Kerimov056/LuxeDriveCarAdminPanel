@@ -3,6 +3,7 @@ import './allcar.scss'
 import { Button, Row } from 'react-bootstrap'
 import { Input } from '@chakra-ui/react';
 import { IsCampaigns, stopCompagins } from "../../Services/carServices";
+import { BySuperAdmin } from "../../Services/authServices";
 import { useFormik } from "formik";
 import { useMutation, useQueryClient, useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,15 +13,31 @@ import axios from 'axios';
 
 const Campaign = () => {
 
-    const currentDateTime = new Date().toISOString().slice(0, 16);
 
+    const currentDateTime = new Date().toISOString().slice(0, 16);
 
     const queryClient = useQueryClient();
 
-    const { appuserid } = useSelector((x) => x.authReducer);
+    const { appuserid, email } = useSelector((x) => x.authReducer);
     const dispatch = useDispatch();
 
-    if (appuserid === SuperAdmin) {
+    const [superAdmin, setSuperAdmin] = useState('');
+
+    useEffect(() => {
+        async function fetchSuperAdmin() {
+            try {
+                const response = await axios.get(`https://localhost:7152/api/Auth/ByAdmin?email=${email}`);
+                setSuperAdmin(response.data)
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        if (email) {
+            fetchSuperAdmin();
+        }
+    }, [email]);
+
+    if (appuserid === superAdmin) {
 
         const [selectedDate, setSelectedDate] = useState(null);
         const [selectedDate1, setSelectedDate1] = useState(null);
