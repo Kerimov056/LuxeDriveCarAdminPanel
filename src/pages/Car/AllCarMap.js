@@ -5,6 +5,8 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useQuery } from "react-query";
 import 'leaflet/dist/leaflet.css';
 import { useQueryClient } from "react-query";
+import { Button } from "@chakra-ui/react";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const markerIcon = new L.Icon({
     iconUrl: require("../../assets/img/faces/download.png"),
@@ -45,8 +47,8 @@ const AllCarMap = () => {
                     />
 
                     {AllCar?.data?.map((car, index) => (
-                    console.log("lat:", car.latitude),console.log("lnh:", car.longitude),    <Marker
-                            position={[ car?.latitude, car?.longitude]}
+                        console.log("lat:", car.latitude), console.log("lnh:", car.longitude), <Marker
+                            position={[car?.latitude, car?.longitude]}
                             key={index}
                             icon={markerIcon}
                             eventHandlers={{
@@ -56,17 +58,18 @@ const AllCarMap = () => {
                                 },
                             }}
                         >
-                             <Popup >
+                            <Popup >
                                 <p style={{ color: "purple" }}>Car Location</p>
 
                                 <p> Marka: {car?.marka}</p>
                                 <p> Model: {car?.model}</p>
                                 <p> Year: {car?.year}</p>
+                                <Link to={`/CarDetails/${car.id}`}><Button style={{backgroundColor:"purple",marginBottom:"10px"}}>Car Details</Button></Link>
                                 <img
                                     style={{ width: "300px", height: "180px", objectFit: "cover" }}
                                     src={`data:image/png;base64,${car?.carImages[0]?.imagePath}`}
                                 />
-                            </Popup> 
+                            </Popup>
                         </Marker>
                     ))}
 

@@ -8,10 +8,6 @@ import Campaign from './Campaign';
 import { useMutation, useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import AllCarMap from './AllCarMap';
-import axios from 'axios';
-import InfiniteScroll from 'react-infinite-scroller';
-
-
 
 const CountdownTimer = ({ targetDate }) => {
     const [countdown, setCountdown] = useState('');
@@ -46,65 +42,17 @@ const AllCar = () => {
     const { appuserid } = useSelector((x) => x.authReducer);
     const dispatch = useDispatch();
 
-    // const { data: allCars } = useQuery({
-    //     queryKey: ["Allcars"],
-    //     queryFn: getCar,
-    //     staleTime: 0,
-    // });
+    const { data: allCars } = useQuery({
+        queryKey: ["Allcars"],
+        queryFn: getCar,
+        staleTime: 0,
+    });
 
     const { data: Compn } = useQuery({
         queryKey: ["IsCampaigns"],
         queryFn: IsCampaigns,
         staleTime: 0,
     });
-
-
-    const [allCars, setCars] = useState([]);
-    const [page, setPage] = useState(1);
-    const [loading, setLoading] = useState(false);
-
-
-    const fetchCars = async () => {
-        setLoading(true);
-        try {
-            const response = await axios.get(`https://localhost:7152/api/Car/GetAllCar?page=${page}&pageSize=10`);
-            if (response.data && response.data.length > 0) {
-                setCars(prevCars => [...prevCars, ...response.data]);
-                setPage(page + 1);
-            } else {
-                setLoading(false); // Tüm arabalar yüklendiğinde loading durumunu kapatın
-            }
-        } catch (error) {
-            console.error('Error fetching cars:', error);
-            setLoading(false); // Hata durumunda loading durumunu kapatın
-        }
-    };
-
-
-    useEffect(() => {
-        fetchCars();
-    }, []);
-
-
-    const handleScroll = () => {
-        if (
-            window.innerHeight + document.documentElement.scrollTop ===
-            document.documentElement.offsetHeight
-        ) {
-            if (!loading) {
-                fetchCars();
-            }
-        }
-    };
-
-
-
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
 
 
     return (
@@ -125,11 +73,11 @@ const AllCar = () => {
                         <div className='Compagins'>
                             <div>
                                 PickUp Campaign:
-                                <CountdownTimer targetDate={new Date(allCars[0]?.pickUpCampaigns)} />
+                                <CountdownTimer targetDate={new Date(allCars?.data[0]?.pickUpCampaigns)} />
                             </div>
                             <div>Finsh Campaign:
-                                <CountdownTimer targetDate={new Date(allCars[0]?.returnCampaigns)} /></div>
-                            <div>Campaigns Interest: {allCars[0]?.campaignsInterest}%</div>
+                                <CountdownTimer targetDate={new Date(allCars?.data[0]?.returnCampaigns)} /></div>
+                            <div>Campaigns Interest: {allCars?.data[0]?.campaignsInterest}%</div>
                         </div>
 
                     </Row>
@@ -144,41 +92,20 @@ const AllCar = () => {
                 </Row>
 
                 <Campaign />
-                {/*
-                <Row style={{ marginTop: "40px" }}>
-                    <AllCarMap />
-                </Row> */}
 
-                <InfiniteScroll
-                    pageStart={0}
-                    loadMore={fetchCars}
-                    hasMore={!loading}
-                    loader={<div className="loader" key={0}>Loading ...</div>}
-                >
-                    <Row style={{ marginBottom: "40px" }} className='mt-5'>
-                        {allCars?.map((bycars, index) => (
-                            <CarCard images={bycars?.carImages} key={index} Id={bycars?.id} isReserv={bycars?.isReserv} marka={bycars?.marka} model={bycars?.model} year={bycars?.year} />
-                        ))}
-                    </Row>
-                </InfiniteScroll>
+                <Row style={{marginTop:"40px"}}>
+                    <AllCarMap />
+                </Row>
+
+
+                <Row style={{marginBottom:"40px"}} className='mt-5'>
+                    {allCars?.data.map((bycars, index) => (
+                        <CarCard images={bycars?.carImages} key={index} Id={bycars?.id} isReserv={bycars?.isReserv} marka={bycars?.marka} model={bycars?.model} year={bycars?.year} />
+                    ))}
+                </Row>
             </Container>
         </>
     )
 }
 
 export default AllCar;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -97,7 +97,7 @@ const ComlatedRDetails = () => {
                             </div>
                         </div>
                     </div>
-                    <Link to="/CancledReservations"><Button id='GoToBack'>Go To Back</Button></Link>
+                    <Link to="/ComplatedReservation"><Button id='GoToBack'>Go To Back</Button></Link>
                 </div>
             </Container>
         </>

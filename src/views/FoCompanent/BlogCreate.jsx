@@ -1,10 +1,12 @@
 import React from 'react';
 import './BlogCreate.scss';
-import { Button, Container, Row } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import { useQueryClient } from 'react-query';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios'; 
+
+
 
 const BlogCreate = () => {
     const queryClient = useQueryClient();
@@ -103,15 +105,3 @@ const BlogCreate = () => {
 export default BlogCreate;
 
 
-
-// console.log("MARKA-----" + formData.getAll("Marka"));
-// console.log("MODEL-----" + formData.getAll("Model"));
-// console.log("PRICE-----" + formData.getAll("Price"));
-// console.log("YEAR-----" + formData.getAll("Year"));
-// console.log("DESC-----" + formData.getAll("Description"));
-// console.log("TYPE-----" + formData.getAll("CarType"));
-// console.log("CATEGORY-----" + formData.getAll("CarCategory"));
-// console.log("TAG-----" + formData.getAll("tags"));
-// console.log("CarImages-----" + formData.getAll("CarImages"));
-
-// console.log(formData);
