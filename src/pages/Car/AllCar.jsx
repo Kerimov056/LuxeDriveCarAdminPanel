@@ -93,12 +93,12 @@ const AllCar = () => {
 
                 <Campaign />
 
-                <Row style={{marginTop:"40px"}}>
+                <Row style={{ marginTop: "40px" }}>
                     <AllCarMap />
                 </Row>
 
 
-                <Row style={{marginBottom:"40px"}} className='mt-5'>
+                <Row style={{ marginBottom: "40px" }} className='mt-5'>
                     {allCars?.data.map((bycars, index) => (
                         <CarCard images={bycars?.carImages} key={index} Id={bycars?.id} isReserv={bycars?.isReserv} marka={bycars?.marka} model={bycars?.model} year={bycars?.year} />
                     ))}

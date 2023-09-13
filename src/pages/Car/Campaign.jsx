@@ -12,6 +12,9 @@ import axios from 'axios';
 
 const Campaign = () => {
 
+    const currentDateTime = new Date().toISOString().slice(0, 16);
+
+
     const queryClient = useQueryClient();
 
     const { appuserid } = useSelector((x) => x.authReducer);
@@ -121,6 +124,7 @@ const Campaign = () => {
                                 type="datetime-local"
                                 value={selectedDate}
                                 onChange={handleDateChange}
+                                min={currentDateTime}
                                 style={{
                                     borderTop: "none",
                                     borderRight: "none",
@@ -139,6 +143,7 @@ const Campaign = () => {
                                 type="datetime-local"
                                 value={selectedDate1}
                                 onChange={handleDateChange1}
+                                min={currentDateTime}
                                 style={{
                                     borderTop: "none",
                                     borderRight: "none",
