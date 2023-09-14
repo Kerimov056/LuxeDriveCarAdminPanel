@@ -10,7 +10,7 @@ import {
     InputGroup
 } from 'react-bootstrap'
 import { useQuery, useQueryClient, useMutation } from "react-query";
-import { getByCar, postCar, removeCar } from "../../Services/carServices";
+import { getByCar, postCar, removeCar, IsReservTrue, IsReservFalse } from "../../Services/carServices";
 import { useParams, useHistory } from "react-router-dom";
 import "./cardetails.scss";
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
@@ -23,6 +23,7 @@ import "leaflet-draw/dist/leaflet.draw.css";
 import { MapContainer, TileLayer, Marker, Popup, FeatureGroup } from "react-leaflet";
 import { EditControl } from "react-leaflet-draw";
 import './AllCarMap.scss'
+import { Label } from 'reactstrap';
 
 
 
@@ -175,6 +176,30 @@ const CarDetails = () => {
 
     const position = [byCar?.data?.latitude ? byCar?.data?.latitude : '', byCar?.data?.longitude ? byCar?.data?.longitude : '']
 
+
+    const reservTrue = useMutation(() => IsReservTrue(byCar?.data?.id), {
+        onSuccess: () => {
+            queryClient.invalidateQueries("getByCar");
+        },
+    });
+
+    const handleButtonClickTrue = async () => {
+        await reservTrue.mutateAsync(byCar?.data?.id);
+    };
+
+
+    const reservFalse = useMutation(() => IsReservFalse(byCar?.data?.id), {
+        onSuccess: () => {
+            queryClient.invalidateQueries("getByCar");
+        },
+    });
+
+    const handleButtonClickFalse = async () => {
+        await reservFalse.mutateAsync(byCar?.data?.id);
+    };
+
+
+
     return (
         <>
             <Container>
@@ -250,6 +275,29 @@ const CarDetails = () => {
                         </MapContainer>
                     </div>
                 </Row>
+                {byCar?.data?.isReserv !== true &&
+
+                    <Row id='isReservTrue'>
+                        <div>
+                            <Label>Take your car off the market</Label>
+                        </div>
+                        <div>
+                            <Button onClick={() => handleButtonClickTrue(byCar?.data?.id)} type='submit'>Get out of the market</Button>
+                        </div>
+                    </Row>
+                }
+
+                {byCar?.data?.isReserv !== false &&
+
+                    <Row id='isReservTrue'>
+                        <div>
+                            <Label>Put the car on the market</Label>
+                        </div>
+                        <div>
+                            <Button onClick={() => handleButtonClickFalse(byCar?.data?.id)} type='submit'>Enter</Button>
+                        </div>
+                    </Row>
+                }
 
                 <div className='carDetails'>
                     <span>Description</span><br />

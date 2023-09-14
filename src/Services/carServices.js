@@ -16,6 +16,14 @@ export const stopCompagins = (superAdminId) => {   //Compagins'in dayandirlmasi
   return httpClient.post(`api/Car/StopCampaigns?superAdminId=${superAdminId}`)
 };
 
+export const IsReservTrue = (carId) => {   //Car'i reservini true edir
+  return httpClient.put(`api/Car/IsReservTrue?id=${carId}`)
+};
+
+export const IsReservFalse = (carId) => {   //Car'i reservini false edir
+  return httpClient.put(`api/Car/IsReservFalse?id=${carId}`)
+};
+
 export const postCar = (data) => {         //Create car
   return httpClient.post("api/Car/postCar",data)
 };

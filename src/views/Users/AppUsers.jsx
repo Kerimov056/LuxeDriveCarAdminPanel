@@ -17,6 +17,22 @@ const AppUsers = () => {
 
     const [superAdmin, setSuperAdmin] = useState(null);
 
+    useEffect(() => {
+        if (email) {
+            async function fetchSuperAdmin() {
+                try {
+                    const response = await axios.get(`https://localhost:7152/api/Auth/ByAdmin?email=${email}`);
+                    if (response.status === 200) {
+                        setSuperAdmin(response.data);
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+            fetchSuperAdmin();
+        }
+    }, [email]);
+    
 
     if (superAdmin!==null) {
 
