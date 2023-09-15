@@ -24,13 +24,22 @@ const ReservDetail = () => {
         getByReserv(id)
     );
 
+    const notifyConfirem = () => {
+        toast.success(`Confirem ${byReserv?.data?.fullName} Reservation!`, {
+            position: toast.POSITION.TOP_CENTER
+        });
+    };
+    const notifyConfiremError = () => toast.error(`Error ${byReserv?.data?.fullName} Confirem.`);
+
+
     const handleConfirm = async (reservId) => {
         try {
             await putReservConfirmed(reservId);
             queryClient.invalidateQueries(["reservConform", reservId]);
             navigate.push("/NotificationsReservation");
+            notifyConfirem();
         } catch (error) {
-            console.error("Error confirming reservation:", error);
+            notifyConfiremError();
         }
     };
 
@@ -72,7 +81,7 @@ const ReservDetail = () => {
                 <div style={{ backgroundColor: "black" }} class="ReservDetailCard">
                     <div className='person'>
                         <div class="SrVesiqe">
-                            <img style={{objectFit:"cover"}} src={`data:image/png;base64,${byReserv?.data?.imagePath}`} />
+                            <img style={{ objectFit: "cover" }} src={`data:image/png;base64,${byReserv?.data?.imagePath}`} />
                         </div>
                         <div class="cardDesc shadowDesc">
                             <p>{byReserv?.data?.notes}</p>
@@ -81,7 +90,7 @@ const ReservDetail = () => {
                             <ReservCarCard carImages={byReserv?.data?.reservCar?.carImages[0]?.imagePath} marka={byReserv?.data?.reservCar.marka} model={byReserv?.data.reservCar.model} year={byReserv?.data.reservCar.year} />
                         </div>
                         <div style={{ backgroundColor: "black" }} className='details'>
-                            <div class="login-box" style={{marginLeft:"30px"}}>
+                            <div class="login-box" style={{ marginLeft: "30px" }}>
 
                                 <form>
                                     <div class="user-box">
@@ -132,9 +141,9 @@ const ReservDetail = () => {
                     <form onSubmit={formik.handleSubmit} class="formUserEmailMessageSend">
                         <div class="title">Contact us</div>
                         <p>Send an email message to the person making the reservation</p>
-                        <input type="email" disabled value={ formik.values.Email=byReserv?.data?.email} onChange={formik.handleChange} placeholder="Your email" class="input" />
+                        <input type="email" disabled value={formik.values.Email = byReserv?.data?.email} onChange={formik.handleChange} placeholder="Your email" class="input" />
                         <textarea name='Message' value={formik.values.Message} onChange={formik.handleChange} placeholder="Your message"></textarea>
-                        <button style={{width:"150px",backgroundColor:"#0fb81a"}} type="submit">Send</button>
+                        <button style={{ width: "150px", backgroundColor: "#0fb81a" }} type="submit">Send</button>
                     </form>
                 </div>
                 <Link to="/NotificationsReservation"><Button id='GoToBack'>Go To Back</Button></Link>

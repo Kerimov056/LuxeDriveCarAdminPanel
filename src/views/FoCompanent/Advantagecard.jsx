@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useQuery, useQueryClient, useMutation } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import { useParams } from 'react-router-dom';
-import { Formik, Field } from 'formik';
 import { removeFaqs, UpdateFaqs } from '../../Services/faqsServices';
 import { removeAdvatages, byAdvatages, UpdateAdvantage } from '../../Services/advantageServices';
 import './advantagecard.scss';

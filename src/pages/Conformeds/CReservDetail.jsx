@@ -23,13 +23,23 @@ const CReservDetail = () => {
         getByReserv(id)
     );
 
+
+    const notifyCanceld = () => {
+        toast.success(`Canceld ${byReserv?.data?.fullName} Reservation!`, {
+            position: toast.POSITION.TOP_CENTER
+        });
+    };
+    const notifyCancledError = () => toast.error(`Error ${byReserv?.data?.fullName} Canceld.`);
+
+
     const handleCancled = async (reservId) => {
         try {
             await putReservCancled(reservId);
             queryClient.invalidateQueries(["reservcancled", reservId]);
             navigate.push("/ConfirmedReservation");
+            notifyCanceld()
         } catch (error) {
-            console.error("Error confirming reservation:", error);
+            notifyCancledError();
         }
     };
 
@@ -81,7 +91,7 @@ const CReservDetail = () => {
                             <ReservCarCard carImages={byReserv?.data?.reservCar?.carImages[0]?.imagePath} marka={byReserv?.data?.reservCar.marka} model={byReserv?.data.reservCar.model} year={byReserv?.data.reservCar.year} />
                         </div>
                         <div className='details'>
-                            <div class="login-box" style={{marginLeft:"35px"}}>
+                            <div class="login-box" style={{ marginLeft: "35px" }}>
 
                                 <form>
                                     <div class="user-box">

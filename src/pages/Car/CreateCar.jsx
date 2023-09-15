@@ -9,7 +9,7 @@ import {
     InputGroup
 } from "react-bootstrap";
 import "./createcar.scss";
-import { useParams, useNavigate, Link, useLocation, useHistory } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import { useQueryClient } from "react-query";
 import axios from 'axios';
@@ -21,6 +21,9 @@ import "leaflet-draw/dist/leaflet.draw.css";
 import { MapContainer, TileLayer, Marker, Popup, FeatureGroup } from "react-leaflet";
 import { EditControl } from "react-leaflet-draw";
 import carCreateSchema from "../../Validators/carCreateSchema";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 const markerIcon = new L.Icon({
@@ -148,6 +151,14 @@ const CreateCar = () => {
         setIsOpen(false);
     }
 
+    const notifyError = () => toast.success(`New ${selectedBrand} car Created!`);
+
+    
+    const notifyCarCreatedSuccess = () => {
+        toast.success(`New ${selectedBrand} car Created successfully!`, {
+            position: toast.POSITION.TOP_CENTER
+        });
+    };
 
     const formik = useFormik({
         initialValues: {
@@ -191,9 +202,10 @@ const CreateCar = () => {
                 if (response.status === 201) {
                     queryClient.invalidateQueries('newCar');
                     navigate.push('/AllCar');
+                    notifyCarCreatedSuccess()
                 }
             } catch (error) {
-                console.log(error);
+                notifyError()
             }
         },
         validationSchema: carCreateSchema,

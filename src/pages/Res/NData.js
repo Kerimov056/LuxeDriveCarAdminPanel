@@ -3,8 +3,30 @@ import { Button, Table } from 'react-bootstrap'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 import { useQuery, useQueryClient } from "react-query";
 import { putReservConfirmed, putReservCancled } from "../../Services/reservationServices";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 const NData = (props) => {
+
+    //Confirem
+    const notifyConfirem = () => {
+        toast.success(`Confirem ${props.fullName} Reservation!`, {
+            position: toast.POSITION.TOP_CENTER
+        });
+    };
+    const notifyConfiremError = () => toast.error(`Error ${props.fullName} Confirem.`);
+
+    //Cancel
+    const notifyCancel = () => {
+        toast.success(`Cancel ${props.fullName} Reservation!`, {
+            position: toast.POSITION.TOP_CENTER
+        });
+    };
+    const notifyCancelError = () => toast.error(`Error ${props.fullName} Cancel.`);
+
+
 
     const queryClient = useQueryClient();
 
@@ -13,19 +35,21 @@ const NData = (props) => {
             await putReservConfirmed(reservId);
             queryClient.invalidateQueries(["reservConform", reservId]);
             queryClient.invalidateQueries(["reservAllPedding"]);
+            notifyConfirem();
         } catch (error) {
-            console.error("Error confirming reservation:", error);
+            notifyConfiremError();
         }
     };
 
-    
+
     const handleCancled = async (reservId) => {
         try {
             await putReservCancled(reservId);
             queryClient.invalidateQueries(["reservCancled", reservId]);
             queryClient.invalidateQueries(["reservAllPedding"]);
+            notifyCancel();
         } catch (error) {
-            console.error("Error confirming reservation:", error);
+            notifyCancelError()
         }
     };
 

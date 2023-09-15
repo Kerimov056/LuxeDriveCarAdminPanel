@@ -14,7 +14,6 @@ import { getByCar, postCar, removeCar, IsReservTrue, IsReservFalse } from "../..
 import { useParams, useHistory } from "react-router-dom";
 import "./cardetails.scss";
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-import { useFormik } from "formik";
 import axios from 'axios';
 import { carCategory, carType, carYear, carData } from "../../components/Export/Export";
 import L from "leaflet";
@@ -24,6 +23,9 @@ import { MapContainer, TileLayer, Marker, Popup, FeatureGroup } from "react-leaf
 import { EditControl } from "react-leaflet-draw";
 import './AllCarMap.scss'
 import { Label } from 'reactstrap';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 
@@ -78,6 +80,14 @@ const CarDetails = () => {
         }
     }, [byCar?.data?.carCategory?.category]);
 
+    const notifyRemoveError = () => toast.error(`Error Delete ${byCar?.data?.marka}.`);
+
+    const notifyCarsRemoveSuccess = () => {
+        toast.success(`${byCar?.data?.marka} Deleted successfully!`, {
+            position: toast.POSITION.TOP_CENTER
+        });
+    };
+
 
     const handleRemove = async (carId) => {
         try {
@@ -85,8 +95,9 @@ const CarDetails = () => {
             queryClient.invalidateQueries(["carRemove", carId]);
             queryClient.invalidateQueries(["Allcars"]);
             navigate.push(`/AllCar`);
+            notifyCarsRemoveSuccess();
         } catch (error) {
-            console.error("Error confirming car:", error);
+            notifyRemoveError()
         }
     };
 
@@ -102,7 +113,7 @@ const CarDetails = () => {
     };
 
 
-    const [returnUpLocationMap, setReturnLocationMap] = useState({ lat: null, lng: null });
+    const [returnUpLocationMap, setReturnLocationMap] = useState({ lat: byCar?.data?.latitude ? byCar?.data?.latitude : '', lng: byCar?.data?.longitude ? byCar?.data?.longitude : '' });
 
     const updatReturnpLocation = (lat, lng) => {
         setReturnLocationMap({ lat, lng });
@@ -128,6 +139,9 @@ const CarDetails = () => {
     const [updatedCategory, setUpdatedCategory] = useState(byCar?.data?.carCategory?.category);
     const [updatedTags, setUpdatedTags] = useState(byCar?.data?.marka);
     const [updatedCarImages, setUpdatedCarImages] = useState(byCar?.data?.carImages);
+
+    const notifySuccess = () => toast.success(`${updatedMarka} updated successfully!`);
+    const notifyError = () => toast.error(`Error updating  ${byCar?.data?.marka}.`);
 
 
     const handleUpdateSubmit = async (e) => {
@@ -165,8 +179,9 @@ const CarDetails = () => {
             });
             queryClient.invalidateQueries(['getByCar', id]);
             setCarEdit(false);
+            notifySuccess();
         } catch (error) {
-            console.error('Error updating Car:', error);
+            notifyError();
         }
     };
 
