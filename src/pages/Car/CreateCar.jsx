@@ -20,6 +20,7 @@ import 'leaflet/dist/leaflet.css';
 import "leaflet-draw/dist/leaflet.draw.css";
 import { MapContainer, TileLayer, Marker, Popup, FeatureGroup } from "react-leaflet";
 import { EditControl } from "react-leaflet-draw";
+import carCreateSchema from "../../Validators/carCreateSchema";
 
 
 const markerIcon = new L.Icon({
@@ -195,6 +196,7 @@ const CreateCar = () => {
                 console.log(error);
             }
         },
+        validationSchema: carCreateSchema,
     });
 
 
@@ -214,7 +216,8 @@ const CreateCar = () => {
                                             <Form.Group>
                                                 <div className='MM'>
                                                     <label>Marka:</label>
-                                                    <Form.Select id='FS' size='lg' name='Marka' value={selectedBrand} onChange={(event) => {
+                                                    <>{formik.touched.Marka && formik.errors.Marka}</>
+                                                    <Form.Select isInvalid={formik.errors.Marka && formik.touched.Marka} id='FS' size='lg' name='Marka' value={selectedBrand} onChange={(event) => {
                                                         formik.handleChange(event);
                                                         handleBrandChange(event);
                                                     }}>
