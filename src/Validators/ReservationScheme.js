@@ -25,8 +25,7 @@ const reservationSchema = Yup.object({
 
 });
 
-// isInvalid={reservFormik.errors.Image && reservFormik.touched.Image}
-// {reservFormik.touched.Image && reservFormik.errors.Image}
+
 
 
 

@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginAction } from "../Redux/Slices/authSlice";
 import { useMutation } from 'react-query'
 import { Button } from "react-bootstrap";
-
+import loginSchema from "../Validators/loginSchema";
 
 const Login = () => {
 
@@ -18,14 +18,13 @@ const Login = () => {
     const { token } = useSelector(x => x.authReducer)
     console.log(token);
 
-    const { mutate, isLoading , isError} = useMutation((values) => AdminLogin(values), {
+    const { mutate, isLoading, isError } = useMutation((values) => AdminLogin(values), {
         onSuccess: (resp) => {
             dispatch(loginAction(resp.data));
             history.push('/admin/dashboard');
         },
     });
-    
-    console.log(isError);
+
     const formik = useFormik({
         initialValues: {
             UsernameOrEmail: '',
@@ -34,8 +33,8 @@ const Login = () => {
         onSubmit: (values) => {
             console.log(values);
             mutate(values);
-        }
-        // validationSchema: 
+        },
+        validationSchema: loginSchema
     });
 
 
@@ -44,30 +43,32 @@ const Login = () => {
             <div className='login_section'>
 
                 <form className='login_form' onSubmit={formik.handleSubmit}>
-                        <h3>Login</h3>
-                        <label htmlFor="email">Email</label>
-                        <input
-                            type='text' 
-                            isInvalid={formik.errors.UsernameOrEmail && formik.touched.UsernameOrEmail}
-                            name='UsernameOrEmail'
-                            value={formik.values.UsernameOrEmail}
-                            onChange={formik.handleChange}
-                            placeholder='Here is a sample placeholder'
-                            size='sm'
-                        />
-                        <label htmlFor="password">Password</label>
+                    <h3>Login</h3>
+                    <label htmlFor="email">Email</label>
+                    <>{formik.touched.UsernameOrEmail && formik.errors.UsernameOrEmail}</>
+                    <input
+                        type='text'
+                        isInvalid={formik.errors.UsernameOrEmail && formik.touched.UsernameOrEmail}
+                        name='UsernameOrEmail'
+                        value={formik.values.UsernameOrEmail}
+                        onChange={formik.handleChange}
+                        placeholder='Here is a sample placeholder'
+                        size='sm'
+                    />
 
-                        <input
-                            type='password' 
-                            isInvalid={formik.errors.password && formik.touched.password}
-                            name='password'
-                            value={formik.values.password}
-                            onChange={formik.handleChange}
-                            placeholder='Here is a sample placeholder'
-                            size='sm'
-                        />
+                    <label htmlFor="password">Password</label>
+                    <>{formik.touched.password && formik.errors.password}</>
+                    <input
+                        type='password'
+                        isInvalid={formik.errors.password && formik.touched.password}
+                        name='password'
+                        value={formik.values.password}
+                        onChange={formik.handleChange}
+                        placeholder='Here is a sample placeholder'
+                        size='sm'
+                    />
 
-                        <Button isLoading={isLoading} type='submit' onClick={formik.handleSubmit}>Log In</Button>
+                    <Button isLoading={isLoading} type='submit' onClick={formik.handleSubmit}>Log In</Button>
                 </form>
             </div>
         </>
