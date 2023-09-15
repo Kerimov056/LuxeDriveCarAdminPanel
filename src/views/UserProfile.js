@@ -13,8 +13,11 @@ import { useMutation, useQueryClient } from "react-query";
 import { getAdvatages, postAdvatages } from "../Services/advantageServices";
 import { FormControl, Input } from "@chakra-ui/react";
 import advantagesSchema from "../Validators/advantagesSchema";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function User() {
+
 
   const [createAdvantage, setcreateAdvantage] = useState(false);
   const queryClient = useQueryClient();
@@ -28,6 +31,13 @@ function User() {
   if (isError) {
     return <div>Bir hata oluştu</div>;
   }
+  const notifyCreatedSuccess = () => {
+    toast.success(`New Advantage Created!`, {
+      position: toast.POSITION.TOP_CENTER
+    });
+  };
+  
+  const notifyError = () => toast.success(`New Advantage Created!`);
 
 
   const mutation = useMutation(postAdvatages, {
@@ -36,7 +46,7 @@ function User() {
       queryClient.invalidateQueries("getAllAdvatages");
     },
     onError: (error) => {
-      console.log("Error:", error);
+      notifyError();
     },
   });
 
@@ -47,14 +57,15 @@ function User() {
     },
     onSubmit: async (values) => {
       try {
-        console.log(values);
         await mutation.mutateAsync(values);
+        queryClient.invalidateQueries("getAllAdvatages");
+        notifyCreatedSuccess()
       } catch (error) {
-        console.log(error);
       }
     },
-    validationSchema : advantagesSchema
+    validationSchema: advantagesSchema
   });
+
 
 
   return (
@@ -101,14 +112,9 @@ function User() {
 
                     </FormControl>
                   </form>
-
-
-
                 </div>
               </div>
             </div>
-
-
             : <></>
           }
         </Row>
@@ -127,7 +133,13 @@ function User() {
                     </tr>
                   </thead>
                   {getadvantage?.data?.map((byAdvantage, index) => (
-                    <Advantagecard berirleme={1} key={index} number={index + 1} Id={byAdvantage?.id} title={byAdvantage?.title} description={byAdvantage?.descrption.slice(0, 120)} />
+                    <Advantagecard
+                      berirleme={1}
+                      key={index}
+                      number={index + 1}
+                      Id={byAdvantage?.id}
+                      title={byAdvantage?.title}
+                      description={byAdvantage?.descrption.slice(0, 120)} />
                   ))}
                 </Table>
               </Card.Body>

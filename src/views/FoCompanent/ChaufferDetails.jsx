@@ -26,13 +26,13 @@ const ChaufferDetails = () => {
     );
 
     const notifySuccess = () => toast.success(`${byCheuf?.data?.name} updated successfully!`);
+    const notifyError = () => toast.error(`Error updating  ${byCheuf?.data?.name}.`);
     const notifyRemoveSuccess = () => {
         toast.success(`${byCheuf?.data?.name} Deleted successfully!`, {
             position: toast.POSITION.TOP_CENTER
         });
     };
 
-    const notifyError = () => toast.error(`Error updating  ${byCheuf?.data?.name}.`);
     const notifyRemoveError = () => toast.error(`Error Delete ${byCheuf?.data?.name}.`);
 
 
@@ -45,8 +45,7 @@ const ChaufferDetails = () => {
             navigate.push(`/admin/typography`);
             notifyRemoveSuccess();
         } catch (error) {
-            console.error("Error confirming car:", error);
-            notifyError();
+            notifyRemoveError();
         }
     };
 
@@ -82,7 +81,7 @@ const ChaufferDetails = () => {
             setCheufEdit(false);
             notifySuccess();
         } catch (error) {
-            console.error('Error updating Blog:', error);
+            notifyError()
         }
     };
 
