@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import "./TableListt.scss";
 import { Button, Form } from 'react-bootstrap';
 import { useQueryClient } from "react-query";
-import { removeSlider, UpdateSliders } from "../Services/sliderServices";
+import { removeSlider } from "../Services/sliderServices";
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const SliderCard = (props) => {
     const [editSlider, setEditSlider] = useState(false);
@@ -11,15 +14,29 @@ const SliderCard = (props) => {
     const [showImage, setShowImage] = useState(null);
     const queryClient = useQueryClient();
 
+    const notifyRemoveSuccess = () => {
+        toast.success(`Slider Deleted successfully!`, {
+            position: toast.POSITION.TOP_CENTER
+        });
+    };
+    const notifyRemoveError = () => toast.error(`Error Delete Slider.`);
+
+    const notifySuccess = () => toast.success(`Slider updated successfully!`);
+    const notifyError = () => toast.error(`Error updating Slider.`);
+   
+
     const handleRemove = async (sliderId) => {
         try {
             await removeSlider(sliderId);
             queryClient.invalidateQueries(["sliderRemove", sliderId]);
             queryClient.invalidateQueries(["getAllSlider"]);
+            notifyRemoveSuccess();
         } catch (error) {
-            console.error("Error confirming reservation:", error);
+            notifyRemoveError();
         }
     };
+
+
 
     const fileUploadHandler = (e) => {
         const file = e.target.files[0];
@@ -39,12 +56,12 @@ const SliderCard = (props) => {
             },
         })
             .then((res) => {
-                console.log(res);
                 queryClient.invalidateQueries("getAllSlider");
                 setEditSlider(false);
+                notifySuccess();
             })
             .catch((err) => {
-                console.log(err);
+                notifyError()
             });
     };
 

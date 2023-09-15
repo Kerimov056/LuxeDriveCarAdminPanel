@@ -13,6 +13,10 @@ import { getSlider, postSlider } from "../Services/sliderServices";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { useQueryClient } from "react-query";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 function TableList(props) {
   const [createSlider, setCreateSlider] = useState(false);
@@ -35,23 +39,26 @@ function TableList(props) {
     setShowImage(URL.createObjectURL(file));
   };
 
+  const notifyError = () => toast.success(`New Slider Created!`);
+
+
   const CreateSlider = async (e) => {
     e.preventDefault();
     
     const formData = new FormData();
-    formData.append("image", image); // "image" adını kullanarak FormData'ya ekleyin.
+    formData.append("image", image);
     
     try {
       const response = await axios.post(`https://localhost:7152/api/Sliders`, formData, {
         headers: {
-          "Content-Type": "multipart/form-data", // Content-Type'ı doğru ayarlayın.
+          "Content-Type": "multipart/form-data", 
         },
         
       });
       setCreateSlider(false);
       queryClient.invalidateQueries("getAllSlider");
+      notifyError();
     } catch (error) {
-      console.error(error); // Hata durumunda hata mesajını loglayın.
     }
   };
 

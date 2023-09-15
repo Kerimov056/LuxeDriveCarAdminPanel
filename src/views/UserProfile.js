@@ -13,8 +13,9 @@ import { useMutation, useQueryClient } from "react-query";
 import { getAdvatages, postAdvatages } from "../Services/advantageServices";
 import { FormControl, Input } from "@chakra-ui/react";
 import advantagesSchema from "../Validators/advantagesSchema";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 
 function User() {
 
