@@ -50,16 +50,12 @@ const CancledReservDetail = () => {
                             <ReservCarCard carImages={byReserv?.data?.reservCar?.carImages[0]?.imagePath} marka={byReserv?.data?.reservCar.marka} model={byReserv?.data.reservCar.model} year={byReserv?.data.reservCar.year} />
                         </div>
                         <div className='details'>
-                            <div class="login-box">
+                            <div class="login-box" style={{marginLeft:"30px"}}>
 
                                 <form>
                                     <div class="user-box">
-                                        <input type="text" value={"Ulvi"} />
+                                        <input type="text" value={byReserv?.data?.fullName} />
                                         <label>Name</label>
-                                    </div>
-                                    <div class="user-box">
-                                        <input type="text" value={"Kerimov"} />
-                                        <label>Surname</label>
                                     </div>
                                     <div class="user-box">
                                         <input type="text" value={formatDate(byReserv?.data?.pickupDate)} />
@@ -73,20 +69,11 @@ const CancledReservDetail = () => {
                                         <input type="text" value={byReserv?.data?.email} />
                                         <label>Email</label>
                                     </div>
-                                    <div style={byReserv?.data?.pickupLocation == null ? { display: "none" } : {}} class="user-box">
-                                        <input type="text" value={byReserv?.data?.pickupLocation == null ? "" : byReserv?.data?.pickupLocation} />
-                                        <label>Pickup Location</label>
-                                    </div>
-                                    <div style={byReserv?.data.returnLocation == null ? { display: "none" } : {}} class="user-box">
-                                        <input type="text" value={byReserv?.data?.returnLocation == null ? "" : byReserv?.data?.returnLocation} />
-                                        <label>Return Location</label>
-                                    </div>
-                                    <InputGroup className="mb-3">
+                                        <InputGroup className="mb-3">
                                         <InputGroup.Text>+</InputGroup.Text>
                                         <InputGroup.Text>994</InputGroup.Text>
                                         <Form.Control value={byReserv?.data?.number} />
                                     </InputGroup>
-
                                     <center>
                                         <a href="#" onClick={() => handleRemove(byReserv?.data?.id)}>
                                             Remove

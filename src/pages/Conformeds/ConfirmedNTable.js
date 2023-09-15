@@ -1,11 +1,7 @@
 import React from "react";
 
 import {
-    Badge,
-    Button,
     Card,
-    Navbar,
-    Nav,
     Table,
     Container,
     Row,
@@ -13,7 +9,7 @@ import {
 } from "react-bootstrap";
 import CNData from "./CNData";
 import { useQuery } from "react-query";
-import { getReservAllConfirmeD  } from "../../Services/reservationServices";
+import { getReservAllConfirmeD } from "../../Services/reservationServices";
 import moment from 'moment';
 
 

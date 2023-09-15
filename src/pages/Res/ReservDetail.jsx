@@ -81,16 +81,12 @@ const ReservDetail = () => {
                             <ReservCarCard carImages={byReserv?.data?.reservCar?.carImages[0]?.imagePath} marka={byReserv?.data?.reservCar.marka} model={byReserv?.data.reservCar.model} year={byReserv?.data.reservCar.year} />
                         </div>
                         <div style={{ backgroundColor: "black" }} className='details'>
-                            <div class="login-box">
+                            <div class="login-box" style={{marginLeft:"30px"}}>
 
                                 <form>
                                     <div class="user-box">
-                                        <input type="text" value={"Ulvi"} />
+                                        <input type="text" value={byReserv?.data?.fullName} />
                                         <label>Name</label>
-                                    </div>
-                                    <div class="user-box">
-                                        <input type="text" value={"Kerimov"} />
-                                        <label>Surname</label>
                                     </div>
                                     <div class="user-box">
                                         <input type="text" value={formatDate(byReserv?.data?.pickupDate)} />
