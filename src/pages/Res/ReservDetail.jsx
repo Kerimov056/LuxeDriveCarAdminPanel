@@ -32,6 +32,15 @@ const ReservDetail = () => {
     const notifyConfiremError = () => toast.error(`Error ${byReserv?.data?.fullName} Confirem.`);
 
 
+    const notifySendMessage = () => {
+        toast.success(`Send Gamil message ${byReserv?.data?.fullName} Reservation!`, {
+            position: toast.POSITION.TOP_CENTER
+        });
+    };
+    const notifySendMessageError = () => toast.error(`Send Gamil message  ${byReserv?.data?.fullName} Confirem.`);
+
+
+
     const handleConfirm = async (reservId) => {
         try {
             await putReservConfirmed(reservId);
@@ -50,12 +59,10 @@ const ReservDetail = () => {
 
     const mutation = useMutation(SendEmailMessage, {
         onSuccess: (data) => {
-            toast.success('Message sent to Email', { position: toast.POSITION.TOP_RIGHT });
-
-            // queryClient.invalidateQueries("postAdvatage");
+            notifySendMessage();
         },
         onError: (error) => {
-            console.log("Error:", error);
+            notifySendMessageError();
         },
     });
 

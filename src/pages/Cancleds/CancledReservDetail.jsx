@@ -7,6 +7,8 @@ import { Button, Container, Form, InputGroup } from 'react-bootstrap';
 import ReservCarCard from 'pages/Car/ReservCarCard';
 import moment from 'moment';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const CancledReservDetail = () => {
@@ -19,13 +21,23 @@ const CancledReservDetail = () => {
         getByReserv(id)
     );
 
+    //Remove
+    const notifyRemove = () => {
+        toast.success(`Remove ${byReserv?.data?.fullName} Reservation!`, {
+            position: toast.POSITION.TOP_CENTER
+        });
+    };
+    const notifyRemoveError = () => toast.error(`Error Remove ${byReserv?.data?.fullName} Reservation.`);
+
+
     const handleRemove = async (reservId) => {
         try {
             await putReservRemove(reservId);
             queryClient.invalidateQueries(["reservcancled", reservId]);
             navigate.push("/CancledReservations");
+            notifyRemove();
         } catch (error) {
-            console.error("Error confirming reservation:", error);
+            notifyRemoveError();
         }
     };
 
@@ -50,7 +62,7 @@ const CancledReservDetail = () => {
                             <ReservCarCard carImages={byReserv?.data?.reservCar?.carImages[0]?.imagePath} marka={byReserv?.data?.reservCar.marka} model={byReserv?.data.reservCar.model} year={byReserv?.data.reservCar.year} />
                         </div>
                         <div className='details'>
-                            <div class="login-box" style={{marginLeft:"30px"}}>
+                            <div class="login-box" style={{ marginLeft: "30px" }}>
 
                                 <form>
                                     <div class="user-box">
@@ -69,7 +81,7 @@ const CancledReservDetail = () => {
                                         <input type="text" value={byReserv?.data?.email} />
                                         <label>Email</label>
                                     </div>
-                                        <InputGroup className="mb-3">
+                                    <InputGroup className="mb-3">
                                         <InputGroup.Text>+</InputGroup.Text>
                                         <InputGroup.Text>994</InputGroup.Text>
                                         <Form.Control value={byReserv?.data?.number} />

@@ -8,6 +8,7 @@ const CancledNData = (props) => {
 
     const queryClient = useQueryClient();
     const naviqate = useHistory();
+    
 
     const handleRemove = async (reservId) => {
         try {
