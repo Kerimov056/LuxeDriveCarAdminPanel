@@ -62,6 +62,7 @@ function NowTable() {
                                             <NowData Id={now?.id}
                                                 key={index}
                                                 number={index + 1}
+                                                fullName={now?.fullName}
                                                 marka={now?.reservCar?.marka}
                                                 model={now?.reservCar?.model}
                                                 pick={formatDate(now?.pickupDate)}

@@ -63,6 +63,7 @@ function NTable() {
                                             <NData Id={pedding?.id}
                                                 key={index}
                                                 number={index + 1}
+                                                fullName={pedding?.fullName}
                                                 marka={pedding?.reservCar?.marka}
                                                 model={pedding?.reservCar?.model}
                                                 pick={formatDate(pedding?.pickupDate)}

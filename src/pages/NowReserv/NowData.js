@@ -8,7 +8,7 @@ const NowData = (props) => {
             <tbody>
                 <tr>
                     <td>{props.number}</td>
-                    <td>Ulvi Kerimov</td>
+                    <td>{props.fullName}</td>
                     <td>{props.marka} {props.model}</td>
                     <td>{props.pick}</td>
                     <td>{props.return}</td>

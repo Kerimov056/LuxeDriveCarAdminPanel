@@ -32,7 +32,7 @@ function ComplatedTable() {
     const formatDate = (inputDate) => {
         const date = moment(inputDate);
         return date.format("DD MMMM YYYY");
-      };
+    };
 
     return (
         <>
@@ -59,15 +59,16 @@ function ComplatedTable() {
                                             <th className="border-0">Remove</th>
                                         </tr>
                                     </thead>
-                                        {resgetComplted?.data?.map((now, index) => ( 
-                                            <CpNData Id={now?.id}
-                                                key={index}
-                                                number={index + 1}
-                                                marka={now?.reservCar?.marka}
-                                                model={now?.reservCar?.model}
-                                                pick={formatDate(now?.pickupDate)}
-                                                return={formatDate(now?.returnDate)} />
-                                        ))}
+                                    {resgetComplted?.data?.map((now, index) => (
+                                        <CpNData Id={now?.id}
+                                            key={index}
+                                            number={index + 1}
+                                            fullName={confirmed?.fullName}
+                                            marka={now?.reservCar?.marka}
+                                            model={now?.reservCar?.model}
+                                            pick={formatDate(now?.pickupDate)}
+                                            return={formatDate(now?.returnDate)} />
+                                    ))}
                                 </Table>
                             </Card.Body>
                         </Card>

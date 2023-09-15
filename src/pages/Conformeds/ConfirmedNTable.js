@@ -62,6 +62,7 @@ function ConfirmedNTable() {
                                         <CNData Id={confirmed?.id}
                                             key={index}
                                             number={index + 1}
+                                            fullName={confirmed?.fullName}
                                             marka={confirmed?.reservCar?.marka}
                                             model={confirmed?.reservCar?.model}
                                             pick={formatDate(confirmed?.pickupDate)}
