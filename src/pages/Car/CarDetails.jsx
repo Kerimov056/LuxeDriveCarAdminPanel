@@ -157,9 +157,6 @@ const CarDetails = () => {
             formData.append('CarImages', updatedCarImages[i]);
         }
 
-        console.log(formData.getAll("Latitude"));
-        console.log(formData.getAll("Longitude"));
-
         try {
             await axios.put(`https://localhost:7152/api/Car/${id}`, formData, {
                 headers: {

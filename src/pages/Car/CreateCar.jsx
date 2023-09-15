@@ -232,7 +232,9 @@ const CreateCar = () => {
                                                     {selectedBrand && (
                                                         <div className='MM'>
                                                             <label>Model:</label>
-                                                            <Form.Select id='FS' name='Model' value={selectedModel} onChange={(e) => {
+                                                            <>{formik.touched.Model && formik.errors.Model}</>
+
+                                                            <Form.Select isInvalid={formik.errors.Model && formik.touched.Model} id='FS' name='Model' value={selectedModel} onChange={(e) => {
                                                                 formik.handleChange(e);
                                                                 setSelectedModel(e.target.value);
                                                             }}>
@@ -248,7 +250,9 @@ const CreateCar = () => {
 
 
                                                     <label>Year:</label>
+                                                    <>{formik.touched.Year && formik.errors.Year}</>
                                                     <Form.Select
+                                                        isInvalid={formik.errors.Year && formik.touched.Year}
                                                         name="Year"
                                                         values={formik.values.Year}
                                                         onChange={formik.handleChange}
@@ -262,7 +266,9 @@ const CreateCar = () => {
                                                     </Form.Select>
 
                                                     <label>Type:</label>
+                                                    <>{formik.touched.CarType && formik.errors.CarType}</>
                                                     <Form.Select
+                                                        isInvalid={formik.errors.CarType && formik.touched.CarType}
                                                         name="CarType.type"
                                                         values={formik.values.CarType.type}
                                                         onChange={formik.handleChange}
@@ -276,7 +282,9 @@ const CreateCar = () => {
                                                     </Form.Select>
 
                                                     <label>Category:</label>
+                                                    <>{formik.touched.CarCategory && formik.errors.CarCategory}</>
                                                     <Form.Select
+                                                        isInvalid={formik.errors.CarCategory && formik.touched.CarCategory}
                                                         name="CarCategory.Category"
                                                         values={formik.values.CarCategory.Category}
                                                         onChange={formik.handleChange}
@@ -292,9 +300,11 @@ const CreateCar = () => {
 
                                                     <Form.Group>
                                                         <label>Price</label>
+                                                        <>{formik.touched.Price && formik.errors.Price}</>
                                                         <InputGroup className="mb-2">
                                                             <InputGroup.Text>$</InputGroup.Text>
                                                             <Form.Control
+                                                                isInvalid={formik.errors.Price && formik.touched.Price}
                                                                 type='number'
                                                                 name='Price'
                                                                 value={formik.values.Price}
@@ -313,7 +323,9 @@ const CreateCar = () => {
                                             <div id='ImgUpload' >
                                                 <Form.Group className="mb-3">
                                                     <Form.Label className='InputCreateCarimage'>Car Images</Form.Label>
+                                                    <>{formik.touched.CarImages && formik.errors.CarImages}</>
                                                     <input
+                                                        isInvalid={formik.errors.CarImages && formik.touched.CarImages}
                                                         className='InputCreateCarimage ll'
                                                         name='CarImages'
                                                         type="file"
@@ -332,7 +344,9 @@ const CreateCar = () => {
                                         <Col md="12">
                                             <Form.Group>
                                                 <label>Description</label>
+                                                <>{formik.touched.Description && formik.errors.Description}</>
                                                 <Form.Control
+                                                    isInvalid={formik.errors.Description && formik.touched.Description}
                                                     className='CarCreateDesc'
                                                     cols="90"
                                                     defaultValue="Lamborghini Mercy, Your chick she so thirsty, I'm inthat two seat Lambo."

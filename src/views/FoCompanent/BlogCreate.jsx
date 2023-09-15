@@ -4,8 +4,8 @@ import { Container, Row } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import { useQueryClient } from 'react-query';
 import { Link, useHistory } from 'react-router-dom';
-import axios from 'axios'; 
-
+import axios from 'axios';
+import blogSchema from "../../Validators/blogSchema";
 
 
 const BlogCreate = () => {
@@ -43,6 +43,7 @@ const BlogCreate = () => {
                 console.error('Blog Created error:', error);
             }
         },
+        validationSchema: blogSchema,
     });
 
     return (
@@ -53,7 +54,9 @@ const BlogCreate = () => {
                     <form className="form" onSubmit={formik.handleSubmit}>
                         <div className="form-group">
                             <label htmlFor="Title">Blog Title</label>
+                            <>{formik.touched.Title && formik.errors.Title}</>
                             <input
+                                isInvalid={formik.errors.Title && formik.touched.Title}
                                 name="Title"
                                 value={formik.values.Title}
                                 onChange={formik.handleChange}
@@ -63,7 +66,9 @@ const BlogCreate = () => {
                         </div>
                         <div className="form-group">
                             <label htmlFor="blogImages">Blog Image</label>
+                            <>{formik.touched.blogImages && formik.errors.blogImages}</>
                             <input
+                                isInvalid={formik.errors.blogImages && formik.touched.blogImages}
                                 multiple
                                 name="blogImages"
                                 type="file"
@@ -74,7 +79,9 @@ const BlogCreate = () => {
                         </div>
                         <div className="form-group">
                             <label htmlFor="Description">Blog Description</label>
+                            <>{formik.touched.Description && formik.errors.Description}</>
                             <textarea
+                                isInvalid={formik.errors.Description && formik.touched.Description}
                                 name="Description"
                                 value={formik.values.Description}
                                 onChange={formik.handleChange}

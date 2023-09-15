@@ -12,6 +12,7 @@ import { useFormik } from "formik";
 import { useMutation, useQueryClient } from "react-query";
 import { getAdvatages, postAdvatages } from "../Services/advantageServices";
 import { FormControl, Input } from "@chakra-ui/react";
+import advantagesSchema from "../Validators/advantagesSchema";
 
 function User() {
 
@@ -52,6 +53,7 @@ function User() {
         console.log(error);
       }
     },
+    validationSchema : advantagesSchema
   });
 
 
@@ -78,12 +80,18 @@ function User() {
 
                   <form style={{ display: "flex", flexDirection: "column" }} controlId="formFileMultiple" className="mb-3">
                     <FormControl>
-                      
+
                       <label>Title : </label>
-                      <Input type="text" name="Title" value={formik.values.Title} onChange={formik.handleChange} />
+                      <>{formik.touched.Title && formik.errors.Title}</>
+                      <Input
+                        isInvalid={formik.errors.Title && formik.touched.Title}
+                        type="text" name="Title" value={formik.values.Title} onChange={formik.handleChange} />
 
                       <label style={{ marginTop: "20px" }}>Description : </label>
-                      <Input type="text" style={{ height: "40px" }} name="Descrption" value={formik.values.Descrption} onChange={formik.handleChange} />
+                      <>{formik.touched.Descrption && formik.errors.Descrption}</>
+                      <Input
+                        isInvalid={formik.errors.Descrption && formik.touched.Descrption}
+                        type="text" style={{ height: "40px" }} name="Descrption" value={formik.values.Descrption} onChange={formik.handleChange} />
 
                       <p style={{ width: "20%", marginTop: "35px" }}>
                         <Button type="submit" onClick={formik.handleSubmit} style={{ width: "140px" }} variant="success">
