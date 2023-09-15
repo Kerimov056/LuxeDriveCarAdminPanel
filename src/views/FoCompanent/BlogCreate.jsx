@@ -6,9 +6,20 @@ import { useQueryClient } from 'react-query';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import blogSchema from "../../Validators/blogSchema";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const BlogCreate = () => {
+    const notify = () => toast("New Blog Created!", {
+        style: {
+            backgroundColor: 'green',
+            color: 'white',
+        },
+    });
+
+    const notifyError = () => toast.error("Error Created Blog.");
+
     const queryClient = useQueryClient();
     const history = useHistory();
 
@@ -38,9 +49,11 @@ const BlogCreate = () => {
                 if (response.status === 201) {
                     queryClient.invalidateQueries('newBlog');
                     history.push('/admin/blog');
+                    notify();
                 }
             } catch (error) {
                 console.error('Blog Created error:', error);
+                notifyError();
             }
         },
         validationSchema: blogSchema,

@@ -8,9 +8,20 @@ import { useQuery, useQueryClient } from "react-query";
 import { useParams, useHistory } from "react-router-dom";
 import { getByBlog, removeBlog } from "../../Services/blogServices";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const BlogDetails = () => {
+
+    const notifySuccess = () => toast.success("Blog updated successfully!");
+    const notifyError = () => toast.error("Error updating Blog.");
+    const notifyRemoveError = () => toast.error("Error Delete Blog.");
+    const notifyRemoveSuccess = () => {
+        toast.success("Item Deleted successfully!", {
+            position: toast.POSITION.TOP_CENTER
+        });
+    };
 
     const [blogEdit, setBlogEdit] = useState(false)
 
@@ -29,13 +40,12 @@ const BlogDetails = () => {
             queryClient.invalidateQueries(["chuferRemove", blogId]);
             queryClient.invalidateQueries(["getChauffeurs"]);
             navigate.push(`/admin/blog`);
+            notifyRemoveSuccess();
         } catch (error) {
             console.error("Error confirming car:", error);
+            notifyRemoveError();
         }
     };
-    // const [image, setImage] = useState(null);
-
-    // console.log(image);
 
     const [updatedTitle, setUpdatedTitle] = useState(byblog?.data?.title);
     const [updatedDescription, setUpdatedDescription] = useState(byblog?.data?.description);
@@ -67,8 +77,11 @@ const BlogDetails = () => {
             });
             queryClient.invalidateQueries(['getByBlog', id]);
             setBlogEdit(false);
+            notifySuccess();
+
         } catch (error) {
             console.error('Error updating Blog:', error);
+            notifyError();
         }
     };
 
@@ -78,7 +91,7 @@ const BlogDetails = () => {
                 <div className="blogDetailss">
                     <div class="BlofDimg pyramid-loaderRRR">
                         <span class="side side2">{byblog?.data?.blogImages.map((image, index) => (
-                            <img style={{ width: "400px", height: "240px", objectFit: "cover",marginTop:"5px" }} src={`data:image/png;base64,${image?.imagePath}`} />
+                            <img style={{ width: "400px", height: "240px", objectFit: "cover", marginTop: "5px" }} src={`data:image/png;base64,${image?.imagePath}`} />
                         ))}
                         </span>
                     </div>
