@@ -8,13 +8,20 @@ import { AllAdmin } from "../../Services/authServices";
 import { useQuery } from "react-query";
 import { Input } from '@chakra-ui/react';
 import { useDispatch, useSelector } from "react-redux";
+import { BySuperAdmin } from "../../Services/authServices";
 
 
 const Admin = () => {
 
-    const { email } = useSelector((x) => x.authReducer);
+    const { email, appuserid } = useSelector((x) => x.authReducer);
     const dispatch = useDispatch();
-    const [superAdmin, setSuperAdmin] = useState(null);
+    
+
+    const { data: SuperAdmin } = useQuery({
+        queryKey: ["BySuperAdmin"],
+        queryFn: BySuperAdmin,
+        staleTime: 0,
+    });
 
     useEffect(() => {
         if (email) {
@@ -22,7 +29,6 @@ const Admin = () => {
                 try {
                     const response = await axios.get(`https://localhost:7152/api/Auth/ByAdmin?email=${email}`);
                     if (response.status === 200) {
-                        setSuperAdmin(response.data);
                     }
                 } catch (error) {
                     console.error(error);
@@ -31,23 +37,22 @@ const Admin = () => {
             fetchSuperAdmin();
         }
     }, [email]);
-    
 
-    if (superAdmin!==null) {
 
-        const [searchAdmin, setSearchAdmin] = useState('');
+    const [searchAdmin, setSearchAdmin] = useState('');
 
-        const handleAdminSearch = (event) => {
-            setSearchAdmin(event.target.value);
-        };
+    const handleAdminSearch = (event) => {
+        setSearchAdmin(event.target.value);
+    };
 
-        const { data: getAdmin, isError } = useQuery(["AllAdmin", searchAdmin], () => AllAdmin(searchAdmin), {
-            staleTime: 0,
-        });
+    const { data: getAdmin, isError } = useQuery(["AllAdmin", searchAdmin], () => AllAdmin(searchAdmin), {
+        staleTime: 0,
+    });
 
-        if (isError) {
-            return <div>Bir hata oluştu</div>;
-        }
+    if (isError) {
+        return <div>Bir hata oluştu</div>;
+    }
+    if (SuperAdmin?.data === appuserid) {
 
         return (
             <Card className="card-plain table-plain-bg">

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import './allcar.scss'
-import { Button, Row } from 'react-bootstrap'
+import React, { useState, useEffect } from 'react';
+import './allcar.scss';
+import { Button, Row } from 'react-bootstrap';
 import { Input } from '@chakra-ui/react';
 import { IsCampaigns, stopCompagins } from "../../Services/carServices";
 import { BySuperAdmin } from "../../Services/authServices";
@@ -10,128 +10,113 @@ import { useDispatch, useSelector } from "react-redux";
 import { SuperAdmin } from "../../components/Export/Export";
 import axios from 'axios';
 
-
 const Campaign = () => {
-    const [superAdmin, setSuperAdmin] = useState(false);
-    const [fake, setFake] = useState(false);
-
     const { appuserid, email } = useSelector((x) => x.authReducer);
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedDate1, setSelectedDate1] = useState(null);
     const dispatch = useDispatch();
 
 
+    const queryClient = useQueryClient();
+
+
+    const { data: SuperAdmin } = useQuery({
+        queryKey: ["BySuperAdmin"],
+        queryFn: BySuperAdmin,
+        staleTime: 0,
+    });
+
+
+
+    const currentDateTime = new Date().toISOString().slice(0, 16);
+
+
     useEffect(() => {
-        if (email) {
-            async function fetchSuperAdmin() {
-                try {
-                    const response = await axios.get(`https://localhost:7152/api/Auth/ByAdmin?email=${email}`);
-                    if (response.status === 200) {
-                        // setSuperAdmin(response.data);
-                    }
-                } catch (error) {
-                    console.error(error);
-                }
-            }
-            fetchSuperAdmin();
+        formik.setValues({
+            ...formik.values,
+            PickupDate: selectedDate ? selectedDate : "",
+            ReturnDate: selectedDate1 ? selectedDate1 : "",
+        });
+    }, [selectedDate, selectedDate1]);
+
+    const handleDateChange = (e) => {
+        const selected = new Date(e.target.value);
+        const now = new Date();
+
+        if (selected < now) {
+            return;
         }
-     
-    }, [email, superAdmin]);
+        setSelectedDate(e.target.value);
+    };
 
+    const handleDateChange1 = (e) => {
+        const selected = new Date(e.target.value);
+        if (selectedDate === null) {
+            return;
+        }
+        if (selected < selectedDate) {
+            return;
+        }
+        setSelectedDate1(e.target.value);
+    };
 
+    const formik = useFormik({
+        initialValues: {
+            PickUpCampaigns: selectedDate ? selectedDate : '',
+            ReturnCampaigns: selectedDate1 ? selectedDate1 : '',
+            CampaignsInterest: "",
+            SuperAdminId: appuserid ? appuserid : "",
+        },
+        onSubmit: async (values) => {
+            const formData = new FormData();
 
-    if (superAdmin ===false) {
+            formData.append('PickUpCampaigns', selectedDate);
+            formData.append("ReturnCampaigns", selectedDate1);
+            formData.append("CampaignsInterest", values.CampaignsInterest);
+            formData.append("SuperAdminId", values.SuperAdminId);
 
-        const currentDateTime = new Date().toISOString().slice(0, 16);
-
-        const queryClient = useQueryClient();
-
-        const [selectedDate, setSelectedDate] = useState(null);
-        const [selectedDate1, setSelectedDate1] = useState(null);
-
-        useEffect(() => {
-            formik.setValues({
-                ...formik.values,
-                PickupDate: selectedDate ? selectedDate : "",
-                ReturnDate: selectedDate1 ? selectedDate1 : "",
-            });
-        }, [selectedDate, selectedDate1]);
-
-        const handleDateChange = (e) => {
-            const selected = new Date(e.target.value);
-            const now = new Date();
-
-            if (selected < now) {
-                return;
-            }
-            setSelectedDate(e.target.value);
-        };
-
-        const handleDateChange1 = (e) => {
-            const selected = new Date(e.target.value);
-            if (selectedDate === null) {
-                return;
-            }
-            if (selected < selectedDate) {
-                return;
-            }
-            setSelectedDate1(e.target.value);
-        };
-
-        const formik = useFormik({
-            initialValues: {
-                PickUpCampaigns: selectedDate ? selectedDate : '',
-                ReturnCampaigns: selectedDate1 ? selectedDate1 : '',
-                CampaignsInterest: "",
-                SuperAdminId: appuserid ? appuserid : "",
-            },
-            onSubmit: async (values) => {
-                const formData = new FormData();
-
-                formData.append('PickUpCampaigns', selectedDate);
-                formData.append("ReturnCampaigns", selectedDate1);
-                formData.append("CampaignsInterest", values.CampaignsInterest);
-                formData.append("SuperAdminId", values.SuperAdminId);
-
-                try {
-                    const response = await axios.post('https://localhost:7152/api/Car/Campaigns', formData, {
-                        headers: {
-                            'Content-Type': 'multipart/form-data',
-                        },
-                    })
-                    if (response.status === 201) {
-                        queryClient.invalidateQueries('getReservation');
-                        queryClient.invalidateQueries('stopCompagins');
-                        queryClient.invalidateQueries('IsCampaignss');
-                        queryClient.invalidateQueries('IsCampaigns');
-                    }
-
-                } catch (error) {
-                    console.log(error);
+            try {
+                const response = await axios.post('https://localhost:7152/api/Car/Campaigns', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                })
+                if (response.status === 201) {
+                    queryClient.invalidateQueries('getReservation');
+                    queryClient.invalidateQueries('stopCompagins');
+                    queryClient.invalidateQueries('IsCampaignss');
+                    queryClient.invalidateQueries('IsCampaigns');
                 }
-            },
-        });
+
+            } catch (error) {
+                console.log(error);
+            }
+        },
+    });
 
 
 
-        const { data: Compn } = useQuery({
-            queryKey: ["IsCampaignss"],
-            queryFn: IsCampaigns,
-            staleTime: 0,
-        });
+    const { data: Compn } = useQuery({
+        queryKey: ["IsCampaignss"],
+        queryFn: IsCampaigns,
+        staleTime: 0,
+    });
 
 
 
-        const mutation = useMutation(() => stopCompagins(appuserid), {
-            onSuccess: () => {
-                queryClient.invalidateQueries("stopCompagins");
-                queryClient.invalidateQueries("IsCampaignss");
-                queryClient.invalidateQueries("IsCampaigns");
-            },
-        });
+    const mutation = useMutation(() => stopCompagins(appuserid), {
+        onSuccess: () => {
+            queryClient.invalidateQueries("stopCompagins");
+            queryClient.invalidateQueries("IsCampaignss");
+            queryClient.invalidateQueries("IsCampaigns");
+        },
+    });
 
-        const stopCompagin = async () => {
-            await mutation.mutateAsync(appuserid);
-        };
+    const stopCompagin = async () => {
+        await mutation.mutateAsync(appuserid);
+    };
 
+    if (SuperAdmin?.data === appuserid) {
 
         return (
             <>

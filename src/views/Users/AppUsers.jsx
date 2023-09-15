@@ -8,14 +8,20 @@ import { MemberAllUser } from "../../Services/authServices";
 import { Input } from '@chakra-ui/react';
 import { useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
+import { BySuperAdmin } from "../../Services/authServices";
 
 
 const AppUsers = () => {
 
-    const { email } = useSelector((x) => x.authReducer);
+    const { email, appuserid } = useSelector((x) => x.authReducer);
     const dispatch = useDispatch();
 
-    const [superAdmin, setSuperAdmin] = useState(null);
+    const { data: SuperAdmin } = useQuery({
+        queryKey: ["BySuperAdmin"],
+        queryFn: BySuperAdmin,
+        staleTime: 0,
+    });
+
 
     useEffect(() => {
         if (email) {
@@ -23,7 +29,6 @@ const AppUsers = () => {
                 try {
                     const response = await axios.get(`https://localhost:7152/api/Auth/ByAdmin?email=${email}`);
                     if (response.status === 200) {
-                        setSuperAdmin(response.data);
                     }
                 } catch (error) {
                     console.error(error);
@@ -34,7 +39,6 @@ const AppUsers = () => {
     }, [email]);
     
 
-    if (superAdmin!==null) {
 
         const [searchUser, setSearchUser] = useState('');
 
@@ -49,6 +53,7 @@ const AppUsers = () => {
         if (isError) {
             return <div>Error</div>;
         }
+        if (SuperAdmin?.data === appuserid) {
 
         return (
             <Card className="card-plain table-plain-bg">

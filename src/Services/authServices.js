@@ -4,8 +4,8 @@ export const AdminLogin=(data) =>{
     return httpClient.post('api/Auth/AdminLogin',data);
 };
 
-export const BySuperAdmin=(BySuperAdmin) =>{
-    return httpClient.get(`api/Auth/ByAdmin?email=${BySuperAdmin}`);
+export const BySuperAdmin=() =>{
+    return httpClient.get(`api/Auth/ByAdmin`);
 };
 
 export const MemberAllUser=(searchUser) =>{
