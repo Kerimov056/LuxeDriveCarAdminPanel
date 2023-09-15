@@ -8,7 +8,7 @@ import { useQuery, useQueryClient } from "react-query";
 import { useParams, useHistory } from "react-router-dom";
 import { getByBlog, removeBlog } from "../../Services/blogServices";
 import axios from "axios";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -18,7 +18,7 @@ const BlogDetails = () => {
     const notifyError = () => toast.error("Error updating Blog.");
     const notifyRemoveError = () => toast.error("Error Delete Blog.");
     const notifyRemoveSuccess = () => {
-        toast.success("Item Deleted successfully!", {
+        toast.success("Blog Deleted successfully!", {
             position: toast.POSITION.TOP_CENTER
         });
     };

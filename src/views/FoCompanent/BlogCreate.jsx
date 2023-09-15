@@ -39,7 +39,7 @@ const BlogCreate = () => {
             }
 
             try {
-                // Axios ile isteği gönder
+               
                 const response = await axios.post('https://localhost:7152/api/Blogs', formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',

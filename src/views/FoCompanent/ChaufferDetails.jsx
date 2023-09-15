@@ -1,13 +1,17 @@
 import "./chaufferDetails.scss";
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import {
     Button, Container
 } from 'react-bootstrap'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-import { useQuery, useQueryClient, useMutation } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { useParams, useHistory } from "react-router-dom";
 import { chauffeursRemove, getByCheuf } from "../../Services/chauffeursServices";
 import axios from "axios";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 const ChaufferDetails = () => {
 
@@ -21,21 +25,35 @@ const ChaufferDetails = () => {
         getByCheuf(id)
     );
 
+    const notifySuccess = () => toast.success(`${byCheuf?.data?.name} updated successfully!`);
+    const notifyRemoveSuccess = () => {
+        toast.success(`${byCheuf?.data?.name} Deleted successfully!`, {
+            position: toast.POSITION.TOP_CENTER
+        });
+    };
+
+    const notifyError = () => toast.error(`Error updating  ${byCheuf?.data?.name}.`);
+    const notifyRemoveError = () => toast.error(`Error Delete ${byCheuf?.data?.name}.`);
+
+
+
     const handleRemove = async (cheufId) => {
         try {
             await chauffeursRemove(cheufId);
             queryClient.invalidateQueries(["chuferRemove", cheufId]);
             queryClient.invalidateQueries(["getChauffeurs"]);
             navigate.push(`/admin/typography`);
+            notifyRemoveSuccess();
         } catch (error) {
             console.error("Error confirming car:", error);
+            notifyError();
         }
     };
 
     const [updatedName, setUpdatedName] = useState(byCheuf?.data?.name);
     const [updatedNumber, setUpdatedNumber] = useState(byCheuf?.data?.number);
     const [updatedPrice, setUpdatedPrice] = useState(byCheuf?.data?.price);
-    const [updatedImageChauf, setUpdatedImageChauf] = useState(null); 
+    const [updatedImageChauf, setUpdatedImageChauf] = useState(null);
 
     const fileUploadHandler = (e) => {
         const file = e.target.files[0];
@@ -50,10 +68,10 @@ const ChaufferDetails = () => {
         const formData = new FormData();
         formData.append('Name', updatedName);
         formData.append('Number', updatedNumber);
-        formData.append('Price', parseFloat(updatedPrice)); 
+        formData.append('Price', parseFloat(updatedPrice));
         formData.append('Image', updatedImageChauf);
 
-        
+
         try {
             await axios.put(`https://localhost:7152/api/Chauffeurss/${id}`, formData, {
                 headers: {
@@ -62,6 +80,7 @@ const ChaufferDetails = () => {
             });
             queryClient.invalidateQueries(['getByCheuf', id]);
             setCheufEdit(false);
+            notifySuccess();
         } catch (error) {
             console.error('Error updating Blog:', error);
         }
@@ -73,7 +92,7 @@ const ChaufferDetails = () => {
                 <div className='details'>
                     <div>
                         <div className='categoryCarImage'>
-                            <img style={{objectFit:"cover"}} src={`data:image/png;base64,${byCheuf?.data?.imagePath}`} />
+                            <img style={{ objectFit: "cover" }} src={`data:image/png;base64,${byCheuf?.data?.imagePath}`} />
                         </div>
                         <div className='CarDetailsIMs'>
                             <div class="cardDetailsAdmin">
@@ -120,7 +139,7 @@ const ChaufferDetails = () => {
                                                 <div class="reset-button-container">
                                                     <div id="reset-btn" class="reset-button">Reset</div>
                                                 </div>
-                                                <Button style={{ width: "150px", backgroundColor:"black" }} class="send-button"><Link to={'/admin/typography'}>Go to Back</Link></Button>
+                                                <Button style={{ width: "150px", backgroundColor: "black" }} class="send-button"><Link to={'/admin/typography'}>Go to Back</Link></Button>
                                             </div>
                                         </div>
                                     </div>
