@@ -67,7 +67,7 @@ const AllCar = () => {
                     </div>
                 </Row>
 
-                {Compn?.data === true &&
+                {Compn?.data !== true &&
                     <Row id='IsComp'>
                         <img src='https://www.bellwetheragency.com.au/wp-content/uploads/2022/04/Campaign-Brief-logo-1.png' />
                         <div className='Compagins'>
@@ -79,7 +79,6 @@ const AllCar = () => {
                                 <CountdownTimer targetDate={new Date(allCars?.data[0]?.returnCampaigns)} /></div>
                             <div>Campaigns Interest: {allCars?.data[0]?.campaignsInterest}%</div>
                         </div>
-
                     </Row>
                 }
 
