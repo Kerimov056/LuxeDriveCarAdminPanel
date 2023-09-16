@@ -7,8 +7,7 @@ import { BySuperAdmin } from "../../Services/authServices";
 import { useFormik } from "formik";
 import { useMutation, useQueryClient, useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
-import { SuperAdmin } from "../../components/Export/Export"
-;
+import { SuperAdmin } from "../../components/Export/Export";
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

@@ -147,7 +147,7 @@ function Dashboard() {
                 </div>
               </Card.Body>
             </Card>
-              </Col>
+              </Col>      {/* ------- */} 
         </Row>
         <Row>
           <Col md="6">
