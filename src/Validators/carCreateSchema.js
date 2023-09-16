@@ -23,13 +23,13 @@ const carCreateSchema = Yup.object({
         .required("Required"),
 
     Description: Yup.string()
-        .min(5, "Too Short!")
-        .max(255, "Too Long")
+        .min(1, "Too Short!")
+        .max(12000, "Too Long")
         .required("Required"),
 
 
     tags: Yup.string()
-        .min(5, "Too Short!")
+        .min(1, "Too Short!")
         .max(255, "Too Long")
         .required("Required"),
 });

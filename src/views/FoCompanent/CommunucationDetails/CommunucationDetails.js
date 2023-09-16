@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { getByCommunications } from "../../../Services/communicationsServices";
 import './CommunDetails.scss'
 import { useFormik } from "formik";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { SendEmailMessage } from "../../../Services/messageEmail";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

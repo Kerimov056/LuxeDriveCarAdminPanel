@@ -7,8 +7,13 @@ import { BySuperAdmin } from "../../Services/authServices";
 import { useFormik } from "formik";
 import { useMutation, useQueryClient, useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
-import { SuperAdmin } from "../../components/Export/Export";
+import { SuperAdmin } from "../../components/Export/Export"
+;
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 const Campaign = () => {
     const { appuserid, email } = useSelector((x) => x.authReducer);
@@ -60,12 +65,23 @@ const Campaign = () => {
         setSelectedDate1(e.target.value);
     };
 
+    const notifyError = () => toast.success(`Error Compaign Created!`);
+
+    
+    const notifySuccess = () => {
+        toast.success(`New Compaign Created successfully!`, {
+            position: toast.POSITION.TOP_CENTER
+        });
+    };
+
+
     const formik = useFormik({
         initialValues: {
             PickUpCampaigns: selectedDate ? selectedDate : '',
             ReturnCampaigns: selectedDate1 ? selectedDate1 : '',
             CampaignsInterest: "",
             SuperAdminId: appuserid ? appuserid : "",
+            CompaignName: "",
         },
         onSubmit: async (values) => {
             const formData = new FormData();
@@ -74,6 +90,7 @@ const Campaign = () => {
             formData.append("ReturnCampaigns", selectedDate1);
             formData.append("CampaignsInterest", values.CampaignsInterest);
             formData.append("SuperAdminId", values.SuperAdminId);
+            formData.append("CompaignName", values.CompaignName);
 
             try {
                 const response = await axios.post('https://localhost:7152/api/Car/Campaigns', formData, {
@@ -86,10 +103,11 @@ const Campaign = () => {
                     queryClient.invalidateQueries('stopCompagins');
                     queryClient.invalidateQueries('IsCampaignss');
                     queryClient.invalidateQueries('IsCampaigns');
+                    notifySuccess();
                 }
 
             } catch (error) {
-                console.log(error);
+                notifyError()
             }
         },
     });
@@ -123,6 +141,16 @@ const Campaign = () => {
                 <Row id='CampaignsInterest'>
                     <h2>Start a Campaign</h2>
                     <form onSubmit={formik.handleSubmit} >
+
+                        <div>
+                            <label>Compaign Name</label>
+                            <Input 
+                                placeholder='Compaign Name'
+                                type='text'
+                                value={formik.values.CompaignName}
+                                onChange={formik.handleChange}
+                            />
+                        </div>
                         <div>
                             <label htmlFor="password">When do you want the discount to start?</label>
                             <Input

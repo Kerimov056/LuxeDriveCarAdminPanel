@@ -3,12 +3,24 @@ import { Button } from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 import {  useQueryClient } from "react-query";
 import { putReservRemove } from "../../Services/reservationServices";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 const CancledNData = (props) => {
 
     const queryClient = useQueryClient();
     const naviqate = useHistory();
     
+    
+    const notifyRemove = () => {
+        toast.success(`Canceld ${props.fullName} Reservation!`, {
+            position: toast.POSITION.TOP_CENTER
+        });
+    };
+    const notifyRemoveError = () => toast.error(`Error ${props.fullName} Canceld.`);
+
 
     const handleRemove = async (reservId) => {
         try {
@@ -16,8 +28,9 @@ const CancledNData = (props) => {
             queryClient.invalidateQueries(["reservCancled", reservId]);
             queryClient.invalidateQueries(["reservAllCancled"]);
             naviqate.push('/CancledReservations');
+            notifyRemove();
         } catch (error) {
-            console.error("Error confirming reservation:", error);
+            notifyRemoveError();
         }
     };
 
