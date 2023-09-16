@@ -20,6 +20,10 @@ export const getReservNow = () => {     //halahzirda user'de  olan reservationla
     return httpClient.get("api/CarReservations/IsResevNowGetAll")
 };
 
+export const getReservAll = () => {     //butun reservation'larin sayi
+    return httpClient.get("api/CarReservations/NotCompaignStaitsika")
+};
+
 export const getReservConfirmed = () => {     //tesdiqlenmis olan reservationlarin sayi
     return httpClient.get("api/CarReservations/ReservConfirmedCount")
 };
