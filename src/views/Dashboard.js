@@ -1,19 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ChartistGraph from "react-chartist";
 // react-bootstrap components
 import {
-  Badge,
-  Button,
   Card,
-  Navbar,
-  Nav,
-  Table,
   Container,
   Row,
-  Col,
-  Form,
-  OverlayTrigger,
-  Tooltip,
+  Col
 } from "react-bootstrap";
 import CardCompanent from "./FoCompanent/CardCompanent";
 import ReservCar from "./FoCompanent/ReservCar";
@@ -24,6 +16,35 @@ import CanceledReservation from "./FoCompanent/CanceledReservation";
 import { useQuery } from "react-query";
 import { getCampaignStatistik } from "../Services/campaignStatistik";
 import { getReservAll } from "../Services/reservationServices";
+
+
+
+const CountdownTimer = ({ targetDate }) => {
+  const [countdown, setCountdown] = useState('');
+
+  useEffect(() => {
+      const interval = setInterval(() => {
+          const now = new Date();
+          const difference = targetDate - now;
+
+          if (difference <= 0) {
+              clearInterval(interval);
+              setCountdown('Discounts Have Started');
+          } else {
+              const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+              const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+              const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+              const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+              setCountdown(`${days} day ${hours} hour ${minutes} minute ${seconds} second`);
+          }
+      }, 1000);
+
+      return () => clearInterval(interval);
+  }, [targetDate]);
+
+  return <div>{countdown}</div>;
+};
 
 
 function Dashboard() {
@@ -40,8 +61,10 @@ function Dashboard() {
     staleTime: 0,
   });
 
-  const statis = statistik?.data[0]?.reservationSum
-  console.log(statis);
+  const statis = statistik?.data[0]?.reservationSum;
+  const reserv = reservAll?.data;
+
+  const change = reserv - statis;
 
   return (
     <>
@@ -138,8 +161,8 @@ function Dashboard() {
           <Col md="4">  {/* carlarin qrafiki */}
             <Card>
               <Card.Header>
-                <Card.Title as="h4">Email Statistics</Card.Title>
-                <p className="card-category">Last Campaign Performance</p>
+                <Card.Title as="h4">{statistik?.data[0]?.campaignName} Campaign Statistics</Card.Title>
+                <p className="card-category"><CountdownTimer targetDate={new Date(statistik?.data[0]?.finshTime)} /></p>
               </Card.Header>
               <Card.Body>
                 <div
@@ -148,22 +171,22 @@ function Dashboard() {
                 >
                   <ChartistGraph
                     data={{
-                      labels: ["40%", "20%", "40%"],
-                      series: [40, 20, 40],
+                      labels: ["40%", "20%"],
+                      series: [change, statis, reserv],
                     }}
                     type="Pie"
                   />
                 </div>
                 <div className="legend">
                   <i className="fas fa-circle text-info"></i>
-                  Open <i className="fas fa-circle text-danger"></i>
+                  Reservation <i className="fas fa-circle text-danger"></i>
                   Bounce <i className="fas fa-circle text-warning"></i>
-                  Unsubscribe
+                  All Reservation
                 </div>
                 <hr></hr>
                 <div className="stats">
                   <i className="far fa-clock"></i>
-                  Campaign sent 2 days ago
+                  Statistics of Reservations after discount
                 </div>
               </Card.Body>
             </Card>
