@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 const GameList = () => {
 
     // const { data: cancledReserv } = useQuery({
-    //     queryKey: ["CanceledReservation"],
+    //     queryKey: ["gameCount"],
     //     queryFn: getReservCancledCount,
     //     staleTime: 0,
     // });
@@ -39,7 +39,7 @@ const GameList = () => {
                         <hr></hr>
                         <div className="stats">
                             <i className="nc-icon nc-simple-remove"></i>
-                          <Link to='/CancledReservations'> Car Game Results</Link> 
+                          <Link to='/GameResults'> Car Game Results</Link> 
                         </div>
                     </Card.Footer>
                 </Card>

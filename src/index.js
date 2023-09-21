@@ -51,6 +51,7 @@ import RightNowReserv from "pages/NowReserv/RightNowReserv";
 import NowDetail from "pages/NowReserv/NowDetail";
 import ComplatedReservation from "pages/Complated/ComplatedReservation";
 import ComlatedRDetails from "pages/Complated/ComlatedRDetails";
+import GameResults from "pages/Game/GameResults";
 import ChaufferDetails from "views/FoCompanent/ChaufferDetails";
 import BlogDetails from "views/FoCompanent/BlogDetails";
 import BlogCreate from "views/FoCompanent/BlogCreate";
@@ -87,6 +88,7 @@ root.render(
               <Route path="/RightNowReserv" component={RightNowReserv} />
               <Route path="/BlogCreate" component={BlogCreate} />
               <Route path="/ComplatedReservation" component={ComplatedReservation} />
+              <Route path="/GameResults" component={GameResults} />
               <Route path="/AdvantagesDetails/:id" component={AdvantagesDetails} />
               <Route path="/FaqsDetails/:id" component={FaqsDetails} />
               <Route path='/ReservDetail/:id' component={ReservDetail} />
