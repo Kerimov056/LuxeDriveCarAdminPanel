@@ -39,7 +39,7 @@ const CanceledReservation = () => {
                         <hr></hr>
                         <div className="stats">
                             <i className="nc-icon nc-simple-remove"></i>
-                          <Link to='/CancledReservations'>Reservation</Link> 
+                          <Link to='/CancledReservations'> Reservation</Link> 
                         </div>
                     </Card.Footer>
                 </Card>

@@ -16,6 +16,7 @@ import CanceledReservation from "./FoCompanent/CanceledReservation";
 import { useQuery } from "react-query";
 import { getCampaignStatistik } from "../Services/campaignStatistik";
 import { getReservAll } from "../Services/reservationServices";
+import GameList from "./FoCompanent/Game/GameList";
 
 
 
@@ -66,6 +67,9 @@ function Dashboard() {
 
   const change = reserv - statis;
 
+  const faizChange = 50 - change;
+  const faizStatis = 50  - faizChange;
+
   return (
     <>
       <Container fluid>
@@ -82,6 +86,8 @@ function Dashboard() {
           <ComplatedReservation />  {/*Tamamlanmis Reservatonlar */}
 
           <CanceledReservation />  {/*Legv edilmis Reservationlar */}
+
+          <GameList />  {/*Game'den  endirim qazaimis Userler */}
 
         </Row>
         <Row>
@@ -171,8 +177,8 @@ function Dashboard() {
                 >
                   <ChartistGraph
                     data={{
-                      labels: ["40%", "20%"],
-                      series: [change, statis, reserv],
+                      labels: [faizChange ? faizChange : '', faizStatis ? faizStatis : '',"50%"],
+                      series: [change ? change : '', statis ? statis : '', reserv ? reserv : ''],
                     }}
                     type="Pie"
                   />

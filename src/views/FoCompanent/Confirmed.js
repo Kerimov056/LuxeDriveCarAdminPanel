@@ -39,7 +39,7 @@ const Confirmed = () => {
                         <hr></hr>
                         <div className="stats">
                             <i className="nc-icon nc-check-2"></i>
-                            <Link to="/ConfirmedReservation">Confirmed Reservation</Link>
+                            <Link to="/ConfirmedReservation"> Confirmed Reservation</Link>
                         </div>
                     </Card.Footer>
                 </Card>

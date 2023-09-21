@@ -5,16 +5,16 @@ import {
     Col,
 } from "react-bootstrap";
 import { useQuery } from "react-query";
-import { getReservComplatedCount } from "../../Services/reservationServices";
+// import { getReservCancledCount } from "../../Services/reservationServices";
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
-const ComplatedReservation = () => {
+const GameList = () => {
 
-    const { data: reservComlated } = useQuery({
-        queryKey: ["resercComplated"],
-        queryFn: getReservComplatedCount,
-        staleTime: 0,
-    });
+    // const { data: cancledReserv } = useQuery({
+    //     queryKey: ["CanceledReservation"],
+    //     queryFn: getReservCancledCount,
+    //     staleTime: 0,
+    // });
 
     return (
         <>
@@ -24,13 +24,13 @@ const ComplatedReservation = () => {
                         <Row>
                             <Col xs="5">
                                 <div className="icon-big text-center icon-warning">
-                                    <i className="nc-icon nc-app text-success"></i>
+                                    <i className="nc-icon nc-puzzle-10"></i>
                                 </div>
                             </Col>
                             <Col xs="7">
                                 <div className="numbers">
-                                    <p className="card-category">Complated Reservations</p>
-                                    <Card.Title as="h4">{reservComlated?.data == null ? 0 : reservComlated?.data}</Card.Title>
+                                    <p className="card-category">Find Your Car</p>
+                                    {/* <Card.Title as="h4">{cancledReserv?.data == null ? 0 : cancledReserv?.data}</Card.Title> */}
                                 </div>
                             </Col>
                         </Row>
@@ -38,8 +38,8 @@ const ComplatedReservation = () => {
                     <Card.Footer>
                         <hr></hr>
                         <div className="stats">
-                            <i className="nc-icon nc-align-left-2"></i>
-                          <Link to="/ComplatedReservation"> Reservation </Link>  
+                            <i className="nc-icon nc-simple-remove"></i>
+                          <Link to='/CancledReservations'> Car Game Results</Link> 
                         </div>
                     </Card.Footer>
                 </Card>
@@ -48,5 +48,5 @@ const ComplatedReservation = () => {
     )
 }
 
-export default ComplatedReservation
+export default GameList
 
