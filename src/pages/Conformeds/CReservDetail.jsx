@@ -90,11 +90,15 @@ const CReservDetail = () => {
                         <div class="SrVesiqe">
                             <img style={{ objectFit: "cover" }} src={`data:image/png;base64,${byReserv?.data?.imagePath}`} />
                         </div>
-                        <div style={{ marginTop: "-300px" }} class="cardDesc shadowDesc">
+                        <div style={{top:"22%"}} class="cardDesc shadowDesc">
                             <p>{byReserv?.data?.notes}</p>
                         </div>
-                        <div style={{ marginTop: "-300px" }} className='reservCarOne'>
-                            <ReservCarCard carImages={byReserv?.data?.reservCar?.carImages[0]?.imagePath} marka={byReserv?.data?.reservCar.marka} model={byReserv?.data.reservCar.model} year={byReserv?.data.reservCar.year} />
+                        <div style={{top:"39%"}}  className='reservCarOne'>
+                            <ReservCarCard
+                                carImages={byReserv?.data?.reservCar?.carImages[0]?.imagePath}
+                                marka={byReserv?.data?.reservCar.marka}
+                                model={byReserv?.data.reservCar.model}
+                                year={byReserv?.data.reservCar.year} />
                         </div>
                         <div className='details'>
                             <div class="login-box" style={{ marginLeft: "35px" }}>
@@ -146,7 +150,7 @@ const CReservDetail = () => {
                         <button style={{ width: "150px", backgroundColor: "#0fb81a" }} type="submit">Send</button>
                     </form>
                 </div>
-                <Link to="/NotificationsReservation"><Button id='GoToBack'>Go To Back</Button></Link>
+                <Link to="/ConfirmedReservation"><Button id='GoToBack'>Go To Back</Button></Link>
 
             </Container>
         </>

@@ -38,9 +38,9 @@ const Maps = () => {
             <div className='ss'>
 
                 <div className='OptionLocation'>
-                    <Button onClick={() => PickUpReturn()}>PickUp and Return </Button>
-                    <Button onClick={() => PickUp()}>Lonely Pickup location</Button>
-                    <Button onClick={() => Return()}>Lonely Return location</Button>
+                    <Button style={all===true ? {backgroundColor:"red"} : {}} onClick={() => PickUpReturn()}>PickUp and Return </Button>
+                    <Button style={pickUp===true ? {backgroundColor:"red"} : {}} onClick={() => PickUp()}>Lonely Pickup location</Button>
+                    <Button style={returnL===true ? {backgroundColor:"red"} : {}} onClick={() => Return()}>Lonely Return location</Button>
                 </div>
                 {all === true && <ShowAllMap />}
                 {pickUp === true && <PickUpMap />}

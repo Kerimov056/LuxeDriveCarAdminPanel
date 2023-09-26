@@ -5,12 +5,10 @@ export const getSlider = () => {
 };
 
 export const postSlider = (data) => {
-  console.log(data);
   return httpClient.post("api/Sliders", data)
 };
 
 export const UpdateSliders = (id, data) => {
-  console.log(data);
   return httpClient.put(`api/Sliders/${id}`, data)
 };
 

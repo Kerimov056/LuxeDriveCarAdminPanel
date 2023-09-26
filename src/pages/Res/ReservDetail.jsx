@@ -90,11 +90,15 @@ const ReservDetail = () => {
                         <div class="SrVesiqe">
                             <img style={{ objectFit: "cover" }} src={`data:image/png;base64,${byReserv?.data?.imagePath}`} />
                         </div>
-                        <div class="cardDesc shadowDesc">
+                        <div style={{ top: "19%" }} class="cardDesc shadowDesc">
                             <p>{byReserv?.data?.notes}</p>
                         </div>
-                        <div className='reservCarOne'>
-                            <ReservCarCard carImages={byReserv?.data?.reservCar?.carImages[0]?.imagePath} marka={byReserv?.data?.reservCar.marka} model={byReserv?.data.reservCar.model} year={byReserv?.data.reservCar.year} />
+                        <div style={{ top: "38%" }} className='reservCarOne'>
+                            <ReservCarCard
+                                carImages={byReserv?.data?.reservCar?.carImages[0]?.imagePath}
+                                marka={byReserv?.data?.reservCar.marka}
+                                model={byReserv?.data.reservCar.model}
+                                year={byReserv?.data.reservCar.year} />
                         </div>
                         <div style={{ backgroundColor: "black" }} className='details'>
                             <div class="login-box" style={{ marginLeft: "30px" }}>
