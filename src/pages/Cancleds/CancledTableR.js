@@ -11,7 +11,7 @@ import {
     Col,
 } from "react-bootstrap";
 import { useQuery } from "react-query";
-import { getGetAllReservCancled  } from "../../Services/reservationServices";
+import { getGetAllReservCancled } from "../../Services/reservationServices";
 import moment from 'moment';
 import CancledNData from './CancledNData';
 
@@ -37,9 +37,9 @@ const CancledTableR = () => {
             <Col md="12">
                 <Card className="card-plain table-plain-bg">
                     <Card.Header>
-                        <Card.Title as="h4">Table on Plain Background</Card.Title>
+                        <Card.Title as="h4">Reservations Not Accepted</Card.Title>
                         <p className="card-category">
-                            Here is a subtitle for this table
+                            Reservations
                         </p>
                     </Card.Header>
                     <Card.Body className="table-full-width table-responsive px-0">

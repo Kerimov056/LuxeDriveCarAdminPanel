@@ -40,9 +40,9 @@ function NTable() {
                     <Col md="12">
                         <Card className="strpied-tabled-with-hover">
                             <Card.Header>
-                                <Card.Title as="h4">Striped Table with Hover</Card.Title>
+                                <Card.Title as="h4">New Arrival Reservations</Card.Title>
                                 <p className="card-category">
-                                    Here is a subtitle for this table
+                                   Reservations
                                 </p>
                             </Card.Header>
                             <Card.Body className="table-full-width table-responsive px-0">

@@ -99,7 +99,14 @@ const AllCar = () => {
 
                 <Row style={{ marginBottom: "40px" }} className='mt-5'>
                     {allCars?.data.map((bycars, index) => (
-                        <CarCard images={bycars?.carImages} key={index} Id={bycars?.id} isReserv={bycars?.isReserv} marka={bycars?.marka} model={bycars?.model} year={bycars?.year} />
+                        <CarCard
+                            images={bycars?.carImages}
+                            key={index}
+                            Id={bycars?.id}
+                            isReserv={bycars?.isReserv}
+                            marka={bycars?.marka}
+                            model={bycars?.model}
+                            year={bycars?.year} />
                     ))}
                 </Row>
             </Container>

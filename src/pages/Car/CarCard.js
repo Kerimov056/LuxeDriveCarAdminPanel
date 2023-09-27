@@ -1,15 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './carcard.scss'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
+import AOS from 'aos'
+import "aos/dist/aos.css";
+
 
 const CarCard = (props) => {
 
+    useEffect(() => {
+        AOS.init({
+            offset: 300,
+            duration: 500,
+            delay: 1360,
+        });
+        AOS.refresh();
+    }, [])
     
-    console.log(props.images)
     return (
         <>
             <Link to={`/CarDetails/${props.Id}`} >
-                <div class="cardDD">
+                <div data-aos="fade-up" class="cardDD">
                     <div class="alignN">
                         <span class={props.isReserv==true ? "red" : "green"}></span>
                     </div>

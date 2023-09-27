@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useFormik } from 'formik'
 import "./Login.scss";
 import { Container } from "react-bootstrap";
@@ -12,11 +12,12 @@ import loginSchema from "../Validators/loginSchema";
 
 const Login = () => {
 
+    const [invaliderror, setinvaliderror] = useState(false);
+
     const history = useHistory();
 
     const dispatch = useDispatch();
     const { token } = useSelector(x => x.authReducer)
-    console.log(token);
 
     const { mutate, isLoading, isError } = useMutation((values) => AdminLogin(values), {
         onSuccess: (resp) => {
@@ -31,12 +32,16 @@ const Login = () => {
             password: '',
         },
         onSubmit: (values) => {
-            console.log(values);
             mutate(values);
         },
         validationSchema: loginSchema
     });
 
+    useEffect(() => {
+        if (isError) {
+            setinvaliderror(true);
+        }
+    }, [isError]);
 
     return (
         <>
@@ -55,6 +60,7 @@ const Login = () => {
                         placeholder='Here is a sample placeholder'
                         size='sm'
                     />
+                    {invaliderror === true ? <>Invalid Account</> : <></>}
 
                     <label htmlFor="password">Password</label>
                     <>{formik.touched.password && formik.errors.password}</>
@@ -67,7 +73,7 @@ const Login = () => {
                         placeholder='Here is a sample placeholder'
                         size='sm'
                     />
-
+                    {invaliderror===true ? <>Invalid Account</> : <></>}
                     <Button isLoading={isLoading} type='submit' onClick={formik.handleSubmit}>Log In</Button>
                 </form>
             </div>
